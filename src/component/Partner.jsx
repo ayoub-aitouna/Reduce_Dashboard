@@ -1,6 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import { UserTable } from "./index";
+import { PartnerInfo } from "./index";
 function Partner() {
+  const [isDialogOpend, setDialogOpend] = useState(false);
+  const [SelectedPartner, setSelectedpartner] = useState({});
   const data = [
     {
       id: 1,
@@ -291,8 +294,17 @@ function Partner() {
       status: "Rejected",
     },
   ];
+  const ToggleDialog = () => {
+    setDialogOpend((value) => !value);
+  };
+
   return (
     <div className="p-5 my-10">
+      <PartnerInfo
+        open={isDialogOpend}
+        data={SelectedPartner}
+        handleClose={ToggleDialog()}
+      />
       <div className="flex flex-col items-start justify-start">
         <h1 className="text-[20px] font-black leading-9 text-gray-800">
           Reduce Partners
@@ -301,7 +313,12 @@ function Partner() {
           partners that submited form to reduce platform
         </p>
       </div>
-      <UserTable Data={data} />
+      <UserTable
+        Data={data}
+        OnSelect={(data) => {
+          setSelectedpartner(data);
+        }}
+      />
     </div>
   );
 }

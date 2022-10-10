@@ -3,18 +3,11 @@ import { IoIosCloseCircle } from "react-icons/io";
 import { BsCheckCircleFill } from "react-icons/bs";
 import { MdPendingActions } from "react-icons/md";
 import { BsFillArrowRightSquareFill } from "react-icons/bs";
-const IconHolder = ({ Icon, style }) => {
-  return (
-    <>
-      <div className={`text-[20px]  ${style}`}>
-        <Icon />
-      </div>
-    </>
-  );
-};
-const DataRow = ({ item, index }) => {
+import { IconHalder } from "./index";
+const DataRow = ({ item, index, onClick }) => {
   return (
     <tr
+      onClick={onClick}
       className={` text-gray-900 hover:text-[#fff] hover:bg-[#2E5CFF] cursor-pointer ${
         index % 2 == 0 ? "bg-gray-100" : "bg-white"
       } border-b`}
@@ -50,20 +43,20 @@ const DataRow = ({ item, index }) => {
       </td>
       <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-[30px] ">
         {item.status == "Pending" ? (
-          <IconHolder
+          <IconHalder
             Icon={() => <MdPendingActions />}
             style="text-[#353535]"
           />
         ) : item.status == "Acepted" ? (
           <div>
-            <IconHolder
+            <IconHalder
               Icon={() => <BsCheckCircleFill />}
               style="text-[#0012ff]"
             />
           </div>
         ) : (
           <div>
-            <IconHolder
+            <IconHalder
               Icon={() => <IoIosCloseCircle />}
               style="text-[#ff0000]"
             />
@@ -71,7 +64,7 @@ const DataRow = ({ item, index }) => {
         )}
       </td>
       <td class="px-6 py-4 whitespace-nowrap text-sm font-medium ">
-        <IconHolder
+        <IconHalder
           Icon={() => <BsFillArrowRightSquareFill />}
           style="text-[20px]"
         />
@@ -79,7 +72,7 @@ const DataRow = ({ item, index }) => {
     </tr>
   );
 };
-function UserTable({ Data }) {
+function UserTable({ Data, OnSelect }) {
   return (
     <div class="flex flex-col  border-[1px] my-10 border-gray-200 rounded-lg ">
       <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -153,7 +146,12 @@ function UserTable({ Data }) {
               <tbody>
                 {Data.map((item, index) => (
                   <>
-                    <DataRow key={item.id} item={item} index={index} />
+                    <DataRow
+                      key={item.id}
+                      item={item}
+                      index={index}
+                      onClick={OnSelect(item)}
+                    />
                   </>
                 ))}
               </tbody>
@@ -163,22 +161,6 @@ function UserTable({ Data }) {
       </div>
     </div>
   );
-  // return (
-  // 	<table class='table-auto w-full p-[50px]'>
-  // 		<thead>
-  // 			<tr className='h-[77px] bg-[#2E5CFF] text-white'>
-
-  // 			</tr>
-  // 		</thead>
-  // 		<tbody>
-  // 			{Data.map((item) => (
-  // 				<>
-  // 					<DataRow key={item.id} item={item} />
-  // 				</>
-  // 			))}
-  // 		</tbody>
-  // 	</table>
-  // );
 }
 
 export default UserTable;

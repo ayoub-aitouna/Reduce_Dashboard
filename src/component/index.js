@@ -5,4 +5,16 @@ import Partner from "./Partner";
 import Sidebar from "./Sidebar";
 import Button from "./Button";
 import Input from "./Input";
-export { Auth, Home, UserTable, Partner, Sidebar, Button, Input };
+import PartnerInfo from "./PartnerInfo";
+import IconHalder from "./IconHolder";
+export {
+  Auth,
+  Home,
+  UserTable,
+  Partner,
+  Sidebar,
+  Button,
+  Input,
+  PartnerInfo,
+  IconHalder,
+};

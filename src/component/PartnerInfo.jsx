@@ -6,23 +6,13 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import Slide from "@mui/material/Slide";
-import { Button } from "./index";
-function PartnerInfo() {
-  const [open, setOpen] = React.useState(false);
-
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
-
+import { Button as MyButton } from "./index";
+const PartnerInfoRender = () => {
+  return <></>;
+};
+function PartnerInfo(open, handleClose, data) {
   return (
     <div>
-      <Button variant="outlined" onClick={handleClickOpen}>
-        Slide in alert dialog
-      </Button>
       <Dialog
         open={open}
         keepMounted
@@ -32,15 +22,16 @@ function PartnerInfo() {
         <DialogTitle>{"Partner Information"}</DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-slide-description">
-            Let Google help apps determine location. This means sending
-            anonymous location data to Google, even when no apps are running.
+            View All partner Information
           </DialogContentText>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>
-            <Button />
+            <MyButton title="Accept" style="p-[20px]" />
           </Button>
-          <Button onClick={handleClose}>Agree</Button>
+          <Button onClick={handleClose}>
+            <MyButton title="Reject" style="bg-red-500 p-[20px]" />
+          </Button>
         </DialogActions>
       </Dialog>
     </div>
