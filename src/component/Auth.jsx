@@ -10,7 +10,7 @@ const AuthForm = () => {
   return (
     <>
       <form>
-        <div className="w-full h-full w-black flex flex-col justify-center items-center gap-5">
+        <div className="w-full h-full  flex flex-col justify-center items-center gap-5">
           <div className="flex flex-row text-[#2E5CFF] text-4xl font-black gap-2 justify-start items-center pb-9">
             <FaRobot />
             <h1 className="text-2xl">Reduce</h1>
