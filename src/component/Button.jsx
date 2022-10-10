@@ -1,6 +1,11 @@
 import React from "react";
 
-function Button({ title, Icon, OnClick, style }) {
+function Button({
+  title = "title",
+  Icon = () => <></>,
+  OnClick = () => {},
+  style = "",
+}) {
   return (
     <div
       onClick={() => OnClick()}
