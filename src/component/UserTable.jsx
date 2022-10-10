@@ -2,10 +2,11 @@ import React from "react";
 import { IoIosCloseCircle } from "react-icons/io";
 import { BsCheckCircleFill } from "react-icons/bs";
 import { MdPendingActions } from "react-icons/md";
+import { BsFillArrowRightSquareFill } from "react-icons/bs";
 const IconHolder = ({ Icon, style }) => {
   return (
     <>
-      <div className={`text-[20px] ${style}`}>
+      <div className={`text-[20px]  ${style}`}>
         <Icon />
       </div>
     </>
@@ -14,7 +15,9 @@ const IconHolder = ({ Icon, style }) => {
 const DataRow = ({ item, index }) => {
   return (
     <tr
-      className={`${index % 2 == 0 ? "bg-gray-100" : "bg-[#eeeeee]"} border-b`}
+      className={` text-[#353535] hover:text-[#fff] cur ${
+        index % 2 == 0 ? "bg-gray-100" : "bg-white"
+      } border-b`}
     >
       <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
         {item.id}
@@ -68,7 +71,7 @@ const DataRow = ({ item, index }) => {
         )}
       </td>
       <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-        {item.activity_entrprise_nome}
+        <IconHolder Icon={() => <BsFillArrowRightSquareFill />} style="" />
       </td>
     </tr>
   );

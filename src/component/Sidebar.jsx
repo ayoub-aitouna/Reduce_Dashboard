@@ -45,7 +45,7 @@ function Sidebar() {
         OnClick={() => {
           alert("Loged Out");
         }}
-        style="!h-[30px] p-[30px] mt-auto"
+        style="!h-[30px] p-[28px]  mt-auto"
       />
     </div>
   );
