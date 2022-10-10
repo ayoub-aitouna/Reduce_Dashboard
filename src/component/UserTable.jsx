@@ -15,7 +15,7 @@ const IconHolder = ({ Icon, style }) => {
 const DataRow = ({ item, index }) => {
   return (
     <tr
-      className={` text-[#353535] hover:text-[#fff] cur ${
+      className={` text-[#353535] hover:text-[#2E5CFF] cursor-pointer ${
         index % 2 == 0 ? "bg-gray-100" : "bg-white"
       } border-b`}
     >
@@ -70,8 +70,11 @@ const DataRow = ({ item, index }) => {
           </div>
         )}
       </td>
-      <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-        <IconHolder Icon={() => <BsFillArrowRightSquareFill />} style="" />
+      <td class="px-6 py-4 whitespace-nowrap text-sm font-medium ">
+        <IconHolder
+          Icon={() => <BsFillArrowRightSquareFill />}
+          style="text-[20px]"
+        />
       </td>
     </tr>
   );
