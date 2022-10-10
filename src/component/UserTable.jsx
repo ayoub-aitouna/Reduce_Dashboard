@@ -15,14 +15,14 @@ const IconHolder = ({ Icon, style }) => {
 const DataRow = ({ item, index }) => {
   return (
     <tr
-      className={` text-[#353535] hover:text-[#2E5CFF] cursor-pointer ${
+      className={` text-gray-900 hover:text-[#fff] hover:bg-[#2E5CFF] cursor-pointer ${
         index % 2 == 0 ? "bg-gray-100" : "bg-white"
       } border-b`}
     >
-      <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+      <td class="px-6 py-4 whitespace-nowrap text-sm font-medium ">
         {item.id}
       </td>
-      <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+      <td class="px-6 py-4 whitespace-nowrap text-sm font-medium ">
         <img
           className="w-[50px] h-[50px] rounded-full"
           src={item.avatar_Url}
@@ -30,25 +30,25 @@ const DataRow = ({ item, index }) => {
           srcset=""
         />
       </td>
-      <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+      <td class="px-6 py-4 whitespace-nowrap text-sm font-medium ">
         {item.nome_entreprise}
       </td>
-      <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+      <td class="px-6 py-4 whitespace-nowrap text-sm font-medium ">
         {item.identificateur_entreprise}
       </td>
-      <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+      <td class="px-6 py-4 whitespace-nowrap text-sm font-medium ">
         {item.representant_entreprise}
       </td>
-      <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+      <td class="px-6 py-4 whitespace-nowrap text-sm font-medium ">
         {item.role_dans_entriprise}
       </td>
-      <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+      <td class="px-6 py-4 whitespace-nowrap text-sm font-medium ">
         {item.ville_nome}
       </td>
-      <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+      <td class="px-6 py-4 whitespace-nowrap text-sm font-medium ">
         {item.activity_entrprise_nome}
       </td>
-      <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 text-[30px] ">
+      <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-[30px] ">
         {item.status == "Pending" ? (
           <IconHolder
             Icon={() => <MdPendingActions />}
@@ -81,7 +81,7 @@ const DataRow = ({ item, index }) => {
 };
 function UserTable({ Data }) {
   return (
-    <div class="flex flex-col ">
+    <div class="flex flex-col  border-[1px] my-10 border-gray-200 rounded-lg ">
       <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
         <div class="py-2 inline-block min-w-full sm:px-6 lg:px-8">
           <div class="overflow-hidden">
