@@ -29,7 +29,7 @@ function PartnerInfo(open, handleClose, data) {
           <Button onClick={() => handleClose()}>
             <MyButton title="Accept" style="p-[20px] font-bold text-xl" />
           </Button>
-          <Button onClick={() => handleClose()}>
+          <Button onClick={() => handleClose()} s>
             <MyButton
               title="Reject"
               style="bg-red-500 p-[20px] font-bold text-xl"
