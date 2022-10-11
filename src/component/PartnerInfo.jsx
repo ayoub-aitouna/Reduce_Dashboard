@@ -30,7 +30,7 @@ function PartnerInfo(open, handleClose, data) {
             <MyButton title="Accept" style="p-[20px]" />
           </Button>
           <Button onClick={handleClose}>
-            <MyButton title="Reject" style="bg-red-500 p-[20px]" />
+            <MyButton title="Reject" style="bg-red-500 p-[20px] font-black text-2xl" />
           </Button>
         </DialogActions>
       </Dialog>
