@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { UserTable } from "./index";
 import { PartnerInfo } from "./index";
 function Partner() {
-  const [isDialogOpend, setDialogOpend] = useState(false);
+  const [isDialogOpend, setDialogOpend] = useState(true);
   const [SelectedPartner, setSelectedpartner] = useState({});
   const data = [
     {
@@ -294,18 +294,15 @@ function Partner() {
       status: "Rejected",
     },
   ];
-  const ToggleDialog = () => {
-    console.log(isDialogOpend);
-  };
 
   return (
     <div className="p-5 my-10">
       <PartnerInfo
         open={isDialogOpend}
-        data={SelectedPartner}
-        handleClose={() => {
+        OnClick={() => {
           setDialogOpend(false);
         }}
+        data={SelectedPartner}
       />
       <div className="flex flex-col items-start justify-start">
         <h1 className="text-[20px] font-black leading-9 text-gray-800">
@@ -319,6 +316,7 @@ function Partner() {
         Data={data}
         OnSelect={(data) => {
           setSelectedpartner(data);
+          setDialogOpend(true);
         }}
       />
     </div>

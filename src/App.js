@@ -7,7 +7,7 @@ import { Home, Auth } from "./component";
 function App() {
   return (
     <div className="w-full h-[100vh]">
-      <Home />
+      <Auth />
     </div>
   );
 }
