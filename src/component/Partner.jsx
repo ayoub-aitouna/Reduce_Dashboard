@@ -295,7 +295,7 @@ function Partner() {
     },
   ];
   const ToggleDialog = () => {
-    setDialogOpend((value) => !value);
+    console.log(isDialogOpend);
   };
 
   return (
@@ -303,7 +303,9 @@ function Partner() {
       <PartnerInfo
         open={isDialogOpend}
         data={SelectedPartner}
-        handleClose={() => ToggleDialog()}
+        handleClose={() => {
+          setDialogOpend(false);
+        }}
       />
       <div className="flex flex-col items-start justify-start">
         <h1 className="text-[20px] font-black leading-9 text-gray-800">

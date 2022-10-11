@@ -16,7 +16,7 @@ function PartnerInfo(open, handleClose, data) {
       <Dialog
         open={open}
         keepMounted
-        onClose={handleClose}
+        onClose={() => handleClose()}
         aria-describedby="alert-dialog-slide-description"
       >
         <DialogTitle>{"Partner Information"}</DialogTitle>
@@ -26,11 +26,14 @@ function PartnerInfo(open, handleClose, data) {
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose}>
-            <MyButton title="Accept" style="p-[20px]" />
+          <Button onClick={() => handleClose()}>
+            <MyButton title="Accept" style="p-[20px] font-bold text-xl" />
           </Button>
-          <Button onClick={handleClose}>
-            <MyButton title="Reject" style="bg-red-500 p-[20px] font-black text-2xl" />
+          <Button onClick={() => handleClose()}>
+            <MyButton
+              title="Reject"
+              style="bg-red-500 p-[20px] font-bold text-xl"
+            />
           </Button>
         </DialogActions>
       </Dialog>
