@@ -1,11 +1,7 @@
-import React from 'react'
+import React from "react";
 
-function AddNewPartner() {
-  return (
-	<div>
-
-	</div>
-  )
+function AddNewAdmin() {
+  return <div></div>;
 }
 
-export default AddNewPartner
+export default AddNewAdmin;

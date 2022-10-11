@@ -303,7 +303,7 @@ function Partner() {
       <PartnerInfo
         open={isDialogOpend}
         data={SelectedPartner}
-        handleClose={ToggleDialog()}
+        handleClose={() => ToggleDialog()}
       />
       <div className="flex flex-col items-start justify-start">
         <h1 className="text-[20px] font-black leading-9 text-gray-800">

@@ -7,7 +7,7 @@ import { IconHalder } from "./index";
 const DataRow = ({ item, index, onClick }) => {
   return (
     <tr
-      onClick={onClick}
+      onClick={() => onClick()}
       className={` text-gray-900 hover:text-[#fff] hover:bg-[#2E5CFF] cursor-pointer ${
         index % 2 == 0 ? "bg-gray-100" : "bg-white"
       } border-b`}
@@ -150,7 +150,7 @@ function UserTable({ Data, OnSelect }) {
                       key={item.id}
                       item={item}
                       index={index}
-                      onClick={OnSelect(item)}
+                      onClick={() => OnSelect(item)}
                     />
                   </>
                 ))}
