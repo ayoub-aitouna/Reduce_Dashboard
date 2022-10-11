@@ -1,36 +1,55 @@
-import React from "react";
+import React, { useState } from "react";
+import { Button, Input } from "./index";
+import { FaRobot } from "react-icons/fa";
 
-const Input = ({ OnChange, value, hint, title }) => {
-	return (
-		<>
-			<div className='flex flex-col justify-start items-center'>
-				<h1>{title}</h1>
-				<input placeholder={hint} onChange={onchange()} value={value} />
-			</div>
-		</>
-	);
-};
 const AuthForm = () => {
-	return (
-		<>
-			<form>
-				<div className='w-full h-full w-black flex justify-center items-center'>
-					<h1>Reduc</h1>
-					<p>Merci d'entrer vos informations de connexion</p>
-					<Input title='Email' hint={"Example@email.com"} />
-					<Input title='mode de pass' hint={"********"} />
-				</div>
-			</form>
-		</>
-	);
+  const [login, setlogin] = useState({
+    email: "",
+    password: "",
+  });
+  return (
+    <>
+      <form>
+        <div className="w-full h-full  flex flex-col justify-center items-center gap-5">
+          <div className="flex flex-row text-[#2E5CFF] text-4xl font-black gap-2 justify-start items-center pb-9">
+            <FaRobot />
+            <h1 className="text-2xl">Reduce</h1>
+          </div>
+          <p>Merci d'entrer vos informations de connexion</p>
+          <Input
+            title="Email"
+            hint={"Example@email.com"}
+            OnChange={() => {}}
+            value={login.email}
+            type="email"
+          />
+          <Input
+            title="mode de pass"
+            hint={"*************"}
+            OnChange={() => {}}
+            value={login.password}
+            type="passowrd"
+          />
+          <Button
+            title={"Log out"}
+            Icon={() => <></>}
+            OnClick={() => {
+              alert("Loged Out");
+            }}
+            style="!h-[30px] p-[30px] mt-auto"
+          />
+        </div>
+      </form>
+    </>
+  );
 };
 
 function Auth() {
-	return (
-		<div className='w-full h-[100vh] bg-red-500'>
-			<AuthForm />
-		</div>
-	);
+  return (
+    <div className="w-full h-[100vh] grid place-content-center">
+      <AuthForm />
+    </div>
+  );
 }
 
 export default Auth;

@@ -1,12 +1,15 @@
 import "./App.css";
-import Auth from "./component/Auth";
-import { Home } from "./component";
+import "@fontsource/roboto/300.css";
+import "@fontsource/roboto/400.css";
+import "@fontsource/roboto/500.css";
+import "@fontsource/roboto/700.css";
+import { Home, Auth } from "./component";
 function App() {
-	return (
-		<div className='w-full h-[100vh]'>
-			<Home />
-		</div>
-	);
+  return (
+    <div className="w-full h-[100vh]">
+      <Auth />
+    </div>
+  );
 }
 
 export default App;
