@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { UserTable } from "./index";
 import { PartnerInfo } from "./index";
-function Partner() {
-  const [isDialogOpend, setDialogOpend] = useState(true);
+function Partner({ selectedstatus }) {
+  const [isDialogOpend, setDialogOpend] = useState(false);
   const [SelectedPartner, setSelectedpartner] = useState({});
   const data = [
     {
@@ -314,6 +314,7 @@ function Partner() {
       </div>
       <UserTable
         Data={data}
+        selectedstatu={selectedstatus}
         OnSelect={(data) => {
           setSelectedpartner(data);
           setDialogOpend(true);

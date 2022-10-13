@@ -72,7 +72,7 @@ const DataRow = ({ item, index, onClick }) => {
     </tr>
   );
 };
-function UserTable({ Data, OnSelect }) {
+function UserTable({ Data, OnSelect, selectedstatus }) {
   return (
     <div class="flex flex-col  border-[1px] my-10 border-gray-200 rounded-lg ">
       <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
