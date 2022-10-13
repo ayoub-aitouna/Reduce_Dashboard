@@ -35,6 +35,7 @@ const PartnerInfoRender = ({ item }) => {
         <DataRow title={"#"} data={item.id} />
         <DataRow
           title={"Logo"}
+
           Render={() => {
             return (
               <img
@@ -66,6 +67,7 @@ const PartnerInfoRender = ({ item }) => {
         />
         <DataRow
           title={"Status"}
+
           Render={() => {
             return (
               <div className="flex flex-row justify-center items-center ">
