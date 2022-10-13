@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { UserTable } from "./index";
-import { PartnerInfo } from "./index";
-function Partner() {
-  const [isDialogOpend, setDialogOpend] = useState(true);
+import { PartnerInfo, SearchBar, Filter_Selector } from "./index";
+function Partner({ selectedstatus }) {
+  const [isDialogOpend, setDialogOpend] = useState(false);
   const [SelectedPartner, setSelectedpartner] = useState({});
   const data = [
     {
@@ -312,8 +312,40 @@ function Partner() {
           partners that submited form to reduce platform
         </p>
       </div>
+      <div className="flex flex-row w-full mt-10 gap-5 justify-center items-center">
+        <Filter_Selector
+          title={"Role"}
+          styles={"h-[95px]"}
+          options={[
+            { value: 0, name: "" },
+            { value: 1, name: "Admin" },
+            { value: 2, name: "Manager" },
+          ]}
+        />
+        <Filter_Selector
+          title={"Account State"}
+          styles={"h-[95px]"}
+          options={[
+            { value: 0, name: "" },
+            { value: 1, name: "Suspanded" },
+            { value: 2, name: "Active" },
+            { value: 2, name: "Banned" },
+          ]}
+        />
+        <Filter_Selector
+          title={"Ville"}
+          styles={"h-[95px]"}
+          options={[
+            { value: 0, name: "" },
+            { value: 1, name: "Marrakech" },
+            { value: 2, name: "Beni Mellal" },
+          ]}
+        />
+        <SearchBar styles={"max-h-[95px]"} />
+      </div>
       <UserTable
         Data={data}
+        selectedstatu={selectedstatus}
         OnSelect={(data) => {
           setSelectedpartner(data);
           setDialogOpend(true);
