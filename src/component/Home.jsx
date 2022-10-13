@@ -1,5 +1,5 @@
 import React from "react";
-import { Sidebar, Partner } from "./index";
+import { Sidebar, Partner, Admins } from "./index";
 function Home() {
   return (
     <div className="bg-gray-100 w-full h-full overflow-y-scroll">

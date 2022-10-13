@@ -7,6 +7,12 @@ import Button from "./Button";
 import Input from "./Input";
 import PartnerInfo from "./PartnerInfo";
 import IconHalder from "./IconHolder";
+import ActionsDialog from "./ActionsDialog";
+import AdminsTable from "./AdminsTable";
+import Admins from "./Admins";
+import AddNewAdmin from "./AddNewAdmin";
+import Filter_Selector from "./Filter_Selector";
+import SearchBar from "./SearchBar";
 export {
   Auth,
   Home,
@@ -17,4 +23,10 @@ export {
   Input,
   PartnerInfo,
   IconHalder,
+  ActionsDialog,
+  AdminsTable,
+  Admins,
+  AddNewAdmin,
+  Filter_Selector,
+  SearchBar,
 };
