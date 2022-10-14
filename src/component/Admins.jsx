@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import { AdminsTable } from "./index";
 import { ActionsDialog } from "./index";
-import { Filter_Selector, SearchBar } from "./index";
+import { IoMdPersonAdd } from "react-icons/io";
+import { Filter_Selector, SearchBar, Button, AddNewAdmin } from "./index";
 function Admins() {
   const [isDialogOpend, setDialogOpend] = useState(false);
+  const [isNew_Admin_Dialog_Opend, setNew_Admin_Dialog_Opend] = useState(false);
   const [SelectedPartner, setSelectedpartner] = useState({});
   const data = [
     {
@@ -29,11 +31,18 @@ function Admins() {
     },
   ];
   return (
-    <div className="p-5 my-10">
+    <div className="p-5 my-10  ">
       <ActionsDialog
         open={isDialogOpend}
         OnClick={() => {
           setDialogOpend(false);
+        }}
+        data={SelectedPartner}
+      />
+      <AddNewAdmin
+        open={isNew_Admin_Dialog_Opend}
+        OnClick={() => {
+          setNew_Admin_Dialog_Opend(false);
         }}
         data={SelectedPartner}
       />
@@ -75,6 +84,14 @@ function Admins() {
           ]}
         />
         <SearchBar styles={"max-h-[95px]"} />
+      </div>
+      <div className=" absolute bottom-8 right-8">
+        <Button
+          Icon={() => <IoMdPersonAdd />}
+          title={"Add New Admin"}
+          OnClick={() => setNew_Admin_Dialog_Opend(true)}
+          style={"w-[250px] text-[19px] "}
+        />
       </div>
       <AdminsTable
         Data={data}

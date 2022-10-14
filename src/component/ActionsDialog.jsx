@@ -40,7 +40,7 @@ function ActionsDialog({ open, OnClick, data }) {
           <Button onClick={hadlerClose}>
             <MyButton
               title="Suspand"
-              style="bg-red-500 p-[20px] font-bold text-xl"
+              style="!bg-red-500 p-[20px] font-bold text-xl "
             />
           </Button>
         </DialogActions>
