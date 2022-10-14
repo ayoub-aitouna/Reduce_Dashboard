@@ -6,7 +6,7 @@ import "@fontsource/roboto/700.css";
 import { Home, Auth } from "./component";
 function App() {
   return (
-    <div className="w-full h-[100vh]">
+    <div className="w-full h-[100vh] overflow-hidden">
       <Home />
     </div>
   );
