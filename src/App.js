@@ -12,14 +12,19 @@ function App() {
       <Home />
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Auth />} />
+          <Route excat path="/auth" element={<Auth />} />
           <Route path="/home" element={<Home />}>
+            <Route path="/" excat element={<Partner />} />
             <Route
-              path="rejected"
+              path="/rejected"
               element={<Partner selectedStatus={"accepted"} />}
             />
             <Route
-              path="accepted"
+              path="/ccepted"
+              element={<Partner selectedStatus={"rejected"} />}
+            />
+            <Route
+              path="/admins"
               element={<Partner selectedStatus={"rejected"} />}
             />
           </Route>

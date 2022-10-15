@@ -1,7 +1,8 @@
+import { selectClasses } from "@mui/material";
 import React, { useState } from "react";
 import { UserTable } from "./index";
 import { PartnerInfo } from "./index";
-function Partner() {
+function Partner({ selectedStatus = "" }) {
   const [isDialogOpend, setDialogOpend] = useState(true);
   const [SelectedPartner, setSelectedpartner] = useState({});
   const data = [
@@ -294,7 +295,9 @@ function Partner() {
       status: "Rejected",
     },
   ];
-
+  data = data.filter((item) =>
+    selectedStatus != "" ? item.status == selectedStatus : item
+  );
   return (
     <div className="p-5 my-10">
       <PartnerInfo
