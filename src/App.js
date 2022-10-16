@@ -13,19 +13,16 @@ function App() {
         <Routes>
           <Route excat path="/auth" element={<Auth />} />
           <Route path="/" element={<Home />}>
-            <Route index path="/all_partners" excat element={<Partner />} />
+            <Route path="/all_partners" element={<Partner />} />
             <Route
               path="/Rejected_partners"
-              element={<Partner selectedStatus={"accepted"} />}
+              element={<Partner selectedStatus={"Rejected"} />}
             />
             <Route
               path="/Approved_partners"
-              element={<Partner selectedStatus={"rejected"} />}
+              element={<Partner selectedStatus={"Acepted"} />}
             />
-            <Route
-              path="/Admin_managers"
-              element={<Partner selectedStatus={"rejected"} />}
-            />
+            <Route path="/Admin_managers" element={<Admins />} />
           </Route>
         </Routes>
       </BrowserRouter>

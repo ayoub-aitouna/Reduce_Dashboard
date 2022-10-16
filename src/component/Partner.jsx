@@ -4,7 +4,7 @@ import { UserTable } from "./index";
 import { PartnerInfo } from "./index";
 import { Filter_Selector, SearchBar } from "./index";
 function Partner({ selectedStatus = "" }) {
-  const [isDialogOpend, setDialogOpend] = useState(true);
+  const [isDialogOpend, setDialogOpend] = useState(false);
 
   const [SelectedPartner, setSelectedpartner] = useState({});
   let data = [
@@ -298,7 +298,7 @@ function Partner({ selectedStatus = "" }) {
     },
   ];
   data = data.filter((item) =>
-    selectedStatus != "" ? item.status == selectedStatus : item
+    selectedStatus != "" ? item.status == selectedStatus : item.status
   );
   return (
     <div className="p-5 my-10">

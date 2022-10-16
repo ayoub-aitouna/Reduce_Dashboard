@@ -25,7 +25,7 @@ function Sidebar() {
                 {item.tabs.map((tab) => (
                   <>
                     <Link
-                      to={item.tabs.Url}
+                      to={tab.Url}
                       key={tab.key}
                       className=" flex w-[180px] flex-col justify-center items-start  cursor-pointer px-2 py-3 text-[#475569] rounded-md hover:bg-[#2E5CFF] hover:text-white"
                     >
