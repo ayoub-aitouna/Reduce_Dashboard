@@ -1,5 +1,5 @@
 function check_if_user_valide() {
-  return false;
+  return true;
 }
 
 export { check_if_user_valide };

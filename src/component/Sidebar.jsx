@@ -3,6 +3,7 @@ import { SideBarLinks } from "../constants.js";
 import { FaRobot } from "react-icons/fa";
 import { BiExit } from "react-icons/bi";
 import { Button } from "./index";
+import { Link } from "react-router-dom";
 function Sidebar() {
   return (
     <div className="absolute w-[259.19px] h-[100vh] top-0 left-0 bg-[#fff] pt-[20px] px-10 flex flex-col py-10 shadow-lg">
@@ -23,7 +24,8 @@ function Sidebar() {
               <ul className="flex flex-col gap-5 w-full">
                 {item.tabs.map((tab) => (
                   <>
-                    <li
+                    <Link
+                      to={tab.Url}
                       key={tab.key}
                       className=" flex w-[180px] flex-col justify-center items-start  cursor-pointer px-2 py-3 text-[#475569] rounded-md hover:bg-[#2E5CFF] hover:text-white"
                     >
@@ -31,7 +33,7 @@ function Sidebar() {
                         <tab.Icon />
                         {tab.name}
                       </p>
-                    </li>
+                    </Link>
                   </>
                 ))}
               </ul>

@@ -26,11 +26,11 @@ function ActionsDialog({ open, OnClick, data }) {
         onClose={hadlerClose}
         aria-describedby="alert-dialog-slide-description"
       >
-        <DialogTitle>{"Use Google's location service?"}</DialogTitle>
+        <DialogTitle>{`Delete Manager ${data._name}`}</DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-slide-description">
-            Let Google help apps determine location. This means sending
-            anonymous location data to Google, even when no apps are running.
+            if you Deleted This Manager. you could not undo it so please be
+            Cautious
           </DialogContentText>
         </DialogContent>
         <DialogActions>
