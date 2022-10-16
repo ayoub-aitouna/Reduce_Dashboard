@@ -12,22 +12,22 @@ import { MdPendingActions } from "react-icons/md";
 import { BsFillArrowRightSquareFill } from "react-icons/bs";
 import { IconHalder } from "./index";
 import { Button as MyButton } from "./index";
+
 const DataRow = ({ title, data = null, Render = () => <></> }) => {
   return (
-    <>
-      <li class="px-6 py-4 whitespace-nowrap text-sm font-medium w-full h-[107px]">
-        <div class="grid overflow-hidden grid-cols-4 grid-rows-2 gap-2 rounded-mg h-full p-1">
-          <div class="box row-start-1 row-span-6 col-start-3 col-end-1 flex flex-col justify-center items-start">
-            {title}
-          </div>
-          <div class="box row-span-6 col-start-3 col-end-12  flex flex-row justify-center items-center">
-            <p className="mr-auto">: </p> {data ? data : <Render />}
-          </div>
+    <li class="px-6 py-4 whitespace-nowrap text-sm font-medium w-full h-[107px]">
+      <div class="grid overflow-hidden grid-cols-4 grid-rows-2 gap-2 rounded-mg h-full p-1">
+        <div class="box row-start-1 row-span-6 col-start-3 col-end-1 flex flex-col justify-center items-start">
+          {title}
         </div>
-      </li>
-    </>
+        <div class="box row-span-6 col-start-3 col-end-12  flex flex-row justify-end items-center">
+          <p className="mr-auto">: </p> {data ? <p>{data}</p> : <Render />}
+        </div>
+      </div>
+    </li>
   );
 };
+
 const PartnerInfoRender = ({ item }) => {
   return (
     <>
@@ -35,14 +35,17 @@ const PartnerInfoRender = ({ item }) => {
         <DataRow title={"#"} data={item.id} />
         <DataRow
           title={"Logo"}
-          Render={() => (
-            <img
-              className="w-[50px] h-[50px] rounded-full"
-              src={item.avatar_Url}
-              alt="entreprise Logo"
-              srcset=""
-            />
-          )}
+
+          Render={() => {
+            return (
+              <img
+                className="w-[50px] h-[50px] rounded-full"
+                src={item.avatar_Url}
+                alt="entreprise Logo"
+                srcset=""
+              />
+            );
+          }}
         />
         <DataRow title={"Nome Entreprise"} data={item.nome_entreprise} />
         <DataRow
@@ -64,31 +67,34 @@ const PartnerInfoRender = ({ item }) => {
         />
         <DataRow
           title={"Status"}
-          Render={() => (
-            <div className="flex flex-row justify-center items-center ">
-              <p>{item.status}</p>
-              {item.status == "Pending" ? (
-                <IconHalder
-                  Icon={() => <MdPendingActions />}
-                  style="text-[#353535]"
-                />
-              ) : item.status == "Acepted" ? (
-                <div>
+
+          Render={() => {
+            return (
+              <div className="flex flex-row justify-center items-center ">
+                <p>{item.status}</p>
+                {item.status == "Pending" ? (
                   <IconHalder
-                    Icon={() => <BsCheckCircleFill />}
-                    style="text-[#0012ff]"
+                    Icon={() => <MdPendingActions />}
+                    style="text-[#353535]"
                   />
-                </div>
-              ) : (
-                <div>
-                  <IconHalder
-                    Icon={() => <IoIosCloseCircle />}
-                    style="text-[#ff0000]"
-                  />
-                </div>
-              )}
-            </div>
-          )}
+                ) : item.status == "Acepted" ? (
+                  <div>
+                    <IconHalder
+                      Icon={() => <BsCheckCircleFill />}
+                      style="text-[#0012ff]"
+                    />
+                  </div>
+                ) : (
+                  <div>
+                    <IconHalder
+                      Icon={() => <IoIosCloseCircle />}
+                      style="text-[#ff0000]"
+                    />
+                  </div>
+                )}
+              </div>
+            );
+          }}
         />
       </ul>
     </>
@@ -107,11 +113,7 @@ function PartnerInfo({ open, OnClick, data }) {
         onClose={hadlerClose}
         aria-describedby="alert-dialog-slide-description"
       >
-        <DialogTitle>{"Partner Information"}</DialogTitle>
         <DialogContent>
-          <DialogContentText id="alert-dialog-slide-description">
-            View All partner Information
-          </DialogContentText>
           <PartnerInfoRender item={data} />
         </DialogContent>
         {data.status == "Pending" ? (

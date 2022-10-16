@@ -38,12 +38,6 @@ export const SideBarLinks = [
         Icon: RiAdminFill,
         Url: "/Admin_managers",
       },
-      {
-        key: 0,
-        name: "Add Managers",
-        Icon: IoMdPersonAdd,
-        Url: "/add_Admin_managers",
-      },
     ],
   },
 ];

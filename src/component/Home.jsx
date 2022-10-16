@@ -9,10 +9,10 @@ function Home() {
     navigate(`/auth`);
   }
   return (
-    <div className="bg-gray-100 w-full h-full overflow-y-scroll">
+    <div className="bg-gray-100 w-full h-full overflow-y-scroll overflow-x-hidden">
       <Sidebar />
       <div className="ml-[259.19px] h-full">
-        <Partner />
+        <Admins selectedstatus={"Approved"} />
       </div>
     </div>
   );
