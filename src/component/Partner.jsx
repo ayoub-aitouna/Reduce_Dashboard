@@ -5,6 +5,9 @@ import { PartnerInfo } from "./index";
 import { Filter_Selector, SearchBar } from "./index";
 function Partner({ selectedStatus = "" }) {
   const [isDialogOpend, setDialogOpend] = useState(false);
+  const [City, setCity] = useState("");
+  const [Role, setRole] = useState("");
+  const [AccountState, setAccountState] = useState("");
 
   const [SelectedPartner, setSelectedpartner] = useState({});
   let data = [
@@ -317,36 +320,44 @@ function Partner({ selectedStatus = "" }) {
           partners that submited form to reduce platform
         </p>
       </div>
-      <div className="flex flex-row w-full mt-10 gap-5 justify-center items-center">
-        <Filter_Selector
-          title={"Role"}
-          styles={"h-[95px]"}
-          options={[
-            { value: 0, name: "" },
-            { value: 1, name: "Admin" },
-            { value: 2, name: "Manager" },
-          ]}
-        />
-        <Filter_Selector
-          title={"Account State"}
-          styles={"h-[95px]"}
-          options={[
-            { value: 0, name: "" },
-            { value: 1, name: "Suspanded" },
-            { value: 2, name: "Active" },
-            { value: 2, name: "Banned" },
-          ]}
-        />
-        <Filter_Selector
-          title={"Ville"}
-          styles={"h-[95px]"}
-          options={[
-            { value: 0, name: "" },
-            { value: 1, name: "Marrakech" },
-            { value: 2, name: "Beni Mellal" },
-          ]}
-        />
-        <SearchBar styles={"max-h-[95px]"} />
+      <div className="flex ld:flex-row flex-col w-full mt-10 lg:gap-5 gap-0 justify-center items-center">
+        <SearchBar styles={"max-h-[15px] !w-full"} />
+        <div className="flex flex-row w-full mt-10 gap-5 justify-start items-center">
+          <Filter_Selector
+            title={"Role"}
+            styles={"h-[95px]"}
+            options={[
+              { value: 0, name: "" },
+              { value: 1, name: "Admin" },
+              { value: 2, name: "Manager" },
+            ]}
+            setFilter={(value) => setRole(value)}
+            Filter={Role}
+          />
+          <Filter_Selector
+            title={"Account State"}
+            styles={"h-[95px]"}
+            options={[
+              { value: 0, name: "" },
+              { value: 1, name: "Suspanded" },
+              { value: 2, name: "Active" },
+              { value: 2, name: "Banned" },
+            ]}
+            setFilter={(value) => setAccountState(value)}
+            Filter={AccountState}
+          />
+          <Filter_Selector
+            title={"Ville"}
+            styles={"h-[95px]"}
+            options={[
+              { value: 0, name: "" },
+              { value: 1, name: "Marrakech" },
+              { value: 2, name: "Beni Mellal" },
+            ]}
+            setFilter={(value) => setCity(value)}
+            Filter={City}
+          />
+        </div>
       </div>
       <UserTable
         Data={data}

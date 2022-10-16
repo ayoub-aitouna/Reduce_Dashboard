@@ -15,6 +15,12 @@ export const SideBarLinks = [
         key: 0,
       },
       {
+        name: "Pending Partners",
+        Url: "/Pending_partners",
+        Icon: IoIosCloseCircle,
+        key: 1,
+      },
+      {
         name: "Rejected Partners",
         Url: "/Rejected_partners",
         Icon: IoIosCloseCircle,

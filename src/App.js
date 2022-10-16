@@ -14,6 +14,7 @@ function App() {
           <Route excat path="/auth" element={<Auth />} />
           <Route path="/" element={<Home />}>
             <Route path="/all_partners" element={<Partner />} />
+            <Route path="/Pending_partners" element={<Partner selectedStatus="Pending" />} />
             <Route
               path="/Rejected_partners"
               element={<Partner selectedStatus={"Rejected"} />}
