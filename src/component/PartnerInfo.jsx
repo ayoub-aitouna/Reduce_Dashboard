@@ -12,7 +12,7 @@ import { MdPendingActions } from "react-icons/md";
 import { BsFillArrowRightSquareFill } from "react-icons/bs";
 import { IconHalder } from "./index";
 import { Button as MyButton } from "./index";
-const DataRow = ({ title, data = null, Render }) => {
+const DataRow = ({ title, data = null, Render = () => <></> }) => {
   return (
     <>
       <li class="px-6 py-4 whitespace-nowrap text-sm font-medium w-full h-[107px]">

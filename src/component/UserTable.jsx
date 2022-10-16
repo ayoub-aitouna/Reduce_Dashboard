@@ -4,7 +4,7 @@ import { BsCheckCircleFill } from "react-icons/bs";
 import { MdPendingActions } from "react-icons/md";
 import { BsFillArrowRightSquareFill } from "react-icons/bs";
 import { IconHalder } from "./index";
-const DataRow = ({ item, index, onClick }) => {
+const DataRow = ({ item, index, onClick = () => {} }) => {
   return (
     <tr
       onClick={() => onClick()}
