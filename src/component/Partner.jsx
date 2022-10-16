@@ -300,15 +300,12 @@ function Partner({ selectedStatus = "" }) {
       status: "Rejected",
     },
   ];
-  data = data.filter((item) =>
-    selectedStatus != "" ? item.status == selectedStatus : item.status
-  );
-  // data = data.filter((item) =>
-  //   City != "" ? item.City == City : item
-  // );
-  // data = data.filter((item) =>
-  //   activity_entrprise != "" ? item.activity_entrprise_nome == activity_entrprise : item
-  // );
+  data = data.filter(function (v, i) {
+    return v["activity_entrprise_nome"] == activity_entrprise ||
+      (v["City"] == City && selectedStatus != "")
+      ? v.status == selectedStatus
+      : v;
+  });
   return (
     <div className="p-5 my-10">
       <PartnerInfo
@@ -346,9 +343,9 @@ function Partner({ selectedStatus = "" }) {
             styles={"h-[95px]"}
             options={[
               { value: 0, name: "" },
-              { value: 1, name: "Suspanded" },
-              { value: 2, name: "Active" },
-              { value: 2, name: "Banned" },
+              { value: 1, name: "Pending" },
+              { value: 2, name: "Rejected" },
+              { value: 2, name: "Acepted" },
             ]}
             setFilter={(value) => setAccountState(value)}
             Filter={AccountState}
