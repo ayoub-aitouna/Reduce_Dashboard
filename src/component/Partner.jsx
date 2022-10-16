@@ -1,10 +1,12 @@
+import { selectClasses } from "@mui/material";
 import React, { useState } from "react";
 import { UserTable } from "./index";
-import { PartnerInfo, SearchBar, Filter_Selector } from "./index";
-function Partner({ selectedstatus }) {
-  const [isDialogOpend, setDialogOpend] = useState(false);
+import { PartnerInfo } from "./index";
+function Partner({ selectedStatus = "" }) {
+const [isDialogOpend, setDialogOpend] = useState(true);
+
   const [SelectedPartner, setSelectedpartner] = useState({});
-  const data = [
+  let data = [
     {
       id: 1,
       avatar_Url:
@@ -294,7 +296,9 @@ function Partner({ selectedstatus }) {
       status: "Rejected",
     },
   ];
-
+  // data = data.filter((item) =>
+  //   selectedStatus != "" ? item.status == selectedStatus : item
+  // );
   return (
     <div className="p-5 my-10">
       <PartnerInfo
