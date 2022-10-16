@@ -6,7 +6,7 @@ import { Filter_Selector, SearchBar } from "./index";
 function Partner({ selectedStatus = "" }) {
   const [isDialogOpend, setDialogOpend] = useState(false);
   const [City, setCity] = useState("");
-  const [Role, setRole] = useState("");
+  const [activity_entrprise, setactivity_entrprise] = useState("");
   const [AccountState, setAccountState] = useState("");
 
   const [SelectedPartner, setSelectedpartner] = useState({});
@@ -303,6 +303,12 @@ function Partner({ selectedStatus = "" }) {
   data = data.filter((item) =>
     selectedStatus != "" ? item.status == selectedStatus : item.status
   );
+  // data = data.filter((item) =>
+  //   City != "" ? item.City == City : item
+  // );
+  // data = data.filter((item) =>
+  //   activity_entrprise != "" ? item.activity_entrprise_nome == activity_entrprise : item
+  // );
   return (
     <div className="p-5 my-10">
       <PartnerInfo
@@ -324,15 +330,16 @@ function Partner({ selectedStatus = "" }) {
         <SearchBar styles={"max-h-[15px] !w-full"} />
         <div className="flex flex-row w-full mt-10 gap-5 justify-start items-center">
           <Filter_Selector
-            title={"Role"}
+            title={"Activity Entrprise"}
             styles={"h-[95px]"}
             options={[
               { value: 0, name: "" },
-              { value: 1, name: "Admin" },
-              { value: 2, name: "Manager" },
+              { value: 1, name: "Designer" },
+              { value: 2, name: "Programmer" },
+              { value: 2, name: "Cleaner" },
             ]}
-            setFilter={(value) => setRole(value)}
-            Filter={Role}
+            setFilter={(value) => setactivity_entrprise(value)}
+            Filter={activity_entrprise}
           />
           <Filter_Selector
             title={"Account State"}
