@@ -12,7 +12,7 @@ function Home() {
   let navigate = useNavigate();
 
   if (!check_if_user_valide()) {
-    navigate(`/auth`);
+    navigate(`/`);
   }
   return (
     <div className="bg-gray-100 w-full h-full overflow-y-scroll overflow-x-hidden">

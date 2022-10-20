@@ -1,8 +1,21 @@
 import React, { useState } from "react";
 import { Button, Input } from "./index";
 import { FaRobot } from "react-icons/fa";
+import { check_if_user_valide } from "../Utils/Auth";
 
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+  useNavigate,
+  Outlet,
+} from "react-router-dom";
 const AuthForm = () => {
+  let navigate = useNavigate();
+
+  // if (check_if_user_valide()) {
+  //   navigate(`/home`);
+  // }
   const [login, setlogin] = useState({
     email: "",
     password: "",

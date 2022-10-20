@@ -10,7 +10,7 @@ function Admins() {
   const [Role, setRole] = useState("");
   const [AccountState, setAccountState] = useState("");
   const [SelectedPartner, setSelectedpartner] = useState({});
-  const data = [
+  let data = [
     {
       id: 1,
       _name: "Ayoub",
