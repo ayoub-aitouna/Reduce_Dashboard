@@ -5,7 +5,6 @@ import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
 import { Home, Auth, Partner, Admins } from "./component";
 import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";
-
 function App() {
   return (
     <div className="w-full h-[100vh]">

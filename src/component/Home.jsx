@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Sidebar, Partner } from "./index";
 import {
   BrowserRouter,
@@ -10,10 +10,12 @@ import {
 import { check_if_user_valide } from "../Utils/Auth";
 function Home() {
   let navigate = useNavigate();
+  useEffect(() => {
+    if (!check_if_user_valide()) {
+      navigate(`/`);
+    }
+  }, []);
 
-  if (!check_if_user_valide()) {
-    navigate(`/`);
-  }
   return (
     <div className="bg-gray-100 w-full h-full overflow-y-scroll overflow-x-hidden">
       <Sidebar />

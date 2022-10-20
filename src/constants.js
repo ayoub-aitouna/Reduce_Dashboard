@@ -53,3 +53,5 @@ export const SideBarLinks = [
     ],
   },
 ];
+
+export const BaseUrl = "";
