@@ -7,11 +7,15 @@ import {
   useNavigate,
   Outlet,
 } from "react-router-dom";
-import { check_if_user_valide } from "../Utils/Auth";
+import { useCookies } from "react-cookie";
+import { BaseUrl, Coockies_name } from "../constants";
+import { Check_if_user_valide } from "../Utils/Auth";
 function Home() {
+  const [cookies, setCookie, removeCookie] = useCookies([Coockies_name]);
+
   let navigate = useNavigate();
   useEffect(() => {
-    if (!check_if_user_valide()) {
+    if (cookies == null || cookies == undefined) {
       navigate(`/`);
     }
   }, []);

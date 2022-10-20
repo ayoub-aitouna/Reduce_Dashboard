@@ -31,7 +31,8 @@ const AuthForm = () => {
   const [cookies, setCookie, removeCookie] = useCookies([Coockies_name]);
 
   useEffect(() => {
-    if (cookies != null && cookies != undefined) {
+    console.log(cookies);
+    if (cookies != null || cookies != undefined) {
       navigate(`/home`);
     }
   }, []);
