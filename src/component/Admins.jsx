@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { AdminsTable } from "./index";
 import { ActionsDialog } from "./index";
 import { IoMdPersonAdd } from "react-icons/io";
+import { BaseUrl } from "./constants";
+
 import { Filter_Selector, SearchBar, Button, AddNewAdmin } from "./index";
 function Admins() {
   const [isDialogOpend, setDialogOpend] = useState(false);
@@ -10,29 +12,24 @@ function Admins() {
   const [Role, setRole] = useState("");
   const [AccountState, setAccountState] = useState("");
   const [SelectedPartner, setSelectedpartner] = useState({});
-  let data = [
-    {
-      id: 1,
-      _name: "Ayoub",
-      email: "Chanel@emz.com",
-      _role: "Manager",
-      account_status: "Active",
-    },
-    {
-      id: 1,
-      _name: "Ayoub",
-      email: "Chanel@emz.com",
-      _role: "Manager",
-      account_status: "Active",
-    },
-    {
-      id: 1,
-      _name: "Ayoub",
-      email: "Chanel@emz.com",
-      _role: "Manager",
-      account_status: "Active",
-    },
-  ];
+  const [data, setdata] = useState({});
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const req = await fetch(`${BaseUrl}`, {
+          method: "POST",
+          mode: "cors",
+          cache: "no-cache",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          referrerPolicy: "no-referrer",
+        });
+        const data = req.json();
+        setdata(data);
+      } catch (err) {}
+    }
+  }, []);
   return (
     <div className="p-5 my-10  ">
       <ActionsDialog
