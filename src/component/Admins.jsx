@@ -110,15 +110,15 @@ function Admins() {
       <div className=" absolute bottom-8 right-8 flex flex-col gap-5">
         <Button
           Icon={() => <IoMdPersonAdd />}
-          title={"Add Admin"}
+          title={"Add Manager"}
           OnClick={() => setNew_Admin_Dialog_Opend(true)}
-          style={"!w-[200px] text-[19px] "}
+          style={"!w-[250px] text-[19px] "}
         />
         <Button
           Icon={() => <IoMdPersonAdd />}
           title={"Add Task"}
           OnClick={() => setNew_Task_Dialog_Opend(true)}
-          style={"!w-[200px] text-[19px] "}
+          style={"!w-[250px] text-[19px] "}
         />
       </div>
       <AdminsTable

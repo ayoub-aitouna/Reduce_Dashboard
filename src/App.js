@@ -3,7 +3,15 @@ import "@fontsource/roboto/300.css";
 import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
-import { Home, Auth, Partner, Admins } from "./component";
+import {
+  Home,
+  Auth,
+  Partner,
+  Admins,
+  Tasks,
+  Task_anounsments,
+  Task_done,
+} from "./component";
 import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";
 function App() {
   return (
@@ -17,7 +25,14 @@ function App() {
               path="Pending_partners"
               element={<Partner selectedStatus="Pending" />}
             />
-            <Route path="tasks" element={<Partner selectedStatus="" />} />
+            <Route path="tasks" element={<Tasks />}>
+              <Route
+                exact
+                path="task_anounsments"
+                element={<Task_anounsments />}
+              />
+              <Route path="task_done" element={<Task_done />} />
+            </Route>
             <Route
               path="Rejected_partners"
               element={<Partner selectedStatus={"Rejected"} />}

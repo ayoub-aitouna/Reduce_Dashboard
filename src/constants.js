@@ -14,12 +14,7 @@ export const SideBarLinks = [
         Icon: HiUsers,
         key: 0,
       },
-      {
-        key: 1,
-        name: "Tasks",
-        Icon: RiAdminFill,
-        Url: "tasks",
-      },
+
       {
         name: "Pending Partners",
         Url: "Pending_partners",
@@ -37,6 +32,12 @@ export const SideBarLinks = [
         Url: "Approved_partners",
         Icon: BsCheckCircleFill,
         key: 4,
+      },
+      {
+        key: 1,
+        name: "Tasks",
+        Icon: RiAdminFill,
+        Url: "tasks",
       },
     ],
   },
