@@ -4,10 +4,17 @@ import { ActionsDialog } from "./index";
 import { IoMdPersonAdd } from "react-icons/io";
 import { BaseUrl } from "../constants";
 
-import { Filter_Selector, SearchBar, Button, AddNewAdmin } from "./index";
+import {
+  Filter_Selector,
+  SearchBar,
+  Button,
+  AddNewAdmin,
+  Add_new_task as AddNewTask,
+} from "./index";
 function Admins() {
   const [isDialogOpend, setDialogOpend] = useState(false);
   const [isNew_Admin_Dialog_Opend, setNew_Admin_Dialog_Opend] = useState(false);
+  const [isNew_Task_Dialog_Opend, setNew_Task_Dialog_Opend] = useState(false);
   const [City, setCity] = useState("");
   const [Role, setRole] = useState("");
   const [AccountState, setAccountState] = useState("");
@@ -43,6 +50,13 @@ function Admins() {
         open={isNew_Admin_Dialog_Opend}
         OnClick={() => {
           setNew_Admin_Dialog_Opend(false);
+        }}
+        data={SelectedPartner}
+      />
+      <AddNewTask
+        open={isNew_Task_Dialog_Opend}
+        OnClick={() => {
+          setNew_Task_Dialog_Opend(false);
         }}
         data={SelectedPartner}
       />
@@ -93,12 +107,18 @@ function Admins() {
           />
         </div>
       </div>
-      <div className=" absolute bottom-8 right-8">
+      <div className=" absolute bottom-8 right-8 flex flex-col gap-5">
         <Button
           Icon={() => <IoMdPersonAdd />}
-          title={"Add New Admin"}
+          title={"Add Admin"}
           OnClick={() => setNew_Admin_Dialog_Opend(true)}
-          style={"w-[250px] text-[19px] "}
+          style={"!w-[200px] text-[19px] "}
+        />
+        <Button
+          Icon={() => <IoMdPersonAdd />}
+          title={"Add Task"}
+          OnClick={() => setNew_Task_Dialog_Opend(true)}
+          style={"!w-[200px] text-[19px] "}
         />
       </div>
       <AdminsTable

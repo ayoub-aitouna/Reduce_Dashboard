@@ -32,7 +32,7 @@ const Fill_Form = () => {
             class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
             for="grid-name"
           >
-            Admin Name
+            Partner Name
           </label>
           <input
             class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
@@ -40,65 +40,18 @@ const Fill_Form = () => {
             type="text"
             placeholder="Jane Doe"
           />
-          <p class="text-gray-600 text-xs italic">
-            this name will be shown on the dashboard
-          </p>
         </div>
-      </div>
-      <div class="flex flex-wrap -mx-3 mb-6">
-        <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+        <div class="w-full px-3">
           <label
             class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-            for="grid-first-name"
+            for="grid-name"
           >
-            Email
+            Partner Adreess
           </label>
           <input
-            class="appearance-none block w-full bg-gray-200 text-gray-700 border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-            id="grid-first-name"
+            class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+            id="grid-name"
             type="text"
-            placeholder="Example@email.com"
-          />
-          {/* <p class="text-red-500 text-xs italic">Please fill out this field.</p> */}
-        </div>
-        <div class="w-full md:w-1/2 px-3">
-          <label
-            class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-            for="grid-last-name"
-          >
-            Password
-          </label>
-          <input
-            class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-            id="grid-last-name"
-            type="password"
-            placeholder="**********"
-          />
-        </div>
-      </div>
-
-      <div class="flex flex-wrap -mx-3 mb-2">
-        <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-          <Filter_Selector
-            title={"Ville"}
-            options={[
-              { value: 0, name: "" },
-              { value: 1, name: "Marrakech" },
-              { value: 2, name: "Beni Mellal" },
-            ]}
-            styles={"!max-w-full"}
-          />
-        </div>
-
-        <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-          <Filter_Selector
-            title={"Role"}
-            options={[
-              { value: "", name: "" },
-              { value: "Admin", name: "Admin" },
-              { value: "Manager", name: "Manager" },
-            ]}
-            styles={"!max-w-full"}
           />
         </div>
       </div>
@@ -106,7 +59,7 @@ const Fill_Form = () => {
   );
 };
 
-function AddNewAdmin({ open, OnClick, data }) {
+function Add_new_task({ open, OnClick, data }) {
   const hadlerClose = () => {
     OnClick();
   };
@@ -123,7 +76,7 @@ function AddNewAdmin({ open, OnClick, data }) {
         <DialogContent>
           <DialogContentText id="alert-dialog-slide-description">
             <p class="text-gray-600 text-xs ">
-              please fill the information of the admin you want to add
+              please fill the information about the task you want to make
             </p>
           </DialogContentText>
         </DialogContent>
@@ -134,7 +87,7 @@ function AddNewAdmin({ open, OnClick, data }) {
         <DialogActions>
           <Button onClick={hadlerClose}>
             <MyButton
-              title="Add Admin"
+              title="Add task"
               style="bg-red-500 p-[20px] font-bold text-xl !p-[1px]"
             />
           </Button>
@@ -150,4 +103,4 @@ function AddNewAdmin({ open, OnClick, data }) {
   );
 }
 
-export default AddNewAdmin;
+export default Add_new_task;

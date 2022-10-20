@@ -13,6 +13,7 @@ import Admins from "./Admins";
 import AddNewAdmin from "./AddNewAdmin";
 import Filter_Selector from "./Filter_Selector";
 import SearchBar from "./SearchBar";
+import Add_new_task from "./Add_new_task";
 export {
   Auth,
   Home,
@@ -27,6 +28,7 @@ export {
   AdminsTable,
   Admins,
   AddNewAdmin,
+  Add_new_task,
   Filter_Selector,
   SearchBar,
 };
