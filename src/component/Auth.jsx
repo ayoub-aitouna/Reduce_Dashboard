@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Button, Input } from "./index";
 import { FaRobot } from "react-icons/fa";
 import { useCookies } from "react-cookie";
-import { BaseUrl } from "../constants";
+import { BaseUrl, Coockies_name } from "../constants";
 
 import { useNavigate } from "react-router-dom";
 
@@ -28,10 +28,10 @@ const login_submit = async (email, pass, callback = () => {}) => {
 
 const AuthForm = () => {
   let navigate = useNavigate();
-  const [cookies, setCookie, removeCookie] = useCookies(["auth_token"]);
+  const [cookies, setCookie, removeCookie] = useCookies([Coockies_name]);
 
   useEffect(() => {
-    if (cookies != null) {
+    if (cookies != null && cookies != undefined) {
       navigate(`/home`);
     }
   }, []);

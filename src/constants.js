@@ -55,3 +55,5 @@ export const SideBarLinks = [
 ];
 
 export const BaseUrl = "";
+
+export const Coockies_name = "auth_name";

@@ -4,7 +4,13 @@ import { FaRobot } from "react-icons/fa";
 import { BiExit } from "react-icons/bi";
 import { Button } from "./index";
 import { Link } from "react-router-dom";
+import { useCookies } from "react-cookie";
+import { Coockies_name } from "../constants";
+import { useNavigate } from "react-router-dom";
+
 function Sidebar() {
+  const [cookies, setCookie, removeCookie] = useCookies([Coockies_name]);
+  let navigate = useNavigate();
   return (
     <div className="absolute w-[259.19px] h-[100vh] top-0 left-0 bg-[#fff] pt-[20px] px-10 flex flex-col py-10 shadow-lg">
       <div className="flex flex-row text-[#2E5CFF] text-4xl font-black gap-2 justify-start items-center pb-9">
@@ -45,7 +51,8 @@ function Sidebar() {
         title={"Log out"}
         Icon={() => <BiExit />}
         OnClick={() => {
-          alert("Loged Out");
+          removeCookie();
+          navigate("/");
         }}
         style="!h-[30px] p-[28px]  mt-auto"
       />
