@@ -1,8 +1,9 @@
-import { selectClasses } from "@mui/material";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { UserTable } from "./index";
 import { PartnerInfo } from "./index";
 import { Filter_Selector, SearchBar } from "./index";
+import { BaseUrl } from "../constants";
+
 function Partner({ selectedStatus = "" }) {
   const [isDialogOpend, setDialogOpend] = useState(false);
   const [City, setCity] = useState("");
@@ -10,296 +11,24 @@ function Partner({ selectedStatus = "" }) {
   const [AccountState, setAccountState] = useState("");
 
   const [SelectedPartner, setSelectedpartner] = useState({});
-  let data = [
-    {
-      id: 1,
-      avatar_Url:
-        "https://e7.pngegg.com/pngimages/571/691/png-clipart-chanel-logo-brand-fashion-coco-company-text.png",
-      nome_entreprise: "Chanel",
-      identificateur_entreprise: "XF-548CCF",
-      representant_entreprise: "CEO MAARY",
-      role_dans_entriprise: "Cloths",
-      ville_nome: "Parize",
-      activity_entrprise_nome: "Design cloth",
-      status: "Pending",
-    },
-    {
-      id: 2,
-      avatar_Url:
-        "https://e7.pngegg.com/pngimages/571/691/png-clipart-chanel-logo-brand-fashion-coco-company-text.png",
-      nome_entreprise: "Chanel",
-      identificateur_entreprise: "XF-548CCF",
-      representant_entreprise: "CEO MAARY",
-      role_dans_entriprise: "Cloths",
-      ville_nome: "Parize",
-      activity_entrprise_nome: "Design cloth",
-      status: "Rejected",
-    },
-    {
-      id: 3,
-      avatar_Url:
-        "https://e7.pngegg.com/pngimages/571/691/png-clipart-chanel-logo-brand-fashion-coco-company-text.png",
-      nome_entreprise: "Chanel",
-      identificateur_entreprise: "XF-548CCF",
-      representant_entreprise: "CEO MAARY",
-      role_dans_entriprise: "Cloths",
-      ville_nome: "Parize",
-      activity_entrprise_nome: "Design cloth",
-      status: "Acepted",
-    },
-    {
-      id: 4,
-      avatar_Url:
-        "https://e7.pngegg.com/pngimages/571/691/png-clipart-chanel-logo-brand-fashion-coco-company-text.png",
-      nome_entreprise: "Chanel",
-      identificateur_entreprise: "XF-548CCF",
-      representant_entreprise: "CEO MAARY",
-      role_dans_entriprise: "Cloths",
-      ville_nome: "Parize",
-      activity_entrprise_nome: "Design cloth",
-      status: "Rejected",
-    },
-    {
-      id: 4,
-      avatar_Url:
-        "https://e7.pngegg.com/pngimages/571/691/png-clipart-chanel-logo-brand-fashion-coco-company-text.png",
-      nome_entreprise: "Chanel",
-      identificateur_entreprise: "XF-548CCF",
-      representant_entreprise: "CEO MAARY",
-      role_dans_entriprise: "Cloths",
-      ville_nome: "Parize",
-      activity_entrprise_nome: "Design cloth",
-      status: "Rejected",
-    },
-    {
-      id: 4,
-      avatar_Url:
-        "https://e7.pngegg.com/pngimages/571/691/png-clipart-chanel-logo-brand-fashion-coco-company-text.png",
-      nome_entreprise: "Chanel",
-      identificateur_entreprise: "XF-548CCF",
-      representant_entreprise: "CEO MAARY",
-      role_dans_entriprise: "Cloths",
-      ville_nome: "Parize",
-      activity_entrprise_nome: "Design cloth",
-      status: "Rejected",
-    },
-    {
-      id: 4,
-      avatar_Url:
-        "https://e7.pngegg.com/pngimages/571/691/png-clipart-chanel-logo-brand-fashion-coco-company-text.png",
-      nome_entreprise: "Chanel",
-      identificateur_entreprise: "XF-548CCF",
-      representant_entreprise: "CEO MAARY",
-      role_dans_entriprise: "Cloths",
-      ville_nome: "Parize",
-      activity_entrprise_nome: "Design cloth",
-      status: "Rejected",
-    },
-    {
-      id: 4,
-      avatar_Url:
-        "https://e7.pngegg.com/pngimages/571/691/png-clipart-chanel-logo-brand-fashion-coco-company-text.png",
-      nome_entreprise: "Chanel",
-      identificateur_entreprise: "XF-548CCF",
-      representant_entreprise: "CEO MAARY",
-      role_dans_entriprise: "Cloths",
-      ville_nome: "Parize",
-      activity_entrprise_nome: "Design cloth",
-      status: "Rejected",
-    },
-    {
-      id: 4,
-      avatar_Url:
-        "https://e7.pngegg.com/pngimages/571/691/png-clipart-chanel-logo-brand-fashion-coco-company-text.png",
-      nome_entreprise: "Chanel",
-      identificateur_entreprise: "XF-548CCF",
-      representant_entreprise: "CEO MAARY",
-      role_dans_entriprise: "Cloths",
-      ville_nome: "Parize",
-      activity_entrprise_nome: "Design cloth",
-      status: "Rejected",
-    },
-    {
-      id: 4,
-      avatar_Url:
-        "https://e7.pngegg.com/pngimages/571/691/png-clipart-chanel-logo-brand-fashion-coco-company-text.png",
-      nome_entreprise: "Chanel",
-      identificateur_entreprise: "XF-548CCF",
-      representant_entreprise: "CEO MAARY",
-      role_dans_entriprise: "Cloths",
-      ville_nome: "Parize",
-      activity_entrprise_nome: "Design cloth",
-      status: "Rejected",
-    },
-    {
-      id: 4,
-      avatar_Url:
-        "https://e7.pngegg.com/pngimages/571/691/png-clipart-chanel-logo-brand-fashion-coco-company-text.png",
-      nome_entreprise: "Chanel",
-      identificateur_entreprise: "XF-548CCF",
-      representant_entreprise: "CEO MAARY",
-      role_dans_entriprise: "Cloths",
-      ville_nome: "Parize",
-      activity_entrprise_nome: "Design cloth",
-      status: "Rejected",
-    },
-    {
-      id: 4,
-      avatar_Url:
-        "https://e7.pngegg.com/pngimages/571/691/png-clipart-chanel-logo-brand-fashion-coco-company-text.png",
-      nome_entreprise: "Chanel",
-      identificateur_entreprise: "XF-548CCF",
-      representant_entreprise: "CEO MAARY",
-      role_dans_entriprise: "Cloths",
-      ville_nome: "Parize",
-      activity_entrprise_nome: "Design cloth",
-      status: "Rejected",
-    },
-    {
-      id: 4,
-      avatar_Url:
-        "https://e7.pngegg.com/pngimages/571/691/png-clipart-chanel-logo-brand-fashion-coco-company-text.png",
-      nome_entreprise: "Chanel",
-      identificateur_entreprise: "XF-548CCF",
-      representant_entreprise: "CEO MAARY",
-      role_dans_entriprise: "Cloths",
-      ville_nome: "Parize",
-      activity_entrprise_nome: "Design cloth",
-      status: "Rejected",
-    },
-    {
-      id: 4,
-      avatar_Url:
-        "https://e7.pngegg.com/pngimages/571/691/png-clipart-chanel-logo-brand-fashion-coco-company-text.png",
-      nome_entreprise: "Chanel",
-      identificateur_entreprise: "XF-548CCF",
-      representant_entreprise: "CEO MAARY",
-      role_dans_entriprise: "Cloths",
-      ville_nome: "Parize",
-      activity_entrprise_nome: "Design cloth",
-      status: "Rejected",
-    },
-    {
-      id: 4,
-      avatar_Url:
-        "https://e7.pngegg.com/pngimages/571/691/png-clipart-chanel-logo-brand-fashion-coco-company-text.png",
-      nome_entreprise: "Chanel",
-      identificateur_entreprise: "XF-548CCF",
-      representant_entreprise: "CEO MAARY",
-      role_dans_entriprise: "Cloths",
-      ville_nome: "Parize",
-      activity_entrprise_nome: "Design cloth",
-      status: "Rejected",
-    },
-    {
-      id: 4,
-      avatar_Url:
-        "https://e7.pngegg.com/pngimages/571/691/png-clipart-chanel-logo-brand-fashion-coco-company-text.png",
-      nome_entreprise: "Chanel",
-      identificateur_entreprise: "XF-548CCF",
-      representant_entreprise: "CEO MAARY",
-      role_dans_entriprise: "Cloths",
-      ville_nome: "Parize",
-      activity_entrprise_nome: "Design cloth",
-      status: "Rejected",
-    },
-    {
-      id: 4,
-      avatar_Url:
-        "https://e7.pngegg.com/pngimages/571/691/png-clipart-chanel-logo-brand-fashion-coco-company-text.png",
-      nome_entreprise: "Chanel",
-      identificateur_entreprise: "XF-548CCF",
-      representant_entreprise: "CEO MAARY",
-      role_dans_entriprise: "Cloths",
-      ville_nome: "Parize",
-      activity_entrprise_nome: "Design cloth",
-      status: "Rejected",
-    },
-    {
-      id: 4,
-      avatar_Url:
-        "https://e7.pngegg.com/pngimages/571/691/png-clipart-chanel-logo-brand-fashion-coco-company-text.png",
-      nome_entreprise: "Chanel",
-      identificateur_entreprise: "XF-548CCF",
-      representant_entreprise: "CEO MAARY",
-      role_dans_entriprise: "Cloths",
-      ville_nome: "Parize",
-      activity_entrprise_nome: "Design cloth",
-      status: "Rejected",
-    },
-    {
-      id: 4,
-      avatar_Url:
-        "https://e7.pngegg.com/pngimages/571/691/png-clipart-chanel-logo-brand-fashion-coco-company-text.png",
-      nome_entreprise: "Chanel",
-      identificateur_entreprise: "XF-548CCF",
-      representant_entreprise: "CEO MAARY",
-      role_dans_entriprise: "Cloths",
-      ville_nome: "Parize",
-      activity_entrprise_nome: "Design cloth",
-      status: "Rejected",
-    },
-    {
-      id: 4,
-      avatar_Url:
-        "https://e7.pngegg.com/pngimages/571/691/png-clipart-chanel-logo-brand-fashion-coco-company-text.png",
-      nome_entreprise: "Chanel",
-      identificateur_entreprise: "XF-548CCF",
-      representant_entreprise: "CEO MAARY",
-      role_dans_entriprise: "Cloths",
-      ville_nome: "Parize",
-      activity_entrprise_nome: "Design cloth",
-      status: "Rejected",
-    },
-    {
-      id: 4,
-      avatar_Url:
-        "https://e7.pngegg.com/pngimages/571/691/png-clipart-chanel-logo-brand-fashion-coco-company-text.png",
-      nome_entreprise: "Chanel",
-      identificateur_entreprise: "XF-548CCF",
-      representant_entreprise: "CEO MAARY",
-      role_dans_entriprise: "Cloths",
-      ville_nome: "Parize",
-      activity_entrprise_nome: "Design cloth",
-      status: "Rejected",
-    },
-    {
-      id: 4,
-      avatar_Url:
-        "https://e7.pngegg.com/pngimages/571/691/png-clipart-chanel-logo-brand-fashion-coco-company-text.png",
-      nome_entreprise: "Chanel",
-      identificateur_entreprise: "XF-548CCF",
-      representant_entreprise: "CEO MAARY",
-      role_dans_entriprise: "Cloths",
-      ville_nome: "Parize",
-      activity_entrprise_nome: "Design cloth",
-      status: "Rejected",
-    },
-    {
-      id: 4,
-      avatar_Url:
-        "https://e7.pngegg.com/pngimages/571/691/png-clipart-chanel-logo-brand-fashion-coco-company-text.png",
-      nome_entreprise: "Chanel",
-      identificateur_entreprise: "XF-548CCF",
-      representant_entreprise: "CEO MAARY",
-      role_dans_entriprise: "Cloths",
-      ville_nome: "Parize",
-      activity_entrprise_nome: "Design cloth",
-      status: "Rejected",
-    },
-    {
-      id: 4,
-      avatar_Url:
-        "https://e7.pngegg.com/pngimages/571/691/png-clipart-chanel-logo-brand-fashion-coco-company-text.png",
-      nome_entreprise: "Chanel",
-      identificateur_entreprise: "XF-548CCF",
-      representant_entreprise: "CEO MAARY",
-      role_dans_entriprise: "Cloths",
-      ville_nome: "Parize",
-      activity_entrprise_nome: "Design cloth",
-      status: "Rejected",
-    },
-  ];
+  let [data, setdata] = useState([]);
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const req = await fetch(`${BaseUrl}/`, {
+          method: "POST",
+          mode: "cors",
+          cache: "no-cache",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          referrerPolicy: "no-referrer",
+        });
+        const data = req.json();
+        setdata(data);
+      } catch (err) {}
+    }
+  }, []);
   data = data.filter(function (v, i) {
     return v["activity_entrprise_nome"] == activity_entrprise ||
       (v["City"] == City && selectedStatus != "")

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Button, Input } from "./index";
 import { FaRobot } from "react-icons/fa";
 import { useCookies } from "react-cookie";
-import { BaseUrl } from "./constants";
+import { BaseUrl } from "../constants";
 
 import { useNavigate } from "react-router-dom";
 

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { AdminsTable } from "./index";
 import { ActionsDialog } from "./index";
 import { IoMdPersonAdd } from "react-icons/io";
-import { BaseUrl } from "./constants";
+import { BaseUrl } from "../constants";
 
 import { Filter_Selector, SearchBar, Button, AddNewAdmin } from "./index";
 function Admins() {
@@ -12,7 +12,7 @@ function Admins() {
   const [Role, setRole] = useState("");
   const [AccountState, setAccountState] = useState("");
   const [SelectedPartner, setSelectedpartner] = useState({});
-  const [data, setdata] = useState({});
+  const [data, setdata] = useState([]);
   useEffect(() => {
     async function fetchData() {
       try {
