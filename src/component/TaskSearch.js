@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { IoIosCloseCircle } from "react-icons/io";
 import { BsCheckCircleFill } from "react-icons/bs";
 import { AiFillEdit } from "react-icons/ai";
@@ -39,7 +39,7 @@ const DataRow = ({ item, index, onClick = () => {} }) => {
   );
 };
 
-const TaskSearch = () => {
+const TaskSearch = ({ OnSelect, Data }) => {
   return (
     <div class="flex flex-col  border-[1px] my-10 border-gray-200 rounded-lg ">
       <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">

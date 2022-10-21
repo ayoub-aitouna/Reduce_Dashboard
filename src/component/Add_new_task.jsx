@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useState } from "react";
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
@@ -24,6 +24,11 @@ const InputRow = ({ title, Input }) => {
   );
 };
 const Fill_Form = () => {
+  let [data, setdata] = useState({
+    partner_name: "",
+    partner_address: "",
+    ville: 0,
+  });
   return (
     <form class="w-full max-w-lg ">
       <div class="flex flex-wrap -mx-3 mb-6">
@@ -38,6 +43,10 @@ const Fill_Form = () => {
             class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
             id="grid-name"
             type="text"
+            value={data.partner_name}
+            onChange={(e) => {
+              setdata({ ...data, partner_name: e.target.value });
+            }}
             placeholder="Jane Doe"
           />
         </div>
@@ -51,7 +60,25 @@ const Fill_Form = () => {
           <input
             class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
             id="grid-name"
+            value={data.partner_address}
+            onChange={(e) => {
+              setdata({ ...data, partner_address: e.target.value });
+            }}
             type="text"
+          />
+        </div>
+        <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+          <Filter_Selector
+            title={"Ville"}
+            onchange={(e) => {
+              setdata({ ...data, ville: e.target.value });
+            }}
+            options={[
+              { value: 0, name: "" },
+              { value: 1, name: "Marrakech" },
+              { value: 2, name: "Beni Mellal" },
+            ]}
+            styles={"!max-w-full"}
           />
         </div>
       </div>
@@ -83,7 +110,7 @@ function Add_new_task({ open, OnClick, data }) {
         <div className="w-full grid place-content-center">
           <Fill_Form />
         </div>
-        <div className="h-[100px]"></div>
+        <div className="h-[60px]"></div>
         <DialogActions>
           <Button onClick={hadlerClose}>
             <MyButton

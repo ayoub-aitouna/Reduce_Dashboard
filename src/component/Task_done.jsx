@@ -1,11 +1,11 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { IoIosCloseCircle } from "react-icons/io";
 import { BsCheckCircleFill } from "react-icons/bs";
 import { AiFillEdit } from "react-icons/ai";
 import { MdPendingActions } from "react-icons/md";
 import { BsFillArrowRightSquareFill } from "react-icons/bs";
 import { IconHalder } from "./index";
-
+import { BaseUrl } from "../constants";
 
 // Data Row
 const DataRow = ({ item, index, onClick = () => {} }) => {
@@ -13,7 +13,8 @@ const DataRow = ({ item, index, onClick = () => {} }) => {
     <tr
       className={` text-gray-900 hover:text-[#fff] hover:bg-[#2E5CFF] cursor-pointer ${
         index % 2 == 0 ? "bg-gray-100" : "bg-white"
-      } border-b`}>
+      } border-b`}
+    >
       <td class="px-6 py-4 whitespace-nowrap text-sm font-medium ">
         {item.id}
       </td>
@@ -29,8 +30,10 @@ const DataRow = ({ item, index, onClick = () => {} }) => {
       <td class="px-6 py-4 whitespace-nowrap text-sm font-medium ">
         {item.ville_name}
       </td>
-      <td class="px-6 py-4 whitespace-nowrap text-sm font-medium "
-        onClick={() => onClick()}>
+      <td
+        class="px-6 py-4 whitespace-nowrap text-sm font-medium "
+        onClick={() => onClick()}
+      >
         <IconHalder Icon={() => <AiFillEdit />} style="text-[20px]" />
       </td>
     </tr>
@@ -38,12 +41,30 @@ const DataRow = ({ item, index, onClick = () => {} }) => {
 };
 
 // on edite clikced
-function OnSelect(item) =>{
-    alert('');
+function OnSelect(item) {
+  alert("");
 }
 
 // task done Components
 const Task_done = () => {
+  let [data, setdata] = useState([]);
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const req = await fetch(`${BaseUrl}/`, {
+          method: "POST",
+          mode: "cors",
+          cache: "no-cache",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          referrerPolicy: "no-referrer",
+        });
+        const data = req.json();
+        setdata(data);
+      } catch (err) {}
+    }
+  }, []);
   return (
     <div class="flex flex-col  border-[1px] my-10 border-gray-200 rounded-lg ">
       <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -91,7 +112,7 @@ const Task_done = () => {
                 </tr>
               </thead>
               <tbody>
-                {Data.map((item, index) => (
+                {data.map((item, index) => (
                   <>
                     <DataRow
                       key={item.id}

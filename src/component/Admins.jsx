@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { AdminsTable } from "./index";
 import { ActionsDialog } from "./index";
 import { IoMdPersonAdd } from "react-icons/io";
+import { BiTask } from "react-icons/bi";
 import { BaseUrl } from "../constants";
 
 import {
@@ -115,7 +116,7 @@ function Admins() {
           style={"!w-[250px] text-[19px] "}
         />
         <Button
-          Icon={() => <IoMdPersonAdd />}
+          Icon={() => <BiTask />}
           title={"Add Task"}
           OnClick={() => setNew_Task_Dialog_Opend(true)}
           style={"!w-[250px] text-[19px] "}

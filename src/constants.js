@@ -1,4 +1,4 @@
-import { IoIosCloseCircle, IoMdPersonAdd } from "react-icons/io";
+import { IoIosCloseCircle } from "react-icons/io";
 import { BsCheckCircleFill } from "react-icons/bs";
 import { HiUsers } from "react-icons/hi";
 import { RiAdminFill } from "react-icons/ri";
