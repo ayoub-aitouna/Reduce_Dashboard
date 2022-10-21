@@ -1,34 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
-import Slide from "@mui/material/Slide";
-import { IoIosCloseCircle } from "react-icons/io";
-import { BsCheckCircleFill } from "react-icons/bs";
-import { MdPendingActions } from "react-icons/md";
-import { BsFillArrowRightSquareFill } from "react-icons/bs";
-import { IconHalder } from "./index";
 import { Button as MyButton, Filter_Selector } from "./index";
-
-const InputRow = ({ title, Input }) => {
-  return (
-    <>
-      <div className="flex flex-col justify-center item-start">
-        <p>{title}</p>
-        <Input />
-      </div>
-    </>
-  );
-};
-const Fill_Form = () => {
-  let [data, setdata] = useState({
-    partner_name: "",
-    partner_address: "",
-    ville: 0,
-  });
+import { BaseUrl } from "../constants";
+const Fill_Form = ({ data, setdata }) => {
   return (
     <form class="w-full max-w-lg ">
       <div class="flex flex-wrap -mx-3 mb-6">
@@ -70,8 +49,9 @@ const Fill_Form = () => {
         <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
           <Filter_Selector
             title={"Ville"}
-            onchange={(e) => {
-              setdata({ ...data, ville: e.target.value });
+            Filter={data.ville}
+            setFilter={(value) => {
+              setdata({ ...data, ville: value });
             }}
             options={[
               { value: 0, name: "" },
@@ -85,8 +65,28 @@ const Fill_Form = () => {
     </form>
   );
 };
-
-function Add_new_task({ open, OnClick, data }) {
+async function submite(data, setloading) {
+  try {
+    const req = await fetch(`${BaseUrl}/api/v1/auth/admin}`, {
+      method: "POST",
+      mode: "cors",
+      cache: "no-cache",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      referrerPolicy: "no-referrer",
+      body: JSON.stringify(data),
+    });
+    const data = req.json();
+  } catch (err) {}
+}
+function Add_new_task({ open, OnClick }) {
+  let [data, setdata] = useState({
+    partner_name: "",
+    partner_address: "",
+    ville: 0,
+  });
+  const [loading, setloading] = useState(false);
   const hadlerClose = () => {
     OnClick();
   };
@@ -108,13 +108,17 @@ function Add_new_task({ open, OnClick, data }) {
           </DialogContentText>
         </DialogContent>
         <div className="w-full grid place-content-center">
-          <Fill_Form />
+          <Fill_Form data={data} setdata={setdata} />
         </div>
         <div className="h-[60px]"></div>
         <DialogActions>
           <Button onClick={hadlerClose}>
             <MyButton
               title="Add task"
+              onClick={(e) => {
+                setloading(true);
+                submite(data, setloading);
+              }}
               style="bg-red-500 p-[20px] font-bold text-xl !p-[1px]"
             />
           </Button>
