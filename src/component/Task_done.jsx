@@ -1,78 +1,45 @@
 import React from "react";
 import { IoIosCloseCircle } from "react-icons/io";
 import { BsCheckCircleFill } from "react-icons/bs";
+import { AiFillEdit } from "react-icons/ai";
 import { MdPendingActions } from "react-icons/md";
 import { BsFillArrowRightSquareFill } from "react-icons/bs";
 import { IconHalder } from "./index";
+
 const DataRow = ({ item, index, onClick = () => {} }) => {
   return (
     <tr
-      onClick={() => onClick()}
       className={` text-gray-900 hover:text-[#fff] hover:bg-[#2E5CFF] cursor-pointer ${
         index % 2 == 0 ? "bg-gray-100" : "bg-white"
-      } border-b`}
-    >
+      } border-b`}>
       <td class="px-6 py-4 whitespace-nowrap text-sm font-medium ">
         {item.id}
       </td>
       <td class="px-6 py-4 whitespace-nowrap text-sm font-medium ">
-        <img
-          className="w-[50px] h-[50px] rounded-full"
-          src={item.avatar_Url}
-          alt="entreprise Logo"
-          srcset=""
-        />
+        {item.partner_name}
       </td>
       <td class="px-6 py-4 whitespace-nowrap text-sm font-medium ">
-        {item.nome_entreprise}
+        {item.partner_status}
       </td>
       <td class="px-6 py-4 whitespace-nowrap text-sm font-medium ">
-        {item.identificateur_entreprise}
+        {item.manager_name}
       </td>
       <td class="px-6 py-4 whitespace-nowrap text-sm font-medium ">
-        {item.representant_entreprise}
+        {item.ville_name}
       </td>
-      <td class="px-6 py-4 whitespace-nowrap text-sm font-medium ">
-        {item.role_dans_entriprise}
-      </td>
-      <td class="px-6 py-4 whitespace-nowrap text-sm font-medium ">
-        {item.ville_nome}
-      </td>
-      <td class="px-6 py-4 whitespace-nowrap text-sm font-medium ">
-        {item.activity_entrprise_nome}
-      </td>
-      <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-[30px] ">
-        {item.status == "Pending" ? (
-          <IconHalder
-            Icon={() => <MdPendingActions />}
-            style="text-[#353535]"
-          />
-        ) : item.status == "Acepted" ? (
-          <div>
-            <IconHalder
-              Icon={() => <BsCheckCircleFill />}
-              style="text-[#0012ff]"
-            />
-          </div>
-        ) : (
-          <div>
-            <IconHalder
-              Icon={() => <IoIosCloseCircle />}
-              style="text-[#ff0000]"
-            />
-          </div>
-        )}
-      </td>
-      <td class="px-6 py-4 whitespace-nowrap text-sm font-medium ">
-        <IconHalder
-          Icon={() => <BsFillArrowRightSquareFill />}
-          style="text-[20px]"
-        />
+      <td class="px-6 py-4 whitespace-nowrap text-sm font-medium "
+        onClick={() => onClick()}>
+        <IconHalder Icon={() => <AiFillEdit />} style="text-[20px]" />
       </td>
     </tr>
   );
 };
-const Task_done = ({ Data, OnSelect }) => {
+
+function OnSelect(item) =>{
+    
+}
+
+const Task_done = () => {
   return (
     <div class="flex flex-col  border-[1px] my-10 border-gray-200 rounded-lg ">
       <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -91,55 +58,31 @@ const Task_done = ({ Data, OnSelect }) => {
                     scope="col"
                     class="text-sm font-medium text-gray-900 px-6 py-4 text-left"
                   >
-                    logo{" "}
+                    partner name
                   </th>
                   <th
                     scope="col"
                     class="text-sm font-medium text-gray-900 px-6 py-4 text-left"
                   >
-                    Nome Entreprise
+                    partner status
                   </th>
                   <th
                     scope="col"
                     class="text-sm font-medium text-gray-900 px-6 py-4 text-left"
                   >
-                    Identificateur Entreprise
+                    manager name
                   </th>
                   <th
                     scope="col"
                     class="text-sm font-medium text-gray-900 px-6 py-4 text-left"
                   >
-                    Representant Rntreprise
+                    ville name
                   </th>
                   <th
                     scope="col"
                     class="text-sm font-medium text-gray-900 px-6 py-4 text-left"
                   >
-                    Role Dans Entriprise
-                  </th>
-                  <th
-                    scope="col"
-                    class="text-sm font-medium text-gray-900 px-6 py-4 text-left"
-                  >
-                    Ville Nome
-                  </th>
-                  <th
-                    scope="col"
-                    class="text-sm font-medium text-gray-900 px-6 py-4 text-left"
-                  >
-                    Activity Entrprise Nome
-                  </th>
-                  <th
-                    scope="col"
-                    class="text-sm font-medium text-gray-900 px-6 py-4 text-left"
-                  >
-                    Status
-                  </th>
-                  <th
-                    scope="col"
-                    class="text-sm font-medium text-gray-900 px-6 py-4 text-left"
-                  >
-                    Action
+                    Edite
                   </th>
                 </tr>
               </thead>
