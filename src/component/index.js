@@ -18,6 +18,7 @@ import Tasks from "./Tasks";
 import Task_done from "./Task_done";
 import Task_anounsments from "./Task_anounsments";
 import TaskSearch from "./TaskSearch.js";
+import Edite_Task from "./Edite_Task";
 export {
   Auth,
   Home,
@@ -39,4 +40,5 @@ export {
   Tasks,
   Task_anounsments,
   TaskSearch,
+  Edite_Task,
 };

@@ -4,7 +4,7 @@ import { BsCheckCircleFill } from "react-icons/bs";
 import { AiFillEdit } from "react-icons/ai";
 import { MdPendingActions } from "react-icons/md";
 import { BsFillArrowRightSquareFill } from "react-icons/bs";
-import { IconHalder } from "./index";
+import { IconHalder, Edite_Task } from "./index";
 import { BaseUrl } from "../constants";
 
 // Data Row
@@ -32,7 +32,7 @@ const DataRow = ({ item, index, onClick = () => {} }) => {
       </td>
       <td
         class="px-6 py-4 whitespace-nowrap text-sm font-medium "
-        onClick={() => onClick()}
+        onClick={() => onClick(item)}
       >
         <IconHalder Icon={() => <AiFillEdit />} style="text-[20px]" />
       </td>
@@ -40,14 +40,11 @@ const DataRow = ({ item, index, onClick = () => {} }) => {
   );
 };
 
-// on edite clikced
-function OnSelect(item) {
-  alert("");
-}
-
 // task done Components
 const Task_done = () => {
   let [data, setdata] = useState([]);
+  let [isEdite_Task_Dialog_Opend, setEdite_Task_Dialog_Opend] = useState(false);
+  let [SelectedTask, setSelectedTask] = useState(false);
   useEffect(() => {
     async function fetchData() {
       try {
@@ -67,6 +64,13 @@ const Task_done = () => {
   }, []);
   return (
     <div class="flex flex-col  border-[1px] my-10 border-gray-200 rounded-lg ">
+      <Edite_Task
+        open={isEdite_Task_Dialog_Opend}
+        OnClick={() => {
+          setEdite_Task_Dialog_Opend(false);
+        }}
+        SelectedTask={SelectedTask}
+      />
       <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
         <div class="py-2 inline-block min-w-full sm:px-6 lg:px-8">
           <div class="overflow-hidden">
@@ -118,7 +122,10 @@ const Task_done = () => {
                       key={item.id}
                       item={item}
                       index={index}
-                      onClick={() => OnSelect(item)}
+                      onClick={(item) => {
+                        setEdite_Task_Dialog_Opend(true);
+                        setSelectedTask(item);
+                      }}
                     />
                   </>
                 ))}
