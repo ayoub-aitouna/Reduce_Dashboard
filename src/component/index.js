@@ -16,7 +16,8 @@ import SearchBar from "./SearchBar";
 import Add_new_task from "./Add_new_task";
 import Tasks from "./Tasks";
 import Task_done from "./Task_done";
-import Task_anounsments from './Task_anounsments';
+import Task_anounsments from "./Task_anounsments";
+import TaskSearch from "./TaskSearch.js";
 export {
   Auth,
   Home,
@@ -34,5 +35,8 @@ export {
   Add_new_task,
   Filter_Selector,
   SearchBar,
-  Task_done,Tasks,Task_anounsments
+  Task_done,
+  Tasks,
+  Task_anounsments,
+  TaskSearch,
 };

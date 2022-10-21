@@ -6,6 +6,8 @@ import { MdPendingActions } from "react-icons/md";
 import { BsFillArrowRightSquareFill } from "react-icons/bs";
 import { IconHalder } from "./index";
 
+
+// Data Row
 const DataRow = ({ item, index, onClick = () => {} }) => {
   return (
     <tr
@@ -35,10 +37,12 @@ const DataRow = ({ item, index, onClick = () => {} }) => {
   );
 };
 
+// on edite clikced
 function OnSelect(item) =>{
     
 }
 
+// task done Components
 const Task_done = () => {
   return (
     <div class="flex flex-col  border-[1px] my-10 border-gray-200 rounded-lg ">

@@ -25,6 +25,8 @@ function App() {
               path="Pending_partners"
               element={<Partner selectedStatus="Pending" />}
             />
+            <Route path="task_search" element={<Task_done />} />
+
             <Route path="tasks" element={<Tasks />}>
               <Route
                 exact
