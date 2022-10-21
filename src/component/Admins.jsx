@@ -1,38 +1,43 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { AdminsTable } from "./index";
 import { ActionsDialog } from "./index";
 import { IoMdPersonAdd } from "react-icons/io";
-import { Filter_Selector, SearchBar, Button, AddNewAdmin } from "./index";
+import { BiTask } from "react-icons/bi";
+import { BaseUrl } from "../constants";
+
+import {
+  Filter_Selector,
+  SearchBar,
+  Button,
+  AddNewAdmin,
+  Add_new_task as AddNewTask,
+} from "./index";
 function Admins() {
   const [isDialogOpend, setDialogOpend] = useState(false);
   const [isNew_Admin_Dialog_Opend, setNew_Admin_Dialog_Opend] = useState(false);
+  const [isNew_Task_Dialog_Opend, setNew_Task_Dialog_Opend] = useState(false);
   const [City, setCity] = useState("");
   const [Role, setRole] = useState("");
   const [AccountState, setAccountState] = useState("");
   const [SelectedPartner, setSelectedpartner] = useState({});
-  const data = [
-    {
-      id: 1,
-      _name: "Ayoub",
-      email: "Chanel@emz.com",
-      _role: "Manager",
-      account_status: "Active",
-    },
-    {
-      id: 1,
-      _name: "Ayoub",
-      email: "Chanel@emz.com",
-      _role: "Manager",
-      account_status: "Active",
-    },
-    {
-      id: 1,
-      _name: "Ayoub",
-      email: "Chanel@emz.com",
-      _role: "Manager",
-      account_status: "Active",
-    },
-  ];
+  const [data, setdata] = useState([]);
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const req = await fetch(`${BaseUrl}`, {
+          method: "POST",
+          mode: "cors",
+          cache: "no-cache",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          referrerPolicy: "no-referrer",
+        });
+        const data = req.json();
+        setdata(data);
+      } catch (err) {}
+    }
+  }, []);
   return (
     <div className="p-5 my-10  ">
       <ActionsDialog
@@ -46,6 +51,13 @@ function Admins() {
         open={isNew_Admin_Dialog_Opend}
         OnClick={() => {
           setNew_Admin_Dialog_Opend(false);
+        }}
+        data={SelectedPartner}
+      />
+      <AddNewTask
+        open={isNew_Task_Dialog_Opend}
+        OnClick={() => {
+          setNew_Task_Dialog_Opend(false);
         }}
         data={SelectedPartner}
       />
@@ -96,12 +108,18 @@ function Admins() {
           />
         </div>
       </div>
-      <div className=" absolute bottom-8 right-8">
+      <div className=" absolute bottom-8 right-8 flex flex-col gap-5">
         <Button
           Icon={() => <IoMdPersonAdd />}
-          title={"Add New Admin"}
+          title={"Add Manager"}
           OnClick={() => setNew_Admin_Dialog_Opend(true)}
-          style={"w-[250px] text-[19px] "}
+          style={"!w-[250px] text-[19px] "}
+        />
+        <Button
+          Icon={() => <BiTask />}
+          title={"Add Task"}
+          OnClick={() => setNew_Task_Dialog_Opend(true)}
+          style={"!w-[250px] text-[19px] "}
         />
       </div>
       <AdminsTable

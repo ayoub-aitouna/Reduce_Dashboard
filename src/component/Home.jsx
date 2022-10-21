@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Sidebar, Partner } from "./index";
 import {
   BrowserRouter,
@@ -7,13 +7,19 @@ import {
   useNavigate,
   Outlet,
 } from "react-router-dom";
-import { check_if_user_valide } from "../Utils/Auth";
+import { useCookies } from "react-cookie";
+import { BaseUrl, Coockies_name } from "../constants";
+import { Check_if_user_valide } from "../Utils/Auth";
 function Home() {
-  let navigate = useNavigate();
+  const [cookies, setCookie, removeCookie] = useCookies([Coockies_name]);
 
-  if (!check_if_user_valide()) {
-    navigate(`/auth`);
-  }
+  let navigate = useNavigate();
+  useEffect(() => {
+    if (cookies == null || cookies == undefined) {
+      navigate(`/`);
+    }
+  }, []);
+
   return (
     <div className="bg-gray-100 w-full h-full overflow-y-scroll overflow-x-hidden">
       <Sidebar />

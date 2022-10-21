@@ -1,8 +1,42 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Button, Input } from "./index";
 import { FaRobot } from "react-icons/fa";
+import { useCookies } from "react-cookie";
+import { BaseUrl, Coockies_name } from "../constants";
+
+import { useNavigate } from "react-router-dom";
+
+const login_submit = async (email, pass, callback = () => {}) => {
+  try {
+    const req = await fetch(`${BaseUrl}/api/v1/auth/admin}`, {
+      method: "POST",
+      mode: "cors",
+      cache: "no-cache",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      referrerPolicy: "no-referrer",
+      body: JSON.stringify({
+        email: email,
+        password: pass,
+      }),
+    });
+    const data = req.json();
+    callback(data);
+  } catch (err) {}
+};
 
 const AuthForm = () => {
+  let navigate = useNavigate();
+  const [cookies, setCookie, removeCookie] = useCookies([Coockies_name]);
+
+  useEffect(() => {
+    console.log(cookies);
+    if (cookies != null || cookies != undefined) {
+      navigate(`/home`);
+    }
+  }, []);
+
   const [login, setlogin] = useState({
     email: "",
     password: "",
@@ -28,13 +62,15 @@ const AuthForm = () => {
             hint={"*************"}
             OnChange={() => {}}
             value={login.password}
-            type="passowrd"
+            type="password"
           />
           <Button
             title={"Log out"}
             Icon={() => <></>}
             OnClick={() => {
-              alert("Loged Out");
+              login_submit(login.email, login.password, (value) => {
+                setCookie(value);
+              });
             }}
             style="!h-[30px] p-[30px] mt-auto"
           />

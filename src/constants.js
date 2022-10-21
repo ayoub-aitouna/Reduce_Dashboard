@@ -1,4 +1,4 @@
-import { IoIosCloseCircle, IoMdPersonAdd } from "react-icons/io";
+import { IoIosCloseCircle } from "react-icons/io";
 import { BsCheckCircleFill } from "react-icons/bs";
 import { HiUsers } from "react-icons/hi";
 import { RiAdminFill } from "react-icons/ri";
@@ -10,27 +10,34 @@ export const SideBarLinks = [
     tabs: [
       {
         name: "All Partners",
-        Url: "/all_partners",
+        Url: "",
         Icon: HiUsers,
         key: 0,
       },
+
       {
         name: "Pending Partners",
-        Url: "/Pending_partners",
+        Url: "Pending_partners",
         Icon: IoIosCloseCircle,
-        key: 1,
+        key: 2,
       },
       {
         name: "Rejected Partners",
-        Url: "/Rejected_partners",
+        Url: "Rejected_partners",
         Icon: IoIosCloseCircle,
-        key: 1,
+        key: 3,
       },
       {
         name: "Approved Partners",
-        Url: "/Approved_partners",
+        Url: "Approved_partners",
         Icon: BsCheckCircleFill,
-        key: 2,
+        key: 4,
+      },
+      {
+        key: 1,
+        name: "Tasks",
+        Icon: RiAdminFill,
+        Url: "tasks",
       },
     ],
   },
@@ -42,8 +49,12 @@ export const SideBarLinks = [
         key: 0,
         name: "Managers",
         Icon: RiAdminFill,
-        Url: "/Admin_managers",
+        Url: "Admin_managers",
       },
     ],
   },
 ];
+
+export const BaseUrl = "";
+
+export const Coockies_name = "auth_name";
