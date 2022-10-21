@@ -5,6 +5,7 @@ import { AiFillEdit } from "react-icons/ai";
 import { MdPendingActions } from "react-icons/md";
 import { BsFillArrowRightSquareFill } from "react-icons/bs";
 import { IconHalder } from "./index";
+import { BaseUrl } from "../constants";
 
 // Data Row
 const DataRow = ({ item, index, onClick = () => {} }) => {
@@ -39,8 +40,26 @@ const DataRow = ({ item, index, onClick = () => {} }) => {
   );
 };
 
-const TaskSearch = () => {
+const TaskSearch = ({ Search }) => {
   let [Data, setData] = useState([]);
+
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const req = await fetch(`${BaseUrl}/`, {
+          method: "POST",
+          mode: "cors",
+          cache: "no-cache",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          referrerPolicy: "no-referrer",
+        });
+        const data = req.json();
+        setData(data);
+      } catch (err) {}
+    }
+  }, [Search]);
   return (
     <div class="flex flex-col  border-[1px] my-10 border-gray-200 rounded-lg ">
       <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">

@@ -13,9 +13,13 @@ import {
   Task_done,
   TaskSearch,
 } from "./component";
+import React, { useState, useEffect } from "react";
+
 import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";
 
 function App() {
+  const [Search, setSearch] = useState(null);
+
   return (
     <div className="w-full h-[100vh]">
       <BrowserRouter>
@@ -27,10 +31,13 @@ function App() {
               path="Pending_partners"
               element={<Partner selectedStatus="Pending" />}
             />
-            <Route path="tasks" element={<Tasks />}>
+            <Route path="tasks" element={<Tasks setSearch={setSearch} />}>
               <Route exact path="" element={<Task_anounsments />} />
               <Route path="task_done" element={<Task_done />} />
-              <Route path="task_search" element={<TaskSearch />} />
+              <Route
+                path="task_search"
+                element={<TaskSearch Search={Search} />}
+              />
             </Route>
             <Route
               path="Rejected_partners"
