@@ -39,7 +39,7 @@ const DataRow = ({ item, index, onClick = () => {} }) => {
 
 // on edite clikced
 function OnSelect(item) =>{
-    
+    alert('');
 }
 
 // task done Components
