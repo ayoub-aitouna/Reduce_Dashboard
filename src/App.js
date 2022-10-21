@@ -26,15 +26,10 @@ function App() {
               path="Pending_partners"
               element={<Partner selectedStatus="Pending" />}
             />
-            <Route path="task_search" element={<Task_done />} />
-
             <Route path="tasks" element={<Tasks />}>
-              <Route
-                exact
-                path="task_anounsments"
-                element={<Task_anounsments />}
-              />
+              <Route exact path="" element={<Task_anounsments />} />
               <Route path="task_done" element={<Task_done />} />
+              <Route path="task_search" element={<Task_done />} />
             </Route>
             <Route
               path="Rejected_partners"
