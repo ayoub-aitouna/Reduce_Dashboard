@@ -11,6 +11,7 @@ import {
   Tasks,
   Task_anounsments,
   Task_done,
+  TaskSearch,
 } from "./component";
 import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";
 
@@ -29,7 +30,7 @@ function App() {
             <Route path="tasks" element={<Tasks />}>
               <Route exact path="" element={<Task_anounsments />} />
               <Route path="task_done" element={<Task_done />} />
-              <Route path="task_search" element={<Task_done />} />
+              <Route path="task_search" element={<TaskSearch />} />
             </Route>
             <Route
               path="Rejected_partners"

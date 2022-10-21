@@ -19,7 +19,14 @@ const Tasks = () => {
   return (
     <div className="p-5 my-10 flex flex-col gap-5">
       <div className="flex ld:flex-row flex-col w-full mt-10 lg:gap-5 gap-0 justify-center items-center">
-        <SearchBar styles={"max-h-[15px] !w-full"} />
+        <Link
+          to={"task_search"}
+          className=" flex w-full flex-col justify-center items-center 
+           cursor-pointer  text-[#475569] rounded-md "
+        >
+          <SearchBar styles={"max-h-[15px] !w-full"} />
+        </Link>
+
         <div className="w-full h-[127px] flex flex-row items-center justify-start gap-5">
           <Link
             to={""}

@@ -39,7 +39,8 @@ const DataRow = ({ item, index, onClick = () => {} }) => {
   );
 };
 
-const TaskSearch = ({ OnSelect, Data }) => {
+const TaskSearch = () => {
+  let [Data, setData] = useState([]);
   return (
     <div class="flex flex-col  border-[1px] my-10 border-gray-200 rounded-lg ">
       <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -78,12 +79,6 @@ const TaskSearch = ({ OnSelect, Data }) => {
                   >
                     ville name
                   </th>
-                  <th
-                    scope="col"
-                    class="text-sm font-medium text-gray-900 px-6 py-4 text-left"
-                  >
-                    Edite
-                  </th>
                 </tr>
               </thead>
               <tbody>
@@ -93,7 +88,7 @@ const TaskSearch = ({ OnSelect, Data }) => {
                       key={item.id}
                       item={item}
                       index={index}
-                      onClick={() => OnSelect(item)}
+                      onClick={() => {}}
                     />
                   </>
                 ))}
