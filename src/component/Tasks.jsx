@@ -4,13 +4,14 @@ import { PartnerInfo } from "./index";
 import { Filter_Selector, SearchBar, Button } from "./index";
 import { BaseUrl } from "../constants";
 import { Outlet } from "react-router-dom";
-import { matchRoutes, useLocation } from "react-router-dom";
+import { matchRoutes, useLocation, useNavigate } from "react-router-dom";
 
 const Tasks = () => {
   const [isDialogOpend, setDialogOpend] = useState(false);
   const [City, setCity] = useState("");
   const [activity_entrprise, setactivity_entrprise] = useState("");
   const [AccountState, setAccountState] = useState("");
+  let navigate = useNavigate();
 
   const [SelectedPartner, setSelectedpartner] = useState({});
   let [data, setdata] = useState([]);
@@ -22,6 +23,9 @@ const Tasks = () => {
         <div className="w-full h-[127px] flex flex-row items-center justify-start gap-5">
           <Button
             title={"Anounsment"}
+            onClick={() => {
+              navigate("/home/tasks");
+            }}
             style={`border-2 border-blue-500  w-[160px] !p-[0px] ${
               location.pathname != "/home/tasks"
                 ? "bg-transparent text-black"
@@ -30,7 +34,9 @@ const Tasks = () => {
           />
           <Button
             title={"Done"}
-            onclick={}
+            onClick={() => {
+              navigate("/home/tasks/task_done");
+            }}
             style={`border-2 border-blue-500  w-[160px] !p-[0px]  ${
               location.pathname != "/home/tasks/task_done"
                 ? "bg-transparent text-black"
