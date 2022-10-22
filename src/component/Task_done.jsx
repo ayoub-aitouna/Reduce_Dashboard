@@ -143,7 +143,7 @@ const Task_done = () => {
                       index={index}
                       onClick={() => {
                         console.trace(item);
-                        setSelectedTask();
+                        setSelectedTask(item);
                         setEdite_Task_Dialog_Opend(true);
                       }}
                     />
