@@ -6,8 +6,18 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import { Button as MyButton, Filter_Selector, LoadingIcon } from "./index";
-import { BaseUrl } from "../constants";
+import { BaseUrl, Coockies_name } from "../constants";
+import { get_villes } from "../Utils/villes/get_villes";
+
+import Cookies from "js-cookie";
+import { useCookies } from "react-cookie";
+
 const Fill_Form = ({ data, setdata }) => {
+  let [villes, setvilles] = useState([{ value: 0, name: "" }]);
+
+  useEffect(() => {
+    get_villes(setvilles);
+  }, []);
   return (
     <form class="w-full max-w-lg ">
       <div class="flex flex-wrap -mx-3 mb-6">
@@ -23,7 +33,7 @@ const Fill_Form = ({ data, setdata }) => {
             id="grid-name"
             type="text"
             value={data.partner_name}
-            OnChange={(e) => {
+            onChange={(e) => {
               setdata({ ...data, partner_name: e.target.value });
             }}
             placeholder="Jane Doe"
@@ -40,7 +50,7 @@ const Fill_Form = ({ data, setdata }) => {
             class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
             id="grid-name"
             value={data.partner_address}
-            OnChange={(e) => {
+            onChange={(e) => {
               setdata({ ...data, partner_address: e.target.value });
             }}
             type="text"
@@ -53,11 +63,7 @@ const Fill_Form = ({ data, setdata }) => {
             setFilter={(value) => {
               setdata({ ...data, ville: value });
             }}
-            options={[
-              { value: 0, name: "" },
-              { value: 1, name: "Marrakech" },
-              { value: 2, name: "Beni Mellal" },
-            ]}
+            options={villes}
             styles={"!max-w-full"}
           />
         </div>
@@ -66,27 +72,14 @@ const Fill_Form = ({ data, setdata }) => {
   );
 };
 
-async function submite(data, setloading) {
-  try {
-    const req = await fetch(`${BaseUrl}/api/v1/auth/admin}`, {
-      method: "POST",
-      mode: "cors",
-      cache: "no-cache",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      referrerPolicy: "no-referrer",
-      body: JSON.stringify(data),
-    });
-    const data = req.json();
-  } catch (err) {}
-}
 function Add_new_task({ open, OnClick }) {
   let [data, setdata] = useState({
     partner_name: "",
     partner_address: "",
     ville: 0,
   });
+  const [cookies, setCookie, removeCookie] = useCookies([Coockies_name]);
+
   const [loading, setloading] = useState(false);
   const hadlerClose = () => {
     OnClick();
@@ -100,7 +93,7 @@ function Add_new_task({ open, OnClick }) {
         onClose={hadlerClose}
         aria-describedby="alert-dialog-slide-description"
       >
-        <DialogTitle>{"Add Task"}</DialogTitle>
+        <DialogTitle>{"Add s  Task"}</DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-slide-description">
             <p class="text-gray-600 text-xs ">
@@ -117,17 +110,16 @@ function Add_new_task({ open, OnClick }) {
             onClick={async (e) => {
               setloading(true);
               try {
-                const req = await fetch(`${BaseUrl}/admin/Remove_admin`, {
+                const req = await fetch(`${BaseUrl}/Tasks/add_announcement`, {
                   method: "POST",
                   mode: "cors",
                   cache: "no-cache",
                   headers: {
                     "Content-Type": "application/json",
+                    Authorization: `Bearer ${cookies.accesToken}`,
                   },
                   referrerPolicy: "no-referrer",
-                  body: JSON.stringify({
-                    id: data.id,
-                  }),
+                  body: JSON.stringify(data),
                 });
                 setloading(false);
               } catch (err) {
