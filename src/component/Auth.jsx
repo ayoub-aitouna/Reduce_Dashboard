@@ -22,12 +22,13 @@ const login_submit = async (email, pass, callback = () => {}) => {
       }),
     });
     if (req.ok) {
-      const data = req.json();
-      callback(data.accesToken, data.role);
+      callback(await req.json());
     } else {
+      console.log("req not ok");
       alert("error password or email not correct");
     }
   } catch (err) {
+    console.log(err);
     alert("error password or email not correct");
   }
 };
@@ -80,15 +81,12 @@ const AuthForm = () => {
             Icon={() => <></>}
             OnClick={() => {
               console.log(login);
-              login_submit(
-                login.email,
-                login.password,
-                ({ accesToken, role }) => {
-                  setCookie("accesToken", accesToken, { path: "/" });
-                  setCookie("role", role, { path: "/" });
-                  navigate(`/home`);
-                }
-              );
+              login_submit(login.email, login.password, (data) => {
+                console.table(data);
+                setCookie("accesToken", data.accesToken, { path: "/" });
+                setCookie("role", data.role, { path: "/" });
+                navigate(`/home`);
+              });
             }}
             style="!h-[30px] p-[30px] mt-auto"
           />

@@ -10,6 +10,10 @@ import { useNavigate } from "react-router-dom";
 
 function Sidebar() {
   const [cookies, setCookie, removeCookie] = useCookies([Coockies_name]);
+  let links = SideBarLinks;
+  links = links.filter((item) =>
+    cookies.role != "Admin" ? item.groupName != "ADMIN" : item
+  );
   let navigate = useNavigate();
   return (
     <div className="absolute w-[259.19px] h-[100vh] top-0 left-0 bg-[#fff] pt-[20px] px-10 flex flex-col py-10 shadow-lg">
@@ -18,7 +22,7 @@ function Sidebar() {
         <h1 className="text-2xl">Reduce</h1>
       </div>
       <ul className="flex flex-col gap-8 justify-center items-start w-full ">
-        {SideBarLinks.map((item) => (
+        {links.map((item) => (
           <>
             <li
               key={item.key}
