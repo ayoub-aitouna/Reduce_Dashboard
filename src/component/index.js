@@ -21,6 +21,7 @@ import TaskSearch from "./TaskSearch.js";
 import Edite_Task from "./Edite_Task";
 import LoadingIcon from "./LoadingIcon";
 import SetAsDone from "./SetAsDone";
+import AddNewDoneTask from "./AddNewDoneTask";
 export {
   Auth,
   Home,
@@ -44,5 +45,6 @@ export {
   TaskSearch,
   LoadingIcon,
   SetAsDone,
+  AddNewDoneTask,
   Edite_Task,
 };

@@ -50,7 +50,12 @@ const DataRow = ({ item, index, onClick = () => {} }) => {
 const Task_done = () => {
   let [data, setdata] = useState([]);
   let [isEdite_Task_Dialog_Opend, setEdite_Task_Dialog_Opend] = useState(false);
-  const [SelectedTask, setSelectedTask] = useState();
+  const [SelectedTask, setSelectedTask] = useState({
+    id: 0,
+    partner_name: "",
+    partner_address: "",
+    partner_status: "",
+  });
   const [cookies, setCookie, removeCookie] = useCookies([Coockies_name]);
 
   const handleRequest = async () => {
