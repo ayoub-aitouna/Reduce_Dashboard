@@ -22,7 +22,7 @@ const login_submit = async (email, pass, callback = () => {}) => {
       }),
     });
     const data = req.json();
-    callback(data);
+    callback(data.accesToken);
   } catch (err) {}
 };
 
@@ -32,7 +32,7 @@ const AuthForm = () => {
 
   useEffect(() => {
     console.log(cookies);
-    if (cookies != null || cookies != undefined) {
+    if (cookies.jwt != null || cookies.jwt != undefined) {
       navigate(`/home`);
     }
   }, []);
@@ -69,7 +69,7 @@ const AuthForm = () => {
             Icon={() => <></>}
             OnClick={() => {
               login_submit(login.email, login.password, (value) => {
-                setCookie(value);
+                setCookie("accesToken", value, { path: "/" });
               });
             }}
             style="!h-[30px] p-[30px] mt-auto"
