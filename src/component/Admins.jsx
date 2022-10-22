@@ -3,7 +3,8 @@ import { AdminsTable } from "./index";
 import { ActionsDialog } from "./index";
 import { IoMdPersonAdd } from "react-icons/io";
 import { BiTask } from "react-icons/bi";
-import { BaseUrl } from "../constants";
+import { BaseUrl, Coockies_name } from "../constants";
+import { useCookies } from "react-cookie";
 
 import {
   Filter_Selector,
@@ -21,22 +22,27 @@ function Admins() {
   const [AccountState, setAccountState] = useState("");
   const [SelectedPartner, setSelectedpartner] = useState({});
   const [data, setdata] = useState([]);
+
+  const [cookies, setCookie, removeCookie] = useCookies([Coockies_name]);
+
+  const fetchData = async () => {
+    try {
+      const req = await fetch(`${BaseUrl}/admin`, {
+        method: "GET",
+        mode: "cors",
+        cache: "no-cache",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${cookies.accesToken}`,
+        },
+        referrerPolicy: "no-referrer",
+      });
+      const data = await req.json();
+      setdata(data);
+    } catch (err) {}
+  };
   useEffect(() => {
-    async function fetchData() {
-      try {
-        const req = await fetch(`${BaseUrl}/Admins/`, {
-          method: "GET",
-          mode: "cors",
-          cache: "no-cache",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          referrerPolicy: "no-referrer",
-        });
-        const data = await req.json();
-        setdata(data);
-      } catch (err) {}
-    }
+    fetchData();
   }, []);
   return (
     <div className="p-5 my-10  ">
