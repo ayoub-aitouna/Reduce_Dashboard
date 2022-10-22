@@ -87,9 +87,7 @@ function Edite_Task({ open, OnClick, SelectedTask }) {
   //console.log(SelectedTask);
 
   const [loading, setloading] = useState(false);
-  useEffect(() => {
-    console.log("assda");
-  }, [open]);
+
   const hadlerClose = () => {
     OnClick();
   };

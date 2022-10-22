@@ -36,7 +36,8 @@ const DataRow = ({ item, index, onClick = () => {} }) => {
         class="px-6 py-4 whitespace-nowrap text-sm font-medium "
         onClick={() => {
           const { id, partner_name, partner_status } = item;
-          onClick({ id, partner_name, partner_status });
+          console.trace(item);
+          onClick();
         }}
       >
         <IconHalder Icon={() => <AiFillEdit />} style="text-[20px]" />
@@ -49,11 +50,7 @@ const DataRow = ({ item, index, onClick = () => {} }) => {
 const Task_done = () => {
   let [data, setdata] = useState([]);
   let [isEdite_Task_Dialog_Opend, setEdite_Task_Dialog_Opend] = useState(false);
-  const [SelectedTask, setSelectedTask] = useState({
-    id: 1,
-    partner_name: "",
-    partner_status: "",
-  });
+  const [SelectedTask, setSelectedTask] = useState();
   const [cookies, setCookie, removeCookie] = useCookies([Coockies_name]);
 
   const handleRequest = async () => {
@@ -81,6 +78,7 @@ const Task_done = () => {
 
   useEffect(() => {
     handleRequest();
+    console.log(data);
   }, []);
 
   return (
@@ -143,17 +141,9 @@ const Task_done = () => {
                       key={item.id}
                       item={item}
                       index={index}
-                      onClick={({ id, partner_name, partner_status }) => {
-                        console.trace({
-                          id: id,
-                          partner_name: partner_name,
-                          partner_status: partner_status,
-                        });
-                        setSelectedTask({
-                          id: id,
-                          partner_name: partner_name,
-                          partner_status: partner_status,
-                        });
+                      onClick={() => {
+                        console.trace(item);
+                        setSelectedTask();
                         setEdite_Task_Dialog_Opend(true);
                       }}
                     />
