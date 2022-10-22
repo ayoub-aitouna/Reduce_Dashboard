@@ -33,7 +33,7 @@ function Admins() {
           },
           referrerPolicy: "no-referrer",
         });
-        const data = req.json();
+        const data = await req.json();
         setdata(data);
       } catch (err) {}
     }

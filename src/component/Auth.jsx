@@ -38,8 +38,8 @@ const AuthForm = () => {
   const [cookies, setCookie, removeCookie] = useCookies([Coockies_name]);
 
   useEffect(() => {
-    console.log(cookies);
-    if (cookies.jwt != null || cookies.jwt != undefined) {
+    console.log(cookies.accesToken);
+    if (cookies.accesToken != null || cookies.accesToken != undefined) {
       navigate(`/home`);
     }
   }, []);
