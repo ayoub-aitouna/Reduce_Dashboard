@@ -21,7 +21,6 @@ const Input = ({
           placeholder={hint}
           type={type}
           onChange={(e) => {
-            console.log("ff. :" + e.target.value);
             OnChange(e.target.value);
           }}
           //value={value}

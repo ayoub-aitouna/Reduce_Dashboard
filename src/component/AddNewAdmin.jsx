@@ -13,10 +13,10 @@ import Cookies from "js-cookie";
 import { useCookies } from "react-cookie";
 import { get_villes } from "../Utils/villes/get_villes";
 
-const Fill_Form = (data, setdata) => {
+const Fill_Form = ({ data, setdata }) => {
   let [villes, setvilles] = useState([{ value: 0, name: "" }]);
   useEffect(() => {
-    setvilles(null);
+    setvilles([]);
     get_villes(setvilles);
   }, []);
   return (
@@ -155,9 +155,7 @@ function AddNewAdmin({ open, OnClick }) {
                     Authorization: `Bearer ${cookies.accesToken}`,
                   },
                   referrerPolicy: "no-referrer",
-                  body: JSON.stringify({
-                    id: data.id,
-                  }),
+                  body: JSON.stringify(data),
                 });
                 setloading(false);
               } catch (err) {
