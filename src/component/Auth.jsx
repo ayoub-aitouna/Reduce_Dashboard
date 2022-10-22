@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 
 const login_submit = async (email, pass, callback = () => {}) => {
   try {
-    const req = await fetch(`${BaseUrl}/api/v1/auth/admin}`, {
+    const req = await fetch(`${BaseUrl}/auth/admin`, {
       method: "POST",
       mode: "cors",
       cache: "no-cache",
@@ -21,9 +21,15 @@ const login_submit = async (email, pass, callback = () => {}) => {
         password: pass,
       }),
     });
-    const data = req.json();
-    callback(data.accesToken);
-  } catch (err) {}
+    if (req.ok) {
+      const data = req.json();
+      callback(data.accesToken, data.role);
+    } else {
+      alert("error password or email not correct");
+    }
+  } catch (err) {
+    alert("error password or email not correct");
+  }
 };
 
 const AuthForm = () => {
@@ -53,14 +59,19 @@ const AuthForm = () => {
           <Input
             title="Email"
             hint={"Example@email.com"}
-            OnChange={() => {}}
+            OnChange={(value) => {
+              console.log(value);
+              setlogin({ ...login, email: value });
+            }}
             value={login.email}
             type="email"
           />
           <Input
             title="mode de pass"
             hint={"*************"}
-            OnChange={() => {}}
+            OnChange={(value) => {
+              setlogin({ ...login, password: value });
+            }}
             value={login.password}
             type="password"
           />
@@ -68,9 +79,16 @@ const AuthForm = () => {
             title={"Log out"}
             Icon={() => <></>}
             OnClick={() => {
-              login_submit(login.email, login.password, (value) => {
-                setCookie("accesToken", value, { path: "/" });
-              });
+              console.log(login);
+              login_submit(
+                login.email,
+                login.password,
+                ({ accesToken, role }) => {
+                  setCookie("accesToken", accesToken, { path: "/" });
+                  setCookie("role", role, { path: "/" });
+                  navigate(`/home`);
+                }
+              );
             }}
             style="!h-[30px] p-[30px] mt-auto"
           />

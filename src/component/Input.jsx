@@ -1,6 +1,13 @@
 import React from "react";
 
-const Input = ({ OnChange, value, hint, title, type, style }) => {
+const Input = ({
+  OnChange = () => {},
+  value = "",
+  hint,
+  title,
+  type,
+  style,
+}) => {
   return (
     <>
       <div
@@ -13,8 +20,11 @@ const Input = ({ OnChange, value, hint, title, type, style }) => {
           className=" w-[520px] !h-[62px] py-2 border-[1px] border-[#E4E4E7] rounded-[12px]  focus:border-[#617EE7] px-4"
           placeholder={hint}
           type={type}
-          onChange={() => OnChange()}
-          //   value={value}
+          onChange={(e) => {
+            console.log("ff. :" + e.target.value);
+            OnChange(e.target.value);
+          }}
+          //value={value}
         />
       </div>
     </>
