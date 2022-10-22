@@ -46,8 +46,8 @@ const TaskSearch = ({ Search }) => {
   useEffect(() => {
     async function fetchData() {
       try {
-        const req = await fetch(`${BaseUrl}/`, {
-          method: "POST",
+        const req = await fetch(`${BaseUrl}/Tasks/search/${Search}`, {
+          method: "GET",
           mode: "cors",
           cache: "no-cache",
           headers: {

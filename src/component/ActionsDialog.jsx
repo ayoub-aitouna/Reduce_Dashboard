@@ -12,6 +12,7 @@ import { MdPendingActions } from "react-icons/md";
 import { BsFillArrowRightSquareFill } from "react-icons/bs";
 import { IconHalder } from "./index";
 import { Button as MyButton } from "./index";
+import { BaseUrl } from "../constants";
 
 function ActionsDialog({ open, OnClick, data }) {
   const hadlerClose = () => {
@@ -37,7 +38,24 @@ function ActionsDialog({ open, OnClick, data }) {
           <Button onClick={hadlerClose}>
             <MyButton title="cancle" style="p-[20px]  font-bold text-xl" />
           </Button>
-          <Button onClick={hadlerClose}>
+          <Button
+            onClick={async function fetchData() {
+              try {
+                const req = await fetch(`${BaseUrl}/admin/Remove_admin`, {
+                  method: "POST",
+                  mode: "cors",
+                  cache: "no-cache",
+                  headers: {
+                    "Content-Type": "application/json",
+                  },
+                  referrerPolicy: "no-referrer",
+                  body: JSON.stringify({
+                    id: data.id,
+                  }),
+                });
+              } catch (err) {}
+            }}
+          >
             <MyButton
               title="Suspand"
               style="!bg-red-500 p-[20px] font-bold text-xl "

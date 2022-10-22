@@ -48,7 +48,7 @@ const Task_done = () => {
   useEffect(() => {
     async function fetchData() {
       try {
-        const req = await fetch(`${BaseUrl}/`, {
+        const req = await fetch(`${BaseUrl}/Tasks/done`, {
           method: "POST",
           mode: "cors",
           cache: "no-cache",

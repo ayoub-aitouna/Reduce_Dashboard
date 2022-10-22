@@ -51,7 +51,7 @@ function Sidebar() {
         title={"Log out"}
         Icon={() => <BiExit />}
         OnClick={() => {
-          removeCookie();
+          setCookie(null);
           navigate("/");
         }}
         style="!h-[30px] p-[28px]  mt-auto"

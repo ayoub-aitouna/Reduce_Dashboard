@@ -24,7 +24,7 @@ function App() {
     <div className="w-full h-[100vh]">
       <BrowserRouter>
         <Routes>
-          <Route excat path="/" element={<Auth />} />
+          <Route exact path="/" element={<Auth />} />
           <Route path="/home" element={<Home />}>
             <Route exact path="" element={<Partner />} />
             <Route

@@ -24,8 +24,8 @@ function Admins() {
   useEffect(() => {
     async function fetchData() {
       try {
-        const req = await fetch(`${BaseUrl}`, {
-          method: "POST",
+        const req = await fetch(`${BaseUrl}/Admins/`, {
+          method: "GET",
           mode: "cors",
           cache: "no-cache",
           headers: {

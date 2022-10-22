@@ -51,8 +51,8 @@ const Task_anounsments = () => {
   useEffect(() => {
     async function fetchData() {
       try {
-        const req = await fetch(`${BaseUrl}/`, {
-          method: "POST",
+        const req = await fetch(`${BaseUrl}/Tasks/announcement`, {
+          method: "GET",
           mode: "cors",
           cache: "no-cache",
           headers: {
@@ -65,6 +65,7 @@ const Task_anounsments = () => {
       } catch (err) {}
     }
   }, []);
+  data = data.filter((v) => v.task_status == "Pending");
   return (
     <div class="flex flex-col  border-[1px] my-10 border-gray-200 rounded-lg ">
       <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">

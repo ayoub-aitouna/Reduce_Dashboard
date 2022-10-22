@@ -107,21 +107,7 @@ const StartIcon = (loading) => {
     </>
   );
 };
-async function submite(data, setloading) {
-  try {
-    const req = await fetch(`${BaseUrl}/api/v1/auth/admin}`, {
-      method: "POST",
-      mode: "cors",
-      cache: "no-cache",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      referrerPolicy: "no-referrer",
-      body: JSON.stringify(data),
-    });
-    const data = req.json();
-  } catch (err) {}
-}
+
 function Edite_Task({ open, OnClick, SelectedTask }) {
   let [data, setdata] = useState({
     partner_name: SelectedTask.partner_name,
@@ -155,10 +141,27 @@ function Edite_Task({ open, OnClick, SelectedTask }) {
         <div className="h-[60px]"></div>
         <DialogActions>
           <Button
-            onClick={(e) => {
-              alert("ss");
+            onClick={async (e) => {
               setloading(true);
-              submite(data, setloading);
+              try {
+                const req = await fetch(`${BaseUrl}/admin/edit_done`, {
+                  method: "POST",
+                  mode: "cors",
+                  cache: "no-cache",
+                  headers: {
+                    "Content-Type": "application/json",
+                  },
+                  referrerPolicy: "no-referrer",
+                  body: JSON.stringify({
+                    id: SelectedTask.id,
+                    partner_name: data.partner_name,
+                    partner_status: data.partner_address,
+                  }),
+                });
+                setloading(false);
+              } catch (err) {
+                setloading(false);
+              }
             }}
           >
             <MyButton

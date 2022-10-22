@@ -188,9 +188,25 @@ function AddNewAdmin({ open, OnClick }) {
         <div className="h-[100px]"></div>
         <DialogActions>
           <Button
-            onClick={(e) => {
+            onClick={async (e) => {
               setloading(true);
-              submite(data, setloading);
+              try {
+                const req = await fetch(`${BaseUrl}/admin/Remove_admin`, {
+                  method: "POST",
+                  mode: "cors",
+                  cache: "no-cache",
+                  headers: {
+                    "Content-Type": "application/json",
+                  },
+                  referrerPolicy: "no-referrer",
+                  body: JSON.stringify({
+                    id: data.id,
+                  }),
+                });
+                setloading(false);
+              } catch (err) {
+                setloading(false);
+              }
             }}
           >
             <MyButton

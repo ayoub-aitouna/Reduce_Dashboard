@@ -15,8 +15,8 @@ function Partner({ selectedStatus = "" }) {
   useEffect(() => {
     async function fetchData() {
       try {
-        const req = await fetch(`${BaseUrl}/`, {
-          method: "POST",
+        const req = await fetch(`${BaseUrl}/admin/get_partners`, {
+          method: "GET",
           mode: "cors",
           cache: "no-cache",
           headers: {
