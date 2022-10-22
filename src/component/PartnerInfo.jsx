@@ -12,6 +12,7 @@ import { MdPendingActions } from "react-icons/md";
 import { BsFillArrowRightSquareFill } from "react-icons/bs";
 import { IconHalder } from "./index";
 import { Button as MyButton } from "./index";
+import { BaseUrl } from "../constants";
 
 const DataRow = ({ title, data = null, Render = () => <></> }) => {
   return (
@@ -35,7 +36,6 @@ const PartnerInfoRender = ({ item }) => {
         <DataRow title={"#"} data={item.id} />
         <DataRow
           title={"Logo"}
-
           Render={() => {
             return (
               <img
@@ -67,7 +67,6 @@ const PartnerInfoRender = ({ item }) => {
         />
         <DataRow
           title={"Status"}
-
           Render={() => {
             return (
               <div className="flex flex-row justify-center items-center ">
@@ -104,6 +103,27 @@ function PartnerInfo({ open, OnClick, data }) {
   const hadlerClose = () => {
     OnClick();
   };
+  const hadlerResponse = async (id, response) => {
+    try {
+      const req = await fetch(`${BaseUrl}/admin/edit_done`, {
+        method: "POST",
+        mode: "cors",
+        cache: "no-cache",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        referrerPolicy: "no-referrer",
+        body: JSON.stringify({
+          partner_id: id,
+          response: response,
+        }),
+      });
+      hadlerClose();
+    } catch (err) {
+      hadlerClose();
+    }
+  };
+
   return (
     <div>
       <Dialog
@@ -118,10 +138,14 @@ function PartnerInfo({ open, OnClick, data }) {
         </DialogContent>
         {data.status == "Pending" ? (
           <DialogActions>
-            <Button onClick={hadlerClose}>
+            <Button
+              onClick={async (e) => {
+                hadlerResponse(data.id, "Approved");
+              }}
+            >
               <MyButton title="Accept" style="p-[20px] font-bold text-xl" />
             </Button>
-            <Button onClick={hadlerClose}>
+            <Button onClick={() => hadlerResponse(data.id, "Rejected")}>
               <MyButton
                 title="Reject"
                 style="bg-red-500 p-[20px] font-bold text-xl"
