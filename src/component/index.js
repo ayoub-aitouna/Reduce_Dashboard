@@ -20,6 +20,7 @@ import Task_anounsments from "./Task_anounsments";
 import TaskSearch from "./TaskSearch.js";
 import Edite_Task from "./Edite_Task";
 import LoadingIcon from "./LoadingIcon";
+import SetAsDone from "./SetAsDone";
 export {
   Auth,
   Home,
@@ -42,5 +43,6 @@ export {
   Task_anounsments,
   TaskSearch,
   LoadingIcon,
+  SetAsDone,
   Edite_Task,
 };

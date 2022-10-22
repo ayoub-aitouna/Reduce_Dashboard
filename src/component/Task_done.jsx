@@ -5,8 +5,10 @@ import { AiFillEdit } from "react-icons/ai";
 import { MdPendingActions } from "react-icons/md";
 import { BsFillArrowRightSquareFill } from "react-icons/bs";
 import { IconHalder, Edite_Task } from "./index";
-import { BaseUrl } from "../constants";
+import { BaseUrl, Coockies_name } from "../constants";
 
+import Cookies from "js-cookie";
+import { useCookies } from "react-cookie";
 // Data Row
 const DataRow = ({ item, index, onClick = () => {} }) => {
   return (
@@ -45,22 +47,32 @@ const Task_done = () => {
   let [data, setdata] = useState([]);
   let [isEdite_Task_Dialog_Opend, setEdite_Task_Dialog_Opend] = useState(false);
   let [SelectedTask, setSelectedTask] = useState(false);
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        const req = await fetch(`${BaseUrl}/Tasks/done`, {
-          method: "POST",
-          mode: "cors",
-          cache: "no-cache",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          referrerPolicy: "no-referrer",
-        });
-        const data = req.json();
+  const [cookies, setCookie, removeCookie] = useCookies([Coockies_name]);
+
+  const handleRequest = async () => {
+    try {
+      const req = await fetch(`${BaseUrl}/Tasks/done`, {
+        method: "GET",
+        mode: "cors",
+        cache: "no-cache",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${cookies.accesToken}`,
+        },
+        referrerPolicy: "no-referrer",
+      });
+      if (req.ok) {
+        const data = await req.json();
         setdata(data);
-      } catch (err) {}
+      } else {
+        console.log(await req.json());
+      }
+    } catch (err) {
+      alert(err);
     }
+  };
+  useEffect(() => {
+    handleRequest();
   }, []);
   return (
     <div class="flex flex-col  border-[1px] my-10 border-gray-200 rounded-lg ">
