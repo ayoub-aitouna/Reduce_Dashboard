@@ -5,6 +5,7 @@ import { IoMdPersonAdd } from "react-icons/io";
 import { BiTask } from "react-icons/bi";
 import { BaseUrl, Coockies_name } from "../constants";
 import { useCookies } from "react-cookie";
+import Cookies from "js-cookie";
 
 import {
   Filter_Selector,
@@ -26,6 +27,7 @@ function Admins() {
   const [cookies, setCookie, removeCookie] = useCookies([Coockies_name]);
 
   const fetchData = async () => {
+    console.log(Cookies.get("accesToken"));
     try {
       const req = await fetch(`${BaseUrl}/admin`, {
         method: "GET",
@@ -37,8 +39,13 @@ function Admins() {
         },
         referrerPolicy: "no-referrer",
       });
-      const data = await req.json();
-      setdata(data);
+      if (req.ok) {
+        const data = await req.json();
+        console.log(data);
+        setdata(data);
+      } else {
+        console.log(req);
+      }
     } catch (err) {}
   };
   useEffect(() => {
