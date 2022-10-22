@@ -27,7 +27,7 @@ const DataRow = ({ item, index, onClick = () => {} }) => {
         {item.partner_status}
       </td>
       <td class="px-6 py-4 whitespace-nowrap text-sm font-medium ">
-        {item.manager_name}
+        sdsdm._name}
       </td>
       <td class="px-6 py-4 whitespace-nowrap text-sm font-medium ">
         {item.ville_name}
@@ -157,5 +157,4 @@ const Task_done = () => {
     </div>
   );
 };
-
 export default Task_done;
