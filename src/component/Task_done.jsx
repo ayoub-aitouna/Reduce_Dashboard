@@ -34,7 +34,10 @@ const DataRow = ({ item, index, onClick = () => {} }) => {
       </td>
       <td
         class="px-6 py-4 whitespace-nowrap text-sm font-medium "
-        onClick={() => onClick(item)}
+        onClick={() => {
+          const { id, partner_name, partner_status } = item;
+          onClick({ id, partner_name, partner_status });
+        }}
       >
         <IconHalder Icon={() => <AiFillEdit />} style="text-[20px]" />
       </td>
@@ -46,7 +49,11 @@ const DataRow = ({ item, index, onClick = () => {} }) => {
 const Task_done = () => {
   let [data, setdata] = useState([]);
   let [isEdite_Task_Dialog_Opend, setEdite_Task_Dialog_Opend] = useState(false);
-  let [SelectedTask, setSelectedTask] = useState(false);
+  const [SelectedTask, setSelectedTask] = useState({
+    id: 1,
+    partner_name: "",
+    partner_status: "",
+  });
   const [cookies, setCookie, removeCookie] = useCookies([Coockies_name]);
 
   const handleRequest = async () => {
@@ -71,9 +78,11 @@ const Task_done = () => {
       alert(err);
     }
   };
+
   useEffect(() => {
     handleRequest();
   }, []);
+
   return (
     <div class="flex flex-col  border-[1px] my-10 border-gray-200 rounded-lg ">
       <Edite_Task
@@ -134,9 +143,18 @@ const Task_done = () => {
                       key={item.id}
                       item={item}
                       index={index}
-                      onClick={(item) => {
+                      onClick={({ id, partner_name, partner_status }) => {
+                        console.trace({
+                          id: id,
+                          partner_name: partner_name,
+                          partner_status: partner_status,
+                        });
+                        setSelectedTask({
+                          id: id,
+                          partner_name: partner_name,
+                          partner_status: partner_status,
+                        });
                         setEdite_Task_Dialog_Opend(true);
-                        setSelectedTask(item);
                       }}
                     />
                   </>

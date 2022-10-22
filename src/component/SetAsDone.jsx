@@ -17,7 +17,7 @@ const Fill_Form = ({ data, setdata }) => {
         <div class="w-full px-3 mb-6 md:mb-0">
           <Filter_Selector
             title={"partner status"}
-            Filter={data.ville}
+            Filter={data.partner_status}
             setFilter={(value) => {
               setdata({ ...data, partner_status: value });
             }}

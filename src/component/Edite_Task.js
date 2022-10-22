@@ -11,9 +11,9 @@ import Cookies from "js-cookie";
 import { useCookies } from "react-cookie";
 import { get_villes } from "../Utils/villes/get_villes";
 import { FaOpencart } from "react-icons/fa";
+
 const Fill_Form = ({ data, setdata }) => {
   let [villes, setvilles] = useState([]);
-  console.log(FaOpencart);
   useEffect(() => {
     setvilles([]);
     get_villes(setvilles);
@@ -58,12 +58,16 @@ const Fill_Form = ({ data, setdata }) => {
         </div>
         <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
           <Filter_Selector
-            title={"Ville"}
-            Filter={data.ville}
+            title={"Status"}
+            Filter={data.partner_status}
             setFilter={(value) => {
-              setdata({ ...data, ville: value });
+              setdata({ ...data, partner_status: value });
             }}
-            options={villes}
+            options={[
+              { value: "not_intrested", name: "not intressted" },
+              { value: "intrested", name: "intrested" },
+              { value: "thinking", name: "thinking" },
+            ]}
             styles={"!max-w-full"}
           />
         </div>
@@ -74,13 +78,18 @@ const Fill_Form = ({ data, setdata }) => {
 
 function Edite_Task({ open, OnClick, SelectedTask }) {
   let [data, setdata] = useState({
+    id: SelectedTask.id,
     partner_name: SelectedTask.partner_name,
     partner_address: SelectedTask.partner_address,
-    ville: SelectedTask.ville,
+    partner_status: SelectedTask.partner_status,
   });
   const [cookies, setCookie, removeCookie] = useCookies([Coockies_name]);
+  //console.log(SelectedTask);
 
   const [loading, setloading] = useState(false);
+  useEffect(() => {
+    console.log("assda");
+  }, [open]);
   const hadlerClose = () => {
     OnClick();
   };
