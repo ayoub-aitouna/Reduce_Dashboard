@@ -104,6 +104,7 @@ function PartnerInfo({ open, OnClick, data }) {
     OnClick();
   };
   const hadlerResponse = async (id, response) => {
+    setloading(true);
     try {
       const req = await fetch(`${BaseUrl}/admin/Response_partner_form`, {
         method: "POST",
@@ -119,9 +120,9 @@ function PartnerInfo({ open, OnClick, data }) {
           response: response,
         }),
       });
-      hadlerClose();
+      setloading(false);
     } catch (err) {
-      hadlerClose();
+      setloading(false);
     }
   };
   useEffect(() => {
