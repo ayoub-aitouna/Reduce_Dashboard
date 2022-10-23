@@ -18,6 +18,7 @@ const Fill_Form = ({ data, setdata }) => {
   useEffect(() => {
     get_villes(setvilles);
   }, []);
+
   return (
     <form class="w-full max-w-lg ">
       <div class="flex flex-wrap -mx-3 mb-6">
@@ -84,6 +85,9 @@ function Add_new_task({ open, OnClick }) {
   const hadlerClose = () => {
     OnClick();
   };
+  useEffect(() => {
+    if (!loading) hadlerClose();
+  }, [loading]);
   return (
     <div>
       <Dialog

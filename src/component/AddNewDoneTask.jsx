@@ -70,6 +70,9 @@ function AddNewDoneTask({ open, OnClick }) {
   const hadlerClose = () => {
     OnClick();
   };
+  useEffect(() => {
+    if (!loading) hadlerClose();
+  }, [loading]);
   return (
     <div>
       <Dialog

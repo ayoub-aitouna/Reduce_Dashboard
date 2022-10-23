@@ -88,6 +88,7 @@ const Task_done = () => {
     <div class="flex flex-col  border-[1px] my-10 border-gray-200 rounded-lg ">
       <Edite_Task
         open={isEdite_Task_Dialog_Opend}
+        setSelectedTask={setSelectedTask}
         OnClick={() => {
           setEdite_Task_Dialog_Opend(false);
         }}
@@ -145,6 +146,7 @@ const Task_done = () => {
                       item={item}
                       index={index}
                       onClick={() => {
+                        console.trace(item);
                         setSelectedTask(item);
                         setEdite_Task_Dialog_Opend(true);
                       }}

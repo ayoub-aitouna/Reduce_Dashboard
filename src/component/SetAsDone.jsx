@@ -49,6 +49,9 @@ function SetAsDone({ open, OnClick, item }) {
   const hadlerClose = () => {
     OnClick();
   };
+  useEffect(() => {
+    if (!loading) hadlerClose();
+  }, [loading]);
   return (
     <div>
       <Dialog

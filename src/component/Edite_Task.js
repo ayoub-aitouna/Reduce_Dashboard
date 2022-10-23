@@ -76,19 +76,16 @@ const Fill_Form = ({ data, setdata }) => {
   );
 };
 
-function Edite_Task({ open, OnClick, SelectedTask }) {
-  let [data, setdata] = useState({
-    id: SelectedTask.id,
-    partner_name: SelectedTask.partner_name,
-    partner_address: SelectedTask.partner_address,
-    partner_status: SelectedTask.partner_status,
-  });
+function Edite_Task({ open, OnClick, SelectedTask, setSelectedTask }) {
   const [cookies, setCookie, removeCookie] = useCookies([Coockies_name]);
   const [loading, setloading] = useState(false);
 
   const hadlerClose = () => {
     OnClick();
   };
+  useEffect(() => {
+    if (!loading) hadlerClose();
+  }, [loading]);
   return (
     <div>
       <Dialog
@@ -107,7 +104,11 @@ function Edite_Task({ open, OnClick, SelectedTask }) {
           </DialogContentText>
         </DialogContent>
         <div className="w-full grid place-content-center">
-          <Fill_Form data={data} setdata={setdata} open={open} />
+          <Fill_Form
+            data={SelectedTask}
+            setdata={setSelectedTask}
+            open={open}
+          />
         </div>
         <div className="h-[60px]"></div>
         <DialogActions>
@@ -124,7 +125,7 @@ function Edite_Task({ open, OnClick, SelectedTask }) {
                     Authorization: `Bearer ${cookies.accesToken}`,
                   },
                   referrerPolicy: "no-referrer",
-                  body: JSON.stringify(data),
+                  body: JSON.stringify(SelectedTask),
                 });
                 setloading(false);
               } catch (err) {
