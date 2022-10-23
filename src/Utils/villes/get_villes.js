@@ -13,6 +13,7 @@ const get_villes = async (setvilles) => {
     });
     if (req.ok) {
       const data = await req.json();
+      setvilles([{ id: 0, name: "" }]);
       data.map((item) => {
         setvilles((v) => [...v, { value: item.id, name: item.ville_name }]);
       });

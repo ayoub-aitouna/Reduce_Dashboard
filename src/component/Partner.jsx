@@ -8,16 +8,18 @@ import Cookies from "js-cookie";
 import { useCookies } from "react-cookie";
 import { get_villes } from "../Utils/villes/get_villes";
 
-function Partner({ selectedStatus = "" }) {
+function Partner({ selectedStatus }) {
   const [isDialogOpend, setDialogOpend] = useState(false);
   const [City, setCity] = useState("");
   const [Activities, setActivities] = useState([]);
   let [villes, setvilles] = useState([{ value: 0, name: "" }]);
 
   const [activity_entrprise, setactivity_entrprise] = useState("");
+  const [Search, setSearch] = useState("");
   const [AccountState, setAccountState] = useState("");
   const [cookies, setCookie, removeCookie] = useCookies([Coockies_name]);
   const [SelectedPartner, setSelectedpartner] = useState({});
+  let [Odata, setOdata] = useState([]);
   let [data, setdata] = useState([]);
   const handleRequest = async () => {
     try {
@@ -33,7 +35,8 @@ function Partner({ selectedStatus = "" }) {
       });
       if (req.ok) {
         const data = await req.json();
-        setdata(data);
+        console.log(data);
+        setOdata(data);
       } else {
       }
     } catch (err) {}
@@ -43,12 +46,29 @@ function Partner({ selectedStatus = "" }) {
     get_Activity(setActivities);
     get_villes(setvilles);
   }, []);
-  data = data.filter(function (v, i) {
-    return v["activity_entrprise_nome"] == activity_entrprise ||
-      (v["City"] == City && selectedStatus != "")
-      ? v.status == selectedStatus
-      : v;
-  });
+  useEffect(() => {
+    setdata(
+      selectedStatus != ""
+        ? Odata.filter((item) => item._status == selectedStatus)
+        : Odata
+    );
+    setdata((per) =>
+      Search != ""
+        ? per.filter((item) =>
+            item.nome_entreprise.toLowerCase().includes(Search.toLowerCase())
+          )
+        : per
+    );
+    setdata((per) =>
+      City != 0 ? per.filter((item) => item.ville == City) : per
+    );
+    setdata((per) =>
+      activity_entrprise != 0
+        ? per.filter((item) => item.activity_entrprise == activity_entrprise)
+        : per
+    );
+  }, [Search, selectedStatus, City]);
+
   return (
     <div className="p-5 my-10">
       <PartnerInfo
@@ -67,7 +87,7 @@ function Partner({ selectedStatus = "" }) {
         </p>
       </div>
       <div className="flex ld:flex-row flex-col w-full mt-10 lg:gap-5 gap-0 justify-center items-center">
-        <SearchBar styles={"max-h-[15px] !w-full"} />
+        <SearchBar styles={"max-h-[15px] !w-full"} setSearch={setSearch} />
         <div className="flex flex-row w-full mt-10 gap-5 justify-start items-center">
           <Filter_Selector
             title={"Activity Entrprise"}
@@ -75,18 +95,6 @@ function Partner({ selectedStatus = "" }) {
             options={Activities}
             setFilter={(value) => setactivity_entrprise(value)}
             Filter={activity_entrprise}
-          />
-          <Filter_Selector
-            title={"Account State"}
-            styles={"h-[95px]"}
-            options={[
-              { value: 0, name: "" },
-              { value: "Pending", name: "Pending" },
-              { value: "Rejected", name: "Rejected" },
-              { value: "Approved", name: "Approved" },
-            ]}
-            setFilter={(value) => setAccountState(value)}
-            Filter={AccountState}
           />
           <Filter_Selector
             title={"Ville"}

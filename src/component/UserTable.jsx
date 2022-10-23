@@ -36,18 +36,18 @@ const DataRow = ({ item, index, onClick = () => {} }) => {
         {item.role_dans_entriprise}
       </td>
       <td class="px-6 py-4 whitespace-nowrap text-sm font-medium ">
-        {item.ville_nome}
+        {item.ville_name}
       </td>
       <td class="px-6 py-4 whitespace-nowrap text-sm font-medium ">
-        {item.activity_entrprise_nome}
+        {item.nome_entreprise}
       </td>
       <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-[30px] ">
-        {item.status == "Pending" ? (
+        {item._status == "Pending" ? (
           <IconHalder
             Icon={() => <MdPendingActions />}
             style="text-[#353535]"
           />
-        ) : item.status == "Acepted" ? (
+        ) : item._status == "Approved" ? (
           <div>
             <IconHalder
               Icon={() => <BsCheckCircleFill />}

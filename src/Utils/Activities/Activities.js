@@ -13,6 +13,7 @@ const get_Activity = async (setActivity) => {
     });
     if (req.ok) {
       const data = await req.json();
+      setActivity([]);
       data.map((item) => {
         setActivity((v) => [
           ...v,

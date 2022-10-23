@@ -26,7 +26,7 @@ function App() {
         <Routes>
           <Route exact path="/" element={<Auth />} />
           <Route path="/home" element={<Home />}>
-            <Route exact path="" element={<Partner />} />
+            <Route exact path="" element={<Partner selectedStatus="" />} />
             <Route
               path="Pending_partners"
               element={<Partner selectedStatus="Pending" />}
@@ -45,7 +45,7 @@ function App() {
             />
             <Route
               path="Approved_partners"
-              element={<Partner selectedStatus={"Acepted"} />}
+              element={<Partner selectedStatus={"Approved"} />}
             />
             <Route path="Admin_managers" element={<Admins />} />
           </Route>
