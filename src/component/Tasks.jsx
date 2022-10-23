@@ -25,7 +25,7 @@ const Tasks = ({ setSearch }) => {
   let [data, setdata] = useState([]);
   const location = useLocation();
   return (
-    <div className="p-5 h-[95%] relative my-10 flex flex-col gap-5">
+    <div className="p-5 h-[95%]  my-10 flex flex-col gap-5">
       <div className="flex ld:flex-row flex-col w-full mt-10 lg:gap-5 gap-0 justify-center items-center">
         <Link
           to={"task_search"}

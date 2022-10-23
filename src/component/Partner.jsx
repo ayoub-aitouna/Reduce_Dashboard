@@ -4,7 +4,6 @@ import { PartnerInfo } from "./index";
 import { Filter_Selector, SearchBar } from "./index";
 import { BaseUrl, Coockies_name } from "../constants";
 import { get_Activity } from "../Utils/Activities/Activities";
-import Cookies from "js-cookie";
 import { useCookies } from "react-cookie";
 import { get_villes } from "../Utils/villes/get_villes";
 
@@ -16,7 +15,6 @@ function Partner({ selectedStatus }) {
 
   const [activity_entrprise, setactivity_entrprise] = useState("");
   const [Search, setSearch] = useState("");
-  const [AccountState, setAccountState] = useState("");
   const [cookies, setCookie, removeCookie] = useCookies([Coockies_name]);
   const [SelectedPartner, setSelectedpartner] = useState({});
   let [Odata, setOdata] = useState([]);
@@ -66,7 +64,7 @@ function Partner({ selectedStatus }) {
         ? per.filter((item) => item.activity_entrprise == activity_entrprise)
         : per
     );
-  }, [Search, selectedStatus, City]);
+  }, [Search, selectedStatus, City, Odata]);
 
   return (
     <div className="p-5 my-10">

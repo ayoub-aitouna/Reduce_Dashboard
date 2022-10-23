@@ -1,18 +1,15 @@
-import * as React from "react";
+import React, { useState, useEffect } from "react";
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
-import DialogContentText from "@mui/material/DialogContentText";
-import DialogTitle from "@mui/material/DialogTitle";
-import Slide from "@mui/material/Slide";
 import { IoIosCloseCircle } from "react-icons/io";
 import { BsCheckCircleFill } from "react-icons/bs";
 import { MdPendingActions } from "react-icons/md";
-import { BsFillArrowRightSquareFill } from "react-icons/bs";
 import { IconHalder } from "./index";
-import { Button as MyButton } from "./index";
-import { BaseUrl } from "../constants";
+import { Button as MyButton, LoadingIcon } from "./index";
+import { BaseUrl, Coockies_name } from "../constants";
+import { useCookies } from "react-cookie";
 
 const DataRow = ({ title, data = null, Render = () => <></> }) => {
   return (
@@ -69,14 +66,14 @@ const PartnerInfoRender = ({ item }) => {
           title={"Status"}
           Render={() => {
             return (
-              <div className="flex flex-row justify-center items-center ">
-                <p>{item.status}</p>
-                {item.status == "Pending" ? (
+              <div className="flex flex-row justify-center items-center gap-5 ">
+                <p>{item._status}</p>
+                {item._status == "Pending" ? (
                   <IconHalder
                     Icon={() => <MdPendingActions />}
                     style="text-[#353535]"
                   />
-                ) : item.status == "Acepted" ? (
+                ) : item._status == "Approved" ? (
                   <div>
                     <IconHalder
                       Icon={() => <BsCheckCircleFill />}
@@ -100,17 +97,21 @@ const PartnerInfoRender = ({ item }) => {
   );
 };
 function PartnerInfo({ open, OnClick, data }) {
+  const [cookies, setCookie, removeCookie] = useCookies([Coockies_name]);
+  const [loading, setloading] = useState(false);
+
   const hadlerClose = () => {
     OnClick();
   };
   const hadlerResponse = async (id, response) => {
     try {
-      const req = await fetch(`${BaseUrl}/admin/edit_done`, {
+      const req = await fetch(`${BaseUrl}/admin/Response_partner_form`, {
         method: "POST",
         mode: "cors",
         cache: "no-cache",
         headers: {
           "Content-Type": "application/json",
+          Authorization: `Bearer ${cookies.accesToken}`,
         },
         referrerPolicy: "no-referrer",
         body: JSON.stringify({
@@ -123,7 +124,9 @@ function PartnerInfo({ open, OnClick, data }) {
       hadlerClose();
     }
   };
-
+  useEffect(() => {
+    if (!loading) hadlerClose();
+  }, [loading]);
   return (
     <div>
       <Dialog
@@ -136,19 +139,24 @@ function PartnerInfo({ open, OnClick, data }) {
         <DialogContent>
           <PartnerInfoRender item={data} />
         </DialogContent>
-        {data.status == "Pending" ? (
+        {data._status == "Pending" ? (
           <DialogActions>
             <Button
               onClick={async (e) => {
                 hadlerResponse(data.id, "Approved");
               }}
             >
-              <MyButton title="Accept" style="p-[20px] font-bold text-xl" />
+              <MyButton
+                Icon={() => LoadingIcon(loading)}
+                title="Accept"
+                style="p-[20px] font-bold text-xl"
+              />
             </Button>
             <Button onClick={() => hadlerResponse(data.id, "Rejected")}>
               <MyButton
+                Icon={() => LoadingIcon(loading)}
                 title="Reject"
-                style="bg-red-500 p-[20px] font-bold text-xl"
+                style=" p-[20px] font-bold text-xl !bg-red-500"
               />
             </Button>
           </DialogActions>
