@@ -13,7 +13,7 @@ import Cookies from "js-cookie";
 import { useCookies } from "react-cookie";
 
 const Fill_Form = ({ data, setdata }) => {
-  let [villes, setvilles] = useState([{ value: 0, name: "" }]);
+  let [villes, setvilles] = useState([]);
 
   useEffect(() => {
     get_villes(setvilles);
@@ -39,31 +39,18 @@ const Fill_Form = ({ data, setdata }) => {
             placeholder="Jane Doe"
           />
         </div>
-        <div class="w-full px-3">
-          <label
-            class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-            for="grid-name"
-          >
-            Partner Adreess
-          </label>
-          <input
-            class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-            id="grid-name"
-            value={data.partner_address}
-            onChange={(e) => {
-              setdata({ ...data, partner_address: e.target.value });
-            }}
-            type="text"
-          />
-        </div>
         <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
           <Filter_Selector
-            title={"Ville"}
-            Filter={data.ville}
+            title={"partner status"}
+            Filter={data.partner_status}
             setFilter={(value) => {
-              setdata({ ...data, ville: value });
+              setdata({ ...data, partner_status: value });
             }}
-            options={villes}
+            options={[
+              { value: "not_intrested", name: "not intressted" },
+              { value: "intrested", name: "intrested" },
+              { value: "thinking", name: "thinking" },
+            ]}
             styles={"!max-w-full"}
           />
         </div>
@@ -75,8 +62,7 @@ const Fill_Form = ({ data, setdata }) => {
 function AddNewDoneTask({ open, OnClick }) {
   let [data, setdata] = useState({
     partner_name: "",
-    partner_address: "",
-    ville: 0,
+    partner_status: 0,
   });
   const [cookies, setCookie, removeCookie] = useCookies([Coockies_name]);
 
@@ -110,7 +96,7 @@ function AddNewDoneTask({ open, OnClick }) {
             onClick={async (e) => {
               setloading(true);
               try {
-                const req = await fetch(`${BaseUrl}/Tasks/add_announcement`, {
+                const req = await fetch(`${BaseUrl}/Tasks/add_done`, {
                   method: "POST",
                   mode: "cors",
                   cache: "no-cache",

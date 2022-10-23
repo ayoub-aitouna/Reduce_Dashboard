@@ -18,7 +18,7 @@ import React, { useState, useEffect } from "react";
 import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";
 
 function App() {
-  const [Search, setSearch] = useState(null);
+  const [Search, setSearch] = useState("HH");
 
   return (
     <div className="w-full h-[100vh]">

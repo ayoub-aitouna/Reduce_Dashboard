@@ -13,7 +13,7 @@ import { Outlet } from "react-router-dom";
 import { matchRoutes, useLocation, useNavigate, Link } from "react-router-dom";
 import { BiTask } from "react-icons/bi";
 
-const Tasks = () => {
+const Tasks = ({ setSearch }) => {
   const [isDialogOpend, setDialogOpend] = useState(false);
   const [City, setCity] = useState("");
   const [activity_entrprise, setactivity_entrprise] = useState("");
@@ -32,7 +32,7 @@ const Tasks = () => {
           className=" flex w-full flex-col justify-center items-center
            cursor-pointer  text-[#475569] rounded-md "
         >
-          <SearchBar styles={"max-h-[15px] !w-full"} />
+          <SearchBar styles={"max-h-[15px] !w-full"} setSearch={setSearch} />
         </Link>
 
         <div className="w-full h-[127px] flex flex-row items-center justify-start gap-5">
@@ -54,6 +54,12 @@ const Tasks = () => {
           </Link>
         </div>
       </div>
+      <AddNewDoneTask
+        open={isNew_Task_Dialog_Opend}
+        OnClick={() => {
+          setNew_Task_Dialog_Opend(false);
+        }}
+      />
       <Outlet />
       <div className=" absolute bottom-8 right-8 flex flex-col gap-5">
         <Button
