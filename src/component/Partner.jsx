@@ -3,17 +3,20 @@ import { UserTable } from "./index";
 import { PartnerInfo } from "./index";
 import { Filter_Selector, SearchBar } from "./index";
 import { BaseUrl, Coockies_name } from "../constants";
-
+import { get_Activity } from "../Utils/Activities/Activities";
 import Cookies from "js-cookie";
 import { useCookies } from "react-cookie";
+import { get_villes } from "../Utils/villes/get_villes";
 
 function Partner({ selectedStatus = "" }) {
   const [isDialogOpend, setDialogOpend] = useState(false);
   const [City, setCity] = useState("");
+  const [Activities, setActivities] = useState([]);
+  let [villes, setvilles] = useState([{ value: 0, name: "" }]);
+
   const [activity_entrprise, setactivity_entrprise] = useState("");
   const [AccountState, setAccountState] = useState("");
   const [cookies, setCookie, removeCookie] = useCookies([Coockies_name]);
-
   const [SelectedPartner, setSelectedpartner] = useState({});
   let [data, setdata] = useState([]);
   const handleRequest = async () => {
@@ -37,6 +40,8 @@ function Partner({ selectedStatus = "" }) {
   };
   useEffect(() => {
     handleRequest();
+    get_Activity(setActivities);
+    get_villes(setvilles);
   }, []);
   data = data.filter(function (v, i) {
     return v["activity_entrprise_nome"] == activity_entrprise ||
@@ -67,12 +72,7 @@ function Partner({ selectedStatus = "" }) {
           <Filter_Selector
             title={"Activity Entrprise"}
             styles={"h-[95px]"}
-            options={[
-              { value: 0, name: "" },
-              { value: 1, name: "Designer" },
-              { value: 2, name: "Programmer" },
-              { value: 2, name: "Cleaner" },
-            ]}
+            options={Activities}
             setFilter={(value) => setactivity_entrprise(value)}
             Filter={activity_entrprise}
           />
@@ -81,9 +81,9 @@ function Partner({ selectedStatus = "" }) {
             styles={"h-[95px]"}
             options={[
               { value: 0, name: "" },
-              { value: 1, name: "Pending" },
-              { value: 2, name: "Rejected" },
-              { value: 2, name: "Acepted" },
+              { value: "Pending", name: "Pending" },
+              { value: "Rejected", name: "Rejected" },
+              { value: "Approved", name: "Approved" },
             ]}
             setFilter={(value) => setAccountState(value)}
             Filter={AccountState}
@@ -91,11 +91,7 @@ function Partner({ selectedStatus = "" }) {
           <Filter_Selector
             title={"Ville"}
             styles={"h-[95px]"}
-            options={[
-              { value: 0, name: "" },
-              { value: 1, name: "Marrakech" },
-              { value: 2, name: "Beni Mellal" },
-            ]}
+            options={villes}
             setFilter={(value) => setCity(value)}
             Filter={City}
           />
