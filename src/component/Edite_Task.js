@@ -84,8 +84,6 @@ function Edite_Task({ open, OnClick, SelectedTask }) {
     partner_status: SelectedTask.partner_status,
   });
   const [cookies, setCookie, removeCookie] = useCookies([Coockies_name]);
-  //console.log(SelectedTask);
-
   const [loading, setloading] = useState(false);
 
   const hadlerClose = () => {

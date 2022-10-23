@@ -66,17 +66,13 @@ const TaskSearch = ({ Search }) => {
       );
       if (req.ok) {
         const data = await req.json();
-        console.log(data);
         if (data.length > 0) {
           setData(data);
         }
-      } else {
-        console.log("NO OK!!");
       }
     } catch (err) {}
   };
   useEffect(() => {
-    console.log(Search);
     HandleRequest();
   }, [Search]);
   return (

@@ -1,6 +1,5 @@
 import { BaseUrl } from "../../constants";
 const get_Activity = async (setActivity) => {
-  console.log("call");
   try {
     const req = await fetch(`${BaseUrl}/Activities`, {
       method: "GET",

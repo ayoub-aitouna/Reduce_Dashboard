@@ -36,7 +36,6 @@ const DataRow = ({ item, index, onClick = () => {} }) => {
         class="px-6 py-4 whitespace-nowrap text-sm font-medium "
         onClick={() => {
           const { id, partner_name, partner_status } = item;
-          console.trace(item);
           onClick();
         }}
       >
@@ -74,7 +73,7 @@ const Task_done = () => {
         const data = await req.json();
         setdata(data);
       } else {
-        console.log(await req.json());
+        console.error(await req.json());
       }
     } catch (err) {
       alert(err);
@@ -83,7 +82,6 @@ const Task_done = () => {
 
   useEffect(() => {
     handleRequest();
-    console.log(data);
   }, []);
 
   return (
@@ -147,7 +145,6 @@ const Task_done = () => {
                       item={item}
                       index={index}
                       onClick={() => {
-                        console.trace(item);
                         setSelectedTask(item);
                         setEdite_Task_Dialog_Opend(true);
                       }}

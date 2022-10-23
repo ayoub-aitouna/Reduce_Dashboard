@@ -40,13 +40,12 @@ function SetAsDone({ open, OnClick, item }) {
   let [data, setdata] = useState({});
   const [loading, setloading] = useState(false);
   useEffect(() => {
-    console.log(item);
     setdata({
       id: item.id,
       partner_name: item.partner_name,
-      partner_status: "",
+      partner_status: "not_intrested",
     });
-  }, []);
+  }, [open]);
   const hadlerClose = () => {
     OnClick();
   };
@@ -92,11 +91,10 @@ function SetAsDone({ open, OnClick, item }) {
 
                 if (req.ok) {
                 } else {
-                  console.log(req);
                 }
               } catch (err) {
                 setloading(false);
-                console.log(err);
+                console.error(err);
               }
             }}
           >

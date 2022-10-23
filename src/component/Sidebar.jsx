@@ -60,7 +60,8 @@ function Sidebar() {
         title={"Log out"}
         Icon={() => <BiExit />}
         OnClick={() => {
-          removeCookie(Coockies_name, { path: "/" });
+          removeCookie("role");
+          removeCookie("accesToken");
           navigate("/");
         }}
         style="!h-[30px] p-[28px]  mt-auto"

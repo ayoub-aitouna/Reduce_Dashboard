@@ -77,11 +77,9 @@ const Task_anounsments = () => {
       if (req.ok) {
         const data = await req.json();
         setdata(data);
-      } else {
-        // console.log(await req.json());
       }
     } catch (err) {
-      console.log(err);
+      console.error(err);
     }
   };
   useEffect(() => {
@@ -151,8 +149,8 @@ const Task_anounsments = () => {
                       onClick={(selected) => {
                         setDialogOpend(true);
                         setSelectedTask({
-                          id: selected.id,
-                          partner_name: selected.partner_name,
+                          id: item.id,
+                          partner_name: item.partner_name,
                           partner_status: "",
                         });
                       }}

@@ -30,7 +30,6 @@ function Admins() {
   let [Odata, setOdata] = useState([]);
 
   const fetchData = async () => {
-    console.log(Cookies.get("accesToken"));
     try {
       const req = await fetch(`${BaseUrl}/admin`, {
         method: "GET",
@@ -44,7 +43,6 @@ function Admins() {
       });
       if (req.ok) {
         const data = await req.json();
-        console.log(data);
         setOdata(data);
       } else {
         console.log(req);

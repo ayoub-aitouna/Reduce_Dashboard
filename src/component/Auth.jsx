@@ -65,7 +65,6 @@ const AuthForm = () => {
             title="Email"
             hint={"Example@email.com"}
             OnChange={(value) => {
-              console.log(value);
               setlogin({ ...login, email: value });
             }}
             value={login.email}
