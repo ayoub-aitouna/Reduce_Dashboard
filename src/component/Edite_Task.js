@@ -7,10 +7,8 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import { Button as MyButton, Filter_Selector, LoadingIcon } from "./index";
 import { BaseUrl, Coockies_name } from "../constants";
-import Cookies from "js-cookie";
 import { useCookies } from "react-cookie";
 import { get_villes } from "../Utils/villes/get_villes";
-import { FaOpencart } from "react-icons/fa";
 
 const Fill_Form = ({ data, setdata }) => {
   let [villes, setvilles] = useState([]);

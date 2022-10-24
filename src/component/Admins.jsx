@@ -5,7 +5,6 @@ import { IoMdPersonAdd } from "react-icons/io";
 import { BiTask } from "react-icons/bi";
 import { BaseUrl, Coockies_name } from "../constants";
 import { useCookies } from "react-cookie";
-import Cookies from "js-cookie";
 import { get_villes } from "../Utils/villes/get_villes";
 import {
   Filter_Selector,

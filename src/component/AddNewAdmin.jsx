@@ -6,10 +6,8 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 
-import { BsFillArrowRightSquareFill } from "react-icons/bs";
 import { Button as MyButton, Filter_Selector, LoadingIcon } from "./index";
 import { BaseUrl, Coockies_name } from "../constants";
-import Cookies from "js-cookie";
 import { useCookies } from "react-cookie";
 import { get_villes } from "../Utils/villes/get_villes";
 

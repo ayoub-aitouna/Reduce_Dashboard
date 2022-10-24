@@ -1,29 +1,17 @@
 import React, { useState, useEffect } from "react";
-import { UserTable } from "./index";
-import { PartnerInfo } from "./index";
+
 import {
-  Filter_Selector,
   SearchBar,
   Button,
-  Edite_Task,
   AddNewDoneTask,
 } from "./index";
-import { BaseUrl } from "../constants";
-import { Outlet } from "react-router-dom";
-import { matchRoutes, useLocation, useNavigate, Link } from "react-router-dom";
+import {Link ,Outlet} from "react-router-dom";
 import { BiTask } from "react-icons/bi";
-
+  
 const Tasks = ({ setSearch }) => {
-  const [isDialogOpend, setDialogOpend] = useState(false);
-  const [City, setCity] = useState("");
-  const [activity_entrprise, setactivity_entrprise] = useState("");
-  const [AccountState, setAccountState] = useState("");
-  let navigate = useNavigate();
+
   const [isNew_Task_Dialog_Opend, setNew_Task_Dialog_Opend] = useState(false);
 
-  const [SelectedPartner, setSelectedpartner] = useState({});
-  let [data, setdata] = useState([]);
-  const location = useLocation();
   return (
     <div className="p-5 h-[95%]  my-10 flex flex-col gap-5">
       <div className="flex ld:flex-row flex-col w-full mt-10 lg:gap-5 gap-0 justify-center items-center">

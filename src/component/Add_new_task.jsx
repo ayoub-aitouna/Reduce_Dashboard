@@ -8,8 +8,6 @@ import DialogTitle from "@mui/material/DialogTitle";
 import { Button as MyButton, Filter_Selector, LoadingIcon } from "./index";
 import { BaseUrl, Coockies_name } from "../constants";
 import { get_villes } from "../Utils/villes/get_villes";
-
-import Cookies from "js-cookie";
 import { useCookies } from "react-cookie";
 
 const Fill_Form = ({ data, setdata }) => {

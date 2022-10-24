@@ -96,7 +96,7 @@ const PartnerInfoRender = ({ item }) => {
     </>
   );
 };
-function PartnerInfo({ open, OnClick, data }) {
+function PartnerInfo({ open, OnClick, data, setRefresh }) {
   const [cookies, setCookie, removeCookie] = useCookies([Coockies_name]);
   const [loading, setloading] = useState(false);
 
@@ -120,8 +120,11 @@ function PartnerInfo({ open, OnClick, data }) {
           response: response,
         }),
       });
+      setRefresh((i) => i + 1);
       setloading(false);
     } catch (err) {
+      setRefresh((i) => i + 1);
+
       setloading(false);
     }
   };

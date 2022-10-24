@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { SideBarLinks } from "../constants.js";
 import { FaRobot } from "react-icons/fa";
 import { BiExit } from "react-icons/bi";
@@ -7,15 +7,15 @@ import { Link } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import { Coockies_name } from "../constants";
 import { useNavigate } from "react-router-dom";
-import Cookies from "js-cookie";
 
 function Sidebar() {
   const [cookies, setCookie, removeCookie] = useCookies([Coockies_name]);
-  let links = SideBarLinks;
+  const [links, setLinks] = useState(SideBarLinks);
   useEffect(() => {
-    Cookies.get("name");
-    links = links.filter((item) =>
-      cookies.role != "Admin" ? item.groupName != "ADMIN" : item
+    setLinks((per) =>
+      per.filter((item) =>
+        cookies.role == "Admin" ? item.groupName : item.groupName != "ADMIN"
+      )
     );
   }, []);
 

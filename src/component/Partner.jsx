@@ -18,6 +18,7 @@ function Partner({ selectedStatus }) {
   const [cookies, setCookie, removeCookie] = useCookies([Coockies_name]);
   const [SelectedPartner, setSelectedpartner] = useState({});
   let [Odata, setOdata] = useState([]);
+  let [Refresh, setRefresh] = useState(0);
   let [data, setdata] = useState([]);
   const handleRequest = async () => {
     try {
@@ -42,7 +43,7 @@ function Partner({ selectedStatus }) {
     handleRequest();
     get_Activity(setActivities);
     get_villes(setvilles);
-  }, []);
+  }, [Refresh]);
   useEffect(() => {
     setdata(
       selectedStatus != ""
@@ -70,6 +71,7 @@ function Partner({ selectedStatus }) {
     <div className="p-5 my-10">
       <PartnerInfo
         open={isDialogOpend}
+        setRefresh={setRefresh}
         OnClick={() => {
           setDialogOpend(false);
         }}

@@ -49,8 +49,16 @@ function App() {
             />
             <Route path="Admin_managers" element={<Admins />} />
           </Route>
+          <Route path="*" element={<PageNotFound />} />
         </Routes>
       </BrowserRouter>
+    </div>
+  );
+}
+function PageNotFound() {
+  return (
+    <div className="h-full font-black text-4xl grid place-content-center">
+      <h2>404 Page not found</h2>
     </div>
   );
 }
