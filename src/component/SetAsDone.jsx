@@ -34,7 +34,7 @@ const Fill_Form = ({ data, setdata }) => {
   );
 };
 
-function SetAsDone({ open, OnClick, item }) {
+function SetAsDone({ open, OnClick, item,setrefrech }) {
   const [cookies, setCookie, removeCookie] = useCookies([Coockies_name]);
 
   let [data, setdata] = useState({});
@@ -50,7 +50,9 @@ function SetAsDone({ open, OnClick, item }) {
     OnClick();
   };
   useEffect(() => {
-    if (!loading) hadlerClose();
+    if (!loading){
+      setrefrech(per=>per+1);
+       hadlerClose();}
   }, [loading]);
   return (
     <div>
