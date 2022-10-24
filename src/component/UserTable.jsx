@@ -15,10 +15,13 @@ const DataRow = ({ item, index, onClick = () => {} }) => {
       <td class="px-6 py-4 whitespace-nowrap text-sm font-medium ">
         {item.id}
       </td>
-      <td class="px-6 py-4 whitespace-nowrap text-sm font-medium ">
+      <td class="px-4 py-4 whitespace-nowrap text-sm font-medium ">
         <img
-          className="w-[50px] h-[50px] rounded-full object-cover bg-black overflow-hidden"
-          src={item.avatar_Url}
+          className="w-[50px] h-[50px] rounded-full object-cover bg-gray-400 overflow-hidden"
+          src={
+            "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Default_pfp.svg/800px-Default_pfp.svg.png"
+          }
+          onerror="if (this.src != 'error.jpg') this.src = 'https://www.nicepng.com/png/detail/136-1366211_group-of-10-guys-login-user-icon-png.png';"
           srcset=""
         />
       </td>

@@ -34,6 +34,7 @@ function Partner({ selectedStatus }) {
       });
       if (req.ok) {
         const data = await req.json();
+        console.trace(data);
         setOdata(data);
       } else {
       }

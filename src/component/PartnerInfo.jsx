@@ -37,7 +37,7 @@ const PartnerInfoRender = ({ item }) => {
             return (
               <img
                 className="w-[50px] h-[50px] rounded-full"
-                src={item.avatar_Url}
+                src={`https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Default_pfp.svg/800px-Default_pfp.svg.png`}
                 alt="entreprise Logo"
                 srcset=""
               />
@@ -57,11 +57,8 @@ const PartnerInfoRender = ({ item }) => {
           title={"Role Dans Entriprise"}
           data={item.role_dans_entriprise}
         />
-        <DataRow title={"Ville Nome"} data={item.ville_nome} />
-        <DataRow
-          title={"Activity Entrprise Nome"}
-          data={item.activity_entrprise_nome}
-        />
+        <DataRow title={"Ville Nome"} data={item.ville_name} />
+        <DataRow title={"Activity Entrprise Nome"} data={item.activity_name} />
         <DataRow
           title={"Status"}
           Render={() => {
