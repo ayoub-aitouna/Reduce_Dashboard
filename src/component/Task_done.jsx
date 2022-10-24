@@ -70,6 +70,7 @@ const Task_done = () => {
       if (req.ok) {
         const data = await req.json();
         setdata(data);
+        console.trace(data);
       } else {
         console.error(await req.json());
       }

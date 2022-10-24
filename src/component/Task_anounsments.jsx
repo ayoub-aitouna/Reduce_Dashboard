@@ -72,6 +72,7 @@ const Task_anounsments = () => {
       });
       if (req.ok) {
         const data = await req.json();
+        console.trace(data);
         setdata(data);
       }
     } catch (err) {

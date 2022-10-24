@@ -13,6 +13,7 @@ const login_submit = async (
   callback = () => {},
   err = () => {}
 ) => {
+  console.trace({ email, pass });
   try {
     const req = await fetch(`${BaseUrl}/auth/admin`, {
       method: "POST",
