@@ -17,9 +17,8 @@ const DataRow = ({ item, index, onClick = () => {} }) => {
       </td>
       <td class="px-6 py-4 whitespace-nowrap text-sm font-medium ">
         <img
-          className="w-[50px] h-[50px] rounded-full"
+          className="w-[50px] h-[50px] rounded-full object-cover bg-black overflow-hidden"
           src={item.avatar_Url}
-          alt="entreprise Logo"
           srcset=""
         />
       </td>
