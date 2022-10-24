@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { SideBarLinks } from "../constants.js";
 import { FaRobot } from "react-icons/fa";
 import { BiExit } from "react-icons/bi";
@@ -10,6 +10,15 @@ import { useNavigate } from "react-router-dom";
 
 function Sidebar() {
   const [cookies, setCookie, removeCookie] = useCookies([Coockies_name]);
+  const [links, setLinks] = useState(SideBarLinks);
+  useEffect(() => {
+    setLinks((per) =>
+      per.filter((item) =>
+        cookies.role == "Admin" ? item.groupName : item.groupName != "ADMIN"
+      )
+    );
+  }, []);
+
   let navigate = useNavigate();
   return (
     <div className="absolute w-[259.19px] h-[100vh] top-0 left-0 bg-[#fff] pt-[20px] px-10 flex flex-col py-10 shadow-lg">
@@ -18,7 +27,7 @@ function Sidebar() {
         <h1 className="text-2xl">Reduce</h1>
       </div>
       <ul className="flex flex-col gap-8 justify-center items-start w-full ">
-        {SideBarLinks.map((item) => (
+        {links.map((item) => (
           <>
             <li
               key={item.key}
@@ -51,7 +60,8 @@ function Sidebar() {
         title={"Log out"}
         Icon={() => <BiExit />}
         OnClick={() => {
-          removeCookie();
+          removeCookie("role");
+          removeCookie("accesToken");
           navigate("/");
         }}
         style="!h-[30px] p-[28px]  mt-auto"

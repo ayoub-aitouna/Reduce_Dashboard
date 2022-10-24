@@ -18,15 +18,15 @@ import React, { useState, useEffect } from "react";
 import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";
 
 function App() {
-  const [Search, setSearch] = useState(null);
+  const [Search, setSearch] = useState("HH");
 
   return (
     <div className="w-full h-[100vh]">
       <BrowserRouter>
         <Routes>
-          <Route excat path="/" element={<Auth />} />
+          <Route exact path="/" element={<Auth />} />
           <Route path="/home" element={<Home />}>
-            <Route exact path="" element={<Partner />} />
+            <Route exact path="" element={<Partner selectedStatus="" />} />
             <Route
               path="Pending_partners"
               element={<Partner selectedStatus="Pending" />}
@@ -45,12 +45,20 @@ function App() {
             />
             <Route
               path="Approved_partners"
-              element={<Partner selectedStatus={"Acepted"} />}
+              element={<Partner selectedStatus={"Approved"} />}
             />
             <Route path="Admin_managers" element={<Admins />} />
           </Route>
+          <Route path="*" element={<PageNotFound />} />
         </Routes>
       </BrowserRouter>
+    </div>
+  );
+}
+function PageNotFound() {
+  return (
+    <div className="h-full font-black text-4xl grid place-content-center">
+      <h2>404 Page not found</h2>
     </div>
   );
 }

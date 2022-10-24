@@ -1,6 +1,6 @@
 import React from "react";
 
-const SearchBar = ({ styles }) => {
+const SearchBar = ({ styles, setSearch }) => {
   return (
     <div className={`flex-1 ${styles}`}>
       {" "}
@@ -37,6 +37,9 @@ const SearchBar = ({ styles }) => {
 		  dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
           placeholder="Search bar, type something ...."
           required
+          onChange={(e) => {
+            setSearch(e.target.value);
+          }}
         />
         <button
           type="submit"

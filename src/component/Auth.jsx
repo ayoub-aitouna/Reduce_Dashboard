@@ -1,14 +1,20 @@
 import React, { useState, useEffect } from "react";
-import { Button, Input } from "./index";
+import { Button, Input, LoadingIcon } from "./index";
 import { FaRobot } from "react-icons/fa";
 import { useCookies } from "react-cookie";
 import { BaseUrl, Coockies_name } from "../constants";
+import Cookies from "js-cookie";
 
 import { useNavigate } from "react-router-dom";
 
-const login_submit = async (email, pass, callback = () => {}) => {
+const login_submit = async (
+  email,
+  pass,
+  callback = () => {},
+  err = () => {}
+) => {
   try {
-    const req = await fetch(`${BaseUrl}/api/v1/auth/admin}`, {
+    const req = await fetch(`${BaseUrl}/auth/admin`, {
       method: "POST",
       mode: "cors",
       cache: "no-cache",
@@ -21,18 +27,23 @@ const login_submit = async (email, pass, callback = () => {}) => {
         password: pass,
       }),
     });
-    const data = req.json();
-    callback(data);
-  } catch (err) {}
+    if (req.ok) {
+      callback(await req.json());
+    } else {
+      err();
+    }
+  } catch (error_msg) {
+    err();
+  }
 };
 
 const AuthForm = () => {
   let navigate = useNavigate();
+  const [loading, setloading] = useState(false);
   const [cookies, setCookie, removeCookie] = useCookies([Coockies_name]);
-
   useEffect(() => {
-    console.log(cookies);
-    if (cookies != null || cookies != undefined) {
+    console.log(cookies.accesToken);
+    if (cookies.accesToken != null || cookies.accesToken != undefined) {
       navigate(`/home`);
     }
   }, []);
@@ -53,24 +64,44 @@ const AuthForm = () => {
           <Input
             title="Email"
             hint={"Example@email.com"}
-            OnChange={() => {}}
+            OnChange={(value) => {
+              setlogin({ ...login, email: value });
+            }}
             value={login.email}
             type="email"
           />
           <Input
             title="mode de pass"
             hint={"*************"}
-            OnChange={() => {}}
+            OnChange={(value) => {
+              setlogin({ ...login, password: value });
+            }}
             value={login.password}
             type="password"
           />
           <Button
-            title={"Log out"}
-            Icon={() => <></>}
+            title={"Log in"}
+            Icon={() => LoadingIcon(loading)}
             OnClick={() => {
-              login_submit(login.email, login.password, (value) => {
-                setCookie(value);
-              });
+              setloading(true);
+              login_submit(
+                login.email,
+                login.password,
+                (data) => {
+                  setloading(false);
+                  Cookies.set("accesToken", data.accesToken);
+                  Cookies.set("role", data.rol);
+
+                  setCookie("accesToken", data.accesToken, { path: "/" });
+                  setCookie("role", data.role, { path: "/" });
+                  navigate(`/home`);
+                },
+                (err) => {
+                  setlogin({ ...login, password: "" });
+                  setloading(false);
+                  alert("error password or email not correct");
+                }
+              );
             }}
             style="!h-[30px] p-[30px] mt-auto"
           />

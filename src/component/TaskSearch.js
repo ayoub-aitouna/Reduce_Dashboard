@@ -5,8 +5,11 @@ import { AiFillEdit } from "react-icons/ai";
 import { MdPendingActions } from "react-icons/md";
 import { BsFillArrowRightSquareFill } from "react-icons/bs";
 import { IconHalder } from "./index";
-import { BaseUrl } from "../constants";
+import { BaseUrl, Coockies_name } from "../constants";
+import { get_villes } from "../Utils/villes/get_villes";
 
+import Cookies from "js-cookie";
+import { useCookies } from "react-cookie";
 // Data Row
 const DataRow = ({ item, index, onClick = () => {} }) => {
   return (
@@ -22,10 +25,12 @@ const DataRow = ({ item, index, onClick = () => {} }) => {
         {item.partner_name}
       </td>
       <td class="px-6 py-4 whitespace-nowrap text-sm font-medium ">
-        {item.partner_status}
+        {item.partner_status != undefined
+          ? item.partner_status
+          : "Not Available "}
       </td>
       <td class="px-6 py-4 whitespace-nowrap text-sm font-medium ">
-        {item.manager_name}
+        {item._name != undefined ? item._name : "Not Available "}
       </td>
       <td class="px-6 py-4 whitespace-nowrap text-sm font-medium ">
         {item.ville_name}
@@ -42,23 +47,33 @@ const DataRow = ({ item, index, onClick = () => {} }) => {
 
 const TaskSearch = ({ Search }) => {
   let [Data, setData] = useState([]);
+  const [cookies, setCookie, removeCookie] = useCookies([Coockies_name]);
 
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        const req = await fetch(`${BaseUrl}/`, {
-          method: "POST",
+  const HandleRequest = async () => {
+    try {
+      const req = await fetch(
+        `${BaseUrl}/Tasks/search?partner_name=${Search}`,
+        {
+          method: "GET",
           mode: "cors",
           cache: "no-cache",
           headers: {
             "Content-Type": "application/json",
+            Authorization: `Bearer ${cookies.accesToken}`,
           },
           referrerPolicy: "no-referrer",
-        });
-        const data = req.json();
-        setData(data);
-      } catch (err) {}
-    }
+        }
+      );
+      if (req.ok) {
+        const data = await req.json();
+        if (data.length > 0) {
+          setData(data);
+        }
+      }
+    } catch (err) {}
+  };
+  useEffect(() => {
+    HandleRequest();
   }, [Search]);
   return (
     <div class="flex flex-col  border-[1px] my-10 border-gray-200 rounded-lg ">

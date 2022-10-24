@@ -2,7 +2,6 @@ import { Coockies_name } from "../constants";
 import { useCookies } from "react-cookie";
 
 function Check_if_user_valide() {
-  console.log(true);
   return true;
 }
 
