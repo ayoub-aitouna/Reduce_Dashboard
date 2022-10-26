@@ -35,7 +35,7 @@ const DataRow = ({ item, index, onClick = () => {} }) => {
         onClick={() => {
           onClick(item);
         }}
-      >reac
+      >
         <IconHalder Icon={() => <AiOutlineFileDone />} style="text-[20px]" />
       </td>
     </tr>
@@ -87,7 +87,7 @@ const Task_anounsments = () => {
   return (
     <div class="flex flex-col  border-[1px] my-10 border-gray-200 rounded-lg ">
       <SetAsDone
-      setrefrech={setrefrech}
+        setrefrech={setrefrech}
         open={isDialogOpend}
         OnClick={() => {
           setDialogOpend(false);
