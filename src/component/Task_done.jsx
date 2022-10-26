@@ -47,6 +47,8 @@ const DataRow = ({ item, index, onClick = () => {} }) => {
 const Task_done = () => {
   let [data, setdata] = useState([]);
   let [isEdite_Task_Dialog_Opend, setEdite_Task_Dialog_Opend] = useState(false);
+  let [refrech, setrefrech] = useState(0);
+
   const [SelectedTask, setSelectedTask] = useState({
     id: 0,
     partner_name: "",
@@ -70,6 +72,7 @@ const Task_done = () => {
       if (req.ok) {
         const data = await req.json();
         setdata(data);
+        console.trace(data);
       } else {
         console.error(await req.json());
       }
@@ -80,11 +83,12 @@ const Task_done = () => {
 
   useEffect(() => {
     handleRequest();
-  }, []);
+  }, [refrech]);
 
   return (
     <div class="flex flex-col  border-[1px] my-10 border-gray-200 rounded-lg ">
       <Edite_Task
+      setrefrech={setrefrech}
         open={isEdite_Task_Dialog_Opend}
         setSelectedTask={setSelectedTask}
         OnClick={() => {

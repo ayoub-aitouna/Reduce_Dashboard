@@ -7,6 +7,8 @@ import { Link } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import { Coockies_name } from "../constants";
 import { useNavigate } from "react-router-dom";
+import {Icon} from '../assets'
+
 
 function Sidebar() {
   const [cookies, setCookie, removeCookie] = useCookies([Coockies_name]);
@@ -23,8 +25,8 @@ function Sidebar() {
   return (
     <div className="absolute w-[259.19px] h-[100vh] top-0 left-0 bg-[#fff] pt-[20px] px-10 flex flex-col py-10 shadow-lg">
       <div className="flex flex-row text-[#2E5CFF] text-4xl font-black gap-2 justify-start items-center pb-9">
-        <FaRobot />
-        <h1 className="text-2xl">Reduce</h1>
+      <img src={Icon} alt="" srcset="" className="w-[150px] object-cover" />
+
       </div>
       <ul className="flex flex-col gap-8 justify-center items-start w-full ">
         {links.map((item) => (

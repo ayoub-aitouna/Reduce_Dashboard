@@ -50,6 +50,7 @@ function OnSelect(item) {
 // task done Components
 const Task_anounsments = () => {
   let [data, setdata] = useState([]);
+  let [refrech, setrefrech] = useState(0);
   const [cookies, setCookie, removeCookie] = useCookies([Coockies_name]);
   const [isDialogOpend, setDialogOpend] = useState(false);
   const [SelectedTask, setSelectedTask] = useState({
@@ -72,6 +73,7 @@ const Task_anounsments = () => {
       });
       if (req.ok) {
         const data = await req.json();
+        console.trace(data);
         setdata(data);
       }
     } catch (err) {
@@ -80,11 +82,12 @@ const Task_anounsments = () => {
   };
   useEffect(() => {
     handleRequest();
-  }, []);
+  }, [refrech]);
   data = data.filter((v) => v.task_status == "Pending");
   return (
     <div class="flex flex-col  border-[1px] my-10 border-gray-200 rounded-lg ">
       <SetAsDone
+        setrefrech={setrefrech}
         open={isDialogOpend}
         OnClick={() => {
           setDialogOpend(false);
