@@ -1,11 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { IoIosCloseCircle } from "react-icons/io";
-import { BsCheckCircleFill } from "react-icons/bs";
 import { AiFillEdit } from "react-icons/ai";
 import { IconHalder, Edite_Task } from "./index";
 import { BaseUrl, Coockies_name } from "../constants";
 
-import Cookies from "js-cookie";
 import { useCookies } from "react-cookie";
 // Data Row
 const DataRow = ({ item, index, onClick = () => {} }) => {
@@ -88,7 +85,7 @@ const Task_done = () => {
   return (
     <div class="flex flex-col  border-[1px] my-10 border-gray-200 rounded-lg ">
       <Edite_Task
-      setrefrech={setrefrech}
+        setrefrech={setrefrech}
         open={isEdite_Task_Dialog_Opend}
         setSelectedTask={setSelectedTask}
         OnClick={() => {

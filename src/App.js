@@ -21,7 +21,7 @@ function App() {
   const [Search, setSearch] = useState("HH");
 
   return (
-    <div className="w-full h-[100vh]">
+    <div className="w-full h-[100vh] !pb-[150px]">
       <BrowserRouter>
         <Routes>
           <Route exact path="/" element={<Auth />} />

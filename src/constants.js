@@ -39,6 +39,12 @@ export const SideBarLinks = [
         Icon: RiAdminFill,
         Url: "tasks",
       },
+      {
+        key: 1,
+        name: "Edit History",
+        Icon: RiAdminFill,
+        Url: "edit_history",
+      },
     ],
   },
   {
