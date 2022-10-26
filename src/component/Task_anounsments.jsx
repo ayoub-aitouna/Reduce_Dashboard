@@ -35,7 +35,7 @@ const DataRow = ({ item, index, onClick = () => {} }) => {
         onClick={() => {
           onClick(item);
         }}
-      >
+      >reac
         <IconHalder Icon={() => <AiOutlineFileDone />} style="text-[20px]" />
       </td>
     </tr>
