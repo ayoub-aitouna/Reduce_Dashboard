@@ -69,7 +69,6 @@ const Task_done = () => {
       if (req.ok) {
         const data = await req.json();
         setdata(data);
-        console.trace(data);
       } else {
         console.error(await req.json());
       }
@@ -145,7 +144,6 @@ const Task_done = () => {
                       item={item}
                       index={index}
                       onClick={() => {
-                        console.trace(item);
                         setSelectedTask(item);
                         setEdite_Task_Dialog_Opend(true);
                       }}

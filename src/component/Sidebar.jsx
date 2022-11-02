@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { SideBarLinks } from "../constants.js";
 import { BiExit } from "react-icons/bi";
 import { Button } from "./index";
-import { Link, NavLink } from "react-router-dom";
+import {  NavLink } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import { Coockies_name } from "../constants";
 import { useNavigate } from "react-router-dom";

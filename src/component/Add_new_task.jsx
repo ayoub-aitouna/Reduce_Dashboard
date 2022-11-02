@@ -111,7 +111,6 @@ function Add_new_task({ open, OnClick }) {
           <Button
             onClick={async (e) => {
               setloading(true);
-              console.trace(data);
               try {
                 const req = await fetch(`${BaseUrl}/Tasks/add_announcement`, {
                   method: "POST",

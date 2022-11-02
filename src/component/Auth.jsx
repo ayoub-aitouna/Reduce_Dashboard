@@ -13,7 +13,6 @@ const login_submit = async (
   callback = () => {},
   err = () => {}
 ) => {
-  console.trace({ email, pass });
   try {
     const req = await fetch(`${BaseUrl}/auth/admin`, {
       method: "POST",
@@ -43,7 +42,6 @@ const AuthForm = () => {
   const [loading, setloading] = useState(false);
   const [cookies, setCookie, removeCookie] = useCookies([Coockies_name]);
   useEffect(() => {
-    console.log(cookies.accesToken);
     if (cookies.accesToken != null || cookies.accesToken != undefined) {
       navigate(`/home`);
     }
@@ -94,6 +92,7 @@ const AuthForm = () => {
                 login.password,
                 (data) => {
                   setloading(false);
+                  console.log(data);
                   Cookies.set("accesToken", data.accesToken);
                   Cookies.set("role", data.rol);
                   Cookies.set("name", data._name);
