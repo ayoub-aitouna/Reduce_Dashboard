@@ -74,13 +74,13 @@ function Admins() {
   }, [Search, City, Role, AccountState, Odata]);
   return (
     <div className="p-5 my-10  ">
-      <ActionsDialog
+      {/* <ActionsDialog
         open={isDialogOpend}
         OnClick={() => {
           setDialogOpend(false);
         }}
         data={SelectedPartner}
-      />
+      /> */}
       <AddNewAdmin
         open={isNew_Admin_Dialog_Opend}
         OnClick={() => {

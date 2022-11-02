@@ -3,6 +3,7 @@ import { BsCheckCircleFill, BsClockHistory } from "react-icons/bs";
 import { HiUsers } from "react-icons/hi";
 import { FaTasks } from "react-icons/fa";
 import { RiAdminFill } from "react-icons/ri";
+import { MdPendingActions } from "react-icons/md";
 
 export const SideBarLinks = [
   {
@@ -19,7 +20,7 @@ export const SideBarLinks = [
       {
         name: "Pending Partners",
         Url: "Pending_partners",
-        Icon: IoIosCloseCircle,
+        Icon: MdPendingActions,
         key: 2,
       },
       {
