@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { Button, Input, LoadingIcon } from "./index";
-import { FaRobot } from "react-icons/fa";
 import { useCookies } from "react-cookie";
 import { BaseUrl, Coockies_name } from "../constants";
 import Cookies from "js-cookie";
