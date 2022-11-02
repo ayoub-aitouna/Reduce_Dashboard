@@ -4,7 +4,7 @@ import { FaRobot } from "react-icons/fa";
 import { useCookies } from "react-cookie";
 import { BaseUrl, Coockies_name } from "../constants";
 import Cookies from "js-cookie";
-import {  Icon_Auth} from '../assets'
+import { Icon_Auth } from "../assets";
 import { useNavigate } from "react-router-dom";
 
 const login_submit = async (
@@ -58,7 +58,12 @@ const AuthForm = () => {
       <form>
         <div className="w-full h-full  flex flex-col justify-center items-center gap-5">
           <div className="flex flex-row text-[#2E5CFF] text-4xl font-black gap-2 justify-start items-center pb-9">
-           <img src={Icon_Auth} alt="" srcset="" className="w-[250px] object-cover" />
+            <img
+              src={Icon_Auth}
+              alt=""
+              srcset=""
+              className="w-[250px] object-cover"
+            />
           </div>
           <p>Merci d'entrer vos informations de connexion</p>
           <Input
@@ -91,8 +96,10 @@ const AuthForm = () => {
                   setloading(false);
                   Cookies.set("accesToken", data.accesToken);
                   Cookies.set("role", data.rol);
+                  Cookies.set("name", data._name);
 
                   setCookie("accesToken", data.accesToken, { path: "/" });
+                  setCookie("name", data._name, { path: "/" });
                   setCookie("role", data.role, { path: "/" });
                   navigate(`/home`);
                 },
