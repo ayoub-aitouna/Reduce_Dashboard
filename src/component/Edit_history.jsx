@@ -6,7 +6,13 @@ import { useCookies } from "react-cookie";
 function Edit_history() {
   const [Search, setSearch] = useState("");
   const [cookies, setCookie, removeCookie] = useCookies([Coockies_name]);
-  let [data, setdata] = useState([]);
+  let [data, setdata] = useState([
+    {
+      admin_name: "Super_Admin",
+      partner_name: "LLC",
+      created_date: "10/78/2022",
+    },
+  ]);
   return (
     <div className="p-5 my-10">
       <div className="flex flex-col items-start justify-start">
