@@ -1,6 +1,7 @@
 import { IoIosCloseCircle } from "react-icons/io";
-import { BsCheckCircleFill,BsClockHistory } from "react-icons/bs";
+import { BsCheckCircleFill, BsClockHistory } from "react-icons/bs";
 import { HiUsers } from "react-icons/hi";
+import { FaTasks } from "react-icons/fa";
 import { RiAdminFill } from "react-icons/ri";
 
 export const SideBarLinks = [
@@ -36,7 +37,7 @@ export const SideBarLinks = [
       {
         key: 1,
         name: "Tasks",
-        Icon: RiAdminFill,
+        Icon: FaTasks,
         Url: "tasks",
       },
       {
