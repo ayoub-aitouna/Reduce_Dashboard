@@ -73,6 +73,7 @@ const Task_anounsments = () => {
       });
       if (req.ok) {
         const data = await req.json();
+        console.log(data);
         setdata(data);
       }
     } catch (err) {
@@ -109,31 +110,31 @@ const Task_anounsments = () => {
                     scope="col"
                     class="text-sm font-medium text-gray-900 px-6 py-4 text-left"
                   >
-                    partner name
+                    Partenaire
                   </th>
                   <th
                     scope="col"
                     class="text-sm font-medium text-gray-900 px-6 py-4 text-left"
                   >
-                    partner status
+                    Statut
                   </th>
                   <th
                     scope="col"
                     class="text-sm font-medium text-gray-900 px-6 py-4 text-left"
                   >
-                    ville name
+                    Ville
                   </th>
                   <th
                     scope="col"
                     class="text-sm font-medium text-gray-900 px-6 py-4 text-left"
                   >
-                    Address
+                    Adresse
                   </th>
                   <th
                     scope="col"
                     class="text-sm font-medium text-gray-900 px-6 py-4 text-left"
                   >
-                    Set As Done
+                    Résultat
                   </th>
                 </tr>
               </thead>

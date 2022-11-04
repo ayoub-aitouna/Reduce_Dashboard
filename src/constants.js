@@ -8,42 +8,42 @@ import { MdPendingActions } from "react-icons/md";
 export const SideBarLinks = [
   {
     key: 0,
-    groupName: "PARTNERS",
+    groupName: "PARTENAIRES",
     tabs: [
       {
-        name: "All Partners",
+        name: "Tous les partenaires",
         Url: "",
         Icon: HiUsers,
         key: 0,
       },
 
       {
-        name: "Pending Partners",
+        name: "Partenaires en attente",
         Url: "Pending_partners",
         Icon: MdPendingActions,
         key: 2,
       },
       {
-        name: "Rejected Partners",
-        Url: "Rejected_partners",
-        Icon: IoIosCloseCircle,
-        key: 3,
-      },
-      {
-        name: "Approved Partners",
+        name: "Partenaires approuvés",
         Url: "Approved_partners",
         Icon: BsCheckCircleFill,
         key: 4,
       },
       {
+        name: "Partenaires refusés",
+        Url: "Rejected_partners",
+        Icon: IoIosCloseCircle,
+        key: 3,
+      },
+      {
         key: 1,
-        name: "Tasks",
+        name: "Tâches",
         Icon: FaTasks,
         Url: "tasks",
       },
       {
         key: 1,
-        name: "Edit History",
+        name: "Historique des modifications",
         Icon: BsClockHistory,
         Url: "edit_history",
       },
@@ -51,7 +51,7 @@ export const SideBarLinks = [
   },
   {
     key: 1,
-    groupName: "ADMIN",
+    groupName: "ADMINISTRATEUR",
     tabs: [
       {
         key: 0,

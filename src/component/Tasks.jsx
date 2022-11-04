@@ -30,7 +30,7 @@ const Tasks = ({ setSearch }) => {
             className=" flex w-[180px] flex-col justify-center items-center  cursor-pointer px-2 py-3 text-[#475569] rounded-md hover:bg-[#2E5CFF] hover:text-white"
           >
             <p className="leading-[20px] font-semibold text-[15px] flex flex-row justify-center items-center gap-3">
-              Anounsment
+              Tâches programmées
             </p>
           </NavLink>
           <NavLink
@@ -43,7 +43,7 @@ const Tasks = ({ setSearch }) => {
             className=" flex w-[180px] flex-col justify-center items-center  cursor-pointer px-2 py-3 text-[#475569] rounded-md hover:bg-[#2E5CFF] hover:text-white"
           >
             <p className="leading-[20px] font-semibold text-[15px] flex flex-row justify-center items-center gap-3">
-              Done Tasks
+              Tâches Effectuées
             </p>
           </NavLink>
         </div>
@@ -58,7 +58,7 @@ const Tasks = ({ setSearch }) => {
       <div className=" absolute bottom-8 right-8 flex flex-col gap-5">
         <Button
           Icon={() => <BiTask />}
-          title={"Add Task"}
+          title={"Ajoutez une tâche"}
           OnClick={() => setNew_Task_Dialog_Opend(true)}
           style={"!w-[250px] text-[19px] "}
         />

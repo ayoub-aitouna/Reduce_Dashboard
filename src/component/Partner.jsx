@@ -79,17 +79,17 @@ function Partner({ selectedStatus }) {
       />
       <div className="flex flex-col items-start justify-start">
         <h1 className="text-[20px] font-black leading-9 text-gray-800">
-          Reduce Partners
+          Reducte Partenaires
         </h1>
         <p className="text-[16px] font-normal  leading-9 text-gray-500">
-          partners that submited form to reduce platform
+          Partenaires ayant soumis le formulaire à la plateforme Reducte
         </p>
       </div>
       <div className="flex ld:flex-row flex-col w-full mt-10 lg:gap-5 gap-0 justify-center items-center">
         <SearchBar styles={"max-h-[15px] !w-full"} setSearch={setSearch} />
         <div className="flex flex-row w-full mt-10 gap-5 justify-start items-center">
           <Filter_Selector
-            title={"Activity Entrprise"}
+            title={"Secteur d'activité"}
             styles={"h-[95px]"}
             options={Activities}
             setFilter={(value) => setactivity_entrprise(value)}

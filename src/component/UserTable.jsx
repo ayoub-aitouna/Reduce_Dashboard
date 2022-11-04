@@ -118,49 +118,49 @@ function UserTable({ Data, OnSelect }) {
                     scope="col"
                     class="text-sm font-medium text-gray-900 px-6 py-4 text-left"
                   >
-                    logo{" "}
+                    Logo{" "}
                   </th>
                   <th
                     scope="col"
                     class="text-sm font-medium text-gray-900 px-6 py-4 text-left"
                   >
-                    Nome Entreprise
+                    Raison sociale
                   </th>
                   <th
                     scope="col"
                     class="text-sm font-medium text-gray-900 px-6 py-4 text-left"
                   >
-                    Identificateur Entreprise
+                    ICE
                   </th>
                   <th
                     scope="col"
                     class="text-sm font-medium text-gray-900 px-6 py-4 text-left"
                   >
-                    Representant Rntreprise
+                    Représentant Entreprise
                   </th>
                   <th
                     scope="col"
                     class="text-sm font-medium text-gray-900 px-6 py-4 text-left"
                   >
-                    Role Dans Entriprise
+                    Fonction
                   </th>
                   <th
                     scope="col"
                     class="text-sm font-medium text-gray-900 px-6 py-4 text-left"
                   >
-                    Ville Nome
+                    Ville
                   </th>
                   <th
                     scope="col"
                     class="text-sm font-medium text-gray-900 px-6 py-4 text-left"
                   >
-                    Activity Entrprise Nome
+                    Secteur d'activité
                   </th>
                   <th
                     scope="col"
                     class="text-sm font-medium text-gray-900 px-6 py-4 text-left"
                   >
-                    Status
+                    Statut
                   </th>
                   <th
                     scope="col"
@@ -172,7 +172,7 @@ function UserTable({ Data, OnSelect }) {
                     scope="col"
                     class="text-sm font-medium text-gray-900 px-6 py-4 text-left"
                   >
-                    Edite
+                    Modifier
                   </th>
                 </tr>
               </thead>
