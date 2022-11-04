@@ -62,7 +62,7 @@ const AuthForm = () => {
               className="w-[250px] object-cover"
             />
           </div>
-          <p>Merci d'entrer vos informations de connexion</p>
+          <p>Merci de saisir vos informations de connexion</p>
           <Input
             title="Email"
             hint={"Example@email.com"}
@@ -73,7 +73,7 @@ const AuthForm = () => {
             type="email"
           />
           <Input
-            title="mode de pass"
+            title="Mot de passe"
             hint={"*************"}
             OnChange={(value) => {
               setlogin({ ...login, password: value });
@@ -82,7 +82,7 @@ const AuthForm = () => {
             type="password"
           />
           <Button
-            title={"Log in"}
+            title={"Connectez-vous"}
             Icon={() => LoadingIcon(loading)}
             OnClick={() => {
               setloading(true);

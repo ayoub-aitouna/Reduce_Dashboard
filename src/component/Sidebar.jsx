@@ -39,21 +39,38 @@ function Sidebar() {
               <ul className="flex flex-col gap-5 w-full">
                 {item.tabs.map((tab) => (
                   <>
-                    <NavLink
-                      to={tab.Url}
-                      key={tab.key}
-                      end
-                      style={({ isActive }) => ({
-                        color: isActive ? "#fff" : "#545e6f",
-                        background: isActive ? "#7600dc" : "#f0f0f0",
-                      })}
-                      className=" flex w-[200px] flex-col justify-center items-start  cursor-pointer px-2 py-3 text-[#475569] rounded-md hover:bg-[#2E5CFF] hover:text-white"
-                    >
-                      <p className="leading-[20px] font-semibold text-[15px] flex flex-row justify-center items-center gap-3">
-                        <tab.Icon />
-                        {tab.name}
-                      </p>
-                    </NavLink>
+                    {tab.Url == "tasks" ? (
+                      <NavLink
+                        to={tab.Url}
+                        key={tab.key}
+                        style={({ isActive }) => ({
+                          color: isActive ? "#fff" : "#545e6f",
+                          background: isActive ? "#2E5CFF" : "#f0f0f0",
+                        })}
+                        className=" flex w-[200px] flex-col justify-center items-start  cursor-pointer px-2 py-3 text-[#475569] rounded-md hover:bg-[#2E5CFF] hover:text-white"
+                      >
+                        <p className="leading-[20px] font-semibold text-[15px] flex flex-row justify-center items-center gap-3">
+                          <tab.Icon />
+                          {tab.name}
+                        </p>
+                      </NavLink>
+                    ) : (
+                      <NavLink
+                        to={tab.Url}
+                        key={tab.key}
+                        end
+                        style={({ isActive }) => ({
+                          color: isActive ? "#fff" : "#545e6f",
+                          background: isActive ? "#2E5CFF" : "#f0f0f0",
+                        })}
+                        className=" flex w-[200px] flex-col justify-center items-start  cursor-pointer px-2 py-3 text-[#475569] rounded-md hover:bg-[#2E5CFF] hover:text-white"
+                      >
+                        <p className="leading-[20px] font-semibold text-[15px] flex flex-row justify-center items-center gap-3">
+                          <tab.Icon />
+                          {tab.name}
+                        </p>
+                      </NavLink>
+                    )}
                   </>
                 ))}
               </ul>

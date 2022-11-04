@@ -143,13 +143,13 @@ function Admins() {
           Icon={() => <IoMdPersonAdd />}
           title={"Ajoutez Un Responsable"}
           OnClick={() => setNew_Admin_Dialog_Opend(true)}
-          style={"!w-[250px] text-[19px] "}
+          style={"!w-[250px] text-[19px] shadow-lg"}
         />
         <Button
           Icon={() => <BiTask />}
           title={"Ajoutez Une Tâche"}
           OnClick={() => setNew_Task_Dialog_Opend(true)}
-          style={"!w-[250px] text-[19px] "}
+          style={"!w-[250px] text-[19px] shadow-lg "}
         />
       </div>
       <AdminsTable

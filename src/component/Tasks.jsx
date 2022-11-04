@@ -24,10 +24,10 @@ const Tasks = ({ setSearch }) => {
             end
             style={({ isActive }) => ({
               color: isActive ? "#fff" : "#545e6f",
-              background: isActive ? "#7600dc" : "#f0f0f0",
+              background: isActive ? "#2E5CFF" : "#c0c0c0",
             })}
             to={""}
-            className=" flex w-[180px] flex-col justify-center items-center  cursor-pointer px-2 py-3 text-[#475569] rounded-md hover:bg-[#2E5CFF] hover:text-white"
+            className=" flex w-[180px] flex-col justify-center items-center  cursor-pointer px-2 py-3 text-[#475569] rounded-md hover:bg-[#2E5CFF] hover:text-white shadow-lg"
           >
             <p className="leading-[20px] font-semibold text-[15px] flex flex-row justify-center items-center gap-3">
               Tâches programmées
@@ -37,10 +37,10 @@ const Tasks = ({ setSearch }) => {
             end
             style={({ isActive }) => ({
               color: isActive ? "#fff" : "#545e6f",
-              background: isActive ? "#7600dc" : "#f0f0f0",
+              background: isActive ? "#2E5CFF" : "#c0c0c0",
             })}
             to={"task_done"}
-            className=" flex w-[180px] flex-col justify-center items-center  cursor-pointer px-2 py-3 text-[#475569] rounded-md hover:bg-[#2E5CFF] hover:text-white"
+            className=" flex w-[180px] flex-col justify-center items-center  cursor-pointer px-2 py-3 text-[#475569] rounded-md hover:bg-[#2E5CFF] hover:text-white  shadow-lg"
           >
             <p className="leading-[20px] font-semibold text-[15px] flex flex-row justify-center items-center gap-3">
               Tâches Effectuées
