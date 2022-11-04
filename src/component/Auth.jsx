@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { Button, Input, LoadingIcon } from "./index";
-import { FaRobot } from "react-icons/fa";
 import { useCookies } from "react-cookie";
 import { BaseUrl, Coockies_name } from "../constants";
 import Cookies from "js-cookie";
-import {  Icon_Auth} from '../assets'
+import { Icon_Auth } from "../assets";
 import { useNavigate } from "react-router-dom";
 
 const login_submit = async (
@@ -13,7 +12,6 @@ const login_submit = async (
   callback = () => {},
   err = () => {}
 ) => {
-  console.trace({ email, pass });
   try {
     const req = await fetch(`${BaseUrl}/auth/admin`, {
       method: "POST",
@@ -43,7 +41,6 @@ const AuthForm = () => {
   const [loading, setloading] = useState(false);
   const [cookies, setCookie, removeCookie] = useCookies([Coockies_name]);
   useEffect(() => {
-    console.log(cookies.accesToken);
     if (cookies.accesToken != null || cookies.accesToken != undefined) {
       navigate(`/home`);
     }
@@ -58,9 +55,14 @@ const AuthForm = () => {
       <form>
         <div className="w-full h-full  flex flex-col justify-center items-center gap-5">
           <div className="flex flex-row text-[#2E5CFF] text-4xl font-black gap-2 justify-start items-center pb-9">
-           <img src={Icon_Auth} alt="" srcset="" className="w-[250px] object-cover" />
+            <img
+              src={Icon_Auth}
+              alt=""
+              srcset=""
+              className="w-[250px] object-cover"
+            />
           </div>
-          <p>Merci d'entrer vos informations de connexion</p>
+          <p>Merci de saisir vos informations de connexion</p>
           <Input
             title="Email"
             hint={"Example@email.com"}
@@ -71,7 +73,7 @@ const AuthForm = () => {
             type="email"
           />
           <Input
-            title="mode de pass"
+            title="Mot de passe"
             hint={"*************"}
             OnChange={(value) => {
               setlogin({ ...login, password: value });
@@ -80,7 +82,7 @@ const AuthForm = () => {
             type="password"
           />
           <Button
-            title={"Log in"}
+            title={"Connectez-vous"}
             Icon={() => LoadingIcon(loading)}
             OnClick={() => {
               setloading(true);
@@ -89,10 +91,13 @@ const AuthForm = () => {
                 login.password,
                 (data) => {
                   setloading(false);
+                  console.log(data);
                   Cookies.set("accesToken", data.accesToken);
                   Cookies.set("role", data.rol);
+                  Cookies.set("name", data._name);
 
                   setCookie("accesToken", data.accesToken, { path: "/" });
+                  setCookie("name", data._name, { path: "/" });
                   setCookie("role", data.role, { path: "/" });
                   navigate(`/home`);
                 },

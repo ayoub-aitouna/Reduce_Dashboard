@@ -35,12 +35,6 @@ const DataRow = ({ item, index, onClick = () => {} }) => {
       <td class="px-6 py-4 whitespace-nowrap text-sm font-medium ">
         {item.ville_name}
       </td>
-      <td
-        class="px-6 py-4 whitespace-nowrap text-sm font-medium "
-        onClick={() => onClick()}
-      >
-        <IconHalder Icon={() => <AiFillEdit />} style="text-[20px]" />
-      </td>
     </tr>
   );
 };

@@ -1,53 +1,61 @@
 import { IoIosCloseCircle } from "react-icons/io";
-import { BsCheckCircleFill } from "react-icons/bs";
+import { BsCheckCircleFill, BsClockHistory } from "react-icons/bs";
 import { HiUsers } from "react-icons/hi";
+import { FaTasks } from "react-icons/fa";
 import { RiAdminFill } from "react-icons/ri";
+import { MdPendingActions } from "react-icons/md";
 
 export const SideBarLinks = [
   {
     key: 0,
-    groupName: "PARTNERS",
+    groupName: "PARTENAIRES",
     tabs: [
       {
-        name: "All Partners",
+        name: "Tous les partenaires",
         Url: "",
         Icon: HiUsers,
         key: 0,
       },
 
       {
-        name: "Pending Partners",
+        name: "Partenaires en attente",
         Url: "Pending_partners",
-        Icon: IoIosCloseCircle,
+        Icon: MdPendingActions,
         key: 2,
       },
       {
-        name: "Rejected Partners",
-        Url: "Rejected_partners",
-        Icon: IoIosCloseCircle,
-        key: 3,
-      },
-      {
-        name: "Approved Partners",
+        name: "Partenaires approuvés",
         Url: "Approved_partners",
         Icon: BsCheckCircleFill,
         key: 4,
       },
       {
+        name: "Partenaires refusés",
+        Url: "Rejected_partners",
+        Icon: IoIosCloseCircle,
+        key: 3,
+      },
+      {
         key: 1,
-        name: "Tasks",
-        Icon: RiAdminFill,
+        name: "Tâches",
+        Icon: FaTasks,
         Url: "tasks",
+      },
+      {
+        key: 1,
+        name: "Historique des modifications",
+        Icon: BsClockHistory,
+        Url: "edit_history",
       },
     ],
   },
   {
     key: 1,
-    groupName: "ADMIN",
+    groupName: "ADMINISTRATEUR",
     tabs: [
       {
         key: 0,
-        name: "Managers",
+        name: "Responsables",
         Icon: RiAdminFill,
         Url: "Admin_managers",
       },

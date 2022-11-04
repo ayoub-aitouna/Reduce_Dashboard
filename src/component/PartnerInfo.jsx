@@ -44,23 +44,17 @@ const PartnerInfoRender = ({ item }) => {
             );
           }}
         />
-        <DataRow title={"Nome Entreprise"} data={item.nome_entreprise} />
+        <DataRow title={"Raison sociale"} data={item.nome_entreprise} />
+        <DataRow title={"ICE"} data={item.identificateur_entreprise} />
         <DataRow
-          title={"Identificateur Entreprise"}
-          data={item.identificateur_entreprise}
-        />
-        <DataRow
-          title={"Representant Rntreprise"}
+          title={"Représentant Entreprise"}
           data={item.representant_entreprise}
         />
+        <DataRow title={"Fonction"} data={item.role_dans_entriprise} />
+        <DataRow title={"Ville"} data={item.ville_name} />
+        <DataRow title={"Secteur d'activité	"} data={item.activity_name} />
         <DataRow
-          title={"Role Dans Entriprise"}
-          data={item.role_dans_entriprise}
-        />
-        <DataRow title={"Ville Nome"} data={item.ville_name} />
-        <DataRow title={"Activity Entrprise Nome"} data={item.activity_name} />
-        <DataRow
-          title={"Status"}
+          title={"Statut"}
           Render={() => {
             return (
               <div className="flex flex-row justify-center items-center gap-5 ">
@@ -149,14 +143,14 @@ function PartnerInfo({ open, OnClick, data, setRefresh }) {
             >
               <MyButton
                 Icon={() => LoadingIcon(loading)}
-                title="Accept"
+                title="Acceptez"
                 style="p-[20px] font-bold text-xl"
               />
             </Button>
             <Button onClick={() => hadlerResponse(data.id, "Rejected")}>
               <MyButton
                 Icon={() => LoadingIcon(loading)}
-                title="Reject"
+                title="Rejetez"
                 style=" p-[20px] font-bold text-xl !bg-red-500"
               />
             </Button>

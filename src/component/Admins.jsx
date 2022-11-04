@@ -74,13 +74,13 @@ function Admins() {
   }, [Search, City, Role, AccountState, Odata]);
   return (
     <div className="p-5 my-10  ">
-      <ActionsDialog
+      {/* <ActionsDialog
         open={isDialogOpend}
         OnClick={() => {
           setDialogOpend(false);
         }}
         data={SelectedPartner}
-      />
+      /> */}
       <AddNewAdmin
         open={isNew_Admin_Dialog_Opend}
         OnClick={() => {
@@ -97,28 +97,28 @@ function Admins() {
       />
       <div className="flex flex-col items-start justify-start">
         <h1 className="text-[20px] font-black leading-9 text-gray-800">
-          Reduce Admins
+          Administrateurs de Reducte
         </h1>
         <p className="text-[16px] font-normal  leading-9 text-gray-500">
-          All Managers and Admins of Reduce
+          Tous les managers et administrateurs de Reducte
         </p>
       </div>
       <div className="flex ld:flex-row flex-col w-full mt-10 lg:gap-5 gap-0 justify-center items-center">
         <SearchBar styles={"max-h-[15px] !w-full"} setSearch={setSearch} />
         <div className="flex flex-row w-full mt-10 gap-5 justify-start items-center">
           <Filter_Selector
-            title={"Role"}
+            title={"Fonction"}
             styles={"h-[95px]"}
             options={[
               { value: 0, name: "" },
-              { value: "Admin", name: "Admin" },
-              { value: "Manager", name: "Manager" },
+              { value: "Admin", name: "Administrateur" },
+              { value: "Manager", name: "Responsable" },
             ]}
             setFilter={(value) => setRole(value)}
             Filter={Role}
           />
           <Filter_Selector
-            title={"Account State"}
+            title={"Statut Du Compte"}
             styles={"h-[95px]"}
             options={[
               { value: 0, name: "" },
@@ -138,18 +138,18 @@ function Admins() {
           />
         </div>
       </div>
-      <div className=" absolute bottom-8 right-8 flex flex-col gap-5">
+      <div className=" absolute bottom-8 right-8 flex flex-row gap-5">
         <Button
           Icon={() => <IoMdPersonAdd />}
-          title={"Add Manager"}
+          title={"Ajoutez Un Responsable"}
           OnClick={() => setNew_Admin_Dialog_Opend(true)}
-          style={"!w-[250px] text-[19px] "}
+          style={"!w-[250px] text-[19px] shadow-lg"}
         />
         <Button
           Icon={() => <BiTask />}
-          title={"Add Task"}
+          title={"Ajoutez Une Tâche"}
           OnClick={() => setNew_Task_Dialog_Opend(true)}
-          style={"!w-[250px] text-[19px] "}
+          style={"!w-[250px] text-[19px] shadow-lg "}
         />
       </div>
       <AdminsTable

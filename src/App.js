@@ -12,6 +12,7 @@ import {
   Task_anounsments,
   Task_done,
   TaskSearch,
+  Edit_history,
 } from "./component";
 import React, { useState, useEffect } from "react";
 
@@ -21,7 +22,7 @@ function App() {
   const [Search, setSearch] = useState("HH");
 
   return (
-    <div className="w-full h-[100vh]">
+    <div className="w-full h-[100vh] !pb-[150px]">
       <BrowserRouter>
         <Routes>
           <Route exact path="/" element={<Auth />} />
@@ -47,6 +48,7 @@ function App() {
               path="Approved_partners"
               element={<Partner selectedStatus={"Approved"} />}
             />
+            <Route path="edit_history" element={<Edit_history />} />
             <Route path="Admin_managers" element={<Admins />} />
           </Route>
           <Route path="*" element={<PageNotFound />} />

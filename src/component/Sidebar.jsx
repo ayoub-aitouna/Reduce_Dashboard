@@ -1,14 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { SideBarLinks } from "../constants.js";
-import { FaRobot } from "react-icons/fa";
 import { BiExit } from "react-icons/bi";
 import { Button } from "./index";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import { Coockies_name } from "../constants";
 import { useNavigate } from "react-router-dom";
-import {Icon} from '../assets'
-
+import { Icon } from "../assets";
 
 function Sidebar() {
   const [cookies, setCookie, removeCookie] = useCookies([Coockies_name]);
@@ -23,12 +21,12 @@ function Sidebar() {
 
   let navigate = useNavigate();
   return (
-    <div className="absolute w-[259.19px] h-[100vh] top-0 left-0 bg-[#fff] pt-[20px] px-10 flex flex-col py-10 shadow-lg">
-      <div className="flex flex-row text-[#2E5CFF] text-4xl font-black gap-2 justify-start items-center pb-9">
-      <img src={Icon} alt="" srcset="" className="w-[150px] object-cover" />
-
+    <div className="absolute w-[289.19px] h-[100vh] top-0 left-0 bg-[#fff] pt-[20px] px-10 flex flex-col py-10 shadow-lg">
+      <div className="flex flex-col text-[#2E5CFF] text-4xl font-black gap-2 justify-start items-start pb-9">
+        <img src={Icon} alt="" srcset="" className="w-[150px] object-cover" />
+        <h1 className="text-xl ">{cookies.name}</h1>
       </div>
-      <ul className="flex flex-col gap-8 justify-center items-start w-full ">
+      <ul className="flex flex-col gap-8 justify-center items-start w-full">
         {links.map((item) => (
           <>
             <li
@@ -41,16 +39,38 @@ function Sidebar() {
               <ul className="flex flex-col gap-5 w-full">
                 {item.tabs.map((tab) => (
                   <>
-                    <Link
-                      to={tab.Url}
-                      key={tab.key}
-                      className=" flex w-[180px] flex-col justify-center items-start  cursor-pointer px-2 py-3 text-[#475569] rounded-md hover:bg-[#2E5CFF] hover:text-white"
-                    >
-                      <p className="leading-[20px] font-semibold text-[15px] flex flex-row justify-center items-center gap-3">
-                        <tab.Icon />
-                        {tab.name}
-                      </p>
-                    </Link>
+                    {tab.Url == "tasks" ? (
+                      <NavLink
+                        to={tab.Url}
+                        key={tab.key}
+                        style={({ isActive }) => ({
+                          color: isActive ? "#fff" : "#545e6f",
+                          background: isActive ? "#2E5CFF" : "#f0f0f0",
+                        })}
+                        className=" flex w-[200px] flex-col justify-center items-start  cursor-pointer px-2 py-3 text-[#475569] rounded-md hover:bg-[#2E5CFF] hover:text-white"
+                      >
+                        <p className="leading-[20px] font-semibold text-[15px] flex flex-row justify-center items-center gap-3">
+                          <tab.Icon />
+                          {tab.name}
+                        </p>
+                      </NavLink>
+                    ) : (
+                      <NavLink
+                        to={tab.Url}
+                        key={tab.key}
+                        end
+                        style={({ isActive }) => ({
+                          color: isActive ? "#fff" : "#545e6f",
+                          background: isActive ? "#2E5CFF" : "#f0f0f0",
+                        })}
+                        className=" flex w-[200px] flex-col justify-center items-start  cursor-pointer px-2 py-3 text-[#475569] rounded-md hover:bg-[#2E5CFF] hover:text-white"
+                      >
+                        <p className="leading-[20px] font-semibold text-[15px] flex flex-row justify-center items-center gap-3">
+                          <tab.Icon />
+                          {tab.name}
+                        </p>
+                      </NavLink>
+                    )}
                   </>
                 ))}
               </ul>
@@ -59,11 +79,12 @@ function Sidebar() {
         ))}
       </ul>
       <Button
-        title={"Log out"}
+        title={"Se déconnecter"}
         Icon={() => <BiExit />}
         OnClick={() => {
           removeCookie("role");
           removeCookie("accesToken");
+          removeCookie("name");
           navigate("/");
         }}
         style="!h-[30px] p-[28px]  mt-auto"

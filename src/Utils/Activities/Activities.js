@@ -12,7 +12,7 @@ const get_Activity = async (setActivity) => {
     });
     if (req.ok) {
       const data = await req.json();
-      setActivity([]);
+      setActivity([{ id: 0, name: "" }]);
       data.map((item) => {
         setActivity((v) => [
           ...v,
