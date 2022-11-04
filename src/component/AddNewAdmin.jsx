@@ -25,7 +25,7 @@ const Fill_Form = ({ data, setdata }) => {
             class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
             for="grid-name"
           >
-            Admin Name
+            Nom administrateur
           </label>
           <input
             class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
@@ -36,7 +36,7 @@ const Fill_Form = ({ data, setdata }) => {
             placeholder="Jane Doe"
           />
           <p class="text-gray-600 text-xs italic">
-            this name will be shown on the dashboard
+            ce nom sera affiché sur le tableau de bord
           </p>
         </div>
       </div>
@@ -62,7 +62,7 @@ const Fill_Form = ({ data, setdata }) => {
             class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
             for="grid-last-name"
           >
-            Password
+            Mot de passe
           </label>
           <input
             class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
@@ -88,13 +88,13 @@ const Fill_Form = ({ data, setdata }) => {
 
         <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
           <Filter_Selector
-            title={"Role"}
+            title={"Fonction"}
             Filter={data._role}
             setFilter={(value) => setdata({ ...data, _role: value })}
             options={[
               { value: "", name: "" },
-              { value: "Admin", name: "Admin" },
-              { value: "Manager", name: "Manager" },
+              { value: "Admin", name: "Administrateur" },
+              { value: "Manager", name: "Responsable" },
             ]}
             styles={"!max-w-full"}
           />
@@ -130,12 +130,10 @@ function AddNewAdmin({ open, OnClick }) {
         onClose={hadlerClose}
         aria-describedby="alert-dialog-slide-description"
       >
-        <DialogTitle>{"Add New Admin"}</DialogTitle>
+        <DialogTitle>{"Ajoutez Administrateur"}</DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-slide-description">
-            <p class="text-gray-600 text-xs ">
-              please fill the information of the admin you want to add
-            </p>
+            <p class="text-gray-600 text-xs ">Remplissez les champs vides</p>
           </DialogContentText>
         </DialogContent>
         <div className="w-full grid place-content-center">
@@ -166,13 +164,13 @@ function AddNewAdmin({ open, OnClick }) {
           >
             <MyButton
               Icon={() => LoadingIcon(loading)}
-              title="Add Admin"
+              title="Confirmez"
               style="bg-red-500 p-[20px] font-bold text-xl !p-[1px]"
             />
           </Button>
           <Button onClick={hadlerClose}>
             <MyButton
-              title="cancle"
+              title="Annulez"
               style="!bg-red-500 p-[20px]  font-bold text-xl !p-[1px]"
             />
           </Button>

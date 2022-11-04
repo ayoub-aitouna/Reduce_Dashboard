@@ -17,10 +17,10 @@ function Edit_history() {
     <div className="p-5 my-10">
       <div className="flex flex-col items-start justify-start">
         <h1 className="text-[20px] font-black leading-9 text-gray-800">
-          Edites Histroy
+          Historique des modifications
         </h1>
         <p className="text-[16px] font-normal  leading-9 text-gray-500">
-          Edits that been preformed by the managers and admins on partners
+          Modifications sur les partenaires
         </p>
       </div>
       <div className="flex ld:flex-row flex-col w-full mt-10 lg:gap-5 gap-0 justify-center items-center">
@@ -44,13 +44,13 @@ function EditeTable({ Data }) {
                     scope="col"
                     class="text-sm font-medium text-gray-900 px-6 py-4 text-left"
                   >
-                    Admin Name
+                    Nom administrateur
                   </th>
                   <th
                     scope="col"
                     class="text-sm font-medium text-gray-900 px-6 py-4 text-left"
                   >
-                    Partner Name
+                    Nom Partenaire
                   </th>
                   <th
                     scope="col"

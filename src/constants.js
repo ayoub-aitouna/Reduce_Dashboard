@@ -55,7 +55,7 @@ export const SideBarLinks = [
     tabs: [
       {
         key: 0,
-        name: "Managers",
+        name: "Responsables",
         Icon: RiAdminFill,
         Url: "Admin_managers",
       },

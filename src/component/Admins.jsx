@@ -111,8 +111,8 @@ function Admins() {
             styles={"h-[95px]"}
             options={[
               { value: 0, name: "" },
-              { value: "Admin", name: "Admin" },
-              { value: "Manager", name: "Manager" },
+              { value: "Admin", name: "Administrateur" },
+              { value: "Manager", name: "Responsable" },
             ]}
             setFilter={(value) => setRole(value)}
             Filter={Role}
@@ -141,7 +141,7 @@ function Admins() {
       <div className=" absolute bottom-8 right-8 flex flex-row gap-5">
         <Button
           Icon={() => <IoMdPersonAdd />}
-          title={"Ajoutez Un Manager"}
+          title={"Ajoutez Un Responsable"}
           OnClick={() => setNew_Admin_Dialog_Opend(true)}
           style={"!w-[250px] text-[19px] "}
         />

@@ -16,15 +16,15 @@ const Fill_Form = ({ data, setdata }) => {
       <div class="flex flex-wrap -mx-3 mb-6">
         <div class="w-full px-3 mb-6 md:mb-0">
           <Filter_Selector
-            title={"partner status"}
+            title={"Partenaire Statut"}
             Filter={data.partner_status}
             setFilter={(value) => {
               setdata({ ...data, partner_status: value });
             }}
             options={[
-              { value: "not_intrested", name: "not intressted" },
-              { value: "intrested", name: "intrested" },
-              { value: "thinking", name: "thinking" },
+              { value: "not_intrested", name: "Pas intéressé" },
+              { value: "intrested", name: "Intéressé" },
+              { value: "thinking", name: "En cours" },
             ]}
             styles={"!max-w-full"}
           />
@@ -34,7 +34,7 @@ const Fill_Form = ({ data, setdata }) => {
   );
 };
 
-function SetAsDone({ open, OnClick, item,setrefrech }) {
+function SetAsDone({ open, OnClick, item, setrefrech }) {
   const [cookies, setCookie, removeCookie] = useCookies([Coockies_name]);
 
   let [data, setdata] = useState({});
@@ -50,9 +50,10 @@ function SetAsDone({ open, OnClick, item,setrefrech }) {
     OnClick();
   };
   useEffect(() => {
-    if (!loading){
-      setrefrech(per=>per+1);
-       hadlerClose();}
+    if (!loading) {
+      setrefrech((per) => per + 1);
+      hadlerClose();
+    }
   }, [loading]);
   return (
     <div>
@@ -63,12 +64,10 @@ function SetAsDone({ open, OnClick, item,setrefrech }) {
         onClose={hadlerClose}
         aria-describedby="alert-dialog-slide-description"
       >
-        <DialogTitle>{"Set this Task as Done"}</DialogTitle>
+        <DialogTitle>{"Tâche effectuée"}</DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-slide-description">
-            <p class="text-gray-600 text-xs ">
-              please fill the information about the task make change
-            </p>
+            <p class="text-gray-600 text-xs ">Remplissez les champs vides</p>
           </DialogContentText>
         </DialogContent>
         <div className="w-full grid place-content-center">
@@ -104,14 +103,14 @@ function SetAsDone({ open, OnClick, item,setrefrech }) {
             }}
           >
             <MyButton
-              title="Set As Done"
+              title="Confirmez"
               Icon={() => LoadingIcon(loading)}
               style="bg-red-500 p-[20px] font-bold text-xl !p-[1px]"
             />
           </Button>
           <Button onClick={hadlerClose}>
             <MyButton
-              title="cancle"
+              title="Annulez"
               style="!bg-red-500 p-[20px]  font-bold text-xl !p-[1px]"
             />
           </Button>

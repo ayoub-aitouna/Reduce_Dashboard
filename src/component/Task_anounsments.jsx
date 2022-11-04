@@ -22,7 +22,7 @@ const DataRow = ({ item, index, onClick = () => {} }) => {
         {item.partner_name}
       </td>
       <td class="px-6 py-4 whitespace-nowrap text-sm font-medium ">
-        "en coure"
+        "En cours"
       </td>
       <td class="px-6 py-4 whitespace-nowrap text-sm font-medium ">
         {item.ville_name}

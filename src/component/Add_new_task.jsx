@@ -25,7 +25,7 @@ const Fill_Form = ({ data, setdata }) => {
             class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
             for="grid-name"
           >
-            Partner Name
+            Partenaire
           </label>
           <input
             class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
@@ -43,7 +43,7 @@ const Fill_Form = ({ data, setdata }) => {
             class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
             for="grid-name"
           >
-            Partner Adreess
+            Adresse
           </label>
           <input
             class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
@@ -95,12 +95,10 @@ function Add_new_task({ open, OnClick }) {
         onClose={hadlerClose}
         aria-describedby="alert-dialog-slide-description"
       >
-        <DialogTitle>{"Add s  Task"}</DialogTitle>
+        <DialogTitle>{"Ajoutez une tâche"}</DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-slide-description">
-            <p class="text-gray-600 text-xs ">
-              please fill the information about the task you want to make
-            </p>
+            <p class="text-gray-600 text-xs ">Remplissez les champs vides</p>
           </DialogContentText>
         </DialogContent>
         <div className="w-full grid place-content-center">
@@ -130,14 +128,14 @@ function Add_new_task({ open, OnClick }) {
             }}
           >
             <MyButton
-              title="Add task"
+              title="Confirmez"
               Icon={() => LoadingIcon(loading)}
               style="bg-red-500 p-[20px] font-bold text-xl !p-[1px]"
             />
           </Button>
           <Button onClick={hadlerClose}>
             <MyButton
-              title="cancle"
+              title="Annulez"
               style="!bg-red-500 p-[20px]  font-bold text-xl !p-[1px]"
             />
           </Button>
