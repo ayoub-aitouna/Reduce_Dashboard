@@ -6,13 +6,29 @@ import { useCookies } from "react-cookie";
 function Edit_history() {
   const [Search, setSearch] = useState("");
   const [cookies, setCookie, removeCookie] = useCookies([Coockies_name]);
-  let [data, setdata] = useState([
-    {
-      admin_name: "Super_Admin",
-      partner_name: "LLC",
-      created_date: "10/78/2022",
-    },
-  ]);
+  let [data, setdata] = useState([]);
+  const handleRequest = async () => {
+    try {
+      const req = await fetch(`${BaseUrl}/admin/get_modify_history`, {
+        method: "GET",
+        mode: "cors",
+        cache: "no-cache",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${cookies.accesToken}`,
+        },
+        referrerPolicy: "no-referrer",
+      });
+      if (req.ok) {
+        const data = await req.json();
+        setdata(data);
+      } else {
+      }
+    } catch (err) {}
+  };
+  useEffect(() => {
+    handleRequest();
+  }, []);
   return (
     <div className="p-5 my-10">
       <div className="flex flex-col items-start justify-start">
