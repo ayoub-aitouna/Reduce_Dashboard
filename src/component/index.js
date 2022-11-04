@@ -22,7 +22,7 @@ import Edite_Task from "./Edite_Task";
 import LoadingIcon from "./LoadingIcon";
 import SetAsDone from "./SetAsDone";
 import AddNewDoneTask from "./AddNewDoneTask";
-import UpdatePartner from "./UpdatePartrner";
+import UpdatePartner from "./UpdatePartner";
 import Edit_history from "./Edit_history";
 export {
   Auth,

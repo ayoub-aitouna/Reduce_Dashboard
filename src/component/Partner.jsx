@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { UserTable } from "./index";
 import { PartnerInfo } from "./index";
-import { Filter_Selector, SearchBar } from "./index";
+import { Filter_Selector, SearchBar, UpdatePartner } from "./index";
 import { BaseUrl, Coockies_name } from "../constants";
 import { get_Activity } from "../Utils/Activities/Activities";
 import { useCookies } from "react-cookie";
@@ -9,6 +9,7 @@ import { get_villes } from "../Utils/villes/get_villes";
 
 function Partner({ selectedStatus }) {
   const [isDialogOpend, setDialogOpend] = useState(false);
+  const [isUpdateDialogOpend, setUpdateDialogOpend] = useState(false);
   const [City, setCity] = useState("");
   const [Activities, setActivities] = useState([]);
   let [villes, setvilles] = useState([{ value: 0, name: "" }]);
@@ -20,6 +21,7 @@ function Partner({ selectedStatus }) {
   let [Odata, setOdata] = useState([]);
   let [Refresh, setRefresh] = useState(0);
   let [data, setdata] = useState([]);
+
   const handleRequest = async () => {
     try {
       const req = await fetch(`${BaseUrl}/admin/get_partners`, {
@@ -39,11 +41,13 @@ function Partner({ selectedStatus }) {
       }
     } catch (err) {}
   };
+
   useEffect(() => {
     handleRequest();
     get_Activity(setActivities);
     get_villes(setvilles);
   }, [Refresh]);
+
   useEffect(() => {
     setdata(
       selectedStatus != ""
@@ -77,6 +81,16 @@ function Partner({ selectedStatus }) {
         }}
         data={SelectedPartner}
       />
+
+      <UpdatePartner
+        open={isUpdateDialogOpend}
+        setRefresh={setRefresh}
+        OnClick={() => {
+          setUpdateDialogOpend(false);
+        }}
+        partner={SelectedPartner}
+      />
+
       <div className="flex flex-col items-start justify-start">
         <h1 className="text-[20px] font-black leading-9 text-gray-800">
           Reducte Partenaires
@@ -110,6 +124,10 @@ function Partner({ selectedStatus }) {
         OnSelect={(data) => {
           setSelectedpartner(data);
           setDialogOpend(true);
+        }}
+        OnEdit={(data) => {
+          setSelectedpartner(data);
+          setUpdateDialogOpend(true);
         }}
       />
     </div>
