@@ -44,6 +44,12 @@ const PartnerInfoRender = ({ item }) => {
             );
           }}
         />
+        <DataRow title={"email"} data={item.email} />
+        <DataRow title={"Numero Telephone"} data={item.numero_telephone} />
+        <DataRow
+          title={"Numero Telephone Fix"}
+          data={item.numero_telephone_fix}
+        />
         <DataRow title={"Raison sociale"} data={item.nome_entreprise} />
         <DataRow title={"ICE"} data={item.identificateur_entreprise} />
         <DataRow
@@ -53,6 +59,14 @@ const PartnerInfoRender = ({ item }) => {
         <DataRow title={"Fonction"} data={item.role_dans_entriprise} />
         <DataRow title={"Ville"} data={item.ville_name} />
         <DataRow title={"Secteur d'activité	"} data={item.activity_name} />
+
+        <DataRow title={"Offer"} data={item.offer} />
+
+        <DataRow title={"Secteur d'activité	"} data={item.activity_name} />
+        <DataRow
+          title={"Contract PDF"}
+          Render={() => <a href={item.contract_Url}>Voir Le Contrat</a>}
+        />
         <DataRow
           title={"Statut"}
           Render={() => {
