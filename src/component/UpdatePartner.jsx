@@ -11,55 +11,51 @@ import { get_villes } from "../Utils/villes/get_villes";
 import { useCookies } from "react-cookie";
 import { get_Activity } from "../Utils/Activities/Activities";
 
-
-
-const UpdatePartner = ({ open, OnClick, partner }) =>
-{
-    const [cookies, setCookie, removeCookie] = useCookies([Coockies_name]);
-    // console.log(partner);
-    const [data, setdata] = useState({
-    id : partner.id,
-    email : partner.email,
-    nome_entreprise : partner.nome_entreprise,
-    identificateur_entreprise : partner.identificateur_entreprise,
-    representant_entreprise : partner.representant_entreprise,
-    role_dans_entriprise : partner.role_dans_entriprise,
-    numero_telephone : partner.numero_telephone,
-    numero_telephone_fix : partner.numero_telephone_fix,
-    ville : partner.ville,
-    adrress : partner.adrress,
-    activity_entrprise : partner.activity_entrprise,
-    offer :  partner.offer,
+const UpdatePartner = ({ open, OnClick, partner, setRefresh }) => {
+  const [cookies, setCookie, removeCookie] = useCookies([Coockies_name]);
+  // console.log(partner);
+  const [data, setdata] = useState({
+    id: partner.id,
+    email: partner.email,
+    nome_entreprise: partner.nome_entreprise,
+    identificateur_entreprise: partner.identificateur_entreprise,
+    representant_entreprise: partner.representant_entreprise,
+    role_dans_entriprise: partner.role_dans_entriprise,
+    numero_telephone: partner.numero_telephone,
+    numero_telephone_fix: partner.numero_telephone_fix,
+    ville: partner.ville,
+    adrress: partner.adrress,
+    activity_entrprise: partner.activity_entrprise,
+    offer: partner.offer,
   });
-  
-  
+
   const [loading, setloading] = useState(false);
-  
+
   const hadlerClose = () => {
     OnClick();
   };
-  
+
   useEffect(() => {
     if (!loading) hadlerClose();
   }, [loading]);
-  
+
   useEffect(() => {
-      setdata({
-    id : partner.id,
-    email : partner.email,
-    nome_entreprise : partner.nome_entreprise,
-    identificateur_entreprise : partner.identificateur_entreprise,
-    representant_entreprise : partner.representant_entreprise,
-    role_dans_entriprise : partner.role_dans_entriprise,
-    numero_telephone : partner.numero_telephone,
-    numero_telephone_fix : partner.numero_telephone_fix,
-    ville : partner.ville,
-    adrress : partner.adrress,
-    activity_entrprise : partner.activity_entrprise,
-    offer :  partner.offer,
-  });
+    setdata({
+      id: partner.id,
+      email: partner.email,
+      nome_entreprise: partner.nome_entreprise,
+      identificateur_entreprise: partner.identificateur_entreprise,
+      representant_entreprise: partner.representant_entreprise,
+      role_dans_entriprise: partner.role_dans_entriprise,
+      numero_telephone: partner.numero_telephone,
+      numero_telephone_fix: partner.numero_telephone_fix,
+      ville: partner.ville,
+      adrress: partner.adrress,
+      activity_entrprise: partner.activity_entrprise,
+      offer: partner.offer,
+    });
   }, [partner]);
-  
+
   return (
     <div>
       <Dialog
@@ -84,7 +80,7 @@ const UpdatePartner = ({ open, OnClick, partner }) =>
             onClick={async (e) => {
               setloading(true);
               try {
-                const req = await fetch(`${BaseUrl}/Tasks/add_announcement`, {
+                const req = await fetch(`${BaseUrl}/Admin/update_partner`, {
                   method: "POST",
                   mode: "cors",
                   cache: "no-cache",
@@ -95,6 +91,7 @@ const UpdatePartner = ({ open, OnClick, partner }) =>
                   referrerPolicy: "no-referrer",
                   body: JSON.stringify(data),
                 });
+                setRefresh((val) => val + 1);
                 setloading(false);
               } catch (err) {
                 setloading(false);
@@ -116,9 +113,8 @@ const UpdatePartner = ({ open, OnClick, partner }) =>
         </DialogActions>
       </Dialog>
     </div>
-    );
-}
-
+  );
+};
 
 const Fill_Form = ({ data, setdata }) => {
   let [villes, setvilles] = useState([]);
@@ -128,11 +124,10 @@ const Fill_Form = ({ data, setdata }) => {
     get_villes(setvilles);
     get_Activity(setActivities);
   }, []);
-  
+
   return (
     <form class="w-full max-w-lg ">
       <div class="flex flex-wrap -mx-3 mb-6">
-      
         <div class="w-full px-3">
           <label
             class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
@@ -151,7 +146,7 @@ const Fill_Form = ({ data, setdata }) => {
             placeholder="Jane Doe"
           />
         </div>
-      
+
         <div class="w-full px-3">
           <label
             class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
@@ -169,7 +164,7 @@ const Fill_Form = ({ data, setdata }) => {
             type="text"
           />
         </div>
-        
+
         <div class="w-full px-3">
           <label
             class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
@@ -187,7 +182,7 @@ const Fill_Form = ({ data, setdata }) => {
             type="text"
           />
         </div>
-        
+
         <div class="w-full px-3">
           <label
             class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
@@ -205,7 +200,7 @@ const Fill_Form = ({ data, setdata }) => {
             type="text"
           />
         </div>
-        
+
         <div class="w-full px-3">
           <label
             class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
@@ -223,7 +218,7 @@ const Fill_Form = ({ data, setdata }) => {
             type="text"
           />
         </div>
-        
+
         <div class="w-full px-3">
           <label
             class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
@@ -241,32 +236,32 @@ const Fill_Form = ({ data, setdata }) => {
             type="text"
           />
         </div>
-        
-        <div class="flex flex-wrap -mx-3 mb-2">
-            <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-            <Filter_Selector
-                title={"Ville"}
-                Filter={data.ville}
-                setFilter={(value) => {
-                setdata({ ...data, ville: value });
-                }}
-                options={villes}
-                styles={"!max-w-full"}
-            />
-            </div>
 
-            <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+        <div class="flex flex-wrap -mx-3 mb-2">
+          <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
             <Filter_Selector
-                title={"d'activité"}
-                Filter={data.activity_entrprise}
-                setFilter={(value) => {
-                setdata({ ...data, activity_entrprise: value });
-                }}
-                options={Activities}
-                styles={"!max-w-full"}
+              title={"Ville"}
+              Filter={data.ville}
+              setFilter={(value) => {
+                setdata({ ...data, ville: value });
+              }}
+              options={villes}
+              styles={"!max-w-full"}
             />
-            </div>
-      </div>
+          </div>
+
+          <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+            <Filter_Selector
+              title={"d'activité"}
+              Filter={data.activity_entrprise}
+              setFilter={(value) => {
+                setdata({ ...data, activity_entrprise: value });
+              }}
+              options={Activities}
+              styles={"!max-w-full"}
+            />
+          </div>
+        </div>
       </div>
     </form>
   );

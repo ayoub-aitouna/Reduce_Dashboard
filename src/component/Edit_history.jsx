@@ -22,6 +22,7 @@ function Edit_history() {
       });
       if (req.ok) {
         const data = await req.json();
+        console.table(data);
         setdata(data);
       } else {
       }
@@ -102,13 +103,15 @@ const DataRow = ({ item, index }) => {
       } border-b`}
     >
       <td class="px-6 py-4 whitespace-nowrap text-sm font-medium ">
-        {item.admin_name}
+        {item._name}
       </td>
       <td class="px-6 py-4 whitespace-nowrap text-sm font-medium ">
-        {item.partner_name}
+        {item.nome_entreprise}
       </td>
       <td class="px-6 py-4 whitespace-nowrap text-sm font-medium ">
-        {item.created_date}
+        {`${new Date(item.created_date).getDate()}/${new Date(
+          item.created_date
+        ).getMonth()}/${new Date(item.created_date).getFullYear()}`}
       </td>
     </tr>
   );
