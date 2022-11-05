@@ -104,7 +104,7 @@ const Fill_Form = ({ data, setdata }) => {
   );
 };
 
-function AddNewAdmin({ open, OnClick }) {
+function AddNewAdmin({ open, OnClick, setRef }) {
   let [data, setdata] = useState({
     email: "",
     ville: 0,
@@ -156,6 +156,7 @@ function AddNewAdmin({ open, OnClick }) {
                   referrerPolicy: "no-referrer",
                   body: JSON.stringify(data),
                 });
+                setRef((val) => val + 1);
                 setloading(false);
               } catch (err) {
                 setloading(false);

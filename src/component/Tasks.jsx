@@ -4,7 +4,7 @@ import { SearchBar, Button, AddNewDoneTask } from "./index";
 import { NavLink, Outlet } from "react-router-dom";
 import { BiTask } from "react-icons/bi";
 
-const Tasks = ({ setSearch }) => {
+const Tasks = ({ setSearch, setRef }) => {
   const [isNew_Task_Dialog_Opend, setNew_Task_Dialog_Opend] = useState(false);
 
   return (
@@ -50,6 +50,7 @@ const Tasks = ({ setSearch }) => {
       </div>
       <AddNewDoneTask
         open={isNew_Task_Dialog_Opend}
+        setRef={setRef}
         OnClick={() => {
           setNew_Task_Dialog_Opend(false);
         }}

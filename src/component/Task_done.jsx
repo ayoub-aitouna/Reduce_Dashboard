@@ -41,7 +41,7 @@ const DataRow = ({ item, index, onClick = () => {} }) => {
 };
 
 // task done Components
-const Task_done = () => {
+const Task_done = ({ Ref }) => {
   let [data, setdata] = useState([]);
   let [isEdite_Task_Dialog_Opend, setEdite_Task_Dialog_Opend] = useState(false);
   let [refrech, setrefrech] = useState(0);
@@ -80,6 +80,9 @@ const Task_done = () => {
   useEffect(() => {
     handleRequest();
   }, [refrech]);
+  useEffect(() => {
+    setrefrech((val) => val + 1);
+  }, [Ref]);
 
   return (
     <div class="flex flex-col  border-[1px] my-10 border-gray-200 rounded-lg ">

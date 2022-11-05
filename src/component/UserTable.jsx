@@ -5,31 +5,10 @@ import { BsCheckCircleFill } from "react-icons/bs";
 import { MdPendingActions } from "react-icons/md";
 import { BsFillArrowRightSquareFill } from "react-icons/bs";
 import { IconHalder } from "./index";
-const DataRow = ({ item, index, onClick = () => {} }) => {
-  const HandleUpdate = async () => {
-    // try {
-    // 	const req = await fetch(`${BaseUrl}/admins/moidify`, {
-    // 		method: "POST",
-    // 		mode: "cors",
-    // 		cache: "no-cache",
-    // 		headers: {
-    // 			"Content-Type": "application/json",
-    // 		},
-    // 		referrerPolicy: "no-referrer",
-    // 		body: JSON.stringify(),
-    // 	});
-    // 	if (req.ok) {
-    // 		callback(await req.json());
-    // 	} else {
-    // 		err();
-    // 	}
-    // } catch (error_msg) {
-    // 	err();
-    // }
-  };
+
+const DataRow = ({ item, index, onClick = () => {}, OnEdit = () => {} }) => {
   return (
     <tr
-      onClick={() => onClick()}
       className={` text-gray-900 hover:text-[#fff] hover:bg-[#2E5CFF] cursor-pointer ${
         index % 2 == 0 ? "bg-gray-100" : "bg-white"
       } border-b`}
@@ -87,19 +66,26 @@ const DataRow = ({ item, index, onClick = () => {} }) => {
           </div>
         )}
       </td>
-      <td class="px-6 py-4 whitespace-nowrap text-sm font-medium ">
+      <td
+        class="px-6 py-4 whitespace-nowrap text-sm font-medium "
+        onClick={() => onClick()}
+      >
         <IconHalder
           Icon={() => <BsFillArrowRightSquareFill />}
           style="text-[20px]"
         />
       </td>
-      <td class="px-6 py-4 whitespace-nowrap text-sm font-medium ">
+      <td
+        class="px-6 py-4 whitespace-nowrap text-sm font-medium "
+        onClick={() => OnEdit()}
+      >
         <IconHalder Icon={() => <AiFillEdit />} style="text-[20px]" />
       </td>
     </tr>
   );
 };
-function UserTable({ Data, OnSelect }) {
+
+function UserTable({ Data, OnSelect, OnEdit }) {
   return (
     <div class="flex flex-col  border-[1px] my-10 border-gray-200 rounded-lg ">
       <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -183,6 +169,7 @@ function UserTable({ Data, OnSelect }) {
                       key={item.id}
                       item={item}
                       index={index}
+                      OnEdit={() => OnEdit(item)}
                       onClick={() => OnSelect(item)}
                     />
                   </>

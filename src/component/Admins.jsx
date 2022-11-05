@@ -13,6 +13,7 @@ import {
   AddNewAdmin,
   Add_new_task as AddNewTask,
 } from "./index";
+
 function Admins() {
   const [isDialogOpend, setDialogOpend] = useState(false);
   const [isNew_Admin_Dialog_Opend, setNew_Admin_Dialog_Opend] = useState(false);
@@ -27,6 +28,7 @@ function Admins() {
   const [Search, setSearch] = useState("");
   const [cookies, setCookie, removeCookie] = useCookies([Coockies_name]);
   let [Odata, setOdata] = useState([]);
+  let [Ref, setRef] = useState(0);
 
   const fetchData = async () => {
     try {
@@ -51,7 +53,8 @@ function Admins() {
   useEffect(() => {
     fetchData();
     get_villes(setvilles);
-  }, []);
+  }, [Ref]);
+
   useEffect(() => {
     setdata(
       Search != ""
@@ -74,15 +77,9 @@ function Admins() {
   }, [Search, City, Role, AccountState, Odata]);
   return (
     <div className="p-5 my-10  ">
-      {/* <ActionsDialog
-        open={isDialogOpend}
-        OnClick={() => {
-          setDialogOpend(false);
-        }}
-        data={SelectedPartner}
-      /> */}
       <AddNewAdmin
         open={isNew_Admin_Dialog_Opend}
+        setRef={setRef}
         OnClick={() => {
           setNew_Admin_Dialog_Opend(false);
         }}

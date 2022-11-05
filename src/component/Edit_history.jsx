@@ -7,6 +7,7 @@ function Edit_history() {
   const [Search, setSearch] = useState("");
   const [cookies, setCookie, removeCookie] = useCookies([Coockies_name]);
   let [data, setdata] = useState([]);
+
   const handleRequest = async () => {
     try {
       const req = await fetch(`${BaseUrl}/admin/get_modify_history`, {
@@ -21,14 +22,17 @@ function Edit_history() {
       });
       if (req.ok) {
         const data = await req.json();
+        console.table(data);
         setdata(data);
       } else {
       }
     } catch (err) {}
   };
+
   useEffect(() => {
     handleRequest();
   }, []);
+
   return (
     <div className="p-5 my-10">
       <div className="flex flex-col items-start justify-start">
@@ -99,13 +103,15 @@ const DataRow = ({ item, index }) => {
       } border-b`}
     >
       <td class="px-6 py-4 whitespace-nowrap text-sm font-medium ">
-        {item.admin_name}
+        {item._name}
       </td>
       <td class="px-6 py-4 whitespace-nowrap text-sm font-medium ">
-        {item.partner_name}
+        {item.nome_entreprise}
       </td>
       <td class="px-6 py-4 whitespace-nowrap text-sm font-medium ">
-        {item.created_date}
+        {`${new Date(item.created_date).getDate()}/${new Date(
+          item.created_date
+        ).getMonth()}/${new Date(item.created_date).getFullYear()}`}
       </td>
     </tr>
   );
