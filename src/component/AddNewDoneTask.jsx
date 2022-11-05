@@ -47,6 +47,7 @@ const Fill_Form = ({ data, setdata }) => {
               setdata({ ...data, partner_status: value });
             }}
             options={[
+              { value: "", name: "" },
               { value: "not_intrested", name: "Pas intéressé" },
               { value: "intrested", name: "Intéressé" },
               { value: "thinking", name: "En cours" },
@@ -59,7 +60,7 @@ const Fill_Form = ({ data, setdata }) => {
   );
 };
 
-function AddNewDoneTask({ open, OnClick }) {
+function AddNewDoneTask({ open, OnClick, setRef }) {
   let [data, setdata] = useState({
     partner_name: "",
     partner_status: 0,
@@ -108,6 +109,7 @@ function AddNewDoneTask({ open, OnClick }) {
                   referrerPolicy: "no-referrer",
                   body: JSON.stringify(data),
                 });
+                setRef((val) => val + 1);
                 setloading(false);
               } catch (err) {
                 setloading(false);

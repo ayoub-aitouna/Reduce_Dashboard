@@ -22,6 +22,7 @@ const Fill_Form = ({ data, setdata }) => {
               setdata({ ...data, partner_status: value });
             }}
             options={[
+              { value: "", name: "" },
               { value: "not_intrested", name: "Pas intéressé" },
               { value: "intrested", name: "Intéressé" },
               { value: "thinking", name: "En cours" },
