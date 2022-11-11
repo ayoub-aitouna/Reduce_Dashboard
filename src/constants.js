@@ -63,6 +63,6 @@ export const SideBarLinks = [
   },
 ];
 
-export const BaseUrl = "https://kji83y-5000.preview.csb.app/api/v1";
+export const BaseUrl = "https://clever-abbey-365614.nn.r.appspot.com/api/v1";
 
 export const Coockies_name = "auth_name";
