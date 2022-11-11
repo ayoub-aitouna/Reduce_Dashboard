@@ -1,11 +1,16 @@
 import React, { useState, useEffect } from "react";
-import { UserTable } from "./index";
-import { PartnerInfo } from "./index";
-import { Filter_Selector, SearchBar, UpdatePartner } from "./index";
-import { BaseUrl, Coockies_name } from "../constants";
-import { get_Activity } from "../Utils/Activities/Activities";
+
+import {
+  Filter_Selector,
+  SearchBar,
+  UpdatePartner,
+  PartnerInfo,
+  UserTable,
+} from "../index";
+import { BaseUrl, Coockies_name } from "../../constants";
+import { get_Activity } from "../../Utils/Activities/Activities";
 import { useCookies } from "react-cookie";
-import { get_villes } from "../Utils/villes/get_villes";
+import { get_villes } from "../../Utils/villes/get_villes";
 
 function Partner({ selectedStatus }) {
   const [isDialogOpend, setDialogOpend] = useState(false);

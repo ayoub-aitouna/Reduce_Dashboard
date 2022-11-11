@@ -6,10 +6,10 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 
-import { Button as MyButton, Filter_Selector, LoadingIcon } from "./index";
-import { BaseUrl, Coockies_name } from "../constants";
+import { Button as MyButton, Filter_Selector, LoadingIcon } from "../index";
+import { BaseUrl, Coockies_name } from "../../constants";
 import { useCookies } from "react-cookie";
-import { get_villes } from "../Utils/villes/get_villes";
+import { get_villes } from "../../Utils/villes/get_villes";
 
 const Fill_Form = ({ data, setdata }) => {
   let [villes, setvilles] = useState([{ value: 0, name: "" }]);

@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { Button, Input, LoadingIcon } from "./index";
+import { Button, Input, LoadingIcon } from "../index";
 import { useCookies } from "react-cookie";
-import { BaseUrl, Coockies_name } from "../constants";
+import { BaseUrl, Coockies_name } from "../../constants";
 import Cookies from "js-cookie";
-import { Icon_Auth } from "../assets";
+import { Icon_Auth } from "../../assets";
 import { useNavigate } from "react-router-dom";
 
 const AuthForm = () => {

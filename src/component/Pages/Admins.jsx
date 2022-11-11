@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { AdminsTable } from "./index";
-import { ActionsDialog } from "./index";
+import { AdminsTable } from "../index";
+import { ActionsDialog } from "../index";
 import { IoMdPersonAdd } from "react-icons/io";
 import { BiTask } from "react-icons/bi";
-import { BaseUrl, Coockies_name } from "../constants";
+import { BaseUrl, Coockies_name } from "../../constants";
 import { useCookies } from "react-cookie";
-import { get_villes } from "../Utils/villes/get_villes";
+import { get_villes } from "../../Utils/villes/get_villes";
 import {
   Filter_Selector,
   SearchBar,

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { AiFillEdit } from "react-icons/ai";
-import { IconHalder, Edite_Task } from "./index";
-import { BaseUrl, Coockies_name } from "../constants";
+import { IconHalder, Edite_Task } from "../index";
+import { BaseUrl, Coockies_name } from "../../constants";
 
 import { useCookies } from "react-cookie";
 // Data Row

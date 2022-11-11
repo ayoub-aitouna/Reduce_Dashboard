@@ -1,6 +1,6 @@
 import React from "react";
 import { BsFillArrowRightSquareFill } from "react-icons/bs";
-import { IconHalder } from "./index";
+import { IconHalder } from "../index";
 const DataRow = ({ item, index, onClick }) => {
   return (
     <tr

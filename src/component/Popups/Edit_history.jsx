@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { SearchBar } from "./index";
-import { BaseUrl, Coockies_name } from "../constants";
+import { SearchBar } from "../index";
+import { BaseUrl, Coockies_name } from "../../constants";
 import { useCookies } from "react-cookie";
 
 function Edit_history() {

@@ -5,11 +5,11 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
-import { Button as MyButton, Filter_Selector, LoadingIcon } from "./index";
-import { BaseUrl, Coockies_name } from "../constants";
-import { get_villes } from "../Utils/villes/get_villes";
+import { Button as MyButton, Filter_Selector, LoadingIcon } from "../index";
+import { BaseUrl, Coockies_name } from ".../../constants";
+import { get_villes } from "./../Utils/villes/get_villes";
 import { useCookies } from "react-cookie";
-import { get_Activity } from "../Utils/Activities/Activities";
+import { get_Activity } from "../../Utils/Activities/Activities";
 
 const UpdatePartner = ({ open, OnClick, partner, setRefresh }) => {
   const [cookies, setCookie, removeCookie] = useCookies([Coockies_name]);
