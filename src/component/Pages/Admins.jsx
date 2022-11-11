@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { AdminsTable } from "../index";
-import { ActionsDialog } from "../index";
+
 import { IoMdPersonAdd } from "react-icons/io";
 import { BiTask } from "react-icons/bi";
 import { BaseUrl, Coockies_name } from "../../constants";
@@ -11,8 +10,10 @@ import {
   SearchBar,
   Button,
   AddNewAdmin,
+  ActionsDialog,
+  AdminsTable,
   Add_new_task as AddNewTask,
-} from "./index";
+} from "../index";
 
 function Admins() {
   const [isDialogOpend, setDialogOpend] = useState(false);

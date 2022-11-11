@@ -17,12 +17,12 @@ import Add_new_task from "./Popups/Add_new_task";
 import Tasks from "./Pages/Tasks";
 import Task_done from "./Pages/Task_done";
 import Task_anounsments from "./Pages/Task_anounsments";
-import TaskSearch from "./Pages/TaskSearch.js";
+import TaskSearch from "./Pages/TaskSearch";
 import Edite_Task from "./Popups/Edite_Task";
 import LoadingIcon from "./Utils/LoadingIcon";
 import SetAsDone from "./Popups/SetAsDone";
 import AddNewDoneTask from "./Popups/AddNewDoneTask";
-import UpdatePartner from "./Utils/UpdatePartner";
+import UpdatePartner from "./Popups/UpdatePartner";
 import Edit_history from "./Popups/Edit_history";
 export {
   Auth,

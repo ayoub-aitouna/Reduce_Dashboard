@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { SideBarLinks } from "../constants.js";
 import { BiExit } from "react-icons/bi";
-import { Button } from "./index";
+import { Button } from "../index";
 import { NavLink } from "react-router-dom";
 import { useCookies } from "react-cookie";
-import { Coockies_name } from "../constants";
+import { Coockies_name,SideBarLinks } from "../../constants";
 import { useNavigate } from "react-router-dom";
-import { Icon } from "../assets";
+import { Icon } from "../../assets";
 
 function Sidebar() {
   const [cookies, setCookie, removeCookie] = useCookies([Coockies_name]);
