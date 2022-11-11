@@ -23,7 +23,7 @@ import LoadingIcon from "./Utils/LoadingIcon";
 import SetAsDone from "./Popups/SetAsDone";
 import AddNewDoneTask from "./Popups/AddNewDoneTask";
 import UpdatePartner from "./Popups/UpdatePartner";
-import Edit_history from "./Popups/Edit_history";
+import Edit_history from "./Pages/Edit_history";
 export {
   Auth,
   Home,

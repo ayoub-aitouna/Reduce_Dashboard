@@ -261,6 +261,22 @@ const Fill_Form = ({ data, setdata }) => {
               styles={"!max-w-full"}
             />
           </div>
+          <div className="w-full px-3 mb-6 md:mb-0">
+          <Filter_Selector
+            title={"Partenaire Statut"}
+            Filter={data.partner_status}
+            setFilter={(value) => {
+              setdata({ ...data, partner_status: value });
+            }}
+            options={[
+              { value: "", name: "" },
+              { value: "Accepted", name: "Pas intéressé" },
+              { value: "intrested", name: "Intéressé" },
+              { value: "thinking", name: "En cours" },
+            ]}
+            styles={"!max-w-full"}
+          />
+        </div>
         </div>
       </div>
     </form>
