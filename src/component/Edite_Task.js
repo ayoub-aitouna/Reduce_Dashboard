@@ -9,13 +9,19 @@ import { Button as MyButton, Filter_Selector, LoadingIcon } from "./index";
 import { BaseUrl, Coockies_name } from "../constants";
 import { useCookies } from "react-cookie";
 import { get_villes } from "../Utils/villes/get_villes";
+import { Dayjs } from "dayjs";
+import TextField from "@mui/material/TextField";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 
 const Fill_Form = ({ data, setdata }) => {
-  let [villes, setvilles] = useState([]);
+  let [villes, setvilles] = useState([{ value: 0, name: "" }]);
+
   useEffect(() => {
-    setvilles([]);
     get_villes(setvilles);
   }, []);
+
   return (
     <form className="w-full max-w-lg ">
       <div className="flex flex-wrap -mx-3 mb-6">
@@ -24,7 +30,7 @@ const Fill_Form = ({ data, setdata }) => {
             className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
             for="grid-name"
           >
-            Nom Partenaire
+            Partenaire
           </label>
           <input
             className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
@@ -42,7 +48,24 @@ const Fill_Form = ({ data, setdata }) => {
             className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
             for="grid-name"
           >
-            Adresse
+            Full Name
+          </label>
+          <input
+            className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+            id="grid-name"
+            value={data.full_name}
+            onChange={(e) => {
+              setdata({ ...data, full_name: e.target.value });
+            }}
+            type="text"
+          />
+        </div>
+        <div className="w-full px-3">
+          <label
+            className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+            for="grid-name"
+          >
+            partner address
           </label>
           <input
             className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
@@ -54,26 +77,77 @@ const Fill_Form = ({ data, setdata }) => {
             type="text"
           />
         </div>
-        <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-          <Filter_Selector
-            title={"Statut"}
-            Filter={data.partner_status}
-            setFilter={(value) => {
-              setdata({ ...data, partner_status: value });
+        <div className="w-full px-3">
+          <label
+            className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+            for="grid-name"
+          >
+            Phone Number
+          </label>
+          <input
+            className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+            id="grid-name"
+            value={data.phone_number}
+            onChange={(e) => {
+              setdata({ ...data, phone_number: e.target.value });
             }}
-            options={[
-              { value: "not_intrested", name: "Pas intéressé" },
-              { value: "intrested", name: "Intéressé" },
-              { value: "thinking", name: "En cours" },
-            ]}
+            type="text"
+          />
+        </div>
+        <div className="w-full px-3">
+          <label
+            className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+            for="grid-name"
+          >
+            Note
+          </label>
+          <input
+            className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+            id="grid-name"
+            value={data.note}
+            onChange={(e) => {
+              setdata({ ...data, note: e.target.value });
+            }}
+            type="text"
+          />
+        </div>
+        <div className="w-full  px-3 mb-6 md:mb-0 flex flex-row justify-between items-center w-full">
+          <Filter_Selector
+            title={"Ville"}
+            Filter={data.ville}
+            setFilter={(value) => {
+              setdata({ ...data, ville: value });
+            }}
+            options={villes}
             styles={"!max-w-full"}
           />
+          <div className="flex flex-col justify-center items-start">
+            <h3 className="block font-black mb-2 text-sm  text-gray-900 dark:text-gray-400">
+              {" "}
+              Selece Date
+            </h3>
+            <LocalizationProvider dateAdapter={AdapterDayjs}>
+              <DatePicker
+                label="Date of visite"
+                value={data.visite_date}
+                onChange={(newValue) => {
+                  setdata({
+                    ...data,
+                    visite_date: newValue.$d
+                      .toISOString()
+                      .slice(0, 19)
+                      .replace("T", " "),
+                  });
+                }}
+                renderInput={(params) => <TextField {...params} />}
+              />
+            </LocalizationProvider>
+          </div>
         </div>
       </div>
     </form>
   );
 };
-
 function Edite_Task({ open, OnClick, SelectedTask, setSelectedTask }) {
   const [cookies, setCookie, removeCookie] = useCookies([Coockies_name]);
   const [loading, setloading] = useState(false);

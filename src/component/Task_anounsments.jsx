@@ -22,6 +22,20 @@ const DataRow = ({ item, index, onClick = () => {} }) => {
         {item.partner_name}
       </td>
       <td className="px-6 py-4 whitespace-nowrap text-sm font-medium ">
+        {item.partner_full_name}
+      </td>
+      <td className="px-6 py-4 whitespace-nowrap text-sm font-medium ">
+        {item.phone_number}
+      </td>
+      <td className="px-6 py-4 whitespace-nowrap text-sm font-medium ">
+        {item.note}
+      </td>
+      <td className="px-6 py-4 whitespace-nowrap text-sm font-medium ">
+        {`${new Date(item.data_of_visite).getDate()}/${new Date(
+          item.data_of_visite
+        ).getMonth()}/${new Date(item.data_of_visite).getFullYear()}`}
+      </td>
+      <td className="px-6 py-4 whitespace-nowrap text-sm font-medium ">
         "En cours"
       </td>
       <td className="px-6 py-4 whitespace-nowrap text-sm font-medium ">
@@ -42,12 +56,6 @@ const DataRow = ({ item, index, onClick = () => {} }) => {
   );
 };
 
-// on edite clikced
-function OnSelect(item) {
-  alert("");
-}
-
-// task done Components
 const Task_anounsments = () => {
   let [data, setdata] = useState([]);
   let [refrech, setrefrech] = useState(0);
@@ -57,6 +65,10 @@ const Task_anounsments = () => {
     id: 1,
     partner_name: "",
     partner_status: "",
+    note: "",
+    full_name: "",
+    phone_number: "",
+    visite_date: "",
   });
 
   const handleRequest = async () => {
@@ -73,16 +85,18 @@ const Task_anounsments = () => {
       });
       if (req.ok) {
         const data = await req.json();
-        console.log(data);
+        console.trace(data);
         setdata(data);
       }
     } catch (err) {
       console.error(err);
     }
   };
+
   useEffect(() => {
     handleRequest();
   }, [refrech]);
+
   data = data.filter((v) => v.task_status == "Pending");
   return (
     <div className="flex flex-col  border-[1px] my-10 border-gray-200 rounded-lg ">
@@ -116,7 +130,32 @@ const Task_anounsments = () => {
                     scope="col"
                     className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
                   >
-                    Statut
+                    Nom et Prenom
+                  </th>
+                  <th
+                    scope="col"
+                    className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
+                  >
+                    Tele
+                  </th>
+                  <th
+                    scope="col"
+                    className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
+                  >
+                    Note
+                  </th>
+
+                  <th
+                    scope="col"
+                    className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
+                  >
+                    Visite Date
+                  </th>
+                  <th
+                    scope="col"
+                    className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
+                  >
+                    Satut
                   </th>
                   <th
                     scope="col"
@@ -147,11 +186,7 @@ const Task_anounsments = () => {
                       index={index}
                       onClick={(selected) => {
                         setDialogOpend(true);
-                        setSelectedTask({
-                          id: item.id,
-                          partner_name: item.partner_name,
-                          partner_status: "",
-                        });
+                        setSelectedTask(selected);
                       }}
                     />
                   </>

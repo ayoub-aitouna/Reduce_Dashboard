@@ -41,12 +41,11 @@ function SetAsDone({ open, OnClick, item, setrefrech }) {
   let [data, setdata] = useState({});
   const [loading, setloading] = useState(false);
   useEffect(() => {
-    setdata({
-      id: item.id,
-      partner_name: item.partner_name,
-      partner_status: "not_intrested",
-    });
+    setdata(item);
+    console.trace(data);
+    console.trace(data);
   }, [open]);
+
   const hadlerClose = () => {
     OnClick();
   };

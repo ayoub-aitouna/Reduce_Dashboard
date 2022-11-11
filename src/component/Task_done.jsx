@@ -18,6 +18,20 @@ const DataRow = ({ item, index, onClick = () => {} }) => {
       <td class="px-6 py-4 whitespace-nowrap text-sm font-medium ">
         {item.partner_name}
       </td>
+      <td className="px-6 py-4 whitespace-nowrap text-sm font-medium ">
+        {item.partner_full_name}
+      </td>
+      <td className="px-6 py-4 whitespace-nowrap text-sm font-medium ">
+        {item.phone_number}
+      </td>
+      <td className="px-6 py-4 whitespace-nowrap text-sm font-medium ">
+        {item.note}
+      </td>
+      <td className="px-6 py-4 whitespace-nowrap text-sm font-medium ">
+        {`${new Date(item.data_of_visite).getDate()}/${new Date(
+          item.data_of_visite
+        ).getMonth()}/${new Date(item.data_of_visite).getFullYear()}`}
+      </td>
       <td class="px-6 py-4 whitespace-nowrap text-sm font-medium ">
         {item.partner_status}
       </td>
@@ -68,6 +82,7 @@ const Task_done = ({ Ref }) => {
       });
       if (req.ok) {
         const data = await req.json();
+        console.trace(data);
         setdata(data);
       } else {
         console.error(await req.json());
@@ -112,6 +127,31 @@ const Task_done = ({ Ref }) => {
                     class="text-sm font-medium text-gray-900 px-6 py-4 text-left"
                   >
                     Partenaire
+                  </th>
+                  <th
+                    scope="col"
+                    className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
+                  >
+                    Nom et Prenom
+                  </th>
+                  <th
+                    scope="col"
+                    className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
+                  >
+                    Tele
+                  </th>
+                  <th
+                    scope="col"
+                    className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
+                  >
+                    Note
+                  </th>
+
+                  <th
+                    scope="col"
+                    className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
+                  >
+                    Visite Date
                   </th>
                   <th
                     scope="col"
