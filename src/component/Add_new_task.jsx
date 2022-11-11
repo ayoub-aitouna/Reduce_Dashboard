@@ -9,26 +9,32 @@ import { Button as MyButton, Filter_Selector, LoadingIcon } from "./index";
 import { BaseUrl, Coockies_name } from "../constants";
 import { get_villes } from "../Utils/villes/get_villes";
 import { useCookies } from "react-cookie";
+import { Dayjs } from "dayjs";
+import TextField from "@mui/material/TextField";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 
 const Fill_Form = ({ data, setdata }) => {
   let [villes, setvilles] = useState([{ value: 0, name: "" }]);
+  const [value, setValue] = useState(null);
 
   useEffect(() => {
     get_villes(setvilles);
   }, []);
 
   return (
-    <form class="w-full max-w-lg ">
-      <div class="flex flex-wrap -mx-3 mb-6">
-        <div class="w-full px-3">
+    <form className="w-full max-w-lg ">
+      <div className="flex flex-wrap -mx-3 mb-6">
+        <div className="w-full px-3">
           <label
-            class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+            className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
             for="grid-name"
           >
             Partenaire
           </label>
           <input
-            class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+            className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
             id="grid-name"
             type="text"
             value={data.partner_name}
@@ -38,15 +44,15 @@ const Fill_Form = ({ data, setdata }) => {
             placeholder="Jane Doe"
           />
         </div>
-        <div class="w-full px-3">
+        <div className="w-full px-3">
           <label
-            class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+            className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
             for="grid-name"
           >
             Adresse
           </label>
           <input
-            class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+            className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
             id="grid-name"
             value={data.partner_address}
             onChange={(e) => {
@@ -55,7 +61,7 @@ const Fill_Form = ({ data, setdata }) => {
             type="text"
           />
         </div>
-        <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+        <div className="w-full  px-3 mb-6 md:mb-0 flex flex-row justify-between items-center w-full">
           <Filter_Selector
             title={"Ville"}
             Filter={data.ville}
@@ -65,6 +71,22 @@ const Fill_Form = ({ data, setdata }) => {
             options={villes}
             styles={"!max-w-full"}
           />
+          <div className="flex flex-col justify-center items-start">
+            <h3 className="block font-black mb-2 text-sm  text-gray-900 dark:text-gray-400">
+              {" "}
+              Selece Date
+            </h3>
+            <LocalizationProvider dateAdapter={AdapterDayjs}>
+              <DatePicker
+                label="Date of visite"
+                value={value}
+                onChange={(newValue) => {
+                  setValue(newValue);
+                }}
+                renderInput={(params) => <TextField {...params} />}
+              />
+            </LocalizationProvider>
+          </div>
         </div>
       </div>
     </form>
@@ -98,7 +120,9 @@ function Add_new_task({ open, OnClick }) {
         <DialogTitle>{"Ajoutez une tâche"}</DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-slide-description">
-            <p class="text-gray-600 text-xs ">Remplissez les champs vides</p>
+            <p className="text-gray-600 text-xs ">
+              Remplissez les champs vides
+            </p>
           </DialogContentText>
         </DialogContent>
         <div className="w-full grid place-content-center">

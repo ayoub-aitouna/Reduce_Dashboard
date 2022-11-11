@@ -12,9 +12,9 @@ import Cookies from "js-cookie";
 import { useCookies } from "react-cookie";
 const Fill_Form = ({ data, setdata }) => {
   return (
-    <form class="w-full max-w-lg ">
-      <div class="flex flex-wrap -mx-3 mb-6">
-        <div class="w-full px-3 mb-6 md:mb-0">
+    <form className="w-full max-w-lg ">
+      <div className="flex flex-wrap -mx-3 mb-6">
+        <div className="w-full px-3 mb-6 md:mb-0">
           <Filter_Selector
             title={"Partenaire Statut"}
             Filter={data.partner_status}
@@ -68,7 +68,9 @@ function SetAsDone({ open, OnClick, item, setrefrech }) {
         <DialogTitle>{"Tâche effectuée"}</DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-slide-description">
-            <p class="text-gray-600 text-xs ">Remplissez les champs vides</p>
+            <p className="text-gray-600 text-xs ">
+              Remplissez les champs vides
+            </p>
           </DialogContentText>
         </DialogContent>
         <div className="w-full grid place-content-center">
