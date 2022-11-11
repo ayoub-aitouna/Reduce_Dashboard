@@ -53,9 +53,9 @@ const Fill_Form = ({ data, setdata }) => {
           <input
             className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
             id="grid-name"
-            value={data.full_name}
+            value={data.partner_full_name}
             onChange={(e) => {
-              setdata({ ...data, full_name: e.target.value });
+              setdata({ ...data, partner_full_name: e.target.value });
             }}
             type="text"
           />
@@ -129,11 +129,11 @@ const Fill_Form = ({ data, setdata }) => {
             <LocalizationProvider dateAdapter={AdapterDayjs}>
               <DatePicker
                 label="Date of visite"
-                value={data.visite_date}
+                value={data.data_of_visite}
                 onChange={(newValue) => {
                   setdata({
                     ...data,
-                    visite_date: newValue.$d
+                    data_of_visite: newValue.$d
                       .toISOString()
                       .slice(0, 19)
                       .replace("T", " "),
@@ -158,6 +158,11 @@ function Edite_Task({ open, OnClick, SelectedTask, setSelectedTask }) {
   useEffect(() => {
     if (!loading) hadlerClose();
   }, [loading]);
+
+  useEffect(() => {
+    console.trace(SelectedTask);
+  }, [open]);
+
   return (
     <div>
       <Dialog

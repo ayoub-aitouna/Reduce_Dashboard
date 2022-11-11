@@ -60,12 +60,7 @@ const Task_done = ({ Ref }) => {
   let [isEdite_Task_Dialog_Opend, setEdite_Task_Dialog_Opend] = useState(false);
   let [refrech, setrefrech] = useState(0);
 
-  const [SelectedTask, setSelectedTask] = useState({
-    id: 0,
-    partner_name: "",
-    partner_address: "",
-    partner_status: "",
-  });
+  const [SelectedTask, setSelectedTask] = useState({});
   const [cookies, setCookie, removeCookie] = useCookies([Coockies_name]);
 
   const handleRequest = async () => {
