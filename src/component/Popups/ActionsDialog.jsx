@@ -5,8 +5,8 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
-import { Button as MyButton } from "./index";
-import { BaseUrl } from "../constants";
+import { Button as MyButton } from "../index";
+import { BaseUrl } from "../../constants";
 
 function ActionsDialog({ open, OnClick, data }) {
   const hadlerClose = () => {

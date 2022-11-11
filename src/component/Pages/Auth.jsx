@@ -6,53 +6,67 @@ import Cookies from "js-cookie";
 import { Icon_Auth } from "../assets";
 import { useNavigate } from "react-router-dom";
 
-const login_submit = async (
-  email,
-  pass,
-  callback = () => {},
-  err = () => {}
-) => {
-  try {
-    const req = await fetch(`${BaseUrl}/auth/admin`, {
-      method: "POST",
-      mode: "cors",
-      cache: "no-cache",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      referrerPolicy: "no-referrer",
-      body: JSON.stringify({
-        email: email,
-        password: pass,
-      }),
-    });
-    if (req.ok) {
-      callback(await req.json());
-    } else {
-      err();
-    }
-  } catch (error_msg) {
-    err();
-  }
-};
-
 const AuthForm = () => {
   let navigate = useNavigate();
   const [loading, setloading] = useState(false);
   const [cookies, setCookie, removeCookie] = useCookies([Coockies_name]);
+  const [login, setlogin] = useState({
+    email: "",
+    password: "",
+  });
   useEffect(() => {
     if (cookies.accesToken != null || cookies.accesToken != undefined) {
       navigate(`/home`);
     }
   }, []);
 
-  const [login, setlogin] = useState({
-    email: "",
-    password: "",
-  });
+  const login_call = (data) => {
+    setloading(false);
+    console.log(data);
+    Cookies.set("accesToken", data.accesToken);
+    Cookies.set("role", data.rol);
+    Cookies.set("name", data._name);
+
+    setCookie("accesToken", data.accesToken, { path: "/" });
+    setCookie("name", data._name, { path: "/" });
+    setCookie("role", data.role, { path: "/" });
+    navigate(`/home`);
+  };
+
+  const login_submit = async (event) => {
+    event.preventDefault();
+    setloading(true);
+    try {
+      const req = await fetch(`${BaseUrl}/auth/admin`, {
+        method: "POST",
+        mode: "cors",
+        cache: "no-cache",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        referrerPolicy: "no-referrer",
+        body: JSON.stringify({
+          email: login.email,
+          password: login.password,
+        }),
+      });
+      if (req.ok) {
+        login_call(await req.json());
+      } else {
+        setlogin({ ...login, password: "" });
+        setloading(false);
+        alert("error password or email not correct");
+      }
+    } catch (error_msg) {
+      setlogin({ ...login, password: "" });
+      setloading(false);
+      alert("error password or email not correct");
+    }
+  };
+
   return (
     <>
-      <form>
+      <form onSubmit={login_submit}>
         <div className="w-full h-full  flex flex-col justify-center items-center gap-5">
           <div className="flex flex-row text-[#2E5CFF] text-4xl font-black gap-2 justify-start items-center pb-9">
             <img
@@ -82,32 +96,9 @@ const AuthForm = () => {
             type="password"
           />
           <Button
+            OnClick={() => login_submit()}
             title={"Connectez-vous"}
             Icon={() => LoadingIcon(loading)}
-            OnClick={() => {
-              setloading(true);
-              login_submit(
-                login.email,
-                login.password,
-                (data) => {
-                  setloading(false);
-                  console.log(data);
-                  Cookies.set("accesToken", data.accesToken);
-                  Cookies.set("role", data.rol);
-                  Cookies.set("name", data._name);
-
-                  setCookie("accesToken", data.accesToken, { path: "/" });
-                  setCookie("name", data._name, { path: "/" });
-                  setCookie("role", data.role, { path: "/" });
-                  navigate(`/home`);
-                },
-                (err) => {
-                  setlogin({ ...login, password: "" });
-                  setloading(false);
-                  alert("error password or email not correct");
-                }
-              );
-            }}
             style="!h-[30px] p-[30px] mt-auto"
           />
         </div>

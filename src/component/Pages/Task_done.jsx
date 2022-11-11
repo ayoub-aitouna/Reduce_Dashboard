@@ -18,8 +18,26 @@ const DataRow = ({ item, index, onClick = () => {} }) => {
       <td class="px-6 py-4 whitespace-nowrap text-sm font-medium ">
         {item.partner_name}
       </td>
+      <td className="px-6 py-4 whitespace-nowrap text-sm font-medium ">
+        {item.partner_full_name}
+      </td>
+      <td className="px-6 py-4 whitespace-nowrap text-sm font-medium ">
+        {item.phone_number}
+      </td>
+      <td className="px-6 py-4 whitespace-nowrap text-sm font-medium ">
+        {item.note}
+      </td>
+      <td className="px-6 py-4 whitespace-nowrap text-sm font-medium ">
+        {`${new Date(item.data_of_visite).getDate()}/${new Date(
+          item.data_of_visite
+        ).getMonth()}/${new Date(item.data_of_visite).getFullYear()}`}
+      </td>
       <td class="px-6 py-4 whitespace-nowrap text-sm font-medium ">
-        {item.partner_status}
+        {item.partner_status == "intrested"
+          ? "Intéressé"
+          : item.partner_status == "not_intrested"
+          ? "Pas intéressé"
+          : "En cours"}
       </td>
       <td class="px-6 py-4 whitespace-nowrap text-sm font-medium ">
         {item._name}
@@ -46,12 +64,7 @@ const Task_done = ({ Ref }) => {
   let [isEdite_Task_Dialog_Opend, setEdite_Task_Dialog_Opend] = useState(false);
   let [refrech, setrefrech] = useState(0);
 
-  const [SelectedTask, setSelectedTask] = useState({
-    id: 0,
-    partner_name: "",
-    partner_address: "",
-    partner_status: "",
-  });
+  const [SelectedTask, setSelectedTask] = useState({});
   const [cookies, setCookie, removeCookie] = useCookies([Coockies_name]);
 
   const handleRequest = async () => {
@@ -80,6 +93,7 @@ const Task_done = ({ Ref }) => {
   useEffect(() => {
     handleRequest();
   }, [refrech]);
+
   useEffect(() => {
     setrefrech((val) => val + 1);
   }, [Ref]);
@@ -87,7 +101,7 @@ const Task_done = ({ Ref }) => {
   return (
     <div class="flex flex-col  border-[1px] my-10 border-gray-200 rounded-lg ">
       <Edite_Task
-        setrefrech={setrefrech}
+        setRef={setrefrech}
         open={isEdite_Task_Dialog_Opend}
         setSelectedTask={setSelectedTask}
         OnClick={() => {
@@ -112,6 +126,31 @@ const Task_done = ({ Ref }) => {
                     class="text-sm font-medium text-gray-900 px-6 py-4 text-left"
                   >
                     Partenaire
+                  </th>
+                  <th
+                    scope="col"
+                    className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
+                  >
+                    Nom et Prenom
+                  </th>
+                  <th
+                    scope="col"
+                    className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
+                  >
+                    Tele
+                  </th>
+                  <th
+                    scope="col"
+                    className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
+                  >
+                    Note
+                  </th>
+
+                  <th
+                    scope="col"
+                    className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
+                  >
+                    Visite Date
                   </th>
                   <th
                     scope="col"

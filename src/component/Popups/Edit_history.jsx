@@ -53,28 +53,28 @@ function Edit_history() {
 
 function EditeTable({ Data }) {
   return (
-    <div class="flex flex-col  border-[1px] my-10 border-gray-200 rounded-lg ">
-      <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
-        <div class="py-2 inline-block min-w-full sm:px-6 lg:px-8">
-          <div class="overflow-hidden">
-            <table class="min-w-full">
-              <thead class="bg-white border-b">
+    <div className="flex flex-col  border-[1px] my-10 border-gray-200 rounded-lg ">
+      <div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
+        <div className="py-2 inline-block min-w-full sm:px-6 lg:px-8">
+          <div className="overflow-hidden">
+            <table className="min-w-full">
+              <thead className="bg-white border-b">
                 <tr>
                   <th
                     scope="col"
-                    class="text-sm font-medium text-gray-900 px-6 py-4 text-left"
+                    className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
                   >
                     Nom administrateur
                   </th>
                   <th
                     scope="col"
-                    class="text-sm font-medium text-gray-900 px-6 py-4 text-left"
+                    className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
                   >
                     Nom Partenaire
                   </th>
                   <th
                     scope="col"
-                    class="text-sm font-medium text-gray-900 px-6 py-4 text-left"
+                    className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
                   >
                     Date
                   </th>
@@ -102,13 +102,13 @@ const DataRow = ({ item, index }) => {
         index % 2 == 0 ? "bg-gray-100" : "bg-white"
       } border-b`}
     >
-      <td class="px-6 py-4 whitespace-nowrap text-sm font-medium ">
+      <td className="px-6 py-4 whitespace-nowrap text-sm font-medium ">
         {item._name}
       </td>
-      <td class="px-6 py-4 whitespace-nowrap text-sm font-medium ">
+      <td className="px-6 py-4 whitespace-nowrap text-sm font-medium ">
         {item.nome_entreprise}
       </td>
-      <td class="px-6 py-4 whitespace-nowrap text-sm font-medium ">
+      <td className="px-6 py-4 whitespace-nowrap text-sm font-medium ">
         {`${new Date(item.created_date).getDate()}/${new Date(
           item.created_date
         ).getMonth()}/${new Date(item.created_date).getFullYear()}`}

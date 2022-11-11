@@ -5,16 +5,16 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
-import { Button as MyButton, Filter_Selector, LoadingIcon } from "./index";
-import { BaseUrl, Coockies_name } from "../constants";
+import { Button as MyButton, Filter_Selector, LoadingIcon } from "../index";
+import { BaseUrl, Coockies_name } from "../../constants";
 
 import Cookies from "js-cookie";
 import { useCookies } from "react-cookie";
 const Fill_Form = ({ data, setdata }) => {
   return (
-    <form class="w-full max-w-lg ">
-      <div class="flex flex-wrap -mx-3 mb-6">
-        <div class="w-full px-3 mb-6 md:mb-0">
+    <form className="w-full max-w-lg ">
+      <div className="flex flex-wrap -mx-3 mb-6">
+        <div className="w-full px-3 mb-6 md:mb-0">
           <Filter_Selector
             title={"Partenaire Statut"}
             Filter={data.partner_status}
@@ -41,12 +41,10 @@ function SetAsDone({ open, OnClick, item, setrefrech }) {
   let [data, setdata] = useState({});
   const [loading, setloading] = useState(false);
   useEffect(() => {
-    setdata({
-      id: item.id,
-      partner_name: item.partner_name,
-      partner_status: "not_intrested",
-    });
+    setdata(item);
+    console.trace(data);
   }, [open]);
+
   const hadlerClose = () => {
     OnClick();
   };
@@ -68,7 +66,9 @@ function SetAsDone({ open, OnClick, item, setrefrech }) {
         <DialogTitle>{"Tâche effectuée"}</DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-slide-description">
-            <p class="text-gray-600 text-xs ">Remplissez les champs vides</p>
+            <p className="text-gray-600 text-xs ">
+              Remplissez les champs vides
+            </p>
           </DialogContentText>
         </DialogContent>
         <div className="w-full grid place-content-center">

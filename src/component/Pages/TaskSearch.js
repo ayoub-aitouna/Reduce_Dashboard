@@ -24,10 +24,28 @@ const DataRow = ({ item, index, onClick = () => {} }) => {
       <td class="px-6 py-4 whitespace-nowrap text-sm font-medium ">
         {item.partner_name}
       </td>
+      <td className="px-6 py-4 whitespace-nowrap text-sm font-medium ">
+        {item.partner_full_name}
+      </td>
+      <td className="px-6 py-4 whitespace-nowrap text-sm font-medium ">
+        {item.phone_number}
+      </td>
+      <td className="px-6 py-4 whitespace-nowrap text-sm font-medium ">
+        {item.note}
+      </td>
+      <td className="px-6 py-4 whitespace-nowrap text-sm font-medium ">
+        {`${new Date(item.data_of_visite).getDate()}/${new Date(
+          item.data_of_visite
+        ).getMonth()}/${new Date(item.data_of_visite).getFullYear()}`}
+      </td>
       <td class="px-6 py-4 whitespace-nowrap text-sm font-medium ">
-        {item.partner_status != undefined
-          ? item.partner_status
-          : "Not Available "}
+        {item.partner_status === "intrested"
+          ? "Intéressé"
+          : item.partner_status === "not_intrested"
+          ? "Pas intéressé"
+          : item.partner_status === "thinking"
+          ? "En cours"
+          : "toujours en attente"}
       </td>
       <td class="px-6 py-4 whitespace-nowrap text-sm font-medium ">
         {item._name != undefined ? item._name : "Not Available "}
@@ -91,6 +109,31 @@ const TaskSearch = ({ Search }) => {
                   </th>
                   <th
                     scope="col"
+                    className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
+                  >
+                    Nom et Prenom
+                  </th>
+                  <th
+                    scope="col"
+                    className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
+                  >
+                    Tele
+                  </th>
+                  <th
+                    scope="col"
+                    className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
+                  >
+                    Note
+                  </th>
+
+                  <th
+                    scope="col"
+                    className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
+                  >
+                    Visite Date
+                  </th>
+                  <th
+                    scope="col"
                     class="text-sm font-medium text-gray-900 px-6 py-4 text-left"
                   >
                     partner status
@@ -99,7 +142,7 @@ const TaskSearch = ({ Search }) => {
                     scope="col"
                     class="text-sm font-medium text-gray-900 px-6 py-4 text-left"
                   >
-                    manager name
+                    Auteur
                   </th>
                   <th
                     scope="col"

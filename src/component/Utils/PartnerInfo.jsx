@@ -13,12 +13,12 @@ import { useCookies } from "react-cookie";
 
 const DataRow = ({ title, data = null, Render = () => <></> }) => {
   return (
-    <li class="px-6 py-4 whitespace-nowrap text-sm font-medium w-full h-[107px]">
-      <div class="grid overflow-hidden grid-cols-4 grid-rows-2 gap-2 rounded-mg h-full p-1">
-        <div class="box row-start-1 row-span-6 col-start-3 col-end-1 flex flex-col justify-center items-start">
+    <li className="px-6 py-4 whitespace-nowrap text-sm font-medium w-full h-[107px]">
+      <div className="grid overflow-hidden grid-cols-4 grid-rows-2 gap-2 rounded-mg h-full p-1">
+        <div className="box row-start-1 row-span-6 col-start-3 col-end-1 flex flex-col justify-center items-start">
           {title}
         </div>
-        <div class="box row-span-6 col-start-3 col-end-12  flex flex-row justify-end items-center">
+        <div className="box row-span-6 col-start-3 col-end-12  flex flex-row justify-end items-center">
           <p className="mr-auto">: </p> {data ? <p>{data}</p> : <Render />}
         </div>
       </div>
