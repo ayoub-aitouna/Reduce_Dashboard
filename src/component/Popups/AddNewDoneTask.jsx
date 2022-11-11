@@ -7,20 +7,25 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import { Button as MyButton, Filter_Selector, LoadingIcon } from "./index";
 import { BaseUrl, Coockies_name } from "../constants";
-import { useCookies } from "react-cookie";
 import { get_villes } from "../Utils/villes/get_villes";
 import { Dayjs } from "dayjs";
 import TextField from "@mui/material/TextField";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import Cookies from "js-cookie";
+import { useCookies } from "react-cookie";
 
 const Fill_Form = ({ data, setdata }) => {
   let [villes, setvilles] = useState([{ value: 0, name: "" }]);
 
   useEffect(() => {
     get_villes(setvilles);
-  }, []);
+  }, [data]);
+
+  useEffect(() => {
+    console.log(data);
+  }, [data]);
 
   return (
     <form className="w-full max-w-lg ">
@@ -53,9 +58,9 @@ const Fill_Form = ({ data, setdata }) => {
           <input
             className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
             id="grid-name"
-            value={data.partner_full_name}
+            value={data.full_name}
             onChange={(e) => {
-              setdata({ ...data, partner_full_name: e.target.value });
+              setdata({ ...data, full_name: e.target.value });
             }}
             type="text"
           />
@@ -70,9 +75,9 @@ const Fill_Form = ({ data, setdata }) => {
           <input
             className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
             id="grid-name"
-            value={data.partner_address}
+            value={data.adrress}
             onChange={(e) => {
-              setdata({ ...data, partner_address: e.target.value });
+              setdata({ ...data, adrress: e.target.value });
             }}
             type="text"
           />
@@ -129,11 +134,11 @@ const Fill_Form = ({ data, setdata }) => {
             <LocalizationProvider dateAdapter={AdapterDayjs}>
               <DatePicker
                 label="Date of visite"
-                value={data.data_of_visite}
+                value={data.visite_date}
                 onChange={(newValue) => {
                   setdata({
                     ...data,
-                    data_of_visite: newValue.$d
+                    visite_date: newValue.$d
                       .toISOString()
                       .slice(0, 19)
                       .replace("T", " "),
@@ -144,25 +149,47 @@ const Fill_Form = ({ data, setdata }) => {
             </LocalizationProvider>
           </div>
         </div>
+        <div className="w-full px-3 mb-6 md:mb-0">
+          <Filter_Selector
+            title={"Partenaire Statut"}
+            Filter={data.partner_status}
+            setFilter={(value) => {
+              setdata({ ...data, partner_status: value });
+            }}
+            options={[
+              { value: "", name: "" },
+              { value: "not_intrested", name: "Pas intéressé" },
+              { value: "intrested", name: "Intéressé" },
+              { value: "thinking", name: "En cours" },
+            ]}
+            styles={"!max-w-full"}
+          />
+        </div>
       </div>
     </form>
   );
 };
-function Edite_Task({ open, OnClick, SelectedTask, setSelectedTask }) {
-  const [cookies, setCookie, removeCookie] = useCookies([Coockies_name]);
-  const [loading, setloading] = useState(false);
 
+function AddNewDoneTask({ open, OnClick, setRef }) {
+  let [data, setdata] = useState({
+    id: 1,
+    partner_name: "",
+    partner_status: "",
+    note: "",
+    full_name: "",
+    phone_number: "",
+    visite_date: "",
+    adrress: "",
+  });
+  const [cookies, setCookie, removeCookie] = useCookies([Coockies_name]);
+
+  const [loading, setloading] = useState(false);
   const hadlerClose = () => {
     OnClick();
   };
   useEffect(() => {
     if (!loading) hadlerClose();
   }, [loading]);
-
-  useEffect(() => {
-    console.trace(SelectedTask);
-  }, [open]);
-
   return (
     <div>
       <Dialog
@@ -172,7 +199,7 @@ function Edite_Task({ open, OnClick, SelectedTask, setSelectedTask }) {
         onClose={hadlerClose}
         aria-describedby="alert-dialog-slide-description"
       >
-        <DialogTitle>{"Modifier Tâches"}</DialogTitle>
+        <DialogTitle>{"Ajoutez une Tâche"}</DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-slide-description">
             <p className="text-gray-600 text-xs ">
@@ -181,11 +208,7 @@ function Edite_Task({ open, OnClick, SelectedTask, setSelectedTask }) {
           </DialogContentText>
         </DialogContent>
         <div className="w-full grid place-content-center">
-          <Fill_Form
-            data={SelectedTask}
-            setdata={setSelectedTask}
-            open={open}
-          />
+          <Fill_Form data={data} setdata={setdata} />
         </div>
         <div className="h-[60px]"></div>
         <DialogActions>
@@ -193,7 +216,7 @@ function Edite_Task({ open, OnClick, SelectedTask, setSelectedTask }) {
             onClick={async (e) => {
               setloading(true);
               try {
-                const req = await fetch(`${BaseUrl}/Tasks/edit_done`, {
+                const req = await fetch(`${BaseUrl}/Tasks/add_done`, {
                   method: "POST",
                   mode: "cors",
                   cache: "no-cache",
@@ -202,8 +225,9 @@ function Edite_Task({ open, OnClick, SelectedTask, setSelectedTask }) {
                     Authorization: `Bearer ${cookies.accesToken}`,
                   },
                   referrerPolicy: "no-referrer",
-                  body: JSON.stringify(SelectedTask),
+                  body: JSON.stringify(data),
                 });
+                setRef((val) => val + 1);
                 setloading(false);
               } catch (err) {
                 setloading(false);
@@ -228,4 +252,4 @@ function Edite_Task({ open, OnClick, SelectedTask, setSelectedTask }) {
   );
 }
 
-export default Edite_Task;
+export default AddNewDoneTask;

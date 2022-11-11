@@ -1,12 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { AiOutlineFileDone } from "react-icons/ai";
-
-import { IconHalder, SetAsDone } from "./index";
+import { AiFillEdit } from "react-icons/ai";
+import { IconHalder, Edite_Task } from "./index";
 import { BaseUrl, Coockies_name } from "../constants";
 
-import Cookies from "js-cookie";
 import { useCookies } from "react-cookie";
-
 // Data Row
 const DataRow = ({ item, index, onClick = () => {} }) => {
   return (
@@ -15,10 +12,10 @@ const DataRow = ({ item, index, onClick = () => {} }) => {
         index % 2 == 0 ? "bg-gray-100" : "bg-white"
       } border-b`}
     >
-      <td className="px-6 py-4 whitespace-nowrap text-sm font-medium ">
+      <td class="px-6 py-4 whitespace-nowrap text-sm font-medium ">
         {item.id}
       </td>
-      <td className="px-6 py-4 whitespace-nowrap text-sm font-medium ">
+      <td class="px-6 py-4 whitespace-nowrap text-sm font-medium ">
         {item.partner_name}
       </td>
       <td className="px-6 py-4 whitespace-nowrap text-sm font-medium ">
@@ -35,45 +32,44 @@ const DataRow = ({ item, index, onClick = () => {} }) => {
           item.data_of_visite
         ).getMonth()}/${new Date(item.data_of_visite).getFullYear()}`}
       </td>
-      <td className="px-6 py-4 whitespace-nowrap text-sm font-medium ">
-        "En cours"
+      <td class="px-6 py-4 whitespace-nowrap text-sm font-medium ">
+        {item.partner_status == "intrested"
+          ? "Intéressé"
+          : item.partner_status == "not_intrested"
+          ? "Pas intéressé"
+          : "En cours"}
       </td>
-      <td className="px-6 py-4 whitespace-nowrap text-sm font-medium ">
+      <td class="px-6 py-4 whitespace-nowrap text-sm font-medium ">
+        {item._name}
+      </td>
+      <td class="px-6 py-4 whitespace-nowrap text-sm font-medium ">
         {item.ville_name}
       </td>
-      <td className="px-6 py-4 whitespace-nowrap text-sm font-medium ">
-        {item.adrress}
-      </td>
       <td
-        className="px-6 py-4 whitespace-nowrap text-sm font-medium "
+        class="px-6 py-4 whitespace-nowrap text-sm font-medium "
         onClick={() => {
-          onClick(item);
+          const { id, partner_name, partner_status } = item;
+          onClick();
         }}
       >
-        <IconHalder Icon={() => <AiOutlineFileDone />} style="text-[20px]" />
+        <IconHalder Icon={() => <AiFillEdit />} style="text-[20px]" />
       </td>
     </tr>
   );
 };
 
-const Task_anounsments = () => {
+// task done Components
+const Task_done = ({ Ref }) => {
   let [data, setdata] = useState([]);
+  let [isEdite_Task_Dialog_Opend, setEdite_Task_Dialog_Opend] = useState(false);
   let [refrech, setrefrech] = useState(0);
+
+  const [SelectedTask, setSelectedTask] = useState({});
   const [cookies, setCookie, removeCookie] = useCookies([Coockies_name]);
-  const [isDialogOpend, setDialogOpend] = useState(false);
-  const [SelectedTask, setSelectedTask] = useState({
-    id: 1,
-    partner_name: "",
-    partner_status: "",
-    note: "",
-    full_name: "",
-    phone_number: "",
-    visite_date: "",
-  });
 
   const handleRequest = async () => {
     try {
-      const req = await fetch(`${BaseUrl}/Tasks/announcement`, {
+      const req = await fetch(`${BaseUrl}/Tasks/done`, {
         method: "GET",
         mode: "cors",
         cache: "no-cache",
@@ -85,11 +81,12 @@ const Task_anounsments = () => {
       });
       if (req.ok) {
         const data = await req.json();
-        console.trace(data);
         setdata(data);
+      } else {
+        console.error(await req.json());
       }
     } catch (err) {
-      console.error(err);
+      alert(err);
     }
   };
 
@@ -97,32 +94,36 @@ const Task_anounsments = () => {
     handleRequest();
   }, [refrech]);
 
-  data = data.filter((v) => v.task_status == "Pending");
+  useEffect(() => {
+    setrefrech((val) => val + 1);
+  }, [Ref]);
+
   return (
-    <div className="flex flex-col  border-[1px] my-10 border-gray-200 rounded-lg ">
-      <SetAsDone
-        setrefrech={setrefrech}
-        open={isDialogOpend}
+    <div class="flex flex-col  border-[1px] my-10 border-gray-200 rounded-lg ">
+      <Edite_Task
+        setRef={setrefrech}
+        open={isEdite_Task_Dialog_Opend}
+        setSelectedTask={setSelectedTask}
         OnClick={() => {
-          setDialogOpend(false);
+          setEdite_Task_Dialog_Opend(false);
         }}
-        item={SelectedTask}
+        SelectedTask={SelectedTask}
       />
-      <div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
-        <div className="py-2 inline-block min-w-full sm:px-6 lg:px-8">
-          <div className="overflow-hidden">
-            <table className="min-w-full">
-              <thead className="bg-white border-b">
+      <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
+        <div class="py-2 inline-block min-w-full sm:px-6 lg:px-8">
+          <div class="overflow-hidden">
+            <table class="min-w-full">
+              <thead class="bg-white border-b">
                 <tr>
                   <th
                     scope="col"
-                    className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
+                    class="text-sm font-medium text-gray-900 px-6 py-4 text-left"
                   >
                     #
                   </th>
                   <th
                     scope="col"
-                    className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
+                    class="text-sm font-medium text-gray-900 px-6 py-4 text-left"
                   >
                     Partenaire
                   </th>
@@ -153,27 +154,27 @@ const Task_anounsments = () => {
                   </th>
                   <th
                     scope="col"
-                    className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
+                    class="text-sm font-medium text-gray-900 px-6 py-4 text-left"
                   >
-                    Satut
+                    statut
                   </th>
                   <th
                     scope="col"
-                    className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
+                    class="text-sm font-medium text-gray-900 px-6 py-4 text-left"
                   >
-                    Ville
+                    Manager
                   </th>
                   <th
                     scope="col"
-                    className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
+                    class="text-sm font-medium text-gray-900 px-6 py-4 text-left"
                   >
-                    Adresse
+                    ville
                   </th>
                   <th
                     scope="col"
-                    className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
+                    class="text-sm font-medium text-gray-900 px-6 py-4 text-left"
                   >
-                    Résultat
+                    Modifier
                   </th>
                 </tr>
               </thead>
@@ -184,9 +185,9 @@ const Task_anounsments = () => {
                       key={item.id}
                       item={item}
                       index={index}
-                      onClick={(selected) => {
-                        setDialogOpend(true);
-                        setSelectedTask(selected);
+                      onClick={() => {
+                        setSelectedTask(item);
+                        setEdite_Task_Dialog_Opend(true);
                       }}
                     />
                   </>
@@ -199,5 +200,4 @@ const Task_anounsments = () => {
     </div>
   );
 };
-
-export default Task_anounsments;
+export default Task_done;

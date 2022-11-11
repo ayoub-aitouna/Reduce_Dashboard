@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { AiFillEdit } from "react-icons/ai";
-import { IconHalder, Edite_Task } from "./index";
+import { AiOutlineFileDone } from "react-icons/ai";
+
+import { IconHalder, SetAsDone } from "./index";
 import { BaseUrl, Coockies_name } from "../constants";
 
+import Cookies from "js-cookie";
 import { useCookies } from "react-cookie";
+
 // Data Row
 const DataRow = ({ item, index, onClick = () => {} }) => {
   return (
@@ -12,10 +15,10 @@ const DataRow = ({ item, index, onClick = () => {} }) => {
         index % 2 == 0 ? "bg-gray-100" : "bg-white"
       } border-b`}
     >
-      <td class="px-6 py-4 whitespace-nowrap text-sm font-medium ">
+      <td className="px-6 py-4 whitespace-nowrap text-sm font-medium ">
         {item.id}
       </td>
-      <td class="px-6 py-4 whitespace-nowrap text-sm font-medium ">
+      <td className="px-6 py-4 whitespace-nowrap text-sm font-medium ">
         {item.partner_name}
       </td>
       <td className="px-6 py-4 whitespace-nowrap text-sm font-medium ">
@@ -32,40 +35,46 @@ const DataRow = ({ item, index, onClick = () => {} }) => {
           item.data_of_visite
         ).getMonth()}/${new Date(item.data_of_visite).getFullYear()}`}
       </td>
-      <td class="px-6 py-4 whitespace-nowrap text-sm font-medium ">
-        {item.partner_status}
+      <td className="px-6 py-4 whitespace-nowrap text-sm font-medium ">
+        "En cours"
       </td>
-      <td class="px-6 py-4 whitespace-nowrap text-sm font-medium ">
-        {item._name}
-      </td>
-      <td class="px-6 py-4 whitespace-nowrap text-sm font-medium ">
+      <td className="px-6 py-4 whitespace-nowrap text-sm font-medium ">
         {item.ville_name}
       </td>
+      <td className="px-6 py-4 whitespace-nowrap text-sm font-medium ">
+        {item.adrress}
+      </td>
       <td
-        class="px-6 py-4 whitespace-nowrap text-sm font-medium "
+        className="px-6 py-4 whitespace-nowrap text-sm font-medium "
         onClick={() => {
-          const { id, partner_name, partner_status } = item;
-          onClick();
+          onClick(item);
         }}
       >
-        <IconHalder Icon={() => <AiFillEdit />} style="text-[20px]" />
+        <IconHalder Icon={() => <AiOutlineFileDone />} style="text-[20px]" />
       </td>
     </tr>
   );
 };
 
-// task done Components
-const Task_done = ({ Ref }) => {
+const Task_anounsments = () => {
   let [data, setdata] = useState([]);
-  let [isEdite_Task_Dialog_Opend, setEdite_Task_Dialog_Opend] = useState(false);
   let [refrech, setrefrech] = useState(0);
-
-  const [SelectedTask, setSelectedTask] = useState({});
   const [cookies, setCookie, removeCookie] = useCookies([Coockies_name]);
+  const [isDialogOpend, setDialogOpend] = useState(false);
+  const [SelectedTask, setSelectedTask] = useState({
+    id: 1,
+    partner_name: "",
+    partner_status: "",
+    note: "",
+    full_name: "",
+    phone_number: "",
+    visite_date: "",
+    adrress: "",
+  });
 
   const handleRequest = async () => {
     try {
-      const req = await fetch(`${BaseUrl}/Tasks/done`, {
+      const req = await fetch(`${BaseUrl}/Tasks/announcement`, {
         method: "GET",
         mode: "cors",
         cache: "no-cache",
@@ -79,47 +88,42 @@ const Task_done = ({ Ref }) => {
         const data = await req.json();
         console.trace(data);
         setdata(data);
-      } else {
-        console.error(await req.json());
       }
     } catch (err) {
-      alert(err);
+      console.error(err);
     }
   };
 
   useEffect(() => {
     handleRequest();
   }, [refrech]);
-  useEffect(() => {
-    setrefrech((val) => val + 1);
-  }, [Ref]);
 
+  data = data.filter((v) => v.task_status == "Pending");
   return (
-    <div class="flex flex-col  border-[1px] my-10 border-gray-200 rounded-lg ">
-      <Edite_Task
+    <div className="flex flex-col  border-[1px] my-10 border-gray-200 rounded-lg ">
+      <SetAsDone
         setrefrech={setrefrech}
-        open={isEdite_Task_Dialog_Opend}
-        setSelectedTask={setSelectedTask}
+        open={isDialogOpend}
         OnClick={() => {
-          setEdite_Task_Dialog_Opend(false);
+          setDialogOpend(false);
         }}
-        SelectedTask={SelectedTask}
+        item={SelectedTask}
       />
-      <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
-        <div class="py-2 inline-block min-w-full sm:px-6 lg:px-8">
-          <div class="overflow-hidden">
-            <table class="min-w-full">
-              <thead class="bg-white border-b">
+      <div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
+        <div className="py-2 inline-block min-w-full sm:px-6 lg:px-8">
+          <div className="overflow-hidden">
+            <table className="min-w-full">
+              <thead className="bg-white border-b">
                 <tr>
                   <th
                     scope="col"
-                    class="text-sm font-medium text-gray-900 px-6 py-4 text-left"
+                    className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
                   >
                     #
                   </th>
                   <th
                     scope="col"
-                    class="text-sm font-medium text-gray-900 px-6 py-4 text-left"
+                    className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
                   >
                     Partenaire
                   </th>
@@ -150,27 +154,27 @@ const Task_done = ({ Ref }) => {
                   </th>
                   <th
                     scope="col"
-                    class="text-sm font-medium text-gray-900 px-6 py-4 text-left"
+                    className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
                   >
-                    statut
+                    Satut
                   </th>
                   <th
                     scope="col"
-                    class="text-sm font-medium text-gray-900 px-6 py-4 text-left"
+                    className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
                   >
-                    Manager
+                    Ville
                   </th>
                   <th
                     scope="col"
-                    class="text-sm font-medium text-gray-900 px-6 py-4 text-left"
+                    className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
                   >
-                    ville
+                    Adresse
                   </th>
                   <th
                     scope="col"
-                    class="text-sm font-medium text-gray-900 px-6 py-4 text-left"
+                    className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
                   >
-                    Modifier
+                    Résultat
                   </th>
                 </tr>
               </thead>
@@ -181,9 +185,9 @@ const Task_done = ({ Ref }) => {
                       key={item.id}
                       item={item}
                       index={index}
-                      onClick={() => {
-                        setSelectedTask(item);
-                        setEdite_Task_Dialog_Opend(true);
+                      onClick={(selected) => {
+                        setDialogOpend(true);
+                        setSelectedTask(selected);
                       }}
                     />
                   </>
@@ -196,4 +200,5 @@ const Task_done = ({ Ref }) => {
     </div>
   );
 };
-export default Task_done;
+
+export default Task_anounsments;

@@ -34,11 +34,7 @@ function Partner({ selectedStatus }) {
         },
         referrerPolicy: "no-referrer",
       });
-      if (req.ok) {
-        const data = await req.json();
-        setOdata(data);
-      } else {
-      }
+      if (req.ok) setOdata(await req.json());
     } catch (err) {}
   };
 
