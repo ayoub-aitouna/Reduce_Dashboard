@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { AiOutlineFileDone } from "react-icons/ai";
 
-import { IconHalder, SetAsDone } from "./index";
-import { BaseUrl, Coockies_name } from "../constants";
+import { IconHalder, SetAsDone } from "../index";
+import { BaseUrl, Coockies_name } from "../../constants";
 
 import Cookies from "js-cookie";
 import { useCookies } from "react-cookie";

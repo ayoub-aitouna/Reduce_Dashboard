@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Sidebar, Partner } from "./index";
+import { Sidebar, Partner } from "../index";
 import {
   BrowserRouter,
   Routes,
@@ -8,8 +8,8 @@ import {
   Outlet,
 } from "react-router-dom";
 import { useCookies } from "react-cookie";
-import { BaseUrl, Coockies_name } from "../constants";
-import { Check_if_user_valide } from "../Utils/Auth";
+import { BaseUrl, Coockies_name } from "../../constants";
+import { Check_if_user_valide } from "../../Utils/Auth";
 function Home() {
   const [cookies, setCookie, removeCookie] = useCookies([Coockies_name]);
 

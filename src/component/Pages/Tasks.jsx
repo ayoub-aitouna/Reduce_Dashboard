@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-import { SearchBar, Button, AddNewDoneTask } from "./index";
+import { SearchBar, Button, AddNewDoneTask } from "../index";
 import { NavLink, Outlet } from "react-router-dom";
 import { BiTask } from "react-icons/bi";
 

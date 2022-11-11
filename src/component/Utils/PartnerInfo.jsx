@@ -6,8 +6,8 @@ import DialogContent from "@mui/material/DialogContent";
 import { IoIosCloseCircle } from "react-icons/io";
 import { BsCheckCircleFill } from "react-icons/bs";
 import { MdPendingActions } from "react-icons/md";
-import { IconHalder } from "./index";
-import { Button as MyButton, LoadingIcon } from "./index";
+import { IconHalder } from "../index";
+import { Button as MyButton, LoadingIcon } from "../index";
 import { BaseUrl, Coockies_name } from "../constants";
 import { useCookies } from "react-cookie";
 
