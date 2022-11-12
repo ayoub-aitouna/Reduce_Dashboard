@@ -32,8 +32,13 @@ function Edit_history() {
   useEffect(() => {
     setdata(
       Search != ""
-        ? Odata.filter((item) =>
-            item._name.toLowerCase().includes(Search.toLowerCase())
+        ? Odata.filter(
+            (item) =>
+              item._name.toLowerCase().includes(Search.toLowerCase()) ||
+              item.nome_entreprise
+                .toLowerCase()
+                .includes(Search.toLowerCase()) ||
+              item.edited_column.toLowerCase().includes(Search.toLowerCase())
           )
         : Odata
     );
@@ -82,7 +87,13 @@ function EditeTable({ Data }) {
                     scope="col"
                     className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
                   >
-                    Date
+                    attributs mis à jour
+                  </th>
+                  <th
+                    scope="col"
+                    className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
+                  >
+                    date de modification
                   </th>
                 </tr>
               </thead>
@@ -113,6 +124,9 @@ const DataRow = ({ item, index }) => {
       </td>
       <td className="px-6 py-4 whitespace-nowrap text-sm font-medium ">
         {item.nome_entreprise}
+      </td>
+      <td className="px-6 py-4 whitespace-nowrap text-sm font-medium ">
+        {item.edited_column}
       </td>
       <td className="px-6 py-4 whitespace-nowrap text-sm font-medium ">
         {`${new Date(item.created_date).getDate()}/${new Date(

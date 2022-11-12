@@ -61,7 +61,7 @@ const Tasks = ({ setSearch, setRef }) => {
           Icon={() => <BiTask />}
           title={"Ajoutez une tâche"}
           OnClick={() => setNew_Task_Dialog_Opend(true)}
-          style={"!w-[250px] text-[19px] "}
+          style={"!w-[250px] text-[15px] "}
         />
       </div>
     </div>

@@ -65,8 +65,7 @@ const AuthForm = ({ setEmail }) => {
   };
   const request_key = async () => {
     if (login.email === "" || login.email == undefined || login.email === null)
-      alert("Veuillez saisir votre e-mail");
-
+      return alert("Veuillez saisir votre e-mail");
     setloading(true);
     setEmail(login.email);
     try {

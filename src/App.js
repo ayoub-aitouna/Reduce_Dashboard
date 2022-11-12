@@ -25,7 +25,7 @@ function App() {
   let [Ref, setRef] = useState(0);
 
   return (
-    <div className="w-full h-[100vh] !pb-[150px]">
+    <div className="w-full h-[100vh] !pb-[50px]">
       <BrowserRouter>
         <Routes>
           <Route exact path="/" element={<Auth setEmail={setEmail} />} />

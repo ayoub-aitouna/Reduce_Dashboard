@@ -34,10 +34,10 @@ function Sidebar() {
               key={item.key}
               className=" flex flex-col justify-start items-start gap-[10px]"
             >
-              <h3 className="text-[20px] leading-[20px] font-bold pb-[10px]">
+              <h3 className="text-[16px] leading-[20px] font-bold pb-[10px]">
                 {item.groupName}
               </h3>
-              <ul className="flex flex-col gap-5 w-full">
+              <ul className="flex flex-col gap-3 w-full">
                 {item.tabs.map((tab) => (
                   <>
                     {tab.Url == "tasks" ? (
@@ -48,9 +48,9 @@ function Sidebar() {
                           color: isActive ? "#fff" : "#545e6f",
                           background: isActive ? "#2E5CFF" : "#f0f0f0",
                         })}
-                        className=" flex w-[200px] flex-col justify-center items-start  cursor-pointer px-2 py-3 text-[#475569] rounded-md hover:bg-[#2E5CFF] hover:text-white"
+                        className="flex w-[200px] flex-col justify-center items-start  cursor-pointer px-2 py-3 text-[#475569] rounded-md hover:bg-[#2E5CFF] hover:text-white"
                       >
-                        <p className="leading-[20px] font-semibold text-[15px] flex flex-row justify-center items-center gap-3">
+                        <p className="leading-[20px] font-semibold text-[14px] flex flex-row justify-center items-center gap-3">
                           <tab.Icon />
                           {tab.name}
                         </p>

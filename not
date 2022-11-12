@@ -1,8 +1,4 @@
-7# partner Action Error Fix & check validation email & send only if accepted & update mail info.
-
-9# reduce size of button and bellow Bar
-
-last# modif history check what fild has been updated (check every column and add thos what has been changed)
+7# partner Action Error Fix & update mail info.
 
 #done
 
@@ -23,3 +19,7 @@ last# modif history check what fild has been updated (check every column and add
     +edite admin & change pass
 
     +Modif history Search Bar
+
+    +modif history check what fild has been updated (check every column and add thos what has been changed)
+
+    +reduce size of button and bellow Bar
