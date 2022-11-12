@@ -7,6 +7,7 @@ function Edit_history() {
   const [Search, setSearch] = useState("");
   const [cookies, setCookie, removeCookie] = useCookies([Coockies_name]);
   let [data, setdata] = useState([]);
+  let [Odata, setOdata] = useState([]);
 
   const handleRequest = async () => {
     try {
@@ -20,18 +21,23 @@ function Edit_history() {
         },
         referrerPolicy: "no-referrer",
       });
-      if (req.ok) {
-        const data = await req.json();
-        console.table(data);
-        setdata(data);
-      } else {
-      }
+      if (req.ok) setOdata(await req.json());
     } catch (err) {}
   };
 
   useEffect(() => {
     handleRequest();
   }, []);
+
+  useEffect(() => {
+    setdata(
+      Search != ""
+        ? Odata.filter((item) =>
+            item._name.toLowerCase().includes(Search.toLowerCase())
+          )
+        : Odata
+    );
+  }, [Search, Odata]);
 
   return (
     <div className="p-5 my-10">

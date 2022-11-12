@@ -36,7 +36,7 @@ const UpdatePartner = ({ open, OnClick, partner, setRefresh }) => {
         onClose={hadlerClose}
         aria-describedby="alert-dialog-slide-description"
       >
-        <DialogTitle>{"Ajoutez une tâche"}</DialogTitle>
+        <DialogTitle>{"Mettre à Jour Ce Partenaire"}</DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-slide-description">
             <p class="text-gray-600 text-xs ">Remplissez les champs vides</p>

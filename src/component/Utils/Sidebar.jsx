@@ -3,7 +3,7 @@ import { BiExit } from "react-icons/bi";
 import { Button } from "../index";
 import { NavLink } from "react-router-dom";
 import { useCookies } from "react-cookie";
-import { Coockies_name,SideBarLinks } from "../../constants";
+import { Coockies_name, SideBarLinks } from "../../constants";
 import { useNavigate } from "react-router-dom";
 import { Icon } from "../../assets";
 
@@ -13,7 +13,9 @@ function Sidebar() {
   useEffect(() => {
     setLinks((per) =>
       per.filter((item) =>
-        cookies.role == "Admin" ? item.groupName : item.groupName != "ADMIN"
+        cookies.role == "Admin"
+          ? item.groupName
+          : item.groupName != "ADMINISTRATEUR"
       )
     );
   }, []);

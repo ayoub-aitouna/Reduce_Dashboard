@@ -10,9 +10,9 @@ import {
   SearchBar,
   Button,
   AddNewAdmin,
-  ActionsDialog,
   AdminsTable,
   Add_new_task as AddNewTask,
+  UpdateAdmin,
 } from "../index";
 
 function Admins() {
@@ -23,7 +23,7 @@ function Admins() {
   const [Role, setRole] = useState("");
   const [villes, setvilles] = useState([]);
   const [AccountState, setAccountState] = useState("");
-  const [SelectedPartner, setSelectedpartner] = useState({});
+  const [SelectedAdmin, setSelectedAdmin] = useState({});
   const [data, setdata] = useState([]);
   const [activity_entrprise, setactivity_entrprise] = useState("");
   const [Search, setSearch] = useState("");
@@ -84,14 +84,20 @@ function Admins() {
         OnClick={() => {
           setNew_Admin_Dialog_Opend(false);
         }}
-        data={SelectedPartner}
       />
       <AddNewTask
         open={isNew_Task_Dialog_Opend}
         OnClick={() => {
           setNew_Task_Dialog_Opend(false);
         }}
-        data={SelectedPartner}
+      />
+      <UpdateAdmin
+        open={isDialogOpend}
+        setRefresh={setRef}
+        OnClick={() => {
+          setDialogOpend(false);
+        }}
+        admin={SelectedAdmin}
       />
       <div className="flex flex-col items-start justify-start">
         <h1 className="text-[20px] font-black leading-9 text-gray-800">
@@ -153,7 +159,7 @@ function Admins() {
       <AdminsTable
         Data={data}
         OnSelect={(data) => {
-          setSelectedpartner(data);
+          setSelectedAdmin(data);
           setDialogOpend(true);
         }}
       />

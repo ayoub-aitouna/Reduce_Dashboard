@@ -4,9 +4,9 @@ import { useCookies } from "react-cookie";
 import { BaseUrl, Coockies_name } from "../../constants";
 import Cookies from "js-cookie";
 import { Icon_Auth } from "../../assets";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, NavLink } from "react-router-dom";
 
-const AuthForm = () => {
+const AuthForm = ({ setEmail }) => {
   let navigate = useNavigate();
   const [loading, setloading] = useState(false);
   const [cookies, setCookie, removeCookie] = useCookies([Coockies_name]);
@@ -63,6 +63,33 @@ const AuthForm = () => {
       alert("error password or email not correct");
     }
   };
+  const request_key = async () => {
+    if (login.email === "" || login.email == undefined || login.email === null)
+      alert("Veuillez saisir votre e-mail");
+
+    setloading(true);
+    setEmail(login.email);
+    try {
+      const req = await fetch(`${BaseUrl}/auth/sendVeriifyOtp`, {
+        method: "POST",
+        mode: "cors",
+        cache: "no-cache",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        referrerPolicy: "no-referrer",
+        body: JSON.stringify({
+          email: login.email,
+        }),
+      });
+      if (req.ok) {
+        navigate("/forgot_pass");
+      }
+    } catch (error_msg) {
+      setloading(false);
+      alert("error !!");
+    }
+  };
 
   return (
     <>
@@ -95,6 +122,33 @@ const AuthForm = () => {
             value={login.password}
             type="password"
           />
+          <div class="flex justify-between w-full px-2">
+            <div class="flex items-start">
+              <div class="flex items-center h-5">
+                <input
+                  id="remember"
+                  type="checkbox"
+                  value=""
+                  class="w-4 h-4 bg-gray-50 rounded border border-gray-300 focus:ring-3 focus:ring-blue-300 dark:bg-gray-600 dark:border-gray-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800"
+                  required
+                />
+              </div>
+              <label
+                for="remember"
+                class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+              >
+                Remember me
+              </label>
+            </div>
+            <h3
+              onClick={() => request_key()}
+              to={"/forgot_pass"}
+              className="self-end capitalize text-blue-800 font-bold hover:underline cursor-pointer"
+            >
+              mot de passe oublié ?
+            </h3>
+          </div>
+
           <Button
             OnClick={() => login_submit()}
             title={"Connectez-vous"}
@@ -107,10 +161,10 @@ const AuthForm = () => {
   );
 };
 
-function Auth() {
+function Auth({ setEmail }) {
   return (
     <div className="w-full h-[100vh] grid place-content-center">
-      <AuthForm />
+      <AuthForm setEmail={setEmail} />
     </div>
   );
 }

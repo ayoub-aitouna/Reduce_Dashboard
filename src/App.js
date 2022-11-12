@@ -12,6 +12,7 @@ import {
   Task_anounsments,
   Task_done,
   TaskSearch,
+  ForgotPass,
   Edit_history,
 } from "./component";
 import React, { useState, useEffect } from "react";
@@ -20,13 +21,19 @@ import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";
 
 function App() {
   const [Search, setSearch] = useState("");
+  const [Email, setEmail] = useState("");
   let [Ref, setRef] = useState(0);
 
   return (
     <div className="w-full h-[100vh] !pb-[150px]">
       <BrowserRouter>
         <Routes>
-          <Route exact path="/" element={<Auth />} />
+          <Route exact path="/" element={<Auth setEmail={setEmail} />} />
+          <Route
+            exact
+            path="/forgot_pass"
+            element={<ForgotPass Email={Email} />}
+          />
           <Route path="/home" element={<Home />}>
             <Route exact path="" element={<Partner selectedStatus="" />} />
             <Route

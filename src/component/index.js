@@ -24,6 +24,8 @@ import SetAsDone from "./Popups/SetAsDone";
 import AddNewDoneTask from "./Popups/AddNewDoneTask";
 import UpdatePartner from "./Popups/UpdatePartner";
 import Edit_history from "./Pages/Edit_history";
+import ForgotPass from "./Pages/ForgotPass";
+import UpdateAdmin from "./Popups/UpdateAdmin";
 export {
   Auth,
   Home,
@@ -51,4 +53,6 @@ export {
   Edite_Task,
   Edit_history,
   UpdatePartner,
+  ForgotPass,
+  UpdateAdmin,
 };
