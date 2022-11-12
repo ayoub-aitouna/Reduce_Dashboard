@@ -5,7 +5,7 @@ import Partner from "./Pages/Partner";
 import Sidebar from "./Utils/Sidebar";
 import Button from "./Utils/Button";
 import Input from "./Utils/Input";
-import PartnerInfo from "./Utils/PartnerInfo";
+import PartnerInfo from "./Popups/PartnerInfo";
 import IconHalder from "./Utils/IconHolder";
 import ActionsDialog from "./Popups/ActionsDialog";
 import AdminsTable from "./Utils/AdminsTable";
@@ -17,13 +17,13 @@ import Add_new_task from "./Popups/Add_new_task";
 import Tasks from "./Pages/Tasks";
 import Task_done from "./Pages/Task_done";
 import Task_anounsments from "./Pages/Task_anounsments";
-import TaskSearch from "./Pages/TaskSearch.js";
+import TaskSearch from "./Pages/TaskSearch";
 import Edite_Task from "./Popups/Edite_Task";
 import LoadingIcon from "./Utils/LoadingIcon";
 import SetAsDone from "./Popups/SetAsDone";
 import AddNewDoneTask from "./Popups/AddNewDoneTask";
-import UpdatePartner from "./Utils/UpdatePartner";
-import Edit_history from "./Popups/Edit_history";
+import UpdatePartner from "./Popups/UpdatePartner";
+import Edit_history from "./Pages/Edit_history";
 export {
   Auth,
   Home,

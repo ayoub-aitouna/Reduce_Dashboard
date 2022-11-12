@@ -4,7 +4,7 @@ import { AiFillEdit } from "react-icons/ai";
 import { BsCheckCircleFill } from "react-icons/bs";
 import { MdPendingActions } from "react-icons/md";
 import { BsFillArrowRightSquareFill } from "react-icons/bs";
-import { IconHalder } from "./index";
+import { IconHalder } from "../index";
 
 const DataRow = ({ item, index, onClick = () => {}, OnEdit = () => {} }) => {
   return (
