@@ -1,7 +1,6 @@
-$done 0# full of partner & phone number & sidenote & date to go  & activity >> add task , "done task" & add "done task"  && filter ville and status on task done (task systeme).
-$done 1# edite user status & and refresh
 
 4# Admins Forgot pass
+
 6# Modif history Search Bar
 
 7# partner Action Error Fix & check validation email & send only if accepted & update mail info.
@@ -10,7 +9,19 @@ $done 1# edite user status & and refresh
 
 9# reduce size of button and bellow Bar
 
-
-
-
 *last# modif history check what fild has been updated (check every column and add thos what has been changed)
+
+
+#done
+    
+    *full of partner & phone number & sidenote & date to go  & activity >> add task , "done task" & add "done task"  && filter ville and status on task done (task systeme).
+
+    *edite user status & and refresh
+
+    *add to table partner side node Privlege by (ALL)
+    
+    *refresh <on edit task> 
+
+    *show Parnter created_dat
+
+    *Action Show partner Adrress 
