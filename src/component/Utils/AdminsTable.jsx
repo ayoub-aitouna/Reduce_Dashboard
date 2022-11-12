@@ -27,12 +27,12 @@ const DataRow = ({ item, index, onClick }) => {
       <td className="px-6 py-4 whitespace-nowrap text-sm font-medium ">
         {item.account_status}
       </td>
-      {/* <td className="px-6 py-4 whitespace-nowrap text-sm font-medium ">
+      <td className="px-6 py-4 whitespace-nowrap text-sm font-medium ">
         <IconHalder
           Icon={() => <BsFillArrowRightSquareFill />}
           style="text-[20px]"
         />
-      </td> */}
+      </td>
     </tr>
   );
 };
@@ -82,12 +82,12 @@ function AdminsTable({ Data, OnSelect }) {
                   >
                     statut du compte
                   </th>
-                  {/* <th
+                  <th
                     scope="col"
                     className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
                   >
                     Actions
-                  </th> */}
+                  </th>
                 </tr>
               </thead>
               <tbody>
