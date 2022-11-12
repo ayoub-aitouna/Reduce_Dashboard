@@ -255,7 +255,7 @@ const Fill_Form = ({ data, setdata }) => {
               title={"Partenaire Statut"}
               Filter={data._status}
               setFilter={(value) => {
-                setdata({ ...data, partner_status: value });
+                setdata({ ...data, _status: value });
               }}
               options={[
                 { value: "", name: "" },
