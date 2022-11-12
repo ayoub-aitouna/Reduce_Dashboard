@@ -13,24 +13,8 @@ import { get_Activity } from "../../Utils/Activities/Activities";
 
 const UpdatePartner = ({ open, OnClick, partner, setRefresh }) => {
   const [cookies, setCookie, removeCookie] = useCookies([Coockies_name]);
-  // console.log(partner);
-  const [data, setdata] = useState({
-    id: partner.id,
-    email: partner.email,
-    nome_entreprise: partner.nome_entreprise,
-    identificateur_entreprise: partner.identificateur_entreprise,
-    representant_entreprise: partner.representant_entreprise,
-    role_dans_entriprise: partner.role_dans_entriprise,
-    numero_telephone: partner.numero_telephone,
-    numero_telephone_fix: partner.numero_telephone_fix,
-    ville: partner.ville,
-    adrress: partner.adrress,
-    activity_entrprise: partner.activity_entrprise,
-    offer: partner.offer,
-  });
-
+  const [data, setdata] = useState({});
   const [loading, setloading] = useState(false);
-
   const hadlerClose = () => {
     OnClick();
   };
@@ -40,20 +24,7 @@ const UpdatePartner = ({ open, OnClick, partner, setRefresh }) => {
   }, [loading]);
 
   useEffect(() => {
-    setdata({
-      id: partner.id,
-      email: partner.email,
-      nome_entreprise: partner.nome_entreprise,
-      identificateur_entreprise: partner.identificateur_entreprise,
-      representant_entreprise: partner.representant_entreprise,
-      role_dans_entriprise: partner.role_dans_entriprise,
-      numero_telephone: partner.numero_telephone,
-      numero_telephone_fix: partner.numero_telephone_fix,
-      ville: partner.ville,
-      adrress: partner.adrress,
-      activity_entrprise: partner.activity_entrprise,
-      offer: partner.offer,
-    });
+    setdata(partner);
   }, [partner]);
 
   return (
@@ -282,7 +253,7 @@ const Fill_Form = ({ data, setdata }) => {
           <div className="w-full px-3 mb-6 md:mb-0">
             <Filter_Selector
               title={"Partenaire Statut"}
-              Filter={data.partner_status}
+              Filter={data._status}
               setFilter={(value) => {
                 setdata({ ...data, partner_status: value });
               }}

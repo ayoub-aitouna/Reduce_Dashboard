@@ -71,6 +71,7 @@ const PartnerInfoRender = ({ item }) => {
               data={item.numero_telephone_fix}
             />
             <DataRow title={"Raison sociale"} data={item.nome_entreprise} />
+            <DataRow title={"Adrrees"} data={item.adrress} />
             <DataRow title={"ICE"} data={item.identificateur_entreprise} />
             <DataRow
               title={"Représentant Entreprise"}
@@ -83,9 +84,7 @@ const PartnerInfoRender = ({ item }) => {
             <DataRow title={"Offer"} data={item.offer} />
             <DataRow
               title={"Note"}
-              data={
-                "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum"
-              }
+              data={item.note}
             />
 
             <DataRow title={"Secteur d'activité	"} data={item.activity_name} />
@@ -170,7 +169,7 @@ function PartnerInfo({ open, OnClick, data, setRefresh }) {
   return (
     <div>
       <Dialog
-        open={true}
+        open={open}
         keepMounted
         fullWidth={true}
         onClose={hadlerClose}
