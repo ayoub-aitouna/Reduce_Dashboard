@@ -1,7 +1,8 @@
 $done 0# full of partner & phone number & sidenote & date to go  & activity >> add task , "done task" & add "done task"  && filter ville and status on task done (task systeme).
-$progress... 1# edite user status & and refresh
+$done 1# edite user status & and refresh
 
-2# add to table partner side node Privlege by (ALL)
+2#$progress... add to table partner side node Privlege by (ALL)
+
 3# Action Show partner Adrress 
 4# Admins Forgot pass
 5# show Parnter created_dat

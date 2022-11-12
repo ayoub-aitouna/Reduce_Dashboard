@@ -236,6 +236,23 @@ const Fill_Form = ({ data, setdata }) => {
             type="text"
           />
         </div>
+        <div class="w-full px-3">
+          <label
+            class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+            for="grid-name"
+          >
+            Note
+          </label>
+          <input
+            class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+            id="grid-name"
+            value={data.note}
+            onChange={(e) => {
+              setdata({ ...data, note: e.target.value });
+            }}
+            type="text"
+          />
+        </div>
 
         <div class="flex flex-wrap -mx-3 mb-2">
           <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
@@ -261,22 +278,23 @@ const Fill_Form = ({ data, setdata }) => {
               styles={"!max-w-full"}
             />
           </div>
+
           <div className="w-full px-3 mb-6 md:mb-0">
-          <Filter_Selector
-            title={"Partenaire Statut"}
-            Filter={data.partner_status}
-            setFilter={(value) => {
-              setdata({ ...data, partner_status: value });
-            }}
-            options={[
-              { value: "", name: "" },
-              { value: "Accepted", name: "Pas intéressé" },
-              { value: "intrested", name: "Intéressé" },
-              { value: "thinking", name: "En cours" },
-            ]}
-            styles={"!max-w-full"}
-          />
-        </div>
+            <Filter_Selector
+              title={"Partenaire Statut"}
+              Filter={data.partner_status}
+              setFilter={(value) => {
+                setdata({ ...data, partner_status: value });
+              }}
+              options={[
+                { value: "", name: "" },
+                { value: "Approved", name: "Approved" },
+                { value: "Rejected", name: "Rejected" },
+                { value: "Pending", name: "Pending" },
+              ]}
+              styles={"!max-w-full"}
+            />
+          </div>
         </div>
       </div>
     </form>

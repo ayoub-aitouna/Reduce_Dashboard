@@ -5,7 +5,7 @@ import Partner from "./Pages/Partner";
 import Sidebar from "./Utils/Sidebar";
 import Button from "./Utils/Button";
 import Input from "./Utils/Input";
-import PartnerInfo from "./Utils/PartnerInfo";
+import PartnerInfo from "./Popups/PartnerInfo";
 import IconHalder from "./Utils/IconHolder";
 import ActionsDialog from "./Popups/ActionsDialog";
 import AdminsTable from "./Utils/AdminsTable";
