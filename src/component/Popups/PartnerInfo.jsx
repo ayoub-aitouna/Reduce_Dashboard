@@ -51,6 +51,9 @@ const PartnerInfoRender = ({ item }) => {
           </thead>
           <tbody>
             <DataRow title={"#"} data={item.id} />
+            <DataRow title={"Submited At"} data={`${new Date(item.created_date).getDate()}/${new Date(
+          item.created_date
+        ).getMonth()}/${new Date(item.created_date).getFullYear()}`} />
             <DataRow
               title={"Logo"}
               Render={() => {
