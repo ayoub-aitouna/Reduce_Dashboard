@@ -10,7 +10,7 @@ import { IconHalder } from "../index";
 import { Button as MyButton, LoadingIcon } from "../index";
 import { BaseUrl, Coockies_name } from "../../constants";
 import { useCookies } from "react-cookie";
-
+import { Generate_contract_Pdf } from "../../Utils/Pdfgenerator";
 const DataRow = ({ title, data = null, Render = () => <></> }) => {
   return (
     <tr>
@@ -51,9 +51,12 @@ const PartnerInfoRender = ({ item }) => {
           </thead>
           <tbody>
             <DataRow title={"#"} data={item.id} />
-            <DataRow title={"Submited At"} data={`${new Date(item.created_date).getDate()}/${new Date(
-          item.created_date
-        ).getMonth()}/${new Date(item.created_date).getFullYear()}`} />
+            <DataRow
+              title={"Submited At"}
+              data={`${new Date(item.created_date).getDate()}/${new Date(
+                item.created_date
+              ).getMonth()}/${new Date(item.created_date).getFullYear()}`}
+            />
             <DataRow
               title={"Logo"}
               Render={() => {
@@ -85,10 +88,7 @@ const PartnerInfoRender = ({ item }) => {
             <DataRow title={"Secteur d'activité	"} data={item.activity_name} />
 
             <DataRow title={"Offer"} data={item.offer} />
-            <DataRow
-              title={"Note"}
-              data={item.note}
-            />
+            <DataRow title={"Note"} data={item.note} />
 
             <DataRow title={"Secteur d'activité	"} data={item.activity_name} />
             <DataRow
@@ -143,37 +143,40 @@ function PartnerInfo({ open, OnClick, data, setRefresh }) {
   };
   const hadlerResponse = async (id, response) => {
     setloading(true);
+
+    let blob = await Generate_contract_Pdf(data);
+    const formData = new FormData();
+    const str = JSON.stringify({
+      partner_id: id,
+      response: response,
+    });
+
+    formData.append("file", blob);
+    formData.append("data", str);
     try {
       const req = await fetch(`${BaseUrl}/admin/Response_partner_form`, {
         method: "POST",
         mode: "cors",
-        cache: "no-cache",
         headers: {
-          "Content-Type": "application/json",
           Authorization: `Bearer ${cookies.accesToken}`,
         },
-        referrerPolicy: "no-referrer",
-        body: JSON.stringify({
-          partner_id: id,
-          response: response,
-        }),
+        body: formData,
       });
-      setRefresh((i) => i + 1);
-      setloading(false);
+      console.log(await req.json());
     } catch (err) {
-      setRefresh((i) => i + 1);
-
-      setloading(false);
+      console.log(err);
     }
+    setloading(false);
+    setRefresh((i) => i + 1);
   };
   useEffect(() => {
     if (!loading) hadlerClose();
   }, [loading]);
-  
+
   useEffect(() => {
     console.log(data);
   }, [open]);
-  
+
   return (
     <div>
       <Dialog

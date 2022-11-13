@@ -1,23 +1,31 @@
-const pdf = require("html-pdf");
-const { Pdf_contract_template } = require("./Templates.js");
+import { Pdf_contract_template } from "./Templates";
+import jsPDF from "jspdf";
 
 const Generate_contract_Pdf = async (partner_data) => {
   const { content } = Pdf_contract_template(partner_data);
+  var doc = new jsPDF("p", "pt", "a4");
   return new Promise((res, rej) => {
-    const path = `./temp/contracr_${partner_data.id}_Result.pdf`;
-    try {
-      pdf
-        .create(content, {})
-        .toFile(path, async (err) => {
-            if (err) 
-                return rej({ msg: err });
-            fs.unlinkSync(path);
-            res(path);
-        });
-    } catch (err) {
-        rej(err);
-    }
+    doc.html(
+      ` <div style="width:550px;
+        font-style: normal;
+        font-weight: normal;
+        text-decoration: none;
+        font-size: 9pt;
+        display: grid;
+        place-content: center;
+        padding: 10px;
+        ">${content}</div>`,
+      {
+        callback: function (doc) {
+          // var blob = new Blob([doc.output("blob")], { type: "application/pdf" });
+          // res(blob);
+          // var blobUrl = URL.createObjectURL(blob);
+          // alert("AA");
+          // doc.save("test.pdf");
+          window.open(doc.output("bloburl"));
+        },
+      }
+    );
   });
 };
-
 export { Generate_contract_Pdf };
