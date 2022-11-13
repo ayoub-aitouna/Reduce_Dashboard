@@ -1,69 +1,44 @@
 const Pdf_contract_template = (partner_data) => {
-  const {
-    email,
-    nome_entreprise,
-    identificateur_entreprise,
-    representant_entreprise,
-    role_dans_entriprise,
-    numero_telephone_fix,
-    ville,
-    activity_entrprise,
-    offer,
-  } = partner_data;
-  return {
-    content: `
+  return `
 	  <div>
-		<p style="text-indent: 0pt; text-align: left" />
-		<p
-		  class="s1"
-		  style="
-			padding-top: 4pt;
-			padding-left: 12pt;
-			text-indent: 0pt;
-			text-align: left;
-		  "
-		>
-		  Image not found or type unknown
-		</p>
-		<h2 style="padding-left: 86pt; text-indent: 0pt; text-align: left">
-		  REDUCTE
-		</h2>
-		<p style="padding-left: 86pt; text-indent: 0pt; text-align: left">
-		  <a href="https://www.reducte.com/" class="a" target="_blank"
-			>www.reducte.com</a
-		  ><a
-			href="mailto:partenaires@reducte.ma"
-			style="
-			  color: #00c;
-			  font-family: 'Times New Roman', serif;
-			  font-style: normal;
-			  font-weight: normal;
-			  text-decoration: none;
-			  font-size: 9pt;
-			"
-			target="_blank"
-		  >
-		  </a
-		  ><a href="mailto:partenaires@reducte.ma" target="_blank"
-			>partenaires@reducte.ma</a
-		  >
-		</p>
-		<p style="padding-left: 86pt; text-indent: 0pt; text-align: left">
-		  zenith buisness center ETG 3 N14 40000 - Marrakech, Maroc
-		</p>
-		<p style="text-indent: 0pt; text-align: left"><br /></p>
-		<h1 style="padding-left: 45pt; text-indent: 0pt; text-align: center">
-		  Convention de Partenariat
-		</h1>
-		<p style="text-indent: 0pt; text-align: left"><br /></p>
-		<table
-		  style="border-collapse: collapse; margin-left: 6.141pt"
+	  <div style="width: 100%; display:grid; place-items:center">
+	    <h2 style=" text-indent: 0pt; text-align: left">
+		 REDUCTE
+	    </h2>
+	    </div>
+	    <p style="padding-left: 18pt; text-indent: 0pt; text-align: left">
+		 <a href="https://www.reducte.com/" class="a" target="_blank"
+		   >www.reducte.com</a
+		 ><a
+		   href="mailto:partenaires@reducte.ma"
+		   style="
+			color: #00c;
+			font-family: 'Times New Roman', serif;
+			font-style: normal;
+			font-weight: normal;
+			text-decoration: none;
+			font-size: 9pt;
+		   "
+		   target="_blank"
+		 >
+		 </a
+		 ><a href="mailto:partenaires@reducte.ma" target="_blank"
+		   >partenaires@reducte.ma</a
+		 >
+	    </p>
+	    <p style="padding-left: 18pt; text-indent: 0pt; text-align: left">
+		 zenith buisness center ETG 3 N14 40000 - Marrakech, Maroc
+	    </p>
+	    <h1 style="padding-left: 45pt; text-indent: 0pt; text-align: center; margin-top:50px">
+		 Convention de Partenariat
+	    </h1>
+	    <table
+		  style="border-collapse: collapse; margin-left: 6.141pt; margin-top:30px;  margin-bottom:30px"
 		  cellspacing="0"
 		>
 		  <tr style="height: 19pt">
 			<td
 			  style="
-
 				border-top-style: solid;
 				border-top-width: 1pt;
 				border-left-style: solid;
@@ -88,7 +63,6 @@ const Pdf_contract_template = (partner_data) => {
 			</td>
 			<td
 			  style="
-
 				border-top-style: solid;
 				border-top-width: 1pt;
 				border-left-style: solid;
@@ -113,7 +87,6 @@ const Pdf_contract_template = (partner_data) => {
 			</td>
 			<td
 			  style="
-
 				border-top-style: solid;
 				border-top-width: 1pt;
 				border-left-style: solid;
@@ -140,7 +113,6 @@ const Pdf_contract_template = (partner_data) => {
 		  <tr style="height: 19pt">
 			<td
 			  style="
-
 				border-top-style: solid;
 				border-top-width: 1pt;
 				border-left-style: solid;
@@ -165,7 +137,6 @@ const Pdf_contract_template = (partner_data) => {
 			</td>
 			<td
 			  style="
-
 				border-top-style: solid;
 				border-top-width: 1pt;
 				border-left-style: solid;
@@ -190,7 +161,6 @@ const Pdf_contract_template = (partner_data) => {
 			</td>
 			<td
 			  style="
-
 				border-top-style: solid;
 				border-top-width: 1pt;
 				border-left-style: solid;
@@ -217,7 +187,6 @@ const Pdf_contract_template = (partner_data) => {
 		  <tr style="height: 19pt">
 			<td
 			  style="
-
 				border-top-style: solid;
 				border-top-width: 1pt;
 				border-left-style: solid;
@@ -242,7 +211,6 @@ const Pdf_contract_template = (partner_data) => {
 			</td>
 			<td
 			  style="
-
 				border-top-style: solid;
 				border-top-width: 1pt;
 				border-left-style: solid;
@@ -267,7 +235,6 @@ const Pdf_contract_template = (partner_data) => {
 			</td>
 			<td
 			  style="
-
 				border-top-style: solid;
 				border-top-width: 1pt;
 				border-left-style: solid;
@@ -701,7 +668,7 @@ const Pdf_contract_template = (partner_data) => {
 				  text-align: left;
 				"
 			  >
-				${partner_data.ville}
+				${partner_data.ville_name}
 			  </p>
 			</td>
 			<td
@@ -791,102 +758,92 @@ const Pdf_contract_template = (partner_data) => {
 			</td>
 		  </tr>
 		</table>
-		<p style="text-indent: 0pt; text-align: left" />
-		<p
-		  style="
-			padding-top: 13pt;
-			padding-left: 29pt;
-			text-indent: 0pt;
-			text-align: left;
-		  "
-		>
-		  Nous nous engageons à fournir au partenaire mentionné ci-dessus un
-		  affichage de son logo et informations de contact sur notre site web et
-		  notre application mobile gratuitement au niveau de la section réservée aux
-		  partenaires pour une durée indéterminée.
-		</p>
-		<p style="text-indent: 0pt; text-align: left" />
-		<p style="padding-left: 29pt; text-indent: 0pt; text-align: left">
-		  Le partenaire mentionné ci-dessus s’engage à accepter tout client
-		  provenant de la part de REDUCTE.
-		</p>
-		<p style="text-indent: 0pt; text-align: left" />
-		<p style="padding-left: 29pt; text-indent: 0pt; text-align: left">
-		  Le partenaire mentionné ci-dessus s’engage à respecter l&#39;offre
-		  mentionnée ci-dessus vis-à-vis de tous les clients provenant de la part de
-		  REDUCTE dont l&#39;abonnement est actif.
-		</p>
-		<p style="text-indent: 0pt; text-align: left" />
-		<p style="padding-left: 29pt; text-indent: 0pt; text-align: left">
-		  Le partenaire mentionné ci-dessus s’engage à afficher un autocollant
-		  fourni par REDUCTE mettant en avant son partenariat avec REDUCTE
-		  (dimensions de l’autocollant 10 cm x 15 cm).
-		</p>
-		<p style="text-indent: 0pt; text-align: left" />
-		<p style="padding-left: 29pt; text-indent: 0pt; text-align: left">
-		  Le partenaire s’engage à respecter la confidentialité des clients en
-		  s&#39;abstenant de divulguer les informations de ces derniers obtenu de
-		  l&#39;interface partenaires REDUCTE.
-		</p>
-		<p style="text-indent: 0pt; text-align: left" />
-		<p style="text-indent: 0pt; text-align: left" />
-		<p style="padding-left: 29pt; text-indent: 0pt; text-align: left">
-		  Le partenaire mentionné ci-dessus s’engage à ne pas appliquer l&#39;offre
-		  mentionné ci-dessus à des clients dont l’abonnement est expiré. L’accord
-		  qui lie les deux parties peut-être résilié à tout moment à condition de
-		  respecter la période de préavis de 15 jours, l&#39;envoi du préavis devra
-		  se faire par e-mail.
-		</p>
-		<p style="text-indent: 0pt; text-align: left" />
-		<p style="padding-left: 29pt; text-indent: 0pt; text-align: left">
-		  Le partenaire mentionné ci-dessus s’oblige à communiquer toute information
-		  nécessaire au bon fonctionnement de REDUCTE et de respecter les conditions
-		  de travail de REDUCT
-		</p>
-		<p style="text-indent: 0pt; text-align: left" />
-		<p style="text-indent: 0pt; text-align: left" />
-		<p style="padding-left: 29pt; text-indent: 0pt; text-align: left">
-		  Tout point non traité sera traité par la législation en vigueur NB: Le
-		  retour de ce courriel vaut acceptation.
-		</p>
-		<p style="text-indent: 0pt; text-align: left"><br /></p>
-		<h2 style="text-indent: 0pt; text-align: right">
-		  A MARRAKECH Le 05/10/2022 16:44
-		</h2>
-		<p style="text-indent: 0pt; text-align: left"><br /></p>
-		<p
-		  style="
-			padding-top: 4pt;
-			padding-left: 45pt;
-			text-indent: 0pt;
-			text-align: center;
-		  "
-		>
-		  ZAKARIA MDAGHRI ALAOUI
-		</p>
-		<p style="padding-left: 45pt; text-indent: 0pt; text-align: center">
-		  Représentant de REDUCTE
-		</p>
-		<p class="s1" style="text-indent: 0pt; line-height: 9pt; text-align: left">
-		  Image not found or type unknown
-		</p>
-		<p style="padding-left: 150pt; text-indent: 0pt; text-align: left" />
-		<p style="text-indent: 0pt; text-align: left"><br /></p>
-		<p style="text-indent: 0pt; text-align: left"><br /></p>
-		<p style="padding-left: 45pt; text-indent: 0pt; text-align: center">
-		  <a href="mailto:partenaires@reducte.ma" class="s5" target="_blank"
-			>Tel: 06 63 16 10 43 , Email: </a
-		  ><a href="http://www.reducte.com/" class="s5" target="_blank"
-			>partenaires@reducte.ma web: www.reducte.com</a
-		  >
-		</p>
-		<p style="padding-left: 45pt; text-indent: 0pt; text-align: center">
-		  zenith buisness centre etg 3 n14 Marrakech maroc - ICE: 003030945000087
-		  RC: 123941 IF: 51832067 CNSS: 4089085
-		</p>
-	  </div>
-	`,
-  };
+	<ul style = "display : flex; flex-direction : column; gap: 10px;">
+	    <p style=" text-indent: 0pt; text-align: left">
+		 Nous nous engageons à fournir au partenaire mentionné ci-dessus un
+		 affichage de son logo et informations de contact sur notre site web et
+		 notre application mobile gratuitement au niveau de la section réservée aux
+		 partenaires pour une durée indéterminée.
+	    </p>
+
+	    <p style=" text-indent: 0pt; text-align: left">
+		 Le partenaire mentionné ci-dessus s’engage à accepter tout client
+		 provenant de la part de REDUCTE.
+	    </p>
+
+	    <p style=" text-indent: 0pt; text-align: left">
+		 Le partenaire mentionné ci-dessus s’engage à respecter l&#39;offre
+		 mentionnée ci-dessus vis-à-vis de tous les clients provenant de la part de
+		 REDUCTE dont l&#39;abonnement est actif.
+	    </p>
+
+	    <p style=" text-indent: 0pt; text-align: left">
+		 Le partenaire mentionné ci-dessus s’engage à afficher un autocollant
+		 fourni par REDUCTE mettant en avant son partenariat avec REDUCTE
+		 (dimensions de l’autocollant 10 cm x 15 cm).
+	    </p>
+
+	    <p style=" text-indent: 0pt; text-align: left">
+		 Le partenaire s’engage à respecter la confidentialité des clients en
+		 s&#39;abstenant de divulguer les informations de ces derniers obtenu de
+		 l&#39;interface partenaires REDUCTE.
+	    </p>
+
+	    <p style=" text-indent: 0pt; text-align: left">
+		 Le partenaire mentionné ci-dessus s’engage à ne pas appliquer l&#39;offre
+		 mentionné ci-dessus à des clients dont l’abonnement est expiré. L’accord
+		 qui lie les deux parties peut-être résilié à tout moment à condition de
+		 respecter la période de préavis de 15 jours, l&#39;envoi du préavis devra
+		 se faire par e-mail.
+	    </p>
+
+	    <p style=" text-indent: 0pt; text-align: left">
+		 Le partenaire mentionné ci-dessus s’oblige à communiquer toute information
+		 nécessaire au bon fonctionnement de REDUCTE et de respecter les conditions
+		 de travail de REDUCT
+	    </p>
+
+	    <p style=" text-indent: 0pt; text-align: left">
+		 Tout point non traité sera traité par la législation en vigueur NB: Le
+		 retour de ce courriel vaut acceptation.
+	    </p>
+	    </ul>
+	    <p style="text-indent: 0pt; text-align: left"><br /></p>
+	    <h4 style="text-indent: 0pt; text-align: right">
+		 ${` A MARRAKECH &nbsp  &nbsp Le  &nbsp ${new Date()
+       .toJSON()
+       .slice(0, 16)
+       .replace("T", " ")}`}
+	    </h4>
+	    <p style="text-indent: 0pt; text-align: left"><br /></p>
+	    <p
+		 style="
+		   padding-top: 4pt;
+		   padding-left: 45pt;
+		   text-indent: 0pt;
+		   text-align: center;
+		 "
+	    >
+		 ZAKARIA MDAGHRI ALAOUI
+	    </p>
+	    <p style="padding-left: 45pt; text-indent: 0pt; text-align: center">
+		 Représentant de REDUCTE
+	    </p>
+	    <div style="display : flex; flex-direction: row; justify-content : space-between; align-items: center;">
+	    <p style="text-indent: 0pt; text-align: left"><br /></p>
+		 <p class="s5" target="_blank"
+		   >Tel: 06 63 16 10 43 , </p
+		 >
+	    <p href="mailto:partenaires@reducte.ma" class="s5" target="_blank"
+		   > Email: partenaires@reducte.ma</p
+		 >
+	    <a href="www.reducte.com" class="s5" style="text-color: blue;">www.reducte.com</a>
+		</div>
+	    <p style="padding-left: 45pt; text-indent: 0pt; text-align: center">
+		 zenith buisness centre etg 3 n14 Marrakech maroc - ICE: 003030945000087 </br>
+		 RC: 123941 IF: 51832067 CNSS: 4089085
+	    </p>
+	  </div>`;
 };
 
 export { Pdf_contract_template };
