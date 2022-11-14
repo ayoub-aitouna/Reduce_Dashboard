@@ -70,7 +70,7 @@ function Partner({ selectedStatus }) {
         ? per.filter((item) => item.activity_entrprise == activity_entrprise)
         : per
     );
-  }, [Search, selectedStatus, City, Odata]);
+  }, [Search, selectedStatus, City, Odata, activity_entrprise]);
 
   return (
     <div className="p-5 my-10">
