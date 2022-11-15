@@ -114,7 +114,7 @@ function Admins() {
             title={"Fonction"}
             styles={"h-[95px]"}
             options={[
-              { value: 0, name: "" },
+              { value: 0, name: "Toute" },
               { value: "Admin", name: "Administrateur" },
               { value: "Manager", name: "Responsable" },
             ]}
@@ -125,7 +125,7 @@ function Admins() {
             title={"Statut Du Compte"}
             styles={"h-[95px]"}
             options={[
-              { value: 0, name: "" },
+              { value: 0, name: "Toute" },
               { value: "Suspanded", name: "Suspanded" },
               { value: "Active", name: "Active" },
               { value: "Banned", name: "Banned" },

@@ -40,4 +40,4 @@ const LoadingIcon = (loading) => {
     </>
   );
 };
-export default LoadingIcon
+export default LoadingIcon;

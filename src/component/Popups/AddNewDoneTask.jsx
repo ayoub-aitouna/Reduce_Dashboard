@@ -8,7 +8,7 @@ import DialogTitle from "@mui/material/DialogTitle";
 import { Button as MyButton, Filter_Selector, LoadingIcon } from "../index";
 import { BaseUrl, Coockies_name } from "../../constants";
 import { get_villes } from "../../Utils/villes/get_villes";
-import { Dayjs } from "dayjs";
+import dayjs, { Dayjs } from "dayjs";
 import TextField from "@mui/material/TextField";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
@@ -136,13 +136,15 @@ const Fill_Form = ({ data, setdata }) => {
                 label="Date of visite"
                 value={data.visite_date}
                 onChange={(newValue) => {
-                  setdata({
-                    ...data,
-                    visite_date: newValue.$d
-                      .toISOString()
-                      .slice(0, 19)
-                      .replace("T", " "),
-                  });
+                  try {
+                    setdata({
+                      ...data,
+                      visite_date: newValue.$d
+                        .toISOString()
+                        .slice(0, 19)
+                        .replace("T", " "),
+                    });
+                  } catch (error) {}
                 }}
                 renderInput={(params) => <TextField {...params} />}
               />
@@ -178,7 +180,7 @@ function AddNewDoneTask({ open, OnClick, setRef }) {
     note: "",
     full_name: "",
     phone_number: "",
-    visite_date: "",
+    visite_date: dayjs().$d.toISOString().slice(0, 19).replace("T", " "),
     adrress: "",
   });
   const [cookies, setCookie, removeCookie] = useCookies([Coockies_name]);

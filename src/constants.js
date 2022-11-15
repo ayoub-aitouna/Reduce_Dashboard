@@ -63,6 +63,6 @@ export const SideBarLinks = [
   },
 ];
 
-export const BaseUrl = "https://whl021-5000.preview.csb.app/api/v1";
+export const BaseUrl = "http://localhost:5000/api/v1";
 
 export const Coockies_name = "auth_name";

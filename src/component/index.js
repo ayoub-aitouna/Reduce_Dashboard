@@ -20,6 +20,7 @@ import Task_anounsments from "./Pages/Task_anounsments";
 import TaskSearch from "./Pages/TaskSearch";
 import Edite_Task from "./Popups/Edite_Task";
 import LoadingIcon from "./Utils/LoadingIcon";
+import Dark_loading_icon from "./Utils/Dark_loading_icon";
 import SetAsDone from "./Popups/SetAsDone";
 import AddNewDoneTask from "./Popups/AddNewDoneTask";
 import UpdatePartner from "./Popups/UpdatePartner";
@@ -54,5 +55,6 @@ export {
   Edit_history,
   UpdatePartner,
   ForgotPass,
+  Dark_loading_icon,
   UpdateAdmin,
 };

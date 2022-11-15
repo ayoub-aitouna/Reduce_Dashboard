@@ -55,7 +55,13 @@ const PartnerInfoRender = ({ item }) => {
               title={"Submited At"}
               data={`${new Date(item.created_date).getDate()}/${new Date(
                 item.created_date
-              ).getMonth()}/${new Date(item.created_date).getFullYear()}`}
+              ).getMonth()}/${new Date(
+                item.created_date
+              ).getFullYear()}  ${String(
+                new Date(item.created_date).getHours()
+              ).padStart(2, "0")}:${String(
+                new Date(item.created_date).getMinutes()
+              ).padStart(2, "0")}`}
             />
             <DataRow
               title={"Logo"}

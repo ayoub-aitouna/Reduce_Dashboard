@@ -92,7 +92,7 @@ const Fill_Form = ({ data, setdata }) => {
             Filter={data._role}
             setFilter={(value) => setdata({ ...data, _role: value })}
             options={[
-              { value: "", name: "" },
+              { value: "", name: "Toute" },
               { value: "Admin", name: "Administrateur" },
               { value: "Manager", name: "Responsable" },
             ]}
