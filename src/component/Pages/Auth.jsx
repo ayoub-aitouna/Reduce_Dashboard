@@ -92,7 +92,10 @@ const AuthForm = ({ setEmail }) => {
 
   return (
     <>
-      <form onSubmit={login_submit}>
+      <form
+        onSubmit={login_submit}
+        className="w-full p-6 bg-white rounded-lg shadow dark:border md:mt-0 dark:bg-gray-800 dark:border-gray-700 sm:p-8"
+      >
         <div className="w-full h-full  flex flex-col justify-center items-center gap-5">
           <div className="flex flex-row text-[#2E5CFF] text-4xl font-black gap-2 justify-start items-center pb-9">
             <img
@@ -106,8 +109,8 @@ const AuthForm = ({ setEmail }) => {
           <Input
             title="Email"
             hint={"Example@email.com"}
-            OnChange={(value) => {
-              setlogin({ ...login, email: value });
+            OnChange={(e) => {
+              setlogin({ ...login, email: e.target.value });
             }}
             value={login.email}
             type="email"
@@ -115,8 +118,8 @@ const AuthForm = ({ setEmail }) => {
           <Input
             title="Mot de passe"
             hint={"*************"}
-            OnChange={(value) => {
-              setlogin({ ...login, password: value });
+            OnChange={(e) => {
+              setlogin({ ...login, password: e.target.value });
             }}
             value={login.password}
             type="password"
@@ -146,7 +149,7 @@ const AuthForm = ({ setEmail }) => {
 
 function Auth({ setEmail }) {
   return (
-    <div className="w-full h-[100vh] grid place-content-center">
+    <div className="w-full h-[100vh] grid place-content-center bg-gray-50 dark:bg-gray-900">
       <AuthForm setEmail={setEmail} />
     </div>
   );
