@@ -110,7 +110,7 @@ const AuthForm = ({ setEmail }) => {
             title="Email"
             hint={"Example@email.com"}
             OnChange={(e) => {
-              setlogin({ ...login, email: e.target.value });
+              setlogin({ ...login, email: e });
             }}
             value={login.email}
             type="email"
@@ -119,7 +119,7 @@ const AuthForm = ({ setEmail }) => {
             title="Mot de passe"
             hint={"*************"}
             OnChange={(e) => {
-              setlogin({ ...login, password: e.target.value });
+              setlogin({ ...login, password: e });
             }}
             value={login.password}
             type="password"
