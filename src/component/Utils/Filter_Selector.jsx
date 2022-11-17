@@ -17,7 +17,9 @@ const Filter_Selector = ({
       </label>
       <select
         value={Filter}
-        onChange={(e) => setFilter(e.target.value)}
+        onChange={(e) =>
+          setFilter(e.target.value == "Tout" ? "" : e.target.value)
+        }
         id={title}
         className="h-[40px] bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500
 		  focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400
@@ -25,7 +27,7 @@ const Filter_Selector = ({
       >
         {options.map((item, index) => (
           <option key={index} value={item.value}>
-            {item.name}
+            {item.name == "" ? "Tout" : item.name}
           </option>
         ))}
       </select>

@@ -62,9 +62,10 @@ function Partner({ selectedStatus }) {
           )
         : per
     );
-    setdata((per) =>
-      City != 0 ? per.filter((item) => item.ville == City) : per
-    );
+    setdata((per) => {
+      console.log(City);
+      return City != 0 ? per.filter((item) => item.ville == City) : per;
+    });
     setdata((per) =>
       activity_entrprise != 0
         ? per.filter((item) => item.activity_entrprise == activity_entrprise)
