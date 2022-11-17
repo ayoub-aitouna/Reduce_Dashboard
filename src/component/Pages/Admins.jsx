@@ -46,6 +46,7 @@ function Admins() {
       if (req.ok) {
         const data = await req.json();
         setOdata(data);
+        console.log(data);
       } else {
         console.log(req);
       }
