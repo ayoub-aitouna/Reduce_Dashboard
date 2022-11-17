@@ -13,6 +13,7 @@ import Admins from "./Pages/Admins";
 import AddNewAdmin from "./Popups/AddNewAdmin";
 import Filter_Selector from "./Utils/Filter_Selector";
 import SearchBar from "./Utils/SearchBar";
+import ErrorMsg from "./Utils/ErrorMsg";
 import Add_new_task from "./Popups/Add_new_task";
 import Tasks from "./Pages/Tasks";
 import Task_done from "./Pages/Task_done";
@@ -57,4 +58,5 @@ export {
   ForgotPass,
   Dark_loading_icon,
   UpdateAdmin,
+  ErrorMsg,
 };

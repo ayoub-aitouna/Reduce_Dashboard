@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Button, Input, LoadingIcon } from "../index";
+import { Button, Input, LoadingIcon, ErrorMsg } from "../index";
 import { useCookies } from "react-cookie";
 import { BaseUrl, Coockies_name } from "../../constants";
 import Cookies from "js-cookie";
@@ -9,6 +9,10 @@ import { useNavigate, NavLink } from "react-router-dom";
 const AuthForm = ({ setEmail }) => {
   let navigate = useNavigate();
   const [loading, setloading] = useState(false);
+  const [error, seterror] = useState({
+    val: 0,
+    msg: "Email ou mot de passe incorrect.",
+  });
   const [cookies, setCookie, removeCookie] = useCookies([Coockies_name]);
   const [login, setlogin] = useState({
     email: "",
@@ -34,7 +38,7 @@ const AuthForm = ({ setEmail }) => {
   };
 
   const login_submit = async (event) => {
-    event.preventDefault();
+    if (event != undefined) event.preventDefault();
     setloading(true);
     try {
       const req = await fetch(`${BaseUrl}/auth/admin`, {
@@ -50,22 +54,20 @@ const AuthForm = ({ setEmail }) => {
           password: login.password,
         }),
       });
-      if (req.ok) {
-        login_call(await req.json());
-      } else {
-        setlogin({ ...login, password: "" });
-        setloading(false);
-        alert("error password or email not correct");
-      }
-    } catch (error_msg) {
-      setlogin({ ...login, password: "" });
-      setloading(false);
-      alert("error password or email not correct");
-    }
+      if (req.ok) return login_call(await req.json());
+    } catch (error_msg) {}
+    setlogin({ ...login, password: "" });
+    setloading(false);
+    seterror((obj) => {
+      return { val: 1, msg: "Email ou mot de passe incorrect." };
+    });
   };
+
   const request_key = async () => {
     if (login.email === "" || login.email == undefined || login.email === null)
-      return alert("Veuillez saisir votre e-mail");
+      return seterror((obj) => {
+        return { val: 1, msg: "Veuillez saisir votre e-mail" };
+      });
     setloading(true);
     setEmail(login.email);
     try {
@@ -81,17 +83,20 @@ const AuthForm = ({ setEmail }) => {
           email: login.email,
         }),
       });
-      if (req.ok) {
-        navigate("/forgot_pass");
-      }
-    } catch (error_msg) {
-      setloading(false);
-      alert("error !!");
-    }
+      if (req.ok) return navigate("/forgot_pass");
+      else return { val: 1, msg: "Email incorrect." };
+    } catch (error_msg) {}
+    setloading(false);
+    seterror((obj) => {
+      return { val: 1, msg: "Email incorrect." };
+    });
   };
 
   return (
-    <>
+    <div className="relative">
+      <div className="absolute top-[-20%] left-0 right-0">
+        <ErrorMsg error={error} />
+      </div>
       <form
         onSubmit={login_submit}
         className="w-full p-6 bg-white rounded-lg shadow dark:border md:mt-0 dark:bg-gray-800 dark:border-gray-700 sm:p-8"
@@ -143,7 +148,7 @@ const AuthForm = ({ setEmail }) => {
           />
         </div>
       </form>
-    </>
+    </div>
   );
 };
 
