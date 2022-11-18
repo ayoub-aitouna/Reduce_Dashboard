@@ -26,11 +26,6 @@ const AuthForm = ({ setEmail }) => {
 
   const login_call = (data) => {
     setloading(false);
-    console.log(data);
-    Cookies.set("accesToken", data.accesToken);
-    Cookies.set("role", data.rol);
-    Cookies.set("name", data._name);
-
     setCookie("accesToken", data.accesToken, { path: "/" });
     setCookie("name", data._name, { path: "/" });
     setCookie("role", data.role, { path: "/" });

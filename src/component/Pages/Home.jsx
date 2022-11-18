@@ -15,7 +15,11 @@ function Home() {
 
   let navigate = useNavigate();
   useEffect(() => {
-    if (cookies == null || cookies == undefined) {
+    if (
+      cookies.accesToken == null ||
+      cookies.accesToken == undefined ||
+      cookies.accesToken == ""
+    ) {
       navigate(`/`);
     }
   }, []);

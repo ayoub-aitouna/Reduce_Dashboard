@@ -87,6 +87,7 @@ function Sidebar() {
           removeCookie("accesToken");
           removeCookie("name");
           navigate("/");
+          window.location.reload(false);
         }}
         style="!h-[30px] p-[28px]  mt-auto"
       />
