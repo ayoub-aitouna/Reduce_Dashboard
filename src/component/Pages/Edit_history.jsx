@@ -129,9 +129,9 @@ const DataRow = ({ item, index }) => {
         {item.edited_column}
       </td>
       <td className="px-6 py-4 whitespace-nowrap text-sm font-medium ">
-        {`${new Date(item.created_date).getDate()}/${new Date(
-          item.created_date
-        ).getMonth()}/${new Date(item.created_date).getFullYear()}  ${new Date(
+        {`${new Date(item.created_date).getDate()}/${
+          new Date(item.created_date).getMonth() + 1
+        }/${new Date(item.created_date).getFullYear()} ${new Date(
           item.created_date
         ).getHours()}:${String(
           new Date(item.created_date).getMinutes()

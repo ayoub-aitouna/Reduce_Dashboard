@@ -30,7 +30,7 @@ const DataRow = ({ item, index, onClick = () => {} }) => {
       <td className="px-6 py-4 whitespace-nowrap text-sm font-medium ">
         {`${new Date(item.data_of_visite).getDate()}/${new Date(
           item.data_of_visite
-        ).getMonth()}/${new Date(item.data_of_visite).getFullYear()}`}
+        ).getMonth() + 1}/${new Date(item.data_of_visite).getFullYear()}`}
       </td>
       <td class="px-6 py-4 whitespace-nowrap text-sm font-medium ">
         {item.partner_status == "intrested"
