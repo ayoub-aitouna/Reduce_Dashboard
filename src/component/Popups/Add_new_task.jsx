@@ -15,7 +15,7 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 
-const Fill_Form = ({ data, setdata }) => {
+const Fill_Form = ({ data , setdata }) => {
   let [villes, setvilles] = useState([{ value: 0, name: "" }]);
 
   useEffect(() => {
@@ -28,7 +28,7 @@ const Fill_Form = ({ data, setdata }) => {
         <div className="w-full px-3">
           <label
             className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-            for="grid-name"
+            htmlFor="grid-name"
           >
             Partenaire
           </label>
@@ -36,7 +36,8 @@ const Fill_Form = ({ data, setdata }) => {
             className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
             id="grid-name"
             type="text"
-            value={data.partner_name}
+			com
+            value={data.partner_name || ''}
             onChange={(e) => {
               setdata({ ...data, partner_name: e.target.value });
             }}
@@ -46,14 +47,14 @@ const Fill_Form = ({ data, setdata }) => {
         <div className="w-full px-3">
           <label
             className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-            for="grid-name"
+            htmlFor="grid-name"
           >
             Full Name
           </label>
           <input
             className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
             id="grid-name"
-            value={data.full_name}
+            value={data.full_name || '' }
             onChange={(e) => {
               setdata({ ...data, full_name: e.target.value });
             }}
@@ -63,14 +64,14 @@ const Fill_Form = ({ data, setdata }) => {
         <div className="w-full px-3">
           <label
             className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-            for="grid-name"
+            htmlFor="grid-name"
           >
             partner address
           </label>
           <input
             className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
             id="grid-name"
-            value={data.partner_address}
+            value={data.partner_address || ''}
             onChange={(e) => {
               setdata({ ...data, partner_address: e.target.value });
             }}
@@ -80,14 +81,14 @@ const Fill_Form = ({ data, setdata }) => {
         <div className="w-full px-3">
           <label
             className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-            for="grid-name"
+            htmlFor="grid-name"
           >
             Phone Number
           </label>
           <input
             className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
             id="grid-name"
-            value={data.phone_number}
+            value={data.phone_number || '' }
             onChange={(e) => {
               setdata({ ...data, phone_number: e.target.value });
             }}
@@ -97,24 +98,24 @@ const Fill_Form = ({ data, setdata }) => {
         <div className="w-full px-3">
           <label
             className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-            for="grid-name"
+            htmlFor="grid-name"
           >
             Note
           </label>
           <input
             className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
             id="grid-name"
-            value={data.note}
+            value={data.note || ''}
             onChange={(e) => {
               setdata({ ...data, note: e.target.value });
             }}
             type="text"
           />
         </div>
-        <div className="w-full  px-3 mb-6 md:mb-0 flex flex-row justify-between items-center w-full">
+        <div className="w-full  px-3 mb-6 md:mb-0 flex flex-row justify-between items-center">
           <Filter_Selector
             title={"Ville"}
-            Filter={data.ville}
+            Filter={data.ville || ''}
             setFilter={(value) => {
               setdata({ ...data, ville: value });
             }}
@@ -129,7 +130,7 @@ const Fill_Form = ({ data, setdata }) => {
             <LocalizationProvider dateAdapter={AdapterDayjs}>
               <DatePicker
                 label="Date of visite"
-                value={data.visite_date}
+                value={data.visite_date || ''}
                 onChange={(newValue) => {
                   try {
                     setdata({

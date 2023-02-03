@@ -39,7 +39,7 @@ const UpdatePartner = ({ open, OnClick, partner, setRefresh }) => {
         <DialogTitle>{"Mettre à Jour Ce Partenaire"}</DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-slide-description">
-            <p class="text-gray-600 text-xs ">Remplissez les champs vides</p>
+            <p className="text-gray-600 text-xs ">Remplissez les champs vides</p>
           </DialogContentText>
         </DialogContent>
         <div className="w-full grid place-content-center">
@@ -97,17 +97,17 @@ const Fill_Form = ({ data, setdata }) => {
   }, []);
 
   return (
-    <form class="w-full max-w-lg ">
-      <div class="flex flex-wrap -mx-3 mb-6">
-        <div class="w-full px-3">
+    <form className="w-full max-w-lg ">
+      <div className="flex flex-wrap -mx-3 mb-6">
+        <div className="w-full px-3">
           <label
-            class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-            for="grid-name"
+            className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+            htmlFor="grid-name"
           >
             Raison sociale
           </label>
           <input
-            class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+            className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
             id="grid-name"
             type="text"
             value={data.nome_entreprise}
@@ -118,15 +118,15 @@ const Fill_Form = ({ data, setdata }) => {
           />
         </div>
 
-        <div class="w-full px-3">
+        <div className="w-full px-3">
           <label
-            class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-            for="grid-name"
+            className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+            htmlFor="grid-name"
           >
             ICE
           </label>
           <input
-            class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+            className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
             id="grid-name"
             value={data.identificateur_entreprise}
             onChange={(e) => {
@@ -136,15 +136,15 @@ const Fill_Form = ({ data, setdata }) => {
           />
         </div>
 
-        <div class="w-full px-3">
+        <div className="w-full px-3">
           <label
-            class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-            for="grid-name"
+            className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+            htmlFor="grid-name"
           >
             Représentant Entreprise
           </label>
           <input
-            class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+            className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
             id="grid-name"
             value={data.representant_entreprise}
             onChange={(e) => {
@@ -154,15 +154,15 @@ const Fill_Form = ({ data, setdata }) => {
           />
         </div>
 
-        <div class="w-full px-3">
+        <div className="w-full px-3">
           <label
-            class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-            for="grid-name"
+            className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+            htmlFor="grid-name"
           >
             Fonction
           </label>
           <input
-            class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+            className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
             id="grid-name"
             value={data.role_dans_entriprise}
             onChange={(e) => {
@@ -172,15 +172,15 @@ const Fill_Form = ({ data, setdata }) => {
           />
         </div>
 
-        <div class="w-full px-3">
+        <div className="w-full px-3">
           <label
-            class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-            for="grid-name"
+            className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+            htmlFor="grid-name"
           >
             Adresse
           </label>
           <input
-            class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+            className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
             id="grid-name"
             value={data.adrress}
             onChange={(e) => {
@@ -190,15 +190,15 @@ const Fill_Form = ({ data, setdata }) => {
           />
         </div>
 
-        <div class="w-full px-3">
+        <div className="w-full px-3">
           <label
-            class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-            for="grid-name"
+            className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+            htmlFor="grid-name"
           >
             Offer
           </label>
           <input
-            class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+            className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
             id="grid-name"
             value={data.offer}
             onChange={(e) => {
@@ -207,15 +207,15 @@ const Fill_Form = ({ data, setdata }) => {
             type="text"
           />
         </div>
-        <div class="w-full px-3">
+        <div className="w-full px-3">
           <label
-            class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-            for="grid-name"
+            className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+            htmlFor="grid-name"
           >
             Note
           </label>
           <input
-            class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+            className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
             id="grid-name"
             value={data.note}
             onChange={(e) => {
@@ -225,8 +225,8 @@ const Fill_Form = ({ data, setdata }) => {
           />
         </div>
 
-        <div class="flex flex-wrap -mx-3 mb-2">
-          <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+        <div className="flex flex-wrap -mx-3 mb-2">
+          <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
             <Filter_Selector
               title={"Ville"}
               Filter={data.ville}
@@ -238,7 +238,7 @@ const Fill_Form = ({ data, setdata }) => {
             />
           </div>
 
-          <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+          <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
             <Filter_Selector
               title={"d'activité"}
               Filter={data.activity_entrprise}

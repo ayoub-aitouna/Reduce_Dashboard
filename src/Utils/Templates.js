@@ -7,7 +7,7 @@ const Pdf_contract_template = (partner_data) => {
 	    </h2>
 	    </div>
 	    <p style="padding-left: 18pt; text-indent: 0pt; text-align: left">
-		 <a href="https://www.reducte.com/" class="a" target="_blank"
+		 <a href="https://www.reducte.com/" className="a" target="_blank"
 		   >www.reducte.com</a
 		 ><a
 		   href="mailto:partenaires@reducte.ma"
@@ -50,7 +50,7 @@ const Pdf_contract_template = (partner_data) => {
 			  "
 			>
 			  <p
-				class="s3"
+				className="s3"
 				style=" padding: 20px;
 				  padding-top: 3pt;
 				  padding-left: 7pt;
@@ -74,7 +74,7 @@ const Pdf_contract_template = (partner_data) => {
 			  "
 			>
 			  <p
-				class="s3"
+				className="s3"
 				style=" padding: 20px;
 				  padding-top: 3pt;
 				  padding-left: 7pt;
@@ -98,7 +98,7 @@ const Pdf_contract_template = (partner_data) => {
 			  "
 			>
 			  <p
-				class="s3"
+				className="s3"
 				style=" padding: 20px;
 				  padding-top: 3pt;
 				  padding-left: 7pt;
@@ -124,7 +124,7 @@ const Pdf_contract_template = (partner_data) => {
 			  "
 			>
 			  <p
-				class="s3"
+				className="s3"
 				style=" padding: 20px;
 				  padding-top: 3pt;
 				  padding-left: 7pt;
@@ -148,7 +148,7 @@ const Pdf_contract_template = (partner_data) => {
 			  "
 			>
 			  <p
-				class="s3"
+				className="s3"
 				style=" padding: 20px;
 				  padding-top: 3pt;
 				  padding-left: 7pt;
@@ -172,7 +172,7 @@ const Pdf_contract_template = (partner_data) => {
 			  "
 			>
 			  <p
-				class="s3"
+				className="s3"
 				style=" padding: 20px;
 				  padding-top: 3pt;
 				  padding-left: 7pt;
@@ -198,7 +198,7 @@ const Pdf_contract_template = (partner_data) => {
 			  "
 			>
 			  <p
-				class="s3"
+				className="s3"
 				style="padding: 20px;
 				  padding-top: 3pt;
 				  padding-left: 7pt;
@@ -222,7 +222,7 @@ const Pdf_contract_template = (partner_data) => {
 			  "
 			>
 			  <p
-				class="s3"
+				className="s3"
 				style="padding: 20px;
 				  padding-top: 3pt;
 				  padding-left: 7pt;
@@ -246,7 +246,7 @@ const Pdf_contract_template = (partner_data) => {
 			  "
 			>
 			  <p
-				class="s3"
+				className="s3"
 				style=" padding: 20px;
 				  padding-top: 3pt;
 				  padding-left: 7pt;
@@ -272,7 +272,7 @@ const Pdf_contract_template = (partner_data) => {
 			  "
 			>
 			  <p
-				class="s3"
+				className="s3"
 				style=" 	padding: 20px;
 				  padding-top: 3pt;
 				  padding-left: 7pt;
@@ -296,7 +296,7 @@ const Pdf_contract_template = (partner_data) => {
 			  "
 			>
 			  <p
-				class="s3"
+				className="s3"
 				style=" 	padding: 20px;
 				  padding-top: 3pt;
 				  padding-left: 7pt;
@@ -320,7 +320,7 @@ const Pdf_contract_template = (partner_data) => {
 			  "
 			>
 			  <p
-				class="s3"
+				className="s3"
 				style=" 	padding: 20px;
 				  padding-top: 3pt;
 				  padding-left: 7pt;
@@ -346,7 +346,7 @@ const Pdf_contract_template = (partner_data) => {
 			  "
 			>
 			  <p
-				class="s3"
+				className="s3"
 				style="	padding: 20px;
 				  padding-top: 3pt;
 				  padding-left: 7pt;
@@ -372,7 +372,7 @@ const Pdf_contract_template = (partner_data) => {
 			>
 			  <p style="text-indent: 0pt; text-align: left"><br /></p>
 			  <p
-				class="s3"
+				className="s3"
 				style=" 	padding: 20px;padding-left: 7pt; text-indent: 0pt; text-align: left"
 			  >
 				Gérant
@@ -392,7 +392,7 @@ const Pdf_contract_template = (partner_data) => {
 			>
 			  <p style="text-indent: 0pt; text-align: left"><br /></p>
 			  <p
-				class="s3"
+				className="s3"
 				style="	padding: 20px; padding-left: 7pt; text-indent: 0pt; text-align: left"
 			  >
 				CEO
@@ -413,7 +413,7 @@ const Pdf_contract_template = (partner_data) => {
 			  "
 			>
 			  <p
-				class="s3"
+				className="s3"
 				style="	padding: 20px;
 				  padding-top: 3pt;
 				  padding-left: 7pt;
@@ -437,7 +437,7 @@ const Pdf_contract_template = (partner_data) => {
 			  "
 			>
 			  <p
-				class="s3"
+				className="s3"
 				style="	padding: 20px;
 				  padding-top: 3pt;
 				  padding-left: 7pt;
@@ -461,7 +461,7 @@ const Pdf_contract_template = (partner_data) => {
 			  "
 			>
 			  <p
-				class="s3"
+				className="s3"
 				style="	padding: 20px;
 				  padding-top: 3pt;
 				  padding-left: 7pt;
@@ -487,7 +487,7 @@ const Pdf_contract_template = (partner_data) => {
 			  "
 			>
 			  <p
-				class="s3"
+				className="s3"
 				style="	padding: 20px;
 				  padding-top: 3pt;
 				  padding-left: 7pt;
@@ -518,7 +518,7 @@ const Pdf_contract_template = (partner_data) => {
 				  text-align: left;
 				"
 			  >
-				<a href="mailto:${partner_data.email}" class="s4">${partner_data.email}</a>
+				<a href="mailto:${partner_data.email}" className="s4">${partner_data.email}</a>
 			  </p>
 			</td>
 			<td
@@ -541,7 +541,7 @@ const Pdf_contract_template = (partner_data) => {
 				  text-align: left;
 				"
 			  >
-				<a href="mailto:partenaires@reducte.ma" class="s4"
+				<a href="mailto:partenaires@reducte.ma" className="s4"
 				  >partenaires@reducte.ma</a
 				>
 			  </p>
@@ -561,7 +561,7 @@ const Pdf_contract_template = (partner_data) => {
 			  "
 			>
 			  <p
-				class="s3"
+				className="s3"
 				style="	padding: 20px;
 				  padding-top: 3pt;
 				  padding-left: 7pt;
@@ -585,7 +585,7 @@ const Pdf_contract_template = (partner_data) => {
 			  "
 			>
 			  <p
-				class="s3"
+				className="s3"
 				style="	padding: 20px;
 				  padding-top: 3pt;
 				  padding-left: 7pt;
@@ -609,7 +609,7 @@ const Pdf_contract_template = (partner_data) => {
 			  "
 			>
 			  <p
-				class="s3"
+				className="s3"
 				style="	padding: 20px;
 				  padding-top: 3pt;
 				  padding-left: 7pt;
@@ -635,7 +635,7 @@ const Pdf_contract_template = (partner_data) => {
 			  "
 			>
 			  <p
-				class="s3"
+				className="s3"
 				style="
 				padding: 20px;
 				  padding-top: 3pt;
@@ -660,7 +660,7 @@ const Pdf_contract_template = (partner_data) => {
 			  "
 			>
 			  <p
-				class="s3"
+				className="s3"
 				style="	padding: 20px;
 				  padding-top: 3pt;
 				  padding-left: 7pt;
@@ -684,7 +684,7 @@ const Pdf_contract_template = (partner_data) => {
 			  "
 			>
 			  <p
-				class="s3"
+				className="s3"
 				style="
 				  padding-top: 3pt;
 				  padding-left: 7pt;
@@ -710,7 +710,7 @@ const Pdf_contract_template = (partner_data) => {
 			  "
 			>
 			  <p
-				class="s3"
+				className="s3"
 				style="
 				padding: 20px;
 				  padding-top: 3pt;
@@ -735,7 +735,7 @@ const Pdf_contract_template = (partner_data) => {
 			  "
 			>
 			  <p
-				class="s3"
+				className="s3"
 				style="
 				  padding-top: 3pt;
 				  padding-left: 7pt;
@@ -831,13 +831,13 @@ const Pdf_contract_template = (partner_data) => {
 	    </p>
 	    <div style="display : flex; flex-direction: row; justify-content : space-between; align-items: center;">
 	    <p style="text-indent: 0pt; text-align: left"><br /></p>
-		 <p class="s5" target="_blank"
+		 <p className="s5" target="_blank"
 		   >Tel: 06 63 16 10 43 , </p
 		 >
-	    <p href="mailto:partenaires@reducte.ma" class="s5" target="_blank"
+	    <p href="mailto:partenaires@reducte.ma" className="s5" target="_blank"
 		   > Email: partenaires@reducte.ma</p
 		 >
-	    <a href="www.reducte.com" class="s5" style="text-color: blue;">www.reducte.com</a>
+	    <a href="www.reducte.com" className="s5" style="text-color: blue;">www.reducte.com</a>
 		</div>
 	    <p style="padding-left: 45pt; text-indent: 0pt; text-align: center">
 		 zenith buisness centre etg 3 n14 Marrakech maroc - ICE: 003030945000087 </br>

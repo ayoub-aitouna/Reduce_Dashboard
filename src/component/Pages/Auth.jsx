@@ -8,16 +8,21 @@ import { useNavigate, NavLink } from "react-router-dom";
 
 const AuthForm = ({ setEmail }) => {
   let navigate = useNavigate();
+
   const [loading, setloading] = useState(false);
+
   const [error, seterror] = useState({
     val: 0,
     msg: "Email ou mot de passe incorrect.",
   });
+ 
   const [cookies, setCookie, removeCookie] = useCookies([Coockies_name]);
+  
   const [login, setlogin] = useState({
     email: "",
     password: "",
   });
+
   useEffect(() => {
     if (cookies.accesToken != null || cookies.accesToken != undefined) {
       navigate(`/home`);
@@ -36,7 +41,7 @@ const AuthForm = ({ setEmail }) => {
     if (event != undefined) event.preventDefault();
     setloading(true);
     try {
-      const req = await fetch(`${BaseUrl}/auth/admin`, {
+      const req = await fetch(`${BaseUrl}/auth/admin_login`, {
         method: "POST",
         mode: "cors",
         cache: "no-cache",
@@ -101,7 +106,7 @@ const AuthForm = ({ setEmail }) => {
             <img
               src={Icon_Auth}
               alt=""
-              srcset=""
+              srcSet=""
               className="w-[250px] object-cover"
             />
           </div>
@@ -124,8 +129,8 @@ const AuthForm = ({ setEmail }) => {
             value={login.password}
             type="password"
           />
-          <div class="flex justify-between w-full px-2">
-            <div class="flex items-start"></div>
+          <div className="flex justify-between w-full px-2">
+            <div className="flex items-start"></div>
             <h3
               onClick={() => request_key()}
               to={"/forgot_pass"}

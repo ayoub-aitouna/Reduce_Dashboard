@@ -32,7 +32,7 @@ const Fill_Form = ({ data, setdata }) => {
         <div className="w-full px-3">
           <label
             className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-            for="grid-name"
+            htmlFor="grid-name"
           >
             Partenaire
           </label>
@@ -50,7 +50,7 @@ const Fill_Form = ({ data, setdata }) => {
         <div className="w-full px-3">
           <label
             className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-            for="grid-name"
+            htmlFor="grid-name"
           >
             Full Name
           </label>
@@ -67,7 +67,7 @@ const Fill_Form = ({ data, setdata }) => {
         <div className="w-full px-3">
           <label
             className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-            for="grid-name"
+            htmlFor="grid-name"
           >
             partner address
           </label>
@@ -84,7 +84,7 @@ const Fill_Form = ({ data, setdata }) => {
         <div className="w-full px-3">
           <label
             className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-            for="grid-name"
+            htmlFor="grid-name"
           >
             Phone Number
           </label>
@@ -101,7 +101,7 @@ const Fill_Form = ({ data, setdata }) => {
         <div className="w-full px-3">
           <label
             className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-            for="grid-name"
+            htmlFor="grid-name"
           >
             Note
           </label>
