@@ -1,5 +1,6 @@
 import Auth from "./Pages/Auth";
 import Home from "./Pages/Home";
+import Clients from "./Pages/Clients";
 import UserTable from "./Utils/UserTable";
 import Partner from "./Pages/Partner";
 import Sidebar from "./Utils/Sidebar";
@@ -9,6 +10,7 @@ import PartnerInfo from "./Popups/PartnerInfo";
 import IconHalder from "./Utils/IconHolder";
 import ActionsDialog from "./Popups/ActionsDialog";
 import AdminsTable from "./Utils/AdminsTable";
+import ClientTable from "./Utils/ClientTable";
 import Admins from "./Pages/Admins";
 import AddNewAdmin from "./Popups/AddNewAdmin";
 import Filter_Selector from "./Utils/Filter_Selector";
@@ -59,4 +61,6 @@ export {
   Dark_loading_icon,
   UpdateAdmin,
   ErrorMsg,
+  Clients,
+  ClientTable
 };

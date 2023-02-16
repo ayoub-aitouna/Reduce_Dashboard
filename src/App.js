@@ -14,6 +14,7 @@ import {
   TaskSearch,
   ForgotPass,
   Edit_history,
+  Clients
 } from "./component";
 import React, { useState, useEffect } from "react";
 
@@ -61,6 +62,7 @@ function App() {
             />
             <Route path="edit_history" element={<Edit_history />} />
             <Route path="Admin_managers" element={<Admins />} />
+            <Route path="subscribers" element={<Clients />} />
           </Route>
           <Route path="*" element={<PageNotFound />} />
         </Routes>

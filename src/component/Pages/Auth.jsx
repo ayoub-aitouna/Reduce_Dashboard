@@ -99,7 +99,7 @@ const AuthForm = ({ setEmail }) => {
       </div>
       <form
         onSubmit={login_submit}
-        className="w-full p-6 bg-white rounded-lg shadow dark:border md:mt-0 dark:bg-gray-800 dark:border-gray-700 sm:p-8"
+        className="w-full p-6 bg-white rounded-lg shadow  sm:p-8"
       >
         <div className="w-full h-full  flex flex-col justify-center items-center gap-5">
           <div className="flex flex-row text-[#2E5CFF] text-4xl font-black gap-2 justify-start items-center pb-9">
@@ -154,7 +154,7 @@ const AuthForm = ({ setEmail }) => {
 
 function Auth({ setEmail }) {
   return (
-    <div className="w-full h-[100vh] grid place-content-center bg-gray-50 dark:bg-gray-900">
+    <div className="w-full h-[100vh] grid place-content-center bg-gray-50 ">
       <AuthForm setEmail={setEmail} />
     </div>
   );
