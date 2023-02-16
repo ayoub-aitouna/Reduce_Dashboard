@@ -14,7 +14,8 @@ import {
   TaskSearch,
   ForgotPass,
   Edit_history,
-  Clients
+  Clients,
+  Statics
 } from "./component";
 import React, { useState, useEffect } from "react";
 
@@ -36,7 +37,8 @@ function App() {
             element={<ForgotPass Email={Email} />}
           />
           <Route path="/home" element={<Home />}>
-            <Route exact path="" element={<Partner selectedStatus="" />} />
+            <Route exact path="Statistics" element={<Statics  />} />
+            <Route exact path="" element={<Partner />} />
             <Route
               path="Pending_partners"
               element={<Partner selectedStatus="Pending" />}
@@ -52,14 +54,7 @@ function App() {
                 element={<TaskSearch Search={Search} />}
               />
             </Route>
-            <Route
-              path="Rejected_partners"
-              element={<Partner selectedStatus={"Rejected"} />}
-            />
-            <Route
-              path="Approved_partners"
-              element={<Partner selectedStatus={"Approved"} />}
-            />
+            
             <Route path="edit_history" element={<Edit_history />} />
             <Route path="Admin_managers" element={<Admins />} />
             <Route path="subscribers" element={<Clients />} />

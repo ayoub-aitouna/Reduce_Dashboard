@@ -18,6 +18,7 @@ import SearchBar from "./Utils/SearchBar";
 import ErrorMsg from "./Utils/ErrorMsg";
 import Add_new_task from "./Popups/Add_new_task";
 import Tasks from "./Pages/Tasks";
+import Statics from "./Pages/Statics";
 import Task_done from "./Pages/Task_done";
 import Task_anounsments from "./Pages/Task_anounsments";
 import TaskSearch from "./Pages/TaskSearch";
@@ -62,5 +63,6 @@ export {
   UpdateAdmin,
   ErrorMsg,
   Clients,
-  ClientTable
+  ClientTable,
+  Statics
 };
