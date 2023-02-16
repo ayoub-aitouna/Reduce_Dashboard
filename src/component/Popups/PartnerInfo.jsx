@@ -16,11 +16,11 @@ const DataRow = ({ title, data = null, Render = () => <></> }) => {
     <tr>
       <th
         scope="row"
-        class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800"
+        className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800"
       >
         {title}
       </th>
-      <td class="py-4 px-6">
+      <td className="py-4 px-6">
         {data ? (
           <p className="w-full mb-3 font-light text-gray-500 dark:text-gray-400 break-words">
             {" "}
@@ -37,14 +37,14 @@ const DataRow = ({ title, data = null, Render = () => <></> }) => {
 const PartnerInfoRender = ({ item }) => {
   return (
     <>
-      <div class="overflow-x-auto relative sm:rounded-lg">
-        <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-          <thead class="text-xs text-gray-700 uppercase dark:text-gray-400">
+      <div className="overflow-x-auto relative sm:rounded-lg">
+        <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+          <thead className="text-xs text-gray-700 uppercase dark:text-gray-400">
             <tr>
-              <th scope="col" class="py-3 px-6 bg-gray-50 dark:bg-gray-800">
+              <th scope="col" className="py-3 px-6 bg-gray-50 dark:bg-gray-800">
                 Attribut
               </th>
-              <th scope="col" class="py-3 px-6">
+              <th scope="col" className="py-3 px-6">
                 Valeurs
               </th>
             </tr>
@@ -71,7 +71,7 @@ const PartnerInfoRender = ({ item }) => {
                     className="w-[50px] h-[50px] rounded-full"
                     src={`https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Default_pfp.svg/800px-Default_pfp.svg.png`}
                     alt="entreprise Logo"
-                    srcset=""
+                    srcSet=""
                   />
                 );
               }}

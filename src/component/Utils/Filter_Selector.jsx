@@ -10,7 +10,7 @@ const Filter_Selector = ({
   return (
     <div className={`w-[250px] ${styles}`}>
       <label
-        for={title}
+        htmlFor={title}
         className="block font-black mb-2 text-sm  text-gray-900 dark:text-gray-400"
       >
         {title}

@@ -64,7 +64,7 @@ const ForgotPass = ({ Email }) => {
             >
               <div>
                 <label
-                  for="key"
+                  htmlFor="key"
                   className="block mb-2 text-sm font-medium capitalize text-gray-900 dark:text-white"
                 >
                   clé que vous avez reçue
@@ -94,7 +94,7 @@ const ForgotPass = ({ Email }) => {
               </div>
               <div>
                 <label
-                  for="password"
+                  htmlFor="password"
                   className="block capitalize mb-2 text-sm font-medium text-gray-900 dark:text-white"
                 >
                   nouveau mot de passe
@@ -117,7 +117,7 @@ const ForgotPass = ({ Email }) => {
               </div>
               <div>
                 <label
-                  for="confirm-password"
+                  htmlFor="confirm-password"
                   className="block mb-2 capitalize text-sm font-medium text-gray-900 dark:text-white"
                 >
                   Confirmez le mot de passe{" "}
