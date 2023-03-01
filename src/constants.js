@@ -9,20 +9,14 @@ import { AiFillHome } from "react-icons/ai";
 export const SideBarLinks = [
   {
     key: 0,
-    groupName: "Statistiques",
+    groupName: "GÉNÉRAL",
     tabs: [
       {
         key: 0,
         name: "Statistiques",
         Icon: AiFillHome,
         Url: "Statistics",
-      }
-    ],
-  },
-  {
-    key: 1,
-    groupName: "Gestionnaire",
-    tabs: [
+      },
       {
         name: "les Abonné",
         Url: "subscribers",
@@ -38,17 +32,23 @@ export const SideBarLinks = [
     ],
   },
   {
-    key: 0,
-    groupName: "GÉNÉRAL",
+    key: 1,
+    groupName: "Gestionnaire",
     tabs: [
       {
-        key: 1,
+        key: 0,
         name: "Tâches",
         Icon: FaTasks,
         Url: "tasks",
       },
       {
         key: 1,
+        name: "Gestionnaire Banniere",
+        Icon: RiAdminFill,
+        Url: "gestionnaire_banniere",
+      },
+      {
+        key: 2,
         name: "Historique des modifications",
         Icon: BsClockHistory,
         Url: "edit_history",
@@ -56,7 +56,7 @@ export const SideBarLinks = [
     ],
   },
   {
-    key: 3,
+    key: 2,
     groupName: "ADMINISTRATEUR",
     tabs: [
       {
@@ -65,12 +65,6 @@ export const SideBarLinks = [
         Icon: RiAdminFill,
         Url: "Admin_managers",
       },
-      {
-        key: 1,
-        name: "Gestionnaire Banniere",
-        Icon: RiAdminFill,
-        Url: "gestionnaire_banniere",
-      },
     ],
   },
 ];
@@ -78,26 +72,3 @@ export const SideBarLinks = [
 export const BaseUrl = "https://merybtk.xyz/api/v1";
 
 export const Coockies_name = "auth_name";
-
-
-
-/**
- *       {
-        name: "Partenaires en attente",
-        Url: "Pending_partners",
-        Icon: MdPendingActions,
-        key: 2,
-      },
-      {
-        name: "Partenaires approuvés",
-        Url: "Approved_partners",
-        Icon: BsCheckCircleFill,
-        key: 4,
-      },
-      {
-        name: "Partenaires refusés",
-        Url: "Rejected_partners",
-        Icon: IoIosCloseCircle,
-        key: 3,
-      },
- */

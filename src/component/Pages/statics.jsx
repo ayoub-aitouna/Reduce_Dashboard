@@ -12,7 +12,7 @@ import { get_Activity } from "../../Utils/Activities/Activities";
 import { useCookies } from "react-cookie";
 import { get_villes } from "../../Utils/villes/get_villes";
 
-function statics({ selectedStatus }) {
+function Statics({ selectedStatus }) {
   const [isDialogOpend, setDialogOpend] = useState(false);
   const [isUpdateDialogOpend, setUpdateDialogOpend] = useState(false);
   const [City, setCity] = useState("");
@@ -126,4 +126,4 @@ function statics({ selectedStatus }) {
   );
 }
 
-export default statics;
+export default Statics;

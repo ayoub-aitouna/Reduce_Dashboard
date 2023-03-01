@@ -12,7 +12,7 @@ import { get_Activity } from "../../Utils/Activities/Activities";
 import { useCookies } from "react-cookie";
 import { get_villes } from "../../Utils/villes/get_villes";
 
-function Partner({ selectedStatus }) {
+function Partner() {
   const [isDialogOpend, setDialogOpend] = useState(false);
   const [isUpdateDialogOpend, setUpdateDialogOpend] = useState(false);
   const [City, setCity] = useState("");
@@ -20,6 +20,7 @@ function Partner({ selectedStatus }) {
   let [villes, setvilles] = useState([{ value: 0, name: "" }]);
 
   const [activity_entrprise, setactivity_entrprise] = useState("");
+  const [selectedStatus, setselectedStatus] = useState("");
   const [Search, setSearch] = useState("");
   const [cookies, setCookie, removeCookie] = useCookies([Coockies_name]);
   const [SelectedPartner, setSelectedpartner] = useState({});
@@ -39,8 +40,12 @@ function Partner({ selectedStatus }) {
         },
         referrerPolicy: "no-referrer",
       });
-      if (req.ok) setOdata(await req.json());
-    } catch (err) {}
+      if (req.ok){
+        const data = await req.json();
+        setOdata(data);
+        console.log(data);
+      } 
+    } catch (err) { }
   };
 
   useEffect(() => {
@@ -58,8 +63,8 @@ function Partner({ selectedStatus }) {
     setdata((per) =>
       Search != ""
         ? per.filter((item) =>
-            item.nome_entreprise.toLowerCase().includes(Search.toLowerCase())
-          )
+          item.nome_entreprise.toLowerCase().includes(Search.toLowerCase())
+        )
         : per
     );
     setdata((per) => {
@@ -117,6 +122,14 @@ function Partner({ selectedStatus }) {
             options={villes}
             setFilter={(value) => setCity(value)}
             Filter={City}
+          />
+
+          <Filter_Selector
+            title={"status"}
+            styles={"h-[95px]"}
+            options={[{ value: "", name: "Tout" }, { value: "Approved", name: "Accepted" }, { value: "Pending", name: "Pending" }, { value: "Rejected", name: "Rejected" }]}
+            setFilter={(value) => setselectedStatus(value)}
+            Filter={selectedStatus}
           />
         </div>
       </div>
