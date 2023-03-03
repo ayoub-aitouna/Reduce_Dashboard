@@ -5,6 +5,7 @@ import {
   SearchBar,
   UpdatePartner,
   PartnerInfo,
+  SubPartnerInfo,
   UserTable,
 } from "../index";
 import { BaseUrl, Coockies_name } from "../../constants";
@@ -14,6 +15,7 @@ import { get_villes } from "../../Utils/villes/get_villes";
 
 function Partner() {
   const [isDialogOpend, setDialogOpend] = useState(false);
+  const [issubDialogOpend, setsubDialogOpend] = useState(false);
   const [isUpdateDialogOpend, setUpdateDialogOpend] = useState(false);
   const [City, setCity] = useState("");
   const [Activities, setActivities] = useState([]);
@@ -80,6 +82,14 @@ function Partner() {
 
   return (
     <div className="p-5 my-10">
+      <SubPartnerInfo
+        open={issubDialogOpend}
+        setRefresh={setRefresh}
+        OnClick={() => {
+          setsubDialogOpend(false);
+        }}
+        id={SelectedPartner.id}
+      />
       <PartnerInfo
         open={isDialogOpend}
         setRefresh={setRefresh}
@@ -139,6 +149,10 @@ function Partner() {
         OnSelect={(data) => {
           setSelectedpartner(data);
           setDialogOpend(true);
+        }}
+        onRowSelected={(data)=>{
+          setSelectedpartner(data);
+          setsubDialogOpend(true);
         }}
         OnEdit={(data) => {
           setSelectedpartner(data);

@@ -1,8 +1,5 @@
 import React from "react";
-import { IoIosCloseCircle } from "react-icons/io";
 import { AiFillEdit } from "react-icons/ai";
-import { BsCheckCircleFill } from "react-icons/bs";
-import { MdPendingActions } from "react-icons/md";
 import { BsFillArrowRightSquareFill } from "react-icons/bs";
 import { IconHalder } from "../index";
 
@@ -43,17 +40,14 @@ const DataRow = ({ item, index, onClick = () => { }, OnEdit = () => { } }) => {
 			<td className="px-6 py-4 whitespace-nowrap text-sm font-medium ">
 				{item.activity_name}
 			</td>
-			<td className="px-6 py-4 whitespace-nowrap text-sm font-medium ">
-				{item.activity_name}
-			</td>
-			<td className="px-6 py-4 whitespace-nowrap text-sm font-medium ">
-				{item.activity_name}
-			</td>
-			<td className="px-6 py-4 whitespace-nowrap text-sm font-medium ">
-				{item.activity_name}
-			</td>
-			<td className="px-6 py-4 whitespace-nowrap text-sm font-medium ">
-				{item.activity_name}
+			<td
+				className="px-6 py-4 whitespace-nowrap text-sm font-medium "
+				onClick={() => onClick()}
+			>
+				<IconHalder
+					Icon={() => <BsFillArrowRightSquareFill />}
+					style="text-[20px]"
+				/>
 			</td>
 
 			<td
@@ -132,34 +126,13 @@ function UserTable({ Data, OnSelect, OnEdit }) {
 										scope="col"
 										className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
 									>
-										ID
-									</th>
-									<th
-										scope="col"
-										className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
-									>
 										Statut
 									</th>
 									<th
 										scope="col"
 										className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
 									>
-										Date
-										inscription
-									</th>
-									<th
-										scope="col"
-										className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
-									>
-										Date
-										debut abonnement
-									</th>
-									<th
-										scope="col"
-										className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
-									>
-										Date
-										Fin abonnement
+										Action
 									</th>
 									<th
 										scope="col"

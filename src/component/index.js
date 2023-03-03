@@ -7,6 +7,8 @@ import Sidebar from "./Utils/Sidebar";
 import Button from "./Utils/Button";
 import Input from "./Utils/Input";
 import PartnerInfo from "./Popups/PartnerInfo";
+import SubPartnerInfo from "./Popups/SubPartnerInfo";
+import ClientInfo from "./Popups/ClientInfo";
 import IconHalder from "./Utils/IconHolder";
 import ActionsDialog from "./Popups/ActionsDialog";
 import AdminsTable from "./Utils/AdminsTable";
@@ -31,6 +33,7 @@ import UpdatePartner from "./Popups/UpdatePartner";
 import Edit_history from "./Pages/Edit_history";
 import ForgotPass from "./Pages/ForgotPass";
 import UpdateAdmin from "./Popups/UpdateAdmin";
+import UpdateClients from "./Popups/UpdateClients";
 export {
   Auth,
   Home,
@@ -40,6 +43,8 @@ export {
   Button,
   Input,
   PartnerInfo,
+  SubPartnerInfo,
+  ClientInfo,
   IconHalder,
   ActionsDialog,
   AdminsTable,
@@ -58,6 +63,7 @@ export {
   Edite_Task,
   Edit_history,
   UpdatePartner,
+  UpdateClients,
   ForgotPass,
   Dark_loading_icon,
   UpdateAdmin,

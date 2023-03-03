@@ -3,8 +3,8 @@ import React, { useState, useEffect } from "react";
 import {
   Filter_Selector,
   SearchBar,
-  UpdatePartner,
-  PartnerInfo,
+  UpdateClients,
+  ClientInfo,
   ClientTable,
 } from "../index";
 import { BaseUrl, Coockies_name } from "../../constants";
@@ -13,7 +13,7 @@ import { useCookies } from "react-cookie";
 import { get_villes } from "../../Utils/villes/get_villes";
 
 function Clients({ selectedStatus }) {
-  const [isDialogOpend, setDialogOpend] = useState(false);
+  const [isDialogOpend, setDialogOpend] = useState(true);
   const [isUpdateDialogOpend, setUpdateDialogOpend] = useState(false);
   const [City, setCity] = useState("");
   const [Activities, setActivities] = useState([]);
@@ -66,7 +66,7 @@ function Clients({ selectedStatus }) {
 
   return (
     <div className="p-5 my-10 ">
-      <PartnerInfo
+      <ClientInfo
         open={isDialogOpend}
         setRefresh={setRefresh}
         OnClick={() => {
@@ -74,8 +74,7 @@ function Clients({ selectedStatus }) {
         }}
         data={SelectedPartner}
       />
-
-      <UpdatePartner
+      <UpdateClients
         open={isUpdateDialogOpend}
         setRefresh={setRefresh}
         OnClick={() => {
@@ -96,7 +95,7 @@ function Clients({ selectedStatus }) {
         <SearchBar styles={"max-h-[15px] !w-full"} setSearch={setSearch} />
         <div className="flex flex-row w-full mt-10 gap-5 justify-start items-center">
           <Filter_Selector
-            title={"Secteur d'activité"}
+            title={"filter abonnement"}
             styles={"h-[95px]"}
             options={Activities}
             setFilter={(value) => setactivity_entrprise(value)}
@@ -108,6 +107,20 @@ function Clients({ selectedStatus }) {
             options={villes}
             setFilter={(value) => setCity(value)}
             Filter={City}
+          />
+          <Filter_Selector
+            title={"filter status"}
+            styles={"h-[95px]"}
+            options={Activities}
+            setFilter={(value) => setactivity_entrprise(value)}
+            Filter={activity_entrprise}
+          />
+          <Filter_Selector
+            title={"filter date"}
+            styles={"h-[95px]"}
+            options={Activities}
+            setFilter={(value) => setactivity_entrprise(value)}
+            Filter={activity_entrprise}
           />
         </div>
       </div>
