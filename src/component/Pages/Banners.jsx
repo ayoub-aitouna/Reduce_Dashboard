@@ -13,7 +13,7 @@ import { useCookies } from "react-cookie";
 import { get_villes } from "../../Utils/villes/get_villes";
 
 function Banners() {
-  const [isDialogOpend, setDialogOpend] = useState(false);
+  const [isDialogOpend, setDialogOpend] = useState(true);
   const [isUpdateDialogOpend, setUpdateDialogOpend] = useState(false);
   const [City, setCity] = useState("");
   const [Activities, setActivities] = useState([]);
@@ -40,7 +40,7 @@ function Banners() {
         referrerPolicy: "no-referrer",
       });
       if (req.ok) setOdata(await req.json());
-    } catch (err) {}
+    } catch (err) { }
   };
 
   useEffect(() => {
@@ -50,32 +50,23 @@ function Banners() {
   }, [Refresh]);
 
   useEffect(() => {
-    setdata(
-      selectedStatus != ""
-        ? Odata.filter((item) => item._status == selectedStatus)
-        : Odata
-    );
-    setdata((per) =>
-      Search != ""
-        ? per.filter((item) =>
-            item.nome_entreprise.toLowerCase().includes(Search.toLowerCase())
-          )
-        : per
-    );
-    setdata((per) => {
-      console.log(City);
-      return City != 0 ? per.filter((item) => item.ville == City) : per;
-    });
-    setdata((per) =>
-      activity_entrprise != 0
-        ? per.filter((item) => item.activity_entrprise == activity_entrprise)
-        : per
-    );
-  }, [Search, selectedStatus, City, Odata, activity_entrprise]);
+    // setdata((per) =>
+    //   Search != ""
+    //     ? per.filter((item) =>
+    //         item.name.toLowerCase().includes(Search.toLowerCase())
+    //       )
+    //     : per
+    // );
+    // setdata((per) => {
+    //   console.log(City);
+    //   return City != 0 ? per.filter((item) => item.ville == City) : per;
+    // });
+    setdata(Odata);
+  }, [Search, City, Odata]);
 
   return (
-    <div className="p-5 my-10">
-      <PartnerInfo
+    <div className="p-5 my-10 ">
+      <ClientInfo
         open={isDialogOpend}
         setRefresh={setRefresh}
         OnClick={() => {
@@ -83,8 +74,7 @@ function Banners() {
         }}
         data={SelectedPartner}
       />
-
-      <UpdatePartner
+      <UpdateClients
         open={isUpdateDialogOpend}
         setRefresh={setRefresh}
         OnClick={() => {
@@ -95,7 +85,7 @@ function Banners() {
 
       <div className="flex flex-col items-start justify-start">
         <h1 className="text-[20px] font-black leading-9 text-gray-800">
-          Reducte Partenaires
+          Reducte Abonné
         </h1>
         <p className="text-[16px] font-normal  leading-9 text-gray-500">
           Partenaires ayant soumis le formulaire à la plateforme Reducte
@@ -105,7 +95,7 @@ function Banners() {
         <SearchBar styles={"max-h-[15px] !w-full"} setSearch={setSearch} />
         <div className="flex flex-row w-full mt-10 gap-5 justify-start items-center">
           <Filter_Selector
-            title={"Secteur d'activité"}
+            title={"filter abonnement"}
             styles={"h-[95px]"}
             options={Activities}
             setFilter={(value) => setactivity_entrprise(value)}
@@ -118,9 +108,23 @@ function Banners() {
             setFilter={(value) => setCity(value)}
             Filter={City}
           />
+          <Filter_Selector
+            title={"filter status"}
+            styles={"h-[95px]"}
+            options={Activities}
+            setFilter={(value) => setactivity_entrprise(value)}
+            Filter={activity_entrprise}
+          />
+          <Filter_Selector
+            title={"filter date"}
+            styles={"h-[95px]"}
+            options={Activities}
+            setFilter={(value) => setactivity_entrprise(value)}
+            Filter={activity_entrprise}
+          />
         </div>
       </div>
-      <BannerTable
+      <ClientTable
         Data={data}
         selectedstatu={selectedStatus}
         OnSelect={(data) => {
