@@ -85,9 +85,9 @@ const DataRow = ({ item, index, onClick = () => { }, OnEdit = () => { }, onRowSe
 	);
 };
 
-function UserTable({ Data, OnSelect, OnEdit, onRowSelected }) {
+function UserTable({ Data, OnSelect, OnEdit, onRowSelected, my = "10" }) {
 	return (
-		<div className="flex flex-col  border-[1px] my-10 border-gray-200 rounded-lg ">
+		<div className={`flex flex-col  border-[1px] my-${my} border-gray-200 rounded-lg `}>
 			<div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
 				<div className="py-2 inline-block min-w-full sm:px-6 lg:px-8">
 					<div className="overflow-hidden">

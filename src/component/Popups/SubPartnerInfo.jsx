@@ -33,7 +33,7 @@ const DataRow = ({ item, index, onClick = () => { }, OnEdit = () => { } }) => {
 const SubPartnerInfoRender = ({ Data = [] }) => {
   return (
     <>
-      <div className="flex flex-col w-full border-[1px] my-10 border-gray-200 rounded-lg ">
+      <div className="flex flex-col w-full border-[1px]  border-gray-200 rounded-lg ">
         <div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
           <div className="py-2 inline-block min-w-full sm:px-6 lg:px-8">
             <div className="overflow-hidden">
@@ -128,8 +128,15 @@ function SubPartnerInfo({ open, OnClick, id }) {
         aria-describedby="alert-dialog-slide-description"
       >
         <DialogContent>
-          <div className="overflow-hidden min-h-[80vh]">
-            <SubPartnerInfoRender Data={data} />
+          <div className="overflow-hidden min-h-[80vh] flex flex-row gap-5">
+            <div className="flex-1 flex-col items-start bg-gray-100 rounded-2xl p-10">
+              <h1 className="text-[20px]  font-black leading-9 text-gray-800">Sub Partners List</h1>
+              <SubPartnerInfoRender Data={data} />
+            </div>
+            <div className="flex-1 bg-gray-100 rounded-2xl p-10">
+              <h1 className="text-[20px]  font-black leading-9 text-gray-800">visit history list</h1>
+              <SubPartnerInfoRender Data={data} />
+            </div>
           </div>
         </DialogContent>
       </Dialog>
