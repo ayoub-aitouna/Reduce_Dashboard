@@ -5,16 +5,26 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
+import TextField from "@mui/material/TextField";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+
 import { Button as MyButton, Filter_Selector, LoadingIcon } from "../index";
 import { BaseUrl, Coockies_name } from "../../constants";
 import { get_villes } from "../../Utils/villes/get_villes";
 import { useCookies } from "react-cookie";
 import { get_Activity } from "../../Utils/Activities/Activities";
 
-const UpdateClinets = ({ open, OnClick, partner, setRefresh }) => {
+const UpdateClinets = ({ open, OnClick, partner = { email: "", }, setRefresh, is_update }) => {
   const [cookies, setCookie, removeCookie] = useCookies([Coockies_name]);
-  const [data, setdata] = useState({});
+  const [data, setdata] = useState({
+    full_name: "", birth_date: "", sexe: "", ville: 0,
+    adresse: "", profession: 0, tel: "", email: "", abonnement: "",
+    statut: "", date_fin_abonnement: ""
+  });
   const [loading, setloading] = useState(false);
+
   const hadlerClose = () => {
     OnClick();
   };
@@ -24,8 +34,70 @@ const UpdateClinets = ({ open, OnClick, partner, setRefresh }) => {
   }, [loading]);
 
   useEffect(() => {
-    setdata(partner);
+    if (partner != null)
+      setdata(partner);
   }, [partner]);
+
+  const handle_update_create = async () => {
+    setloading(true);
+    try {
+      const req = await fetch(`${BaseUrl}/client/${is_update ? 'update' : ''}`, {
+        method: "POST",
+        mode: "cors",
+        cache: "no-cache",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${cookies.accesToken}`,
+        },
+        referrerPolicy: "no-referrer",
+        body: JSON.stringify(data),
+      });
+      setRefresh((val) => val + 1);
+      setloading(false);
+    } catch (err) {
+      setloading(false);
+    }
+  }
+  const toggle_status = async () => {
+    setloading(true);
+    try {
+      const req = await fetch(`${BaseUrl}/client/${is_update ? 'update' : ''}`, {
+        method: "POST",
+        mode: "cors",
+        cache: "no-cache",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${cookies.accesToken}`,
+        },
+        referrerPolicy: "no-referrer",
+        body: JSON.stringify(data),
+      });
+      setRefresh((val) => val + 1);
+      setloading(false);
+    } catch (err) {
+      setloading(false);
+    }
+  }
+  const reinit_device_id = async () => {
+    setloading(true);
+    try {
+      const req = await fetch(`${BaseUrl}/client/${is_update ? 'update' : ''}`, {
+        method: "POST",
+        mode: "cors",
+        cache: "no-cache",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${cookies.accesToken}`,
+        },
+        referrerPolicy: "no-referrer",
+        body: JSON.stringify(data),
+      });
+      setRefresh((val) => val + 1);
+      setloading(false);
+    } catch (err) {
+      setloading(false);
+    }
+  }
 
   return (
     <div>
@@ -48,28 +120,9 @@ const UpdateClinets = ({ open, OnClick, partner, setRefresh }) => {
         <div className="h-[60px]"></div>
         <DialogActions>
           <div className="flex flex-col w-full">
-            <div className="flex flex-row ">
+            {is_update ? <div className="flex flex-row ">
               <Button
-                onClick={async (e) => {
-                  setloading(true);
-                  try {
-                    const req = await fetch(`${BaseUrl}/Admin/update_partner`, {
-                      method: "POST",
-                      mode: "cors",
-                      cache: "no-cache",
-                      headers: {
-                        "Content-Type": "application/json",
-                        Authorization: `Bearer ${cookies.accesToken}`,
-                      },
-                      referrerPolicy: "no-referrer",
-                      body: JSON.stringify(data),
-                    });
-                    setRefresh((val) => val + 1);
-                    setloading(false);
-                  } catch (err) {
-                    setloading(false);
-                  }
-                }}
+                onClick={async (e) => reinit_device_id()}
               >
                 <MyButton
                   orientation={1}
@@ -79,26 +132,7 @@ const UpdateClinets = ({ open, OnClick, partner, setRefresh }) => {
                 />
               </Button>
               <Button
-                onClick={async (e) => {
-                  setloading(true);
-                  try {
-                    const req = await fetch(`${BaseUrl}/Admin/update_partner`, {
-                      method: "POST",
-                      mode: "cors",
-                      cache: "no-cache",
-                      headers: {
-                        "Content-Type": "application/json",
-                        Authorization: `Bearer ${cookies.accesToken}`,
-                      },
-                      referrerPolicy: "no-referrer",
-                      body: JSON.stringify(data),
-                    });
-                    setRefresh((val) => val + 1);
-                    setloading(false);
-                  } catch (err) {
-                    setloading(false);
-                  }
-                }}
+                onClick={async (e) => toggle_status()}
               >
                 <MyButton
                   orientation={1}
@@ -107,31 +141,10 @@ const UpdateClinets = ({ open, OnClick, partner, setRefresh }) => {
                   style="bg-gray-500 p-[20px] font-bold text-xl !p-[1px]"
                 />
               </Button>
-            </div>
-            <Button
-              onClick={async (e) => {
-                setloading(true);
-                try {
-                  const req = await fetch(`${BaseUrl}/Admin/update_partner`, {
-                    method: "POST",
-                    mode: "cors",
-                    cache: "no-cache",
-                    headers: {
-                      "Content-Type": "application/json",
-                      Authorization: `Bearer ${cookies.accesToken}`,
-                    },
-                    referrerPolicy: "no-referrer",
-                    body: JSON.stringify(data),
-                  });
-                  setRefresh((val) => val + 1);
-                  setloading(false);
-                } catch (err) {
-                  setloading(false);
-                }
-              }}
-            >
+            </div> : <></>}
+            <Button onClick={async (e) => handle_update_create()}>
               <MyButton
-              orientation={1}
+                orientation={1}
                 title="Valide"
                 Icon={() => LoadingIcon(loading)}
                 style="bg-red-500 p-[20px] font-bold text-xl !p-[1px]"
@@ -156,107 +169,102 @@ const Fill_Form = ({ data, setdata }) => {
   return (
     <form className="w-full max-w-lg ">
       <div className="flex flex-wrap -mx-3 mb-6">
-        <div className="w-full px-3">
-          <label
-            className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-            htmlFor="grid-name"
-          >
-            nom complet:
-          </label>
-          <input
-            className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-            id="grid-name"
-            type="text"
-            value={data.nome_entreprise}
-            onChange={(e) => {
-              setdata({ ...data, nome_entreprise: e.target.value });
-            }}
-            placeholder="Jane Doe"
-          />
-        </div>
 
-        <div className="w-full px-3">
-          <label
-            className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-            htmlFor="grid-name"
-          >
-            date naissance:
-          </label>
-          <input
-            className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-            id="grid-name"
-            value={data.identificateur_entreprise}
-            onChange={(e) => {
-              setdata({ ...data, identificateur_entreprise: e.target.value });
-            }}
-            type="text"
-          />
-        </div>
-
-        <div className="w-full px-3">
-          <label
-            className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-            htmlFor="grid-name"
-          >
-            profession:
-          </label>
-          <input
-            className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-            id="grid-name"
-            value={data.representant_entreprise}
-            onChange={(e) => {
-              setdata({ ...data, representant_entreprise: e.target.value });
-            }}
-            type="text"
-          />
-        </div>
-
-        <div className="w-full px-3">
-          <label
-            className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-            htmlFor="grid-name"
-          >
-            tel:
-          </label>
-          <input
-            className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-            id="grid-name"
-            value={data.role_dans_entriprise}
-            onChange={(e) => {
-              setdata({ ...data, role_dans_entriprise: e.target.value });
-            }}
-            type="text"
-          />
-        </div>
-
-        <div className="w-full px-3">
-          <label
-            className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-            htmlFor="grid-name"
-          >
-            ID:
-          </label>
-          <input
-            className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-            id="grid-name"
-            value={data.adrress}
-            onChange={(e) => {
-              setdata({ ...data, adrress: e.target.value });
-            }}
-            type="text"
-          />
-        </div>
-        <div className="flex flex-wrap -mx-3 mb-2">
-          <div className="w-full  px-3 mb-6 md:mb-0">
+        {Object.keys(data).map((key) => (
+          (key !== "ville" && key !== "profession" && key !== "abonnement" && key !== "statut" && key !== "birth_date" && key != "sexe") && (
+            <div className="w-full px-3">
+              <label
+                className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                htmlFor="grid-name"
+              >
+                {key}
+              </label>
+              <input
+                key={key}
+                className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                id={`grid-${key}`}
+                value={data[key]}
+                onChange={(e) => {
+                  setdata({ ...data, [key]: e.target.value });
+                }}
+                type="text"
+              />
+            </div>
+          )
+        ))}
+        <div className="flex flex-wrap  flex- -mx-3 mb-2">
+          <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
             <Filter_Selector
               title={"Ville"}
               Filter={data.ville}
-              setFilter={(value) => {
-                setdata({ ...data, ville: value });
-              }}
+              setFilter={(value) => setdata({ ...data, ville: value })}
               options={villes}
               styles={"!max-w-full"}
             />
+          </div>
+
+          <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+            <Filter_Selector
+              title={"profession"}
+              Filter={data.profession}
+              setFilter={(value) => setdata({ ...data, profession: value })}
+              options={[
+                { value: "", name: "Toute" },
+                { value: "Admin", name: "Administrateur" },
+                { value: "Manager", name: "Responsable" },
+              ]}
+              styles={"!max-w-full"}
+            />
+          </div>
+          <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0 mt-4">
+            <Filter_Selector
+              title={"sexe"}
+              Filter={data.sexe}
+              setFilter={(value) => setdata({ ...data, sexe: value })}
+              options={[
+                { value: "", name: "NONE" },
+                { value: "M", name: "Male" },
+                { value: "F", name: "Female" },
+              ]}
+              styles={"!max-w-full"}
+            />
+          </div>
+          <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0 mt-4">
+            <Filter_Selector
+              title={"abonnement"}
+              Filter={data.abonnement}
+              setFilter={(value) => setdata({ ...data, abonnement: value })}
+              options={[
+                { value: "", name: "Toute" },
+                { value: "Admin", name: "Administrateur" },
+                { value: "Manager", name: "Responsable" },
+              ]}
+              styles={"!max-w-full"}
+            />
+          </div>
+          <div className="flex flex-col w-full justify-center items-start ml-3   ">
+            <h3 className="block font-black mb-2 text-sm  text-gray-900 dark:text-gray-400 mt-4">
+              {" "}
+              Selece Date
+            </h3>
+            <LocalizationProvider dateAdapter={AdapterDayjs}>
+              <DatePicker
+                label="Date of visite"
+                value={data.birth_date || ''}
+                onChange={(newValue) => {
+                  try {
+                    setdata({
+                      ...data,
+                      birth_date: newValue.$d
+                        .toISOString()
+                        .slice(0, 19)
+                        .replace("T", " "),
+                    });
+                  } catch (error) { }
+                }}
+                renderInput={(params) => <TextField {...params} />}
+              />
+            </LocalizationProvider>
           </div>
         </div>
       </div>

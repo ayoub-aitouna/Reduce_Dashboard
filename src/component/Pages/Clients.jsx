@@ -6,15 +6,17 @@ import {
   UpdateClients,
   ClientInfo,
   ClientTable,
+  Button,
 } from "../index";
+import { BiTask } from "react-icons/bi";
 import { BaseUrl, Coockies_name } from "../../constants";
 import { get_Activity } from "../../Utils/Activities/Activities";
 import { useCookies } from "react-cookie";
 import { get_villes } from "../../Utils/villes/get_villes";
+import dayjs, { Dayjs } from "dayjs";
 
 function Clients({ selectedStatus }) {
   const [isDialogOpend, setDialogOpend] = useState(true);
-  const [isUpdateDialogOpend, setUpdateDialogOpend] = useState(false);
   const [City, setCity] = useState("");
   const [Activities, setActivities] = useState([]);
   let [villes, setvilles] = useState([{ value: 0, name: "" }]);
@@ -22,7 +24,14 @@ function Clients({ selectedStatus }) {
   const [activity_entrprise, setactivity_entrprise] = useState("");
   const [Search, setSearch] = useState("");
   const [cookies, setCookie, removeCookie] = useCookies([Coockies_name]);
-  const [SelectedPartner, setSelectedpartner] = useState({});
+  const emty_client = {
+    full_name: "", birth_date: dayjs().$d.toISOString().slice(0, 19).replace("T", " "), sexe: "", ville: 0,
+    adresse: "", profession: 0, tel: "", email: "", abonnement: "",
+    statut: "", date_fin_abonnement: ""
+  };
+  const [SelectedClient, setSelectedClient] = useState(emty_client);
+  const [OpenPopUp, setOpenPopUp] = useState(false);
+  const [PopUpType, setPopUpType] = useState(false);
   let [Odata, setOdata] = useState([]);
   let [Refresh, setRefresh] = useState(0);
   let [data, setdata] = useState([]);
@@ -40,7 +49,7 @@ function Clients({ selectedStatus }) {
         referrerPolicy: "no-referrer",
       });
       if (req.ok) setOdata(await req.json());
-    } catch (err) {}
+    } catch (err) { }
   };
 
   useEffect(() => {
@@ -64,6 +73,13 @@ function Clients({ selectedStatus }) {
     setdata(Odata);
   }, [Search, City, Odata]);
 
+
+  const handle_popup = (data, type) => {
+    setSelectedClient(data);
+    setPopUpType(type);
+    setOpenPopUp(true);
+  }
+
   return (
     <div className="p-5 my-10 ">
       <ClientInfo
@@ -72,17 +88,17 @@ function Clients({ selectedStatus }) {
         OnClick={() => {
           setDialogOpend(false);
         }}
-        data={SelectedPartner}
+        data={SelectedClient}
       />
       <UpdateClients
-        open={isUpdateDialogOpend}
+        open={OpenPopUp}
         setRefresh={setRefresh}
+        is_update={PopUpType}
         OnClick={() => {
-          setUpdateDialogOpend(false);
+          setOpenPopUp(false);
         }}
-        partner={SelectedPartner}
+        partner={SelectedClient}
       />
-
       <div className="flex flex-col items-start justify-start">
         <h1 className="text-[20px] font-black leading-9 text-gray-800">
           Reducte Abonné
@@ -124,16 +140,23 @@ function Clients({ selectedStatus }) {
           />
         </div>
       </div>
+      <div className="absolute bottom-8 right-8 flex flex-row gap-5 capitalize ">
+        <Button
+          Icon={() => <BiTask />}
+          title={"Ajoutez Une Client"}
+          OnClick={() => handle_popup(emty_client, false)}
+          style={"!w-[250px] text-[15px] shadow-lg capitalize"}
+        />
+      </div>
       <ClientTable
         Data={data}
         selectedstatu={selectedStatus}
         OnSelect={(data) => {
-          setSelectedpartner(data);
+          setSelectedClient(data);
           setDialogOpend(true);
         }}
         OnEdit={(data) => {
-          setSelectedpartner(data);
-          setUpdateDialogOpend(true);
+          handle_popup(data, true);
         }}
       />
     </div>

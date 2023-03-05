@@ -15,7 +15,7 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 
-const Fill_Form = ({ data , setdata }) => {
+const Fill_Form = ({ data, setdata }) => {
   let [villes, setvilles] = useState([{ value: 0, name: "" }]);
 
   useEffect(() => {
@@ -36,7 +36,7 @@ const Fill_Form = ({ data , setdata }) => {
             className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
             id="grid-name"
             type="text"
-			com
+            com
             value={data.partner_name || ''}
             onChange={(e) => {
               setdata({ ...data, partner_name: e.target.value });
@@ -54,7 +54,7 @@ const Fill_Form = ({ data , setdata }) => {
           <input
             className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
             id="grid-name"
-            value={data.full_name || '' }
+            value={data.full_name || ''}
             onChange={(e) => {
               setdata({ ...data, full_name: e.target.value });
             }}
@@ -88,7 +88,7 @@ const Fill_Form = ({ data , setdata }) => {
           <input
             className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
             id="grid-name"
-            value={data.phone_number || '' }
+            value={data.phone_number || ''}
             onChange={(e) => {
               setdata({ ...data, phone_number: e.target.value });
             }}
