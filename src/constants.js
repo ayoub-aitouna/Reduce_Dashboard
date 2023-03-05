@@ -53,6 +53,12 @@ export const SideBarLinks = [
         Icon: BsClockHistory,
         Url: "edit_history",
       },
+      {
+        key: 3,
+        name: "Historique des visite",
+        Icon: BsClockHistory,
+        Url: "visit_history",
+      },
     ],
   },
   {
