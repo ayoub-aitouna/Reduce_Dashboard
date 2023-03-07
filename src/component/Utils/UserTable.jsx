@@ -68,7 +68,7 @@ const DataRow = ({ item, index, onClick = () => { }, OnEdit = () => { }, onRowSe
 			</td>
 			<td
 				className="px-6 py-4 whitespace-nowrap text-sm font-medium "
-				onClick={() => onClick()}
+				onClick={(event) => { event.stopPropagation(); onClick() }}
 			>
 				<IconHalder
 					Icon={() => <BsFillArrowRightSquareFill />}
@@ -77,7 +77,7 @@ const DataRow = ({ item, index, onClick = () => { }, OnEdit = () => { }, onRowSe
 			</td>
 			<td
 				className="px-6 py-4 whitespace-nowrap text-sm font-medium "
-				onClick={() => OnEdit()}
+				onClick={(event) => { event.stopPropagation(); OnEdit() }}
 			>
 				<IconHalder Icon={() => <AiFillEdit />} style="text-[20px]" />
 			</td>

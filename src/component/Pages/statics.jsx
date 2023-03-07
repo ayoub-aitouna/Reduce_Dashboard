@@ -21,7 +21,7 @@ function Statics({ selectedStatus }) {
         </p>
       </div>
       <div className="mt-10  flex flex-row flex-wrap w-full h-[90%] justify-between gap-5 ">
-        <div className="flex-1  rounded-xl flex flex-col items-start ">
+        <div className="rounded-xl  max-w-[48%] overflow-hidden flex flex-col items-start ">
           <h1 className="text-[20px] font-black leading-9 text-gray-800">Recently clinets</h1>
           <UserTable
             my="0"
@@ -33,7 +33,7 @@ function Statics({ selectedStatus }) {
             }}
           />
         </div>
-        <div className="flex-1  rounded-xl flex flex-col items-start justify-center">
+        <div className="rounded-xl max-w-[48%] overflow-hidden flex flex-col items-start">
           <h1 className="text-[20px]  font-black leading-9 text-gray-800">Recently clinets</h1>
           <div className="flex-1 ">
             <UserTable

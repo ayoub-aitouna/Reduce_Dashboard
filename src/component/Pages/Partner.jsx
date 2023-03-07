@@ -16,7 +16,7 @@ import { get_villes } from "../../Utils/villes/get_villes";
 function Partner() {
   const [isDialogOpend, setDialogOpend] = useState(false);
   const [issubDialogOpend, setsubDialogOpend] = useState(false);
-  const [isUpdateDialogOpend, setUpdateDialogOpend] = useState(false);
+  const [isUpdateDialogOpend, setUpdateDialogOpend] = useState(true);
   const [City, setCity] = useState("");
   const [Activities, setActivities] = useState([]);
   let [villes, setvilles] = useState([{ value: 0, name: "" }]);

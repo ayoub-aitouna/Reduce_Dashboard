@@ -38,50 +38,54 @@ const UpdatePartner = ({ open, OnClick, partner, setRefresh }) => {
       >
         <DialogTitle>{"Mettre à Jour Ce Partenaire"}</DialogTitle>
         <DialogContent>
-          <DialogContentText id="alert-dialog-slide-description">
-            <p className="text-gray-600 text-xs ">Remplissez les champs vides</p>
-          </DialogContentText>
+          <div className="w-full grid place-content-center">
+            <Fill_Form data={data} setdata={setdata} />
+          </div>
+          <div className="h-[60px]"></div>
+
+          <DialogActions>
+            <div className="flex flex-col">
+              <div className="flex flex-row">
+
+              </div>
+            </div>
+            <Button
+              onClick={async (e) => {
+                setloading(true);
+                try {
+                  const req = await fetch(`${BaseUrl}/Admin/update_partner`, {
+                    method: "POST",
+                    mode: "cors",
+                    cache: "no-cache",
+                    headers: {
+                      "Content-Type": "application/json",
+                      Authorization: `Bearer ${cookies.accesToken}`,
+                    },
+                    referrerPolicy: "no-referrer",
+                    body: JSON.stringify(data),
+                  });
+                  setRefresh((val) => val + 1);
+                  setloading(false);
+                } catch (err) {
+                  setloading(false);
+                }
+              }}
+            >
+              <MyButton
+                title="Confirmez"
+                Icon={() => LoadingIcon(loading)}
+                style="bg-red-500 p-[20px] font-bold text-xl !p-[1px]"
+              />
+            </Button>
+            {/* <Button onClick={hadlerClose}>
+              <MyButton
+                title="Annulez"
+                style="!bg-red-500 p-[20px]  font-bold text-xl !p-[1px]"
+              />
+            </Button> */}
+          </DialogActions>
         </DialogContent>
-        <div className="w-full grid place-content-center">
-          <Fill_Form data={data} setdata={setdata} />
-        </div>
-        <div className="h-[60px]"></div>
-        <DialogActions>
-          <Button
-            onClick={async (e) => {
-              setloading(true);
-              try {
-                const req = await fetch(`${BaseUrl}/Admin/update_partner`, {
-                  method: "POST",
-                  mode: "cors",
-                  cache: "no-cache",
-                  headers: {
-                    "Content-Type": "application/json",
-                    Authorization: `Bearer ${cookies.accesToken}`,
-                  },
-                  referrerPolicy: "no-referrer",
-                  body: JSON.stringify(data),
-                });
-                setRefresh((val) => val + 1);
-                setloading(false);
-              } catch (err) {
-                setloading(false);
-              }
-            }}
-          >
-            <MyButton
-              title="Confirmez"
-              Icon={() => LoadingIcon(loading)}
-              style="bg-red-500 p-[20px] font-bold text-xl !p-[1px]"
-            />
-          </Button>
-          <Button onClick={hadlerClose}>
-            <MyButton
-              title="Annulez"
-              style="!bg-red-500 p-[20px]  font-bold text-xl !p-[1px]"
-            />
-          </Button>
-        </DialogActions>
+  
       </Dialog>
     </div>
   );
@@ -98,6 +102,16 @@ const Fill_Form = ({ data, setdata }) => {
 
   return (
     <form className="w-full max-w-lg ">
+      <div className="w-full flex flex-row justify-around p-5">
+        <Button variant="contained" component="label">
+          Upload LOGO
+          <input hidden accept="image/*" multiple type="file" />
+        </Button>
+        <Button variant="contained" component="label">
+          Upload COVER
+          <input hidden accept="image/*" multiple type="file" />
+        </Button>
+      </div>
       <div className="flex flex-wrap -mx-3 mb-6">
         <div className="w-full px-3">
           <label

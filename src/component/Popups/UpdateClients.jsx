@@ -41,7 +41,7 @@ const UpdateClinets = ({ open, OnClick, partner = { email: "", }, setRefresh, is
   const handle_update_create = async () => {
     setloading(true);
     try {
-      const req = await fetch(`${BaseUrl}/client/${is_update ? 'update' : ''}`, {
+      const req = await fetch(`${BaseUrl}/${is_update ? 'clients/update' : 'auth/new_client'}`, {
         method: "POST",
         mode: "cors",
         cache: "no-cache",
@@ -58,6 +58,7 @@ const UpdateClinets = ({ open, OnClick, partner = { email: "", }, setRefresh, is
       setloading(false);
     }
   }
+  
   const toggle_status = async () => {
     setloading(true);
     try {
