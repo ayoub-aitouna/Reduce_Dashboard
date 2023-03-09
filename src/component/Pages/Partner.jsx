@@ -45,7 +45,6 @@ function Partner() {
       if (req.ok){
         const data = await req.json();
         setOdata(data);
-        console.log(data);
       } 
     } catch (err) { }
   };

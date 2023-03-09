@@ -62,7 +62,7 @@ const UpdateClinets = ({ open, OnClick, partner = { email: "", }, setRefresh, is
   const toggle_status = async () => {
     setloading(true);
     try {
-      const req = await fetch(`${BaseUrl}/client/${is_update ? 'update' : ''}`, {
+      const req = await fetch(`${BaseUrl}/clients/change_status`, {
         method: "POST",
         mode: "cors",
         cache: "no-cache",
@@ -71,7 +71,7 @@ const UpdateClinets = ({ open, OnClick, partner = { email: "", }, setRefresh, is
           Authorization: `Bearer ${cookies.accesToken}`,
         },
         referrerPolicy: "no-referrer",
-        body: JSON.stringify(data),
+        body: {statut : data.status === "Activé" ? "Desactivé": data.status},
       });
       setRefresh((val) => val + 1);
       setloading(false);
@@ -79,11 +79,12 @@ const UpdateClinets = ({ open, OnClick, partner = { email: "", }, setRefresh, is
       setloading(false);
     }
   }
+
   const reinit_device_id = async () => {
     setloading(true);
     try {
-      const req = await fetch(`${BaseUrl}/client/${is_update ? 'update' : ''}`, {
-        method: "POST",
+      const req = await fetch(`${BaseUrl}/clients/setDeviceId?id=${data.id}`, {
+        method: "PUT",
         mode: "cors",
         cache: "no-cache",
         headers: {

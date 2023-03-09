@@ -38,7 +38,7 @@ function Clients({ selectedStatus }) {
 
   const handleRequest = async () => {
     try {
-      const req = await fetch(`${BaseUrl}/admin/get_partners`, {
+      const req = await fetch(`${BaseUrl}/clients/all`, {
         method: "GET",
         mode: "cors",
         cache: "no-cache",
@@ -59,20 +59,18 @@ function Clients({ selectedStatus }) {
   }, [Refresh]);
 
   useEffect(() => {
-    // setdata((per) =>
-    //   Search != ""
-    //     ? per.filter((item) =>
-    //         item.name.toLowerCase().includes(Search.toLowerCase())
-    //       )
-    //     : per
-    // );
-    // setdata((per) => {
-    //   console.log(City);
-    //   return City != 0 ? per.filter((item) => item.ville == City) : per;
-    // });
+    setdata((per) =>
+      Search != ""
+        ? per.filter((item) =>
+            item.name.toLowerCase().includes(Search.toLowerCase())
+          )
+        : per
+    );
+    setdata((per) => {
+      return City != 0 ? per.filter((item) => item.ville == City) : per;
+    });
     setdata(Odata);
   }, [Search, City, Odata]);
-
 
   const handle_popup = (data, type) => {
     setSelectedClient(data);

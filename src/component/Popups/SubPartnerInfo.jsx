@@ -9,22 +9,13 @@ const DataRow = ({ item, index, onClick = () => { }, OnEdit = () => { } }) => {
         } border-b`}
     >
       <td className="px-6 py-4 whitespace-nowrap text-sm font-medium ">
-        {item.nome_entreprise}
+        {item.sub_partner_Name}
       </td>
       <td className="px-6 py-4 whitespace-nowrap text-sm font-medium ">
-        {item.identificateur_entreprise}
+        {item.email}
       </td>
       <td className="px-6 py-4 whitespace-nowrap text-sm font-medium ">
-        {item.representant_entreprise}
-      </td>
-      <td className="px-6 py-4 whitespace-nowrap text-sm font-medium ">
-        {item.role_dans_entriprise}
-      </td>
-      <td className="px-6 py-4 whitespace-nowrap text-sm font-medium ">
-        {item.ville_name}
-      </td>
-      <td className="px-6 py-4 whitespace-nowrap text-sm font-medium ">
-        {item.activity_name}
+        {item._status}
       </td>
     </tr>
   );
@@ -49,31 +40,13 @@ const SubPartnerInfoRender = ({ Data = [] }) => {
                       scope="col"
                       className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
                     >
-                      date naissance
+                      email
                     </th>
                     <th
                       scope="col"
                       className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
                     >
-                      sexe
-                    </th>
-                    <th
-                      scope="col"
-                      className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
-                    >
-                      ville
-                    </th>
-                    <th
-                      scope="col"
-                      className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
-                    >
-                      adresse
-                    </th>
-                    <th
-                      scope="col"
-                      className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
-                    >
-                      profession
+                      _status
                     </th>
                   </tr>
                 </thead>
@@ -103,7 +76,22 @@ function SubPartnerInfo({ open, OnClick, id }) {
   const [data, setdata] = useState([]);
 
   function load_sub_accounts(id) {
-
+ try {
+      const req = await fetch(`${BaseUrl}/sub_parnter/admin_all_subs/${id}`, {
+        method: "GET",
+        mode: "cors",
+        cache: "no-cache",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${cookies.accesToken}`,
+        },
+        referrerPolicy: "no-referrer",
+      });
+      const json = await req.json();
+      setdata(json);
+    } catch (err) {
+    
+    }
   }
   const hadlerClose = () => {
     OnClick();
