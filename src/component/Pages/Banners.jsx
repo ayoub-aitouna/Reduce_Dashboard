@@ -1,16 +1,17 @@
 import React, { useState, useEffect } from "react";
 
 import {
-  Filter_Selector,
+  Button,
   SearchBar,
-  UpdatePartner,
-  PartnerInfo,
-  UserTable,
+  BannerTable,
+  Banner_Dialog
 } from "../index";
 import { BaseUrl, Coockies_name } from "../../constants";
 import { get_Activity } from "../../Utils/Activities/Activities";
 import { useCookies } from "react-cookie";
 import { get_villes } from "../../Utils/villes/get_villes";
+import { BiTask } from "react-icons/bi";
+import dayjs from "dayjs";
 
 function Banners() {
   const [isDialogOpend, setDialogOpend] = useState(true);
@@ -18,14 +19,19 @@ function Banners() {
   const [City, setCity] = useState("");
   const [Activities, setActivities] = useState([]);
   let [villes, setvilles] = useState([{ value: 0, name: "" }]);
-
+  const emty_banner = {
+    Baniere_ordre: 0, Logo: "",
+    Couverture: "", Offer: 0, Adresse: "", Tel: "", statut: ""
+  };
   const [activity_entrprise, setactivity_entrprise] = useState("");
   const [Search, setSearch] = useState("");
   const [cookies, setCookie, removeCookie] = useCookies([Coockies_name]);
-  const [SelectedPartner, setSelectedpartner] = useState({});
+  const [SlectedBanner, setSlectedBanner] = useState({});
   let [Odata, setOdata] = useState([]);
   let [Refresh, setRefresh] = useState(0);
   let [data, setdata] = useState([]);
+  const [OpenPopUp, setOpenPopUp] = useState(false);
+  const [PopUpType, setPopUpType] = useState(false);
 
   const handleRequest = async () => {
     try {
@@ -43,6 +49,12 @@ function Banners() {
     } catch (err) { }
   };
 
+  const handle_popup = (data, type) => {
+    setSlectedBanner(data);
+    setPopUpType(type);
+    setOpenPopUp(true);
+  }
+
   useEffect(() => {
     handleRequest();
     get_Activity(setActivities);
@@ -50,42 +62,33 @@ function Banners() {
   }, [Refresh]);
 
   useEffect(() => {
-    // setdata((per) =>
-    //   Search != ""
-    //     ? per.filter((item) =>
-    //         item.name.toLowerCase().includes(Search.toLowerCase())
-    //       )
-    //     : per
-    // );
-    // setdata((per) => {
-    //   console.log(City);
-    //   return City != 0 ? per.filter((item) => item.ville == City) : per;
-    // });
+    setdata((per) =>
+      Search != ""
+        ? per.filter((item) =>
+          item.name.toLowerCase().includes(Search.toLowerCase())
+        )
+        : per
+    );
+    setdata((per) => {
+      console.log(City);
+      return City != 0 ? per.filter((item) => item.ville == City) : per;
+    });
     setdata(Odata);
   }, [Search, City, Odata]);
 
   return (
     <div className="p-5 my-10 ">
-      <ClientInfo
-        open={isDialogOpend}
+      <Banner_Dialog
+        open={OpenPopUp}
         setRefresh={setRefresh}
         OnClick={() => {
-          setDialogOpend(false);
+          setOpenPopUp(false);
         }}
-        data={SelectedPartner}
+        data={SlectedBanner}
       />
-      <UpdateClients
-        open={isUpdateDialogOpend}
-        setRefresh={setRefresh}
-        OnClick={() => {
-          setUpdateDialogOpend(false);
-        }}
-        partner={SelectedPartner}
-      />
-
       <div className="flex flex-col items-start justify-start">
         <h1 className="text-[20px] font-black leading-9 text-gray-800">
-          Reducte Abonné
+          Reducte Banners
         </h1>
         <p className="text-[16px] font-normal  leading-9 text-gray-500">
           Partenaires ayant soumis le formulaire à la plateforme Reducte
@@ -93,47 +96,19 @@ function Banners() {
       </div>
       <div className="flex ld:flex-row flex-col w-full mt-10 lg:gap-5 gap-0 justify-center items-center">
         <SearchBar styles={"max-h-[15px] !w-full"} setSearch={setSearch} />
-        <div className="flex flex-row w-full mt-10 gap-5 justify-start items-center">
-          <Filter_Selector
-            title={"filter abonnement"}
-            styles={"h-[95px]"}
-            options={Activities}
-            setFilter={(value) => setactivity_entrprise(value)}
-            Filter={activity_entrprise}
-          />
-          <Filter_Selector
-            title={"Ville"}
-            styles={"h-[95px]"}
-            options={villes}
-            setFilter={(value) => setCity(value)}
-            Filter={City}
-          />
-          <Filter_Selector
-            title={"filter status"}
-            styles={"h-[95px]"}
-            options={Activities}
-            setFilter={(value) => setactivity_entrprise(value)}
-            Filter={activity_entrprise}
-          />
-          <Filter_Selector
-            title={"filter date"}
-            styles={"h-[95px]"}
-            options={Activities}
-            setFilter={(value) => setactivity_entrprise(value)}
-            Filter={activity_entrprise}
-          />
-        </div>
       </div>
-      <ClientTable
+      <div className="absolute bottom-8 right-8 flex flex-row gap-5 capitalize ">
+        <Button
+          Icon={() => <BiTask />}
+          title={"Ajoutez Une Banner"}
+          OnClick={() => handle_popup(emty_banner, false)}
+          style={"!w-[250px] text-[15px] shadow-lg capitalize"}
+        />
+      </div>
+      <BannerTable
         Data={data}
-        selectedstatu={selectedStatus}
-        OnSelect={(data) => {
-          setSelectedpartner(data);
-          setDialogOpend(true);
-        }}
         OnEdit={(data) => {
-          setSelectedpartner(data);
-          setUpdateDialogOpend(true);
+          handle_popup(data, true);
         }}
       />
     </div>

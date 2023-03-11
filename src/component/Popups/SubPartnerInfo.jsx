@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react";
 import Dialog from "@mui/material/Dialog";
 import DialogContent from "@mui/material/DialogContent";
+import { get_villes } from "../../Utils/villes/get_villes";
+import { useCookies } from "react-cookie";
+import { BaseUrl, Coockies_name } from "../../constants";
 
 const DataRow = ({ item, index, onClick = () => { }, OnEdit = () => { } }) => {
   return (
@@ -74,9 +77,10 @@ const SubPartnerInfoRender = ({ Data = [] }) => {
 function SubPartnerInfo({ open, OnClick, id }) {
   const [loading, setloading] = useState(false);
   const [data, setdata] = useState([]);
+  const [cookies, setCookie, removeCookie] = useCookies([Coockies_name]);
 
-  function load_sub_accounts(id) {
- try {
+  async function load_sub_accounts(id) {
+    try {
       const req = await fetch(`${BaseUrl}/sub_parnter/admin_all_subs/${id}`, {
         method: "GET",
         mode: "cors",
@@ -90,7 +94,7 @@ function SubPartnerInfo({ open, OnClick, id }) {
       const json = await req.json();
       setdata(json);
     } catch (err) {
-    
+
     }
   }
   const hadlerClose = () => {

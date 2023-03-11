@@ -77,12 +77,6 @@ const UpdatePartner = ({ open, OnClick, partner, setRefresh }) => {
                 style="bg-red-500 p-[20px] font-bold text-xl !p-[1px]"
               />
             </Button>
-            {/* <Button onClick={hadlerClose}>
-              <MyButton
-                title="Annulez"
-                style="!bg-red-500 p-[20px]  font-bold text-xl !p-[1px]"
-              />
-            </Button> */}
           </DialogActions>
         </DialogContent>
   

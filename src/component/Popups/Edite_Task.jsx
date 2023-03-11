@@ -115,7 +115,7 @@ const Fill_Form = ({ data, setdata }) => {
             type="text"
           />
         </div>
-        <div className="w-full  px-3 mb-6 md:mb-0 flex flex-row justify-between items-center w-full">
+        <div className="px-3 mb-6 md:mb-0 flex flex-row justify-between items-center w-full">
           <Filter_Selector
             title={"Ville"}
             Filter={data.ville}

@@ -3,6 +3,7 @@ import { BsCheckCircleFill, BsClockHistory } from "react-icons/bs";
 import { HiUsers } from "react-icons/hi";
 import { FaTasks } from "react-icons/fa";
 import { RiAdminFill } from "react-icons/ri";
+import { IoSettings } from "react-icons/io5";
 import { MdPendingActions, MdGroups } from "react-icons/md";
 import { AiFillHome } from "react-icons/ai";
 
@@ -52,6 +53,12 @@ export const SideBarLinks = [
         name: "Historique des modifications",
         Icon: BsClockHistory,
         Url: "edit_history",
+      },
+      {
+        key: 3,
+        name: "Réglages",
+        Icon: IoSettings,
+        Url: "settings",
       },
     ],
   },

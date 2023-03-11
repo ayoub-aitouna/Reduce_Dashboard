@@ -20,6 +20,7 @@ import SearchBar from "./Utils/SearchBar";
 import ErrorMsg from "./Utils/ErrorMsg";
 import Add_new_task from "./Popups/Add_new_task";
 import Tasks from "./Pages/Tasks";
+import Banners from "./Pages/Banners";
 import Statics from "./Pages/Statics";
 import Task_done from "./Pages/Task_done";
 import Task_anounsments from "./Pages/Task_anounsments";
@@ -34,6 +35,8 @@ import Edit_history from "./Pages/Edit_history";
 import ForgotPass from "./Pages/ForgotPass";
 import UpdateAdmin from "./Popups/UpdateAdmin";
 import UpdateClients from "./Popups/UpdateClients";
+import Banner_Dialog from "./Popups/Banner_Dialog";
+import BannerTable from "./Utils/BannerTable";
 export {
   Auth,
   Home,
@@ -70,5 +73,8 @@ export {
   ErrorMsg,
   Clients,
   ClientTable,
-  Statics
+  Statics,
+  BannerTable,
+  Banners,
+  Banner_Dialog
 };
