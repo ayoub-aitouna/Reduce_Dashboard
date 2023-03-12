@@ -1,7 +1,7 @@
 import { BaseUrl } from "../../constants";
-const get_villes = async (setvilles) => {
+const get_profesional = async (setprofesional) => {
   try {
-    const req = await fetch(`${BaseUrl}/Ville`, {
+    const req = await fetch(`${BaseUrl}/profession`, {
       method: "GET",
       mode: "cors",
       cache: "no-cache",
@@ -12,12 +12,12 @@ const get_villes = async (setvilles) => {
     });
     if (req.ok) {
       const data = await req.json();
-      setvilles([{ id: 0, name: "" }]);
+      setprofesional([{ id: 0, name: "" }]);
       data.map((item) => {
-        setvilles((v) => [...v, { value: item.id, name: item.ville_name, status: item.status }]);
+        setprofesional((v) => [...v, { value: item.id, name: item.profession }]);
       });
     } else {
     }
   } catch (err) { }
 };
-export { get_villes };
+export { get_profesional };

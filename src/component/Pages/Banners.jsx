@@ -23,10 +23,17 @@ function Banners() {
     Baniere_ordre: 0, Logo: "",
     Couverture: "", Offer: 0, Adresse: "", Tel: "", statut: ""
   };
-  const [activity_entrprise, setactivity_entrprise] = useState("");
   const [Search, setSearch] = useState("");
   const [cookies, setCookie, removeCookie] = useCookies([Coockies_name]);
-  const [SlectedBanner, setSlectedBanner] = useState({});
+  const [SlectedBanner, setSlectedBanner] = useState({
+    Baniere_ordre: 0,
+    Logo: "",
+    Couverture: "",
+    Offer: "",
+    Adresse: "",
+    Tel: "",
+    statut: "activer"
+  });
   let [Odata, setOdata] = useState([]);
   let [Refresh, setRefresh] = useState(0);
   let [data, setdata] = useState([]);
@@ -35,7 +42,7 @@ function Banners() {
 
   const handleRequest = async () => {
     try {
-      const req = await fetch(`${BaseUrl}/admin/get_partners`, {
+      const req = await fetch(`${BaseUrl}/banners`, {
         method: "GET",
         mode: "cors",
         cache: "no-cache",
@@ -45,7 +52,9 @@ function Banners() {
         },
         referrerPolicy: "no-referrer",
       });
-      if (req.ok) setOdata(await req.json());
+      if (req.ok)
+        setOdata(await req.json());
+
     } catch (err) { }
   };
 
@@ -56,35 +65,36 @@ function Banners() {
   }
 
   useEffect(() => {
+    setdata(Odata);
+  }, [Odata]);
+
+  useEffect(() => {
     handleRequest();
-    get_Activity(setActivities);
-    get_villes(setvilles);
   }, [Refresh]);
 
   useEffect(() => {
     setdata((per) =>
       Search != ""
         ? per.filter((item) =>
-          item.name.toLowerCase().includes(Search.toLowerCase())
+          item.Offer.toLowerCase().includes(Search.toLowerCase()) ||
+          item.Adresse.toLowerCase().includes(Search.toLowerCase())
         )
         : per
     );
-    setdata((per) => {
-      console.log(City);
-      return City != 0 ? per.filter((item) => item.ville == City) : per;
-    });
-    setdata(Odata);
-  }, [Search, City, Odata]);
+    if (Search == "")
+      setdata(Odata);
+  }, [Search, Odata]);
 
   return (
     <div className="p-5 my-10 ">
       <Banner_Dialog
         open={OpenPopUp}
         setRefresh={setRefresh}
+        update={PopUpType}
+        selected={SlectedBanner}
         OnClick={() => {
           setOpenPopUp(false);
         }}
-        data={SlectedBanner}
       />
       <div className="flex flex-col items-start justify-start">
         <h1 className="text-[20px] font-black leading-9 text-gray-800">
@@ -108,7 +118,7 @@ function Banners() {
       <BannerTable
         Data={data}
         OnEdit={(data) => {
-          handle_popup(data, true);
+          handle_popup(data, data);
         }}
       />
     </div>

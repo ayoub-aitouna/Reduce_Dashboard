@@ -1,12 +1,12 @@
-import React from "react";
-import { IoIosCloseCircle } from "react-icons/io";
-import { AiFillEdit } from "react-icons/ai";
-import { BsCheckCircleFill } from "react-icons/bs";
-import { MdPendingActions } from "react-icons/md";
-import { BsFillArrowRightSquareFill } from "react-icons/bs";
-import { IconHalder } from "../index";
+import React, { useState } from "react";
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Switch from '@mui/material/Switch';
 
 const DataRow = ({ item, index, onClick = () => { }, OnEdit = () => { }, onRowSelected = () => { } }) => {
+	const [checked, setChecked] = useState(item.status);
+	const handleChange = (event) => {
+		setChecked(event.target.checked);
+	};
 	return (
 		<tr
 			onClick={() => onRowSelected()}
@@ -19,14 +19,10 @@ const DataRow = ({ item, index, onClick = () => { }, OnEdit = () => { }, onRowSe
 			<td className="px-6 py-4 whitespace-nowrap text-sm font-medium ">
 				{item.name}
 			</td>
-			<td className="px-6 py-4 whitespace-nowrap text-sm font-medium ">
-				active
-			</td>
 			<td
-				className="px-6 py-4 whitespace-nowrap text-sm font-medium "
-				onClick={(event) => { event.stopPropagation(); OnEdit() }}
+				className="px-6 py-4 whitespace-nowrap text-sm font-medium flex-1"
 			>
-				<IconHalder Icon={() => <AiFillEdit />} style="text-[20px]" />
+				<FormControlLabel control={<Switch  />} checked={checked} onChange={handleChange}  label={checked ? "Active" : "Desabled"} />
 			</td>
 		</tr>
 	);
@@ -55,16 +51,11 @@ function Cities_table({ Data, OnSelect, OnEdit, onRowSelected, my = "10" }) {
 									</th>
 									<th
 										scope="col"
-										className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
+										className="text-sm font-medium text-gray-900 px-6 py-4 text-center w-1/2"
 									>
 										status
 									</th>
-									<th
-										scope="col"
-										className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
-									>
-										Modifier
-									</th>
+
 								</tr>
 							</thead>
 							<tbody>

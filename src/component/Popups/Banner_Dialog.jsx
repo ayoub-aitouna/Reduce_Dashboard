@@ -5,19 +5,25 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
+import FormData from 'form-data';
 
 import { Button as MyButton, Filter_Selector, LoadingIcon } from "../index";
 import { BaseUrl, Coockies_name } from "../../constants";
-import { get_villes } from "../../Utils/villes/get_villes";
 import { useCookies } from "react-cookie";
 
-const Banner_Dialog = ({ open, OnClick, items, setRefresh, is_update }) => {
+const Banner_Dialog = ({ open, OnClick, setRefresh, selected, update = false }) => {
   const [cookies, setCookie, removeCookie] = useCookies([Coockies_name]);
-  const [data, setdata] = useState({
-    Baniere_ordre: 0, Logo: "",
-    Couverture: "", Offer: "", Adresse: "", Tel: "", statut: ""
-  });
   const [loading, setloading] = useState(false);
+  const [data, setdata] = useState({
+    Baniere_ordre: 0,
+    Logo: "",
+    Couverture: "",
+    Offer: "",
+    Adresse: "",
+    Tel: "",
+    statut: "activer"
+  });
+
   const hadlerClose = () => {
     OnClick();
   };
@@ -27,15 +33,16 @@ const Banner_Dialog = ({ open, OnClick, items, setRefresh, is_update }) => {
   }, [loading]);
 
   useEffect(() => {
-    if (items != null)
-      setdata(items);
-  }, [items]);
+    if (selected != undefined)
+      setdata(selected);
+  }, [selected]);
 
-  const handle_update_create = async () => {
+  const handle_request = async () => {
+    console.log("called ");
     setloading(true);
     try {
-      const req = await fetch(`${BaseUrl}/${is_update ? 'clients/update' : 'auth/new_client'}`, {
-        method: "POST",
+      const req = await fetch(`${BaseUrl}/banners/${(update) ? selected.id : ''}`, {
+        method: (update) ? "PUT" : "POST",
         mode: "cors",
         cache: "no-cache",
         headers: {
@@ -45,51 +52,11 @@ const Banner_Dialog = ({ open, OnClick, items, setRefresh, is_update }) => {
         referrerPolicy: "no-referrer",
         body: JSON.stringify(data),
       });
+      console.log("req ended");
       setRefresh((val) => val + 1);
       setloading(false);
     } catch (err) {
-      setloading(false);
-    }
-  }
-
-  const toggle_status = async () => {
-    setloading(true);
-    try {
-      const req = await fetch(`${BaseUrl}/clients/change_status`, {
-        method: "POST",
-        mode: "cors",
-        cache: "no-cache",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${cookies.accesToken}`,
-        },
-        referrerPolicy: "no-referrer",
-        body: { statut: data.status === "Activé" ? "Desactivé" : data.status },
-      });
-      setRefresh((val) => val + 1);
-      setloading(false);
-    } catch (err) {
-      setloading(false);
-    }
-  }
-
-  const reinit_device_id = async () => {
-    setloading(true);
-    try {
-      const req = await fetch(`${BaseUrl}/clients/setDeviceId?id=${data.id}`, {
-        method: "PUT",
-        mode: "cors",
-        cache: "no-cache",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${cookies.accesToken}`,
-        },
-        referrerPolicy: "no-referrer",
-        body: JSON.stringify(data),
-      });
-      setRefresh((val) => val + 1);
-      setloading(false);
-    } catch (err) {
+      console.log(err);
       setloading(false);
     }
   }
@@ -115,29 +82,7 @@ const Banner_Dialog = ({ open, OnClick, items, setRefresh, is_update }) => {
         <div className="h-[60px]"></div>
         <DialogActions>
           <div className="flex flex-col w-full">
-            {is_update ? <div className="flex flex-row ">
-              <Button
-                onClick={async (e) => reinit_device_id()}
-              >
-                <MyButton
-                  orientation={1}
-                  title="Reinitialiser ID"
-                  Icon={() => LoadingIcon(loading)}
-                  style="bg-gray-500 p-[20px] font-bold text-xl !p-[1px]"
-                />
-              </Button>
-              <Button
-                onClick={async (e) => toggle_status()}
-              >
-                <MyButton
-                  orientation={1}
-                  title="activer/desactiver"
-                  Icon={() => LoadingIcon(loading)}
-                  style="bg-gray-500 p-[20px] font-bold text-xl !p-[1px]"
-                />
-              </Button>
-            </div> : <></>}
-            <Button onClick={async (e) => handle_update_create()}>
+            <Button onClick={() => handle_request()}>
               <MyButton
                 orientation={1}
                 title="Valide"
@@ -153,22 +98,56 @@ const Banner_Dialog = ({ open, OnClick, items, setRefresh, is_update }) => {
 };
 
 const Fill_Form = ({ data, setdata }) => {
+  const [file, setFile] = useState(null);
+
+  const Upload = (endpoint) => {
+    const formData = new FormData();
+    formData.append('image', file);
+    fetch(`${BaseUrl}/banners/${endpoint}`, {
+      method: 'POST',
+      body: formData
+    })
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Error uploading image');
+        }
+        return response.json();
+      })
+      .then(data => {
+        console.log('Image uploaded successfully:', data);
+      })
+      .catch(error => {
+        console.error(error);
+      });
+
+  }
+
+  const handleLOGOFileChange = (event) => {
+    setFile(event.target.files[0]);
+    Upload('upload_cover');
+  }
+
+  const handleCOVERFileChange = (event) => {
+    setFile(event.target.files[0]);
+    Upload('upload_logo');
+  }
+
   return (
     <form className="w-full max-w-lg ">
       <div className="w-full flex flex-row justify-around p-5">
         <Button variant="contained" component="label">
           Upload LOGO
-          <input hidden accept="image/*" multiple type="file" />
+          <input hidden accept="image/*" multiple type="file" onChange={handleLOGOFileChange} />
         </Button>
         <Button variant="contained" component="label">
           Upload COVER
-          <input hidden accept="image/*" multiple type="file" />
+          <input hidden accept="image/*" multiple type="file" onChange={handleCOVERFileChange} />
         </Button>
       </div>
       <div className="flex flex-wrap -mx-3 mb-6">
 
         {Object.keys(data).map((key) => (
-          (key !== "statut" && key != "Logo" && key != "Couverture") && (
+          (key == "Baniere_ordre" || key == "Offer" || key == "Adresse" || key == "Tel") && (
             <div className="w-full px-3">
               <label
                 className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
@@ -194,8 +173,8 @@ const Fill_Form = ({ data, setdata }) => {
             <Filter_Selector
               title={"statut"}
               Filter={data.statut}
-              setFilter={(value) => setdata({ ...data, statut: value })}
-              options={[ { value: "activer", name: "activer" }, { value: "Desactiver", name: "Desactiver" }]}
+              setFilter={(value) => setdata({ ...data, statut: value === '' || value === undefined ? 'activer' : value })}
+              options={[{ value: "activer", name: "activer" }, { value: "Desactiver", name: "Desactiver" }]}
               styles={"!max-w-full"}
             />
           </div>

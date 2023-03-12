@@ -28,6 +28,8 @@ import UpdatePartner from "./Popups/UpdatePartner";
 import UpdateAdmin from "./Popups/UpdateAdmin";
 import UpdateClients from "./Popups/UpdateClients";
 import Banner_Dialog from "./Popups/Banner_Dialog";
+import AddNewCity from "./Popups/NewCity";
+import NewActivity from "./Popups/NewActivity";
 
 //Utils 
 import UserTable from "./Utils/UserTable";
@@ -44,6 +46,7 @@ import LoadingIcon from "./Utils/LoadingIcon";
 import Dark_loading_icon from "./Utils/Dark_loading_icon";
 import BannerTable from "./Utils/BannerTable";
 import Activities_table from "./Utils/Activities_table";
+import Profession_table from "./Utils/Profession_table";
 import Cities_table from "./Utils/Cities_table.jsx";
 
 export {
@@ -88,5 +91,8 @@ export {
   Banner_Dialog,
   Settings,
   Cities_table,
-  Activities_table
+  AddNewCity,
+  NewActivity,
+  Activities_table,
+  Profession_table
 };

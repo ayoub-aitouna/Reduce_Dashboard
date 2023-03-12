@@ -13,22 +13,25 @@ const DataRow = ({ item, index, OnEdit = () => { } }) => {
 				} border-b`}
 		>
 			<td className="px-6 py-4 whitespace-nowrap text-sm font-medium ">
-				{item.nome_entreprise}
+				{item.Baniere_ordre}
 			</td>
 			<td className="px-6 py-4 whitespace-nowrap text-sm font-medium ">
-				{item.identificateur_entreprise}
+				{item.Logo}
 			</td>
 			<td className="px-6 py-4 whitespace-nowrap text-sm font-medium ">
-				{item.representant_entreprise}
+				{item.Couverture}
 			</td>
 			<td className="px-6 py-4 whitespace-nowrap text-sm font-medium ">
-				{item.role_dans_entriprise}
+				{item.Offer}
 			</td>
 			<td className="px-6 py-4 whitespace-nowrap text-sm font-medium ">
-				{item.ville_name}
+				{item.Adresse}
 			</td>
 			<td className="px-6 py-4 whitespace-nowrap text-sm font-medium ">
-				{item.activity_name}
+				{item.Tel}
+			</td>
+			<td className="px-6 py-4 whitespace-nowrap text-sm font-medium ">
+				{item.statut}
 			</td>
 			<td
 				className="px-6 py-4 whitespace-nowrap text-sm font-medium "
@@ -84,6 +87,12 @@ function BannerTable({ Data, OnEdit }) {
 										className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
 									>
 										Tel
+									</th>
+									<th
+										scope="col"
+										className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
+									>
+										Statut
 									</th>
 									<th
 										scope="col"

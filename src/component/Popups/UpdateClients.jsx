@@ -15,15 +15,17 @@ import { BaseUrl, Coockies_name } from "../../constants";
 import { get_villes } from "../../Utils/villes/get_villes";
 import { useCookies } from "react-cookie";
 import { get_Activity } from "../../Utils/Activities/Activities";
+import { get_profesional } from "../../Utils/profesional/get_profesional";
 
-const UpdateClinets = ({ open, OnClick, partner = { email: "", }, setRefresh, is_update }) => {
+const UpdateClinets = ({ open, OnClick, partner, setRefresh, is_update }) => {
   const [cookies, setCookie, removeCookie] = useCookies([Coockies_name]);
+  const [loading, setloading] = useState(false);
+
   const [data, setdata] = useState({
     full_name: "", birth_date: "", sexe: "", ville: 0,
     adresse: "", profession: 0, tel: "", email: "", abonnement: "",
     statut: "", date_fin_abonnement: ""
   });
-  const [loading, setloading] = useState(false);
 
   const hadlerClose = () => {
     OnClick();
@@ -58,7 +60,7 @@ const UpdateClinets = ({ open, OnClick, partner = { email: "", }, setRefresh, is
       setloading(false);
     }
   }
-  
+
   const toggle_status = async () => {
     setloading(true);
     try {
@@ -71,7 +73,7 @@ const UpdateClinets = ({ open, OnClick, partner = { email: "", }, setRefresh, is
           Authorization: `Bearer ${cookies.accesToken}`,
         },
         referrerPolicy: "no-referrer",
-        body: {statut : data.status === "Activé" ? "Desactivé": data.status},
+        body: { statut: data.status === "Activé" ? "Desactivé" : data.status },
       });
       setRefresh((val) => val + 1);
       setloading(false);
@@ -161,12 +163,13 @@ const UpdateClinets = ({ open, OnClick, partner = { email: "", }, setRefresh, is
 
 const Fill_Form = ({ data, setdata }) => {
   let [villes, setvilles] = useState([]);
-  const [Activities, setActivities] = useState([]);
+  const [Profession, setProfession] = useState([]);
 
   useEffect(() => {
     get_villes(setvilles);
-    get_Activity(setActivities);
+    get_profesional(setProfession);
   }, []);
+
 
   return (
     <form className="w-full max-w-lg ">
@@ -204,17 +207,12 @@ const Fill_Form = ({ data, setdata }) => {
               styles={"!max-w-full"}
             />
           </div>
-
           <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
             <Filter_Selector
               title={"profession"}
               Filter={data.profession}
               setFilter={(value) => setdata({ ...data, profession: value })}
-              options={[
-                { value: "", name: "Toute" },
-                { value: "Admin", name: "Administrateur" },
-                { value: "Manager", name: "Responsable" },
-              ]}
+              options={Profession}
               styles={"!max-w-full"}
             />
           </div>
@@ -237,9 +235,10 @@ const Fill_Form = ({ data, setdata }) => {
               Filter={data.abonnement}
               setFilter={(value) => setdata({ ...data, abonnement: value })}
               options={[
-                { value: "", name: "Toute" },
-                { value: "Admin", name: "Administrateur" },
-                { value: "Manager", name: "Responsable" },
+                { value: "Abonne", name: "Abonne" },
+                { value: "Gratuit", name: "Gratuit" },
+                { value: "Routier", name: "Routier" },
+                { value: "investisseur", name: "investisseur" },
               ]}
               styles={"!max-w-full"}
             />

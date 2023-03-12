@@ -1,7 +1,7 @@
 import React from "react";
 
 const Input = ({
-  OnChange = () => {},
+  OnChange = () => { },
   value = "",
   hint,
   title,
@@ -20,10 +20,10 @@ const Input = ({
           className=" w-[520px] !h-[62px] py-2 border-[1px] border-[#E4E4E7] rounded-[12px]  focus:border-[#617EE7] px-4"
           placeholder={hint}
           type={type}
+          onLoad={e => { OnChange(e.target.value); }}
           onChange={(e) => {
             OnChange(e.target.value);
           }}
-          //value={value}
         />
       </div>
     </>

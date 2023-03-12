@@ -10,6 +10,7 @@ import { BaseUrl, Coockies_name } from "../../constants";
 import { get_villes } from "../../Utils/villes/get_villes";
 import { useCookies } from "react-cookie";
 import { get_Activity } from "../../Utils/Activities/Activities";
+import FormData from 'form-data';
 
 const UpdatePartner = ({ open, OnClick, partner, setRefresh }) => {
   const [cookies, setCookie, removeCookie] = useCookies([Coockies_name]);
@@ -90,47 +91,36 @@ const Fill_Form = ({ data, setdata }) => {
   const [Activities, setActivities] = useState([]);
   const [file, setFile] = useState(null);
 
+  const Upload = (endpoint) => {
+    const formData = new FormData();
+    formData.append('image', file);
+    fetch(`${BaseUrl}/partner/${endpoint}`, {
+      method: 'POST',
+      body: formData
+    })
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Error uploading image');
+        }
+        return response.json();
+      })
+      .then(data => {
+        console.log('Image uploaded successfully:', data);
+      })
+      .catch(error => {
+        console.error(error);
+      });
+
+  }
+
   const handleLOGOFileChange = (event) => {
     setFile(event.target.files[0]);
-    const formData = new FormData();
-    formData.append('image', file);
-    fetch(`${BaseUrl}/partner/upload_logo`, {
-      method: 'POST',
-      body: formData
-    })
-    .then(response => {
-      if (!response.ok) {
-        throw new Error('Error uploading image');
-      }
-      return response.json();
-    })
-    .then(data => {
-      console.log('Image uploaded successfully:', data);
-    })
-    .catch(error => {
-      console.error(error);
-    });
+    Upload('upload_cover');
   }
+
   const handleCOVERFileChange = (event) => {
     setFile(event.target.files[0]);
-    const formData = new FormData();
-    formData.append('image', file);
-    fetch(`${BaseUrl}/partner/upload_cover`, {
-      method: 'POST',
-      body: formData
-    })
-    .then(response => {
-      if (!response.ok) {
-        throw new Error('Error uploading image');
-      }
-      return response.json();
-    })
-    .then(data => {
-      console.log('Image uploaded successfully:', data);
-    })
-    .catch(error => {
-      console.error(error);
-    });
+    Upload('upload_logo');
   }
 
   useEffect(() => {
@@ -143,11 +133,11 @@ const Fill_Form = ({ data, setdata }) => {
       <div className="w-full flex flex-row justify-around p-5">
         <Button variant="contained" component="label">
           Upload LOGO
-          <input hidden accept="image/*" multiple type="file" onChange={handleLOGOFileChange}/>
+          <input hidden accept="image/*" multiple type="file" onChange={handleLOGOFileChange} />
         </Button>
         <Button variant="contained" component="label">
           Upload COVER
-          <input hidden accept="image/*" multiple type="file" onChange={handleCOVERFileChange}/>
+          <input hidden accept="image/*" multiple type="file" onChange={handleCOVERFileChange} />
         </Button>
       </div>
       <div className="flex flex-wrap -mx-3 mb-6">
@@ -323,4 +313,5 @@ const Fill_Form = ({ data, setdata }) => {
     </form>
   );
 };
+
 export default UpdatePartner;

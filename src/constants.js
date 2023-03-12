@@ -76,6 +76,6 @@ export const SideBarLinks = [
   },
 ];
 
-export const BaseUrl = "https://merybtk.xyz/api/v1";
+export const BaseUrl = "http://localhost:5000/api/v1";
 
 export const Coockies_name = "auth_name";

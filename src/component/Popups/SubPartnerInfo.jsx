@@ -5,7 +5,7 @@ import { get_villes } from "../../Utils/villes/get_villes";
 import { useCookies } from "react-cookie";
 import { BaseUrl, Coockies_name } from "../../constants";
 
-const DataRow = ({ item, index, onClick = () => { }, OnEdit = () => { } }) => {
+const DataRow = ({ item, index }) => {
   return (
     <tr
       className={` text-gray-900 hover:text-[#fff] hover:bg-[#2E5CFF] cursor-pointer ${index % 2 == 0 ? "bg-gray-100" : "bg-white"
@@ -71,9 +71,6 @@ const SubPartnerInfoRender = ({ Data = [] }) => {
   );
 };
 
-
-
-
 function SubPartnerInfo({ open, OnClick, id }) {
   const [loading, setloading] = useState(false);
   const [data, setdata] = useState([]);
@@ -91,8 +88,14 @@ function SubPartnerInfo({ open, OnClick, id }) {
         },
         referrerPolicy: "no-referrer",
       });
-      const json = await req.json();
-      setdata(json);
+      if (req.ok) {
+        const json = await req.json();
+        // setdata(json);
+        console.log(json);
+      }
+      else
+        console.log("/sub_parnter/admin_all_subs/ erro ");
+
     } catch (err) {
 
     }
@@ -106,7 +109,8 @@ function SubPartnerInfo({ open, OnClick, id }) {
   }, [loading]);
 
   useEffect(() => {
-    load_sub_accounts(id);
+    if (id != undefined)
+      load_sub_accounts(id);
   }, [id]);
 
   return (

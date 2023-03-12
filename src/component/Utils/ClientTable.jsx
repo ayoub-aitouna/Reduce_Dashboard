@@ -11,16 +11,16 @@ const DataRow = ({ item, index, onClick = () => { }, OnEdit = () => { } }) => {
 		>
 
 			<td className="px-6 py-4 whitespace-nowrap text-sm font-medium ">
-				{item.nome_entreprise}
+				{item.full_name}
 			</td>
 			<td className="px-6 py-4 whitespace-nowrap text-sm font-medium ">
-				{item.identificateur_entreprise}
+				{item.sexe}
 			</td>
 			<td className="px-6 py-4 whitespace-nowrap text-sm font-medium ">
-				{item.representant_entreprise}
+				{item.tel}
 			</td>
 			<td className="px-6 py-4 whitespace-nowrap text-sm font-medium ">
-				{item.role_dans_entriprise}
+				{item.adresse}
 			</td>
 			<td className="px-6 py-4 whitespace-nowrap text-sm font-medium ">
 				{item.ville_name}
@@ -72,7 +72,7 @@ function UserTable({ Data, OnSelect, OnEdit }) {
 									<th
 										scope="col"
 										className="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-										nom complet
+										full name
 									</th>
 									<th
 										scope="col"

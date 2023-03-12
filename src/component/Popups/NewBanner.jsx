@@ -13,7 +13,6 @@ import TextField from "@mui/material/TextField";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
-import Cookies from "js-cookie";
 import { useCookies } from "react-cookie";
 
 const Fill_Form = ({ data, setdata }) => {
@@ -21,10 +20,6 @@ const Fill_Form = ({ data, setdata }) => {
 
   useEffect(() => {
     get_villes(setvilles);
-  }, [data]);
-
-  useEffect(() => {
-    console.log(data);
   }, [data]);
 
   return (
@@ -144,7 +139,7 @@ const Fill_Form = ({ data, setdata }) => {
                         .slice(0, 19)
                         .replace("T", " "),
                     });
-                  } catch (error) {}
+                  } catch (error) { }
                 }}
                 renderInput={(params) => <TextField {...params} />}
               />
@@ -172,7 +167,7 @@ const Fill_Form = ({ data, setdata }) => {
   );
 };
 
-function AddNewDoneTask({ open, OnClick, setRef }) {
+function AddNewBanner({ open, OnClick, setRef, old_data }) {
   let [data, setdata] = useState({
     id: 1,
     partner_name: "",
@@ -183,15 +178,44 @@ function AddNewDoneTask({ open, OnClick, setRef }) {
     visite_date: dayjs().$d.toISOString().slice(0, 19).replace("T", " "),
     adrress: "",
   });
-  const [cookies, setCookie, removeCookie] = useCookies([Coockies_name]);
 
+  const [cookies, setCookie, removeCookie] = useCookies([Coockies_name]);
   const [loading, setloading] = useState(false);
+
   const hadlerClose = () => {
     OnClick();
   };
+
   useEffect(() => {
     if (!loading) hadlerClose();
   }, [loading]);
+
+  useEffect(() => {
+    if (old_data != undefined)
+      setdata(old_data);
+  }, [old_data]);
+
+  const handle_request = async () => {
+    setloading(true);
+    try {
+      await fetch(`${BaseUrl}/banners/${(old_data.id != undefined && old_data.id != 0) ? old_data.id : ''}`, {
+        method: (old_data.id != undefined && old_data.id != 0) ? "PUT" : "POST",
+        mode: "cors",
+        cache: "no-cache",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${cookies.accesToken}`,
+        },
+        referrerPolicy: "no-referrer",
+        body: JSON.stringify(data),
+      });
+      setRef((val) => val + 1);
+      setloading(false);
+    } catch (err) {
+      setloading(false);
+    }
+  }
+
   return (
     <div>
       <Dialog
@@ -214,28 +238,7 @@ function AddNewDoneTask({ open, OnClick, setRef }) {
         </div>
         <div className="h-[60px]"></div>
         <DialogActions>
-          <Button
-            onClick={async (e) => {
-              setloading(true);
-              try {
-                const req = await fetch(`${BaseUrl}/Tasks/add_done`, {
-                  method: "POST",
-                  mode: "cors",
-                  cache: "no-cache",
-                  headers: {
-                    "Content-Type": "application/json",
-                    Authorization: `Bearer ${cookies.accesToken}`,
-                  },
-                  referrerPolicy: "no-referrer",
-                  body: JSON.stringify(data),
-                });
-                setRef((val) => val + 1);
-                setloading(false);
-              } catch (err) {
-                setloading(false);
-              }
-            }}
-          >
+          <Button onClick={() => handle_request()}>
             <MyButton
               title="Confirmez"
               Icon={() => LoadingIcon(loading)}
@@ -254,4 +257,4 @@ function AddNewDoneTask({ open, OnClick, setRef }) {
   );
 }
 
-export default AddNewDoneTask;
+export default AddNewBanner;
