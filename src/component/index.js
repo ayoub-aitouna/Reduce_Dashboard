@@ -1,42 +1,51 @@
+//Pages 
 import Auth from "./Pages/Auth";
 import Home from "./Pages/Home";
 import Clients from "./Pages/Clients";
-import UserTable from "./Utils/UserTable";
 import Partner from "./Pages/Partner";
-import Sidebar from "./Utils/Sidebar";
-import Button from "./Utils/Button";
-import Input from "./Utils/Input";
-import PartnerInfo from "./Popups/PartnerInfo";
-import SubPartnerInfo from "./Popups/SubPartnerInfo";
-import ClientInfo from "./Popups/ClientInfo";
-import IconHalder from "./Utils/IconHolder";
-import ActionsDialog from "./Popups/ActionsDialog";
-import AdminsTable from "./Utils/AdminsTable";
-import ClientTable from "./Utils/ClientTable";
 import Admins from "./Pages/Admins";
-import AddNewAdmin from "./Popups/AddNewAdmin";
-import Filter_Selector from "./Utils/Filter_Selector";
-import SearchBar from "./Utils/SearchBar";
-import ErrorMsg from "./Utils/ErrorMsg";
-import Add_new_task from "./Popups/Add_new_task";
 import Tasks from "./Pages/Tasks";
 import Banners from "./Pages/Banners";
 import Statics from "./Pages/Statics";
 import Task_done from "./Pages/Task_done";
 import Task_anounsments from "./Pages/Task_anounsments";
 import TaskSearch from "./Pages/TaskSearch";
+import Edit_history from "./Pages/Edit_history";
+import ForgotPass from "./Pages/ForgotPass";
+import Settings from "./Pages/Settings";
+
+//Popups
+import PartnerInfo from "./Popups/PartnerInfo";
+import SubPartnerInfo from "./Popups/SubPartnerInfo";
+import ClientInfo from "./Popups/ClientInfo";
+import ActionsDialog from "./Popups/ActionsDialog";
+import AddNewAdmin from "./Popups/AddNewAdmin";
+import Add_new_task from "./Popups/Add_new_task";
 import Edite_Task from "./Popups/Edite_Task";
-import LoadingIcon from "./Utils/LoadingIcon";
-import Dark_loading_icon from "./Utils/Dark_loading_icon";
 import SetAsDone from "./Popups/SetAsDone";
 import AddNewDoneTask from "./Popups/AddNewDoneTask";
 import UpdatePartner from "./Popups/UpdatePartner";
-import Edit_history from "./Pages/Edit_history";
-import ForgotPass from "./Pages/ForgotPass";
 import UpdateAdmin from "./Popups/UpdateAdmin";
 import UpdateClients from "./Popups/UpdateClients";
 import Banner_Dialog from "./Popups/Banner_Dialog";
+
+//Utils 
+import UserTable from "./Utils/UserTable";
+import Sidebar from "./Utils/Sidebar";
+import Button from "./Utils/Button";
+import Input from "./Utils/Input";
+import IconHalder from "./Utils/IconHolder";
+import AdminsTable from "./Utils/AdminsTable";
+import ClientTable from "./Utils/ClientTable";
+import Filter_Selector from "./Utils/Filter_Selector";
+import SearchBar from "./Utils/SearchBar";
+import ErrorMsg from "./Utils/ErrorMsg";
+import LoadingIcon from "./Utils/LoadingIcon";
+import Dark_loading_icon from "./Utils/Dark_loading_icon";
 import BannerTable from "./Utils/BannerTable";
+import Activities_table from "./Utils/Activities_table";
+import Cities_table from "./Utils/Cities_table.jsx";
+
 export {
   Auth,
   Home,
@@ -76,5 +85,8 @@ export {
   Statics,
   BannerTable,
   Banners,
-  Banner_Dialog
+  Banner_Dialog,
+  Settings,
+  Cities_table,
+  Activities_table
 };

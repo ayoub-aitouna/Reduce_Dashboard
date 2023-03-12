@@ -79,7 +79,7 @@ const UpdatePartner = ({ open, OnClick, partner, setRefresh }) => {
             </Button>
           </DialogActions>
         </DialogContent>
-  
+
       </Dialog>
     </div>
   );
@@ -88,6 +88,50 @@ const UpdatePartner = ({ open, OnClick, partner, setRefresh }) => {
 const Fill_Form = ({ data, setdata }) => {
   let [villes, setvilles] = useState([]);
   const [Activities, setActivities] = useState([]);
+  const [file, setFile] = useState(null);
+
+  const handleLOGOFileChange = (event) => {
+    setFile(event.target.files[0]);
+    const formData = new FormData();
+    formData.append('image', file);
+    fetch(`${BaseUrl}/partner/upload_logo`, {
+      method: 'POST',
+      body: formData
+    })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Error uploading image');
+      }
+      return response.json();
+    })
+    .then(data => {
+      console.log('Image uploaded successfully:', data);
+    })
+    .catch(error => {
+      console.error(error);
+    });
+  }
+  const handleCOVERFileChange = (event) => {
+    setFile(event.target.files[0]);
+    const formData = new FormData();
+    formData.append('image', file);
+    fetch(`${BaseUrl}/partner/upload_cover`, {
+      method: 'POST',
+      body: formData
+    })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Error uploading image');
+      }
+      return response.json();
+    })
+    .then(data => {
+      console.log('Image uploaded successfully:', data);
+    })
+    .catch(error => {
+      console.error(error);
+    });
+  }
 
   useEffect(() => {
     get_villes(setvilles);
@@ -99,11 +143,11 @@ const Fill_Form = ({ data, setdata }) => {
       <div className="w-full flex flex-row justify-around p-5">
         <Button variant="contained" component="label">
           Upload LOGO
-          <input hidden accept="image/*" multiple type="file" />
+          <input hidden accept="image/*" multiple type="file" onChange={handleLOGOFileChange}/>
         </Button>
         <Button variant="contained" component="label">
           Upload COVER
-          <input hidden accept="image/*" multiple type="file" />
+          <input hidden accept="image/*" multiple type="file" onChange={handleCOVERFileChange}/>
         </Button>
       </div>
       <div className="flex flex-wrap -mx-3 mb-6">

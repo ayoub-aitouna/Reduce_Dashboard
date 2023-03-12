@@ -16,7 +16,8 @@ import {
   Edit_history,
   Clients,
   Statics,
-  Banners
+  Banners,
+  Settings
 } from "./component";
 import React, { useState, useEffect } from "react";
 
@@ -60,6 +61,8 @@ function App() {
             <Route path="Admin_managers" element={<Admins />} />
             <Route path="subscribers" element={<Clients />} />
             <Route path="gestionnaire_banniere" element={<Banners />} />
+            <Route path="settings" element={<Settings />} />
+
           </Route>
           <Route path="*" element={<PageNotFound />} />
         </Routes>
