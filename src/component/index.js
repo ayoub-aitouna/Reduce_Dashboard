@@ -30,6 +30,7 @@ import UpdateClients from "./Popups/UpdateClients";
 import Banner_Dialog from "./Popups/Banner_Dialog";
 import AddNewCity from "./Popups/NewCity";
 import NewActivity from "./Popups/NewActivity";
+import EditeActivity from "./Popups/EditeActivity";
 
 //Utils 
 import UserTable from "./Utils/UserTable";
@@ -94,5 +95,6 @@ export {
   AddNewCity,
   NewActivity,
   Activities_table,
-  Profession_table
+  Profession_table,
+  EditeActivity
 };

@@ -3,12 +3,15 @@ import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
-import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
-import { Button as MyButton, Filter_Selector, LoadingIcon } from "../index";
+import { Button as MyButton, LoadingIcon } from "../index";
 import { BaseUrl, Coockies_name } from "../../constants";
-import Cookies from "js-cookie";
 import { useCookies } from "react-cookie";
+import { get_villes } from "../../Utils/villes/get_villes";
+
+import {
+  Cities_table
+} from "../index";
 
 const Fill_Form = ({ data, setdata }) => {
   return (
@@ -37,20 +40,27 @@ const Fill_Form = ({ data, setdata }) => {
   );
 };
 
-function AddActivity({ open, OnClick, setRefresh }) {
+function EditeActivity({ open, OnClick, setRefresh }) {
+  const [villes, setvilles] = useState([]);
+  const [cookies, setCookie, removeCookie] = useCookies([Coockies_name]);
+  const [loading, setloading] = useState(false);
   let [data, setdata] = useState({
     Activity: ""
   });
-  const [cookies, setCookie, removeCookie] = useCookies([Coockies_name]);
 
-  const [loading, setloading] = useState(false);
   const hadlerClose = () => {
     OnClick();
   };
+
   useEffect(() => {
     if (!loading) hadlerClose();
   }, [loading]);
-  
+
+  useEffect(() => {
+    if (open === true)
+      get_villes(setvilles);
+  }, [open]);
+
   return (
     <div>
       <Dialog
@@ -64,6 +74,19 @@ function AddActivity({ open, OnClick, setRefresh }) {
         <DialogContent>
           <div className="w-full grid place-content-center">
             <Fill_Form data={data} setdata={setdata} />
+            <div className="flex-1">
+              <div className="flex flex-col items-start justify-start">
+                <h6 className="text-[15px] font-bold text-gray-800">
+                  Activity Villes
+                </h6>
+              </div>
+              <Cities_table
+                Data={villes}
+                OnEdit={(data) => {
+
+                }}
+              />
+            </div>
           </div>
         </DialogContent>
         <DialogActions>
@@ -101,4 +124,4 @@ function AddActivity({ open, OnClick, setRefresh }) {
   );
 }
 
-export default AddActivity;
+export default EditeActivity;

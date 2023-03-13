@@ -19,15 +19,15 @@ const Fill_Form = ({ data, setdata }) => {
             className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2 w-full"
             htmlFor="grid-name"
           >
-            Activity Name
+            profession Name
           </label>
           <input
             className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
             id="grid-name"
             type="text"
-            value={data.partner_name}
+            value={data.profession}
             onChange={(e) => {
-              setdata({ ...data, Activity: e.target.value });
+              setdata({ ...data, profession: e.target.value });
             }}
             placeholder="Jane Doe"
           />
@@ -37,10 +37,11 @@ const Fill_Form = ({ data, setdata }) => {
   );
 };
 
-function AddActivity({ open, OnClick, setRefresh }) {
+function AddActivity({ open, OnClick, setRef }) {
   let [data, setdata] = useState({
-    Activity: ""
+    profession: ""
   });
+
   const [cookies, setCookie, removeCookie] = useCookies([Coockies_name]);
 
   const [loading, setloading] = useState(false);
@@ -50,7 +51,6 @@ function AddActivity({ open, OnClick, setRefresh }) {
   useEffect(() => {
     if (!loading) hadlerClose();
   }, [loading]);
-  
   return (
     <div>
       <Dialog
@@ -60,18 +60,24 @@ function AddActivity({ open, OnClick, setRefresh }) {
         onClose={hadlerClose}
         aria-describedby="alert-dialog-slide-description"
       >
-        <DialogTitle>{"Ajoutez une Activity"}</DialogTitle>
+        <DialogTitle>{"Ajoutez une Tâche"}</DialogTitle>
         <DialogContent>
-          <div className="w-full grid place-content-center">
-            <Fill_Form data={data} setdata={setdata} />
-          </div>
+          <DialogContentText id="alert-dialog-slide-description">
+            <p className="text-gray-600 text-xs ">
+              Remplissez les champs vides
+            </p>
+          </DialogContentText>
         </DialogContent>
+        <div className="w-full grid place-content-center">
+          <Fill_Form data={data} setdata={setdata} />
+        </div>
+        <div className="h-[60px]"></div>
         <DialogActions>
           <Button
             onClick={async (e) => {
               setloading(true);
               try {
-                const req = await fetch(`${BaseUrl}/Activities/Add`, {
+                const req = await fetch(`${BaseUrl}/profession`, {
                   method: "POST",
                   mode: "cors",
                   cache: "no-cache",
@@ -82,7 +88,7 @@ function AddActivity({ open, OnClick, setRefresh }) {
                   referrerPolicy: "no-referrer",
                   body: JSON.stringify(data),
                 });
-                setRefresh((val) => val + 1);
+                setRef((val) => val + 1);
                 setloading(false);
               } catch (err) {
                 setloading(false);

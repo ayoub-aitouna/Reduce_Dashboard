@@ -15,7 +15,7 @@ import { BaseUrl, Coockies_name } from "../../constants";
 import { get_villes } from "../../Utils/villes/get_villes";
 import { useCookies } from "react-cookie";
 import { get_Activity } from "../../Utils/Activities/Activities";
-import { get_profesional } from "../../Utils/profesional/get_profesional";
+import { get_profesion } from "../../Utils/profesion/Profesion";
 
 const UpdateClinets = ({ open, OnClick, partner, setRefresh, is_update }) => {
   const [cookies, setCookie, removeCookie] = useCookies([Coockies_name]);
@@ -167,7 +167,7 @@ const Fill_Form = ({ data, setdata }) => {
 
   useEffect(() => {
     get_villes(setvilles);
-    get_profesional(setProfession);
+    get_profesion(setProfession);
   }, []);
 
 

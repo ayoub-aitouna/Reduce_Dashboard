@@ -6,28 +6,34 @@ import {
     Button,
     NewActivity,
     AddNewCity,
-    Profession_table
+    Profession_table,
+    EditeActivity
 } from "../index";
 import { BiTask } from "react-icons/bi";
-import { BaseUrl, Coockies_name } from "../../constants";
 import { get_villes } from "../../Utils/villes/get_villes";
 import { get_Activity } from "../../Utils/Activities/Activities";
-import { get_profesional } from "../../Utils/profesional/get_profesional";
+import { get_profesion } from "../../Utils/profesion/Profesion";
 
 function Settings() {
     const [villes, setvilles] = useState([]);
+    const [profession, setprofession] = useState([]);
     const [newcity, setnewcity] = useState(false);
     const [Refresh, setRefresh] = useState(0);
     const [newactivity, setnewactivity] = useState(false);
+    const [editeActivity, setediteActivity] = useState(false);
+    const [Activity, setActivity] = useState(0);
     const [activities, setactivities] = useState([]);
-    const [Profession, setProfession] = useState([]);
 
     useEffect(() => {
+        get_profesion(setprofession);
         get_villes(setvilles);
         get_Activity(setactivities)
-        get_profesional(setProfession)
     }, [Refresh])
 
+    const handleOpenEditeActivity = (id) => {
+        setActivity(id);
+        setediteActivity(true);
+    }
     return (
         <div className="p-5 my-10 ">
             <NewActivity
@@ -42,6 +48,14 @@ function Settings() {
                 setRefresh={setRefresh}
                 OnClick={() => {
                     setnewcity(false);
+                }}
+            />
+            <EditeActivity
+                open={editeActivity}
+                setRefresh={setRefresh}
+                activity={Activity}
+                OnClick={() => {
+                    setediteActivity(false);
                 }}
             />
             <div className="flex flex-col ">
@@ -68,7 +82,8 @@ function Settings() {
                         <Activities_table
                             Data={activities}
                             OnEdit={(item) => {
-
+                                console.log("clicked");
+                                handleOpenEditeActivity(item.id);
                             }}
                         />
                     </div>
@@ -80,7 +95,7 @@ function Settings() {
                         </h6>
                     </div>
                     <Profession_table
-                        Data={Profession}
+                        Data={profession}
                         OnEdit={(data) => {
 
                         }}

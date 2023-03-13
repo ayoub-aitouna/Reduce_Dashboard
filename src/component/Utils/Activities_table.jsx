@@ -6,10 +6,9 @@ import { MdPendingActions } from "react-icons/md";
 import { BsFillArrowRightSquareFill } from "react-icons/bs";
 import { IconHalder } from "../index";
 
-const DataRow = ({ item, index, onClick = () => { }, OnEdit = () => { }, onRowSelected = () => { } }) => {
+const DataRow = ({ item, index, OnEdit = () => { }, onRowSelected = () => { } }) => {
 	return (
 		<tr
-			onClick={() => onRowSelected()}
 			className={` text-gray-900 hover:text-[#fff] hover:bg-[#2E5CFF] cursor-pointer ${index % 2 == 0 ? "bg-gray-100" : "bg-white"
 				} border-b`}
 		>
@@ -21,7 +20,7 @@ const DataRow = ({ item, index, onClick = () => { }, OnEdit = () => { }, onRowSe
 			</td>
 			<td
 				className="px-6 py-4 whitespace-nowrap text-sm font-medium "
-				onClick={(event) => { event.stopPropagation(); OnEdit() }}
+				onClick={() => OnEdit()}
 			>
 				<IconHalder Icon={() => <AiFillEdit />} style="text-[20px]" />
 			</td>

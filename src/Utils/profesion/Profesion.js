@@ -1,5 +1,5 @@
 import { BaseUrl } from "../../constants";
-const get_profesional = async (setprofesional) => {
+const get_profesion = async (setProfesion) => {
   try {
     const req = await fetch(`${BaseUrl}/profession`, {
       method: "GET",
@@ -12,12 +12,17 @@ const get_profesional = async (setprofesional) => {
     });
     if (req.ok) {
       const data = await req.json();
-      setprofesional([{ id: 0, name: "" }]);
+      console.log(data);
+      setProfesion([{ value: 0, name: "" }]);
       data.map((item) => {
-        setprofesional((v) => [...v, { value: item.id, name: item.profession }]);
+        setProfesion((v) => [
+          ...v,
+          { value: item.id, name: item.profession },
+        ]);
       });
     } else {
     }
   } catch (err) { }
 };
-export { get_profesional };
+
+export { get_profesion };

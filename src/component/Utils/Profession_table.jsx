@@ -8,14 +8,8 @@ const DataRow = ({ item, index, OnEdit = () => { } }) => {
 			className={` text-gray-900 hover:text-[#fff] hover:bg-[#2E5CFF] cursor-pointer ${index % 2 == 0 ? "bg-gray-100" : "bg-white"
 				} border-b`}
 		>
-			<td className="px-6 py-4 whitespace-nowrap text-sm font-medium ">
+			<td className="px-6 py-4 whitespace-nowrap text-sm font-normal grid place-content-center">
 				{item.name}
-			</td>
-			<td
-				className="px-6 py-4 whitespace-nowrap text-sm font-medium "
-				onClick={() => OnEdit()}
-			>
-				<IconHalder Icon={() => <AiFillEdit />} style="text-[20px]" />
 			</td>
 		</tr>
 	);
@@ -28,23 +22,18 @@ function UserTable({ Data, OnSelect, OnEdit }) {
 				<div className="py-2 inline-block min-w-full sm:px-6 lg:px-8">
 					<div className="overflow-hidden">
 						<table className="min-w-full">
-							<thead className="bg-white border-b">
+							<thead className="bg-white border-b ">
 								<tr>
 									<th
 										scope="col"
-										className="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+										className="text-sm font-medium grid place-content-center text-gray-900 px-6 py-4 text-left">
 										profession
-									</th>
-									<th
-										scope="col"
-										className="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-										Modifie
 									</th>
 								</tr>
 							</thead>
 							<tbody>
 								{Data.map((item, index) => (
-									item.value !== 0 && 
+									item.value != 0 && 
 									<DataRow
 										key={item.id}
 										item={item}
