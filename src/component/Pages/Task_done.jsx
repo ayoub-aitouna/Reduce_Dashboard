@@ -2,62 +2,9 @@ import React, { useState, useEffect } from "react";
 import { AiFillEdit } from "react-icons/ai";
 import { IconHalder, Edite_Task } from "../index";
 import { BaseUrl, Coockies_name } from "../../constants";
-
+import { LinearIndeterminate } from "../index";
 import { useCookies } from "react-cookie";
-// Data Row
-const DataRow = ({ item, index, onClick = () => { } }) => {
-	return (
-		<tr
-			className={` text-gray-900 hover:text-[#fff] hover:bg-[#2E5CFF] cursor-pointer ${index % 2 == 0 ? "bg-gray-100" : "bg-white"
-				} border-b`}
-		>
-			<td className="px-6 py-4 whitespace-nowrap text-sm font-medium ">
-				{item.id}
-			</td>
-			<td className="px-6 py-4 whitespace-nowrap text-sm font-medium ">
-				{item.partner_name}
-			</td>
-			<td className="px-6 py-4 whitespace-nowrap text-sm font-medium ">
-				{item.partner_full_name}
-			</td>
-			<td className="px-6 py-4 whitespace-nowrap text-sm font-medium ">
-				{item.phone_number}
-			</td>
-			<td className="px-6 py-4 whitespace-nowrap text-sm font-medium ">
-				{item.note}
-			</td>
-			<td className="px-6 py-4 whitespace-nowrap text-sm font-medium ">
-				{`${new Date(item.data_of_visite).getDate()}/${new Date(
-					item.data_of_visite
-				).getMonth()}/${new Date(item.data_of_visite).getFullYear()}`}
-			</td>
-			<td className="px-6 py-4 whitespace-nowrap text-sm font-medium ">
-				{item.partner_status == "intrested"
-					? "Intéressé"
-					: item.partner_status == "not_intrested"
-						? "Pas intéressé"
-						: "En cours"}
-			</td>
-			<td className="px-6 py-4 whitespace-nowrap text-sm font-medium ">
-				{item._name}
-			</td>
-			<td className="px-6 py-4 whitespace-nowrap text-sm font-medium ">
-				{item.ville_name}
-			</td>
-			<td
-				className="px-6 py-4 whitespace-nowrap text-sm font-medium "
-				onClick={() => {
-					const { id, partner_name, partner_status } = item;
-					onClick();
-				}}
-			>
-				<IconHalder Icon={() => <AiFillEdit />} style="text-[20px]" />
-			</td>
-		</tr>
-	);
-};
 
-// task done Components
 const Task_done = ({ Ref }) => {
 	let [data, setdata] = useState([]);
 	let [isEdite_Task_Dialog_Opend, setEdite_Task_Dialog_Opend] = useState(false);
@@ -65,28 +12,22 @@ const Task_done = ({ Ref }) => {
 
 	const [SelectedTask, setSelectedTask] = useState({});
 	const [cookies, setCookie, removeCookie] = useCookies([Coockies_name]);
+	let [loading, setloading] = useState(false);
 
 	const handleRequest = async () => {
-		try {
-			const req = await fetch(`${BaseUrl}/Tasks/done`, {
-				method: "GET",
-				mode: "cors",
-				cache: "no-cache",
-				headers: {
-					"Content-Type": "application/json",
-					Authorization: `Bearer ${cookies.accesToken}`,
-				},
-				referrerPolicy: "no-referrer",
-			});
-			if (req.ok) {
-				const data = await req.json();
-				setdata(data);
-			} else {
-				console.error(await req.json());
-			}
-		} catch (err) {
-			alert(err);
-		}
+		const req = await fetch(`${BaseUrl}/Tasks/done`, {
+			method: "GET",
+			mode: "cors",
+			cache: "no-cache",
+			headers: {
+				"Content-Type": "application/json",
+				Authorization: `Bearer ${cookies.accesToken}`,
+			},
+			referrerPolicy: "no-referrer",
+		});
+		if (req.ok)
+			setdata(await req.json());
+		setloading(false);
 	};
 
 	useEffect(() => {
@@ -97,6 +38,7 @@ const Task_done = ({ Ref }) => {
 		setrefrech((val) => val + 1);
 	}, [Ref]);
 
+	if (loading) return <LinearIndeterminate />
 	return (
 		<div className="flex flex-col  border-[1px] my-10 border-gray-200 rounded-lg ">
 			<Edite_Task
@@ -197,4 +139,58 @@ const Task_done = ({ Ref }) => {
 		</div>
 	);
 };
+
+
+const DataRow = ({ item, index, onClick = () => { } }) => {
+	return (
+		<tr
+			className={` text-gray-900 hover:text-[#fff] hover:bg-[#2E5CFF] cursor-pointer ${index % 2 == 0 ? "bg-gray-100" : "bg-white"
+				} border-b`}
+		>
+			<td className="px-6 py-4 whitespace-nowrap text-sm font-medium ">
+				{item.id}
+			</td>
+			<td className="px-6 py-4 whitespace-nowrap text-sm font-medium ">
+				{item.partner_name}
+			</td>
+			<td className="px-6 py-4 whitespace-nowrap text-sm font-medium ">
+				{item.partner_full_name}
+			</td>
+			<td className="px-6 py-4 whitespace-nowrap text-sm font-medium ">
+				{item.phone_number}
+			</td>
+			<td className="px-6 py-4 whitespace-nowrap text-sm font-medium ">
+				{item.note}
+			</td>
+			<td className="px-6 py-4 whitespace-nowrap text-sm font-medium ">
+				{`${new Date(item.data_of_visite).getDate()}/${new Date(
+					item.data_of_visite
+				).getMonth()}/${new Date(item.data_of_visite).getFullYear()}`}
+			</td>
+			<td className="px-6 py-4 whitespace-nowrap text-sm font-medium ">
+				{item.partner_status == "intrested"
+					? "Intéressé"
+					: item.partner_status == "not_intrested"
+						? "Pas intéressé"
+						: "En cours"}
+			</td>
+			<td className="px-6 py-4 whitespace-nowrap text-sm font-medium ">
+				{item._name}
+			</td>
+			<td className="px-6 py-4 whitespace-nowrap text-sm font-medium ">
+				{item.ville_name}
+			</td>
+			<td
+				className="px-6 py-4 whitespace-nowrap text-sm font-medium "
+				onClick={() => {
+					const { id, partner_name, partner_status } = item;
+					onClick();
+				}}
+			>
+				<IconHalder Icon={() => <AiFillEdit />} style="text-[20px]" />
+			</td>
+		</tr>
+	);
+};
+
 export default Task_done;

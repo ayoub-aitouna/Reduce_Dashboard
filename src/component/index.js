@@ -49,6 +49,7 @@ import BannerTable from "./Utils/BannerTable";
 import Activities_table from "./Utils/Activities_table";
 import Profession_table from "./Utils/Profession_table";
 import Cities_table from "./Utils/Cities_table.jsx";
+import LinearIndeterminate from "./Utils/LinearIndeterminate.jsx";
 
 export {
   Auth,
@@ -96,5 +97,6 @@ export {
   NewActivity,
   Activities_table,
   Profession_table,
-  EditeActivity
+  EditeActivity,
+  LinearIndeterminate
 };

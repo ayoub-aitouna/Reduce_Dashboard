@@ -7,7 +7,9 @@ import {
   PartnerInfo,
   SubPartnerInfo,
   UserTable,
+  LinearIndeterminate
 } from "../index";
+
 import { BaseUrl, Coockies_name } from "../../constants";
 import { get_Activity } from "../../Utils/Activities/Activities";
 import { useCookies } from "react-cookie";
@@ -29,24 +31,25 @@ function Partner() {
   let [Odata, setOdata] = useState([]);
   let [Refresh, setRefresh] = useState(0);
   let [data, setdata] = useState([]);
+  let [loading, setloading] = useState(false);
 
   const handleRequest = async () => {
-    try {
-      const req = await fetch(`${BaseUrl}/admin/get_partners`, {
-        method: "GET",
-        mode: "cors",
-        cache: "no-cache",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${cookies.accesToken}`,
-        },
-        referrerPolicy: "no-referrer",
-      });
-      if (req.ok){
-        const data = await req.json();
-        setOdata(data);
-      } 
-    } catch (err) { }
+    setloading(true);
+    const req = await fetch(`${BaseUrl}/admin/get_partners`, {
+      method: "GET",
+      mode: "cors",
+      cache: "no-cache",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${cookies.accesToken}`,
+      },
+      referrerPolicy: "no-referrer",
+    });
+    if (req.ok) {
+      const data = await req.json();
+      setOdata(data);
+    }
+    setloading(false);
   };
 
   useEffect(() => {
@@ -142,22 +145,26 @@ function Partner() {
           />
         </div>
       </div>
-      <UserTable
-        Data={data}
-        selectedstatu={selectedStatus}
-        OnSelect={(data) => {
-          setSelectedpartner(data);
-          setDialogOpend(true);
-        }}
-        onRowSelected={(data)=>{
-          setSelectedpartner(data);
-          setsubDialogOpend(true);
-        }}
-        OnEdit={(data) => {
-          setSelectedpartner(data);
-          setUpdateDialogOpend(true);
-        }}
-      />
+      {
+        loading ? <LinearIndeterminate /> : <UserTable
+          Data={data}
+          selectedstatu={selectedStatus}
+          OnSelect={(data) => {
+            setSelectedpartner(data);
+            setDialogOpend(true);
+          }}
+          onRowSelected={(data) => {
+            setSelectedpartner(data);
+            setsubDialogOpend(true);
+          }}
+          OnEdit={(data) => {
+            setSelectedpartner(data);
+            setUpdateDialogOpend(true);
+          }}
+        />
+
+      }
+
     </div>
   );
 }

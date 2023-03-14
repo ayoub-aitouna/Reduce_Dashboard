@@ -7,6 +7,7 @@ import {
   ClientInfo,
   ClientTable,
   Button,
+  LinearIndeterminate
 } from "../index";
 import { BiTask } from "react-icons/bi";
 import { BaseUrl, Coockies_name } from "../../constants";
@@ -35,8 +36,10 @@ function Clients({ selectedStatus }) {
   let [Odata, setOdata] = useState([]);
   let [Refresh, setRefresh] = useState(0);
   let [data, setdata] = useState([]);
+  let [loading, setloading] = useState(false);
 
   const handleRequest = async () => {
+    setloading(true);
     try {
       const req = await fetch(`${BaseUrl}/clients/all`, {
         method: "GET",
@@ -50,6 +53,7 @@ function Clients({ selectedStatus }) {
       });
       if (req.ok) setOdata(await req.json());
     } catch (err) { }
+    setloading(false);
   };
 
   useEffect(() => {
@@ -62,8 +66,8 @@ function Clients({ selectedStatus }) {
     setdata((per) =>
       Search != ""
         ? per.filter((item) =>
-            item.name.toLowerCase().includes(Search.toLowerCase())
-          )
+          item.name.toLowerCase().includes(Search.toLowerCase())
+        )
         : per
     );
     setdata((per) => {
@@ -146,7 +150,7 @@ function Clients({ selectedStatus }) {
           style={"!w-[250px] text-[15px] shadow-lg capitalize"}
         />
       </div>
-      <ClientTable
+      {loading ? <LinearIndeterminate /> : <ClientTable
         Data={data}
         selectedstatu={selectedStatus}
         OnSelect={(data) => {
@@ -156,7 +160,7 @@ function Clients({ selectedStatus }) {
         OnEdit={(data) => {
           handle_popup(data, true);
         }}
-      />
+      />}
     </div>
   );
 }

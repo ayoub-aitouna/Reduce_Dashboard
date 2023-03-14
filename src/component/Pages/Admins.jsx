@@ -13,6 +13,7 @@ import {
 	AdminsTable,
 	Add_new_task as AddNewTask,
 	UpdateAdmin,
+	LinearIndeterminate
 } from "../index";
 
 function Admins() {
@@ -29,8 +30,10 @@ function Admins() {
 	const [cookies, setCookie, removeCookie] = useCookies([Coockies_name]);
 	let [Odata, setOdata] = useState([]);
 	let [Ref, setRef] = useState(0);
+	let [loading, setloading] = useState(false);
 
 	const fetchData = async () => {
+		setloading(true);
 		try {
 			const req = await fetch(`${BaseUrl}/admin`, {
 				method: "GET",
@@ -51,6 +54,7 @@ function Admins() {
 		} catch (err) {
 			console.error(err);
 		}
+		setloading(false);
 	};
 	useEffect(() => {
 		console.log("sending request");
@@ -78,6 +82,8 @@ function Admins() {
 				: per
 		);
 	}, [Search, City, Role, AccountState, Odata]);
+
+	if (loading ) return <LinearIndeterminate />
 	return (
 		<div className="p-5 my-10  ">
 			<AddNewAdmin

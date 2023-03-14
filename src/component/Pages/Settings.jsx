@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-
 import {
     Cities_table,
     Activities_table,
@@ -7,7 +6,8 @@ import {
     NewActivity,
     AddNewCity,
     Profession_table,
-    EditeActivity
+    EditeActivity,
+    LinearIndeterminate
 } from "../index";
 import { BiTask } from "react-icons/bi";
 import { get_villes } from "../../Utils/villes/get_villes";
@@ -34,6 +34,7 @@ function Settings() {
         setActivity(id);
         setediteActivity(true);
     }
+    if(villes.length === 0 || Activity.length == 0)return <LinearIndeterminate />
     return (
         <div className="p-5 my-10 ">
             <NewActivity

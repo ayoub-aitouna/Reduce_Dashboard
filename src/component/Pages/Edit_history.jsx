@@ -2,27 +2,30 @@ import React, { useState, useEffect } from "react";
 import { SearchBar } from "../index";
 import { BaseUrl, Coockies_name } from "../../constants";
 import { useCookies } from "react-cookie";
+import { LinearIndeterminate } from "../index";
 
 function Edit_history() {
 	const [Search, setSearch] = useState("");
 	const [cookies, setCookie, removeCookie] = useCookies([Coockies_name]);
 	let [data, setdata] = useState([]);
 	let [Odata, setOdata] = useState([]);
+	let [loading, setloading] = useState(false);
 
 	const handleRequest = async () => {
-		try {
-			const req = await fetch(`${BaseUrl}/admin/get_modify_history`, {
-				method: "GET",
-				mode: "cors",
-				cache: "no-cache",
-				headers: {
-					"Content-Type": "application/json",
-					Authorization: `Bearer ${cookies.accesToken}`,
-				},
-				referrerPolicy: "no-referrer",
-			});
-			if (req.ok) setOdata(await req.json());
-		} catch (err) { }
+		setloading(true);
+		const req = await fetch(`${BaseUrl}/admin/get_modify_history`, {
+			method: "GET",
+			mode: "cors",
+			cache: "no-cache",
+			headers: {
+				"Content-Type": "application/json",
+				Authorization: `Bearer ${cookies.accesToken}`,
+			},
+			referrerPolicy: "no-referrer",
+		});
+		if (req.ok)
+			setOdata(await req.json());
+		setloading(false);
 	};
 
 	useEffect(() => {
@@ -57,7 +60,7 @@ function Edit_history() {
 			<div className="flex ld:flex-row flex-col w-full mt-10 lg:gap-5 gap-0 justify-center items-center">
 				<SearchBar styles={"max-h-[15px] !w-full"} setSearch={setSearch} />
 			</div>
-			<EditeTable Data={data} />
+			{loading ? <LinearIndeterminate /> : <EditeTable Data={data} />}
 		</div>
 	);
 }

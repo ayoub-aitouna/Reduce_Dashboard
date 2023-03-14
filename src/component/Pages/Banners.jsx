@@ -4,43 +4,30 @@ import {
   Button,
   SearchBar,
   BannerTable,
+  LinearIndeterminate,
   Banner_Dialog
 } from "../index";
 import { BaseUrl, Coockies_name } from "../../constants";
-import { get_Activity } from "../../Utils/Activities/Activities";
 import { useCookies } from "react-cookie";
-import { get_villes } from "../../Utils/villes/get_villes";
 import { BiTask } from "react-icons/bi";
-import dayjs from "dayjs";
 
 function Banners() {
-  const [isDialogOpend, setDialogOpend] = useState(true);
-  const [isUpdateDialogOpend, setUpdateDialogOpend] = useState(false);
-  const [City, setCity] = useState("");
-  const [Activities, setActivities] = useState([]);
-  let [villes, setvilles] = useState([{ value: 0, name: "" }]);
   const emty_banner = {
     Baniere_ordre: 0, Logo: "",
     Couverture: "", Offer: 0, Adresse: "", Tel: "", statut: ""
   };
   const [Search, setSearch] = useState("");
   const [cookies, setCookie, removeCookie] = useCookies([Coockies_name]);
-  const [SlectedBanner, setSlectedBanner] = useState({
-    Baniere_ordre: 0,
-    Logo: "",
-    Couverture: "",
-    Offer: "",
-    Adresse: "",
-    Tel: "",
-    statut: "activer"
-  });
+  const [SlectedBanner, setSlectedBanner] = useState(emty_banner);
   let [Odata, setOdata] = useState([]);
   let [Refresh, setRefresh] = useState(0);
   let [data, setdata] = useState([]);
   const [OpenPopUp, setOpenPopUp] = useState(false);
   const [PopUpType, setPopUpType] = useState(false);
+  let [loading, setloading] = useState(false);
 
   const handleRequest = async () => {
+    setloading(true);
     try {
       const req = await fetch(`${BaseUrl}/banners`, {
         method: "GET",
@@ -56,6 +43,7 @@ function Banners() {
         setOdata(await req.json());
 
     } catch (err) { }
+    setloading(false);
   };
 
   const handle_popup = (data, type) => {
@@ -84,6 +72,7 @@ function Banners() {
     if (Search == "")
       setdata(Odata);
   }, [Search, Odata]);
+
 
   return (
     <div className="p-5 my-10 ">
@@ -115,12 +104,16 @@ function Banners() {
           style={"!w-[250px] text-[15px] shadow-lg capitalize"}
         />
       </div>
-      <BannerTable
-        Data={data}
-        OnEdit={(data) => {
-          handle_popup(data, data);
-        }}
-      />
+      {loading
+        ?
+        <LinearIndeterminate />
+        :
+        <BannerTable
+          Data={data}
+          OnEdit={(data) => {
+            handle_popup(data, data);
+          }}
+        />}
     </div>
   );
 }
