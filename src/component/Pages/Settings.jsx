@@ -24,6 +24,7 @@ function Settings() {
     const [Activity, setActivity] = useState(0);
     const [activities, setactivities] = useState([]);
 
+ 
     useEffect(() => {
         get_profesion(setprofession);
         get_villes(setvilles);
@@ -34,7 +35,8 @@ function Settings() {
         setActivity(id);
         setediteActivity(true);
     }
-    if(villes.length === 0 || Activity.length == 0)return <LinearIndeterminate />
+    if((villes  !== undefined  && villes.length === 0) || ( Activity !== undefined && Activity.length == 0))
+        return <LinearIndeterminate />
     return (
         <div className="p-5 my-10 ">
             <NewActivity
