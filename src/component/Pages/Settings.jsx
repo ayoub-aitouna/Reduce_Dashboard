@@ -24,111 +24,129 @@ function Settings() {
     const [Activity, setActivity] = useState(0);
     const [activities, setactivities] = useState([]);
 
- 
-    useEffect(() => {
-        get_profesion(setprofession);
-        get_villes(setvilles);
-        get_Activity(setactivities)
-    }, [Refresh])
+	function handle_city_change(city)
+	{
+		const {status , id} = city;
+		const data = {status : !status, id : id};
 
-    const handleOpenEditeActivity = (id) => {
-        setActivity(id);
-        setediteActivity(true);
-    }
-    if((villes  !== undefined  && villes.length === 0) || ( Activity !== undefined && Activity.length == 0))
-        return <LinearIndeterminate />
-    return (
-        <div className="p-5 my-10 ">
-            <NewActivity
-                open={newactivity}
-                setRefresh={setRefresh}
-                OnClick={() => {
-                    setnewactivity(false);
-                }}
-            />
-            <AddNewCity
-                open={newcity}
-                setRefresh={setRefresh}
-                OnClick={() => {
-                    setnewcity(false);
-                }}
-            />
-            <EditeActivity
-                open={editeActivity}
-                setRefresh={setRefresh}
-                activity={Activity}
-                OnClick={() => {
-                    setediteActivity(false);
-                }}
-            />
-            <div className="flex flex-col ">
-                <div className="p-5 my-10 flex flex-row justify-between gap-6">
-                    <div className="flex-1">
-                        <div className="flex flex-col items-start justify-start">
-                            <h6 className="text-[15px] font-bold text-gray-800">
-                                Reducte Villes
-                            </h6>
-                        </div>
-                        <Cities_table
-                            Data={villes}
-                            OnEdit={(data) => {
+		const handleRequest = async () => {
+			setloading(true);
+			const req = await fetch(`${BaseUrl}/Ville/change_status`, {
+				method: "POST",
+				mode: "cors",
+				cache: "no-cache",
+				headers: {
+					"Content-Type": "application/json",
+				},
+				referrerPolicy: "no-referrer",
+			});
+		};
+	}
 
-                            }}
-                        />
-                    </div>
-                    <div className="flex-1">
-                        <div className="flex flex-col items-start justify-start">
-                            <h6 className="text-[15px] font-bold text-gray-800">
-                                Reducte Activities
-                            </h6>
-                        </div>
-                        <Activities_table
-                            Data={activities}
-                            OnEdit={(item) => {
-                                console.log("clicked");
-                                handleOpenEditeActivity(item.id);
-                            }}
-                        />
-                    </div>
-                </div>
-                <div className="flex-1">
-                    <div className="flex flex-col items-start justify-start">
-                        <h6 className="text-[15px] font-bold text-gray-800">
-                            Reducte Villes
-                        </h6>
-                    </div>
-                    <Profession_table
-                        Data={profession}
-                        OnEdit={(data) => {
+	useEffect(() => {
+		get_profesion(setprofession);
+		get_villes(setvilles);
+		get_Activity(setactivities)
+	}, [Refresh])
 
-                        }}
-                    />
-                </div>
-            </div>
+	const handleOpenEditeActivity = (id) => {
+		setActivity(id);
+		setediteActivity(true);
+	}
 
-            <div className="absolute bottom-8 right-8 flex flex-row gap-5 capitalize ">
-                <Button
-                    Icon={() => <BiTask />}
-                    title={"Ajoutez Une Ville"}
-                    OnClick={() => { setnewcity(true); }}
-                    style={"!w-[250px] text-[15px] shadow-lg capitalize"}
-                />
-                <Button
-                    Icon={() => <BiTask />}
-                    title={"Ajoutez Une Activity"}
-                    OnClick={() => setnewactivity(true)}
-                    style={"!w-[250px] text-[15px] shadow-lg capitalize"}
-                />
-                <Button
-                    Icon={() => <BiTask />}
-                    title={"Ajoutez Une Profession"}
-                    OnClick={() => setnewactivity(true)}
-                    style={"!w-[250px] text-[15px] shadow-lg capitalize"}
-                />
-            </div>
+	if((villes  !== undefined  && villes.length === 0) || ( Activity !== undefined && Activity.length == 0))
+		return <LinearIndeterminate />
+			return (
+				<div className="p-5 my-10 ">
+				<NewActivity
+				open={newactivity}
+				setRefresh={setRefresh}
+				OnClick={() => {
+					setnewactivity(false);
+				}}
+				/>
+				<AddNewCity
+				open={newcity}
+				setRefresh={setRefresh}
+				OnClick={() => {
+					setnewcity(false);
+				}}
+				/>
+				<EditeActivity
+				open={editeActivity}
+				setRefresh={setRefresh}
+				activity={Activity}
+				OnClick={() => {
+					setediteActivity(false);
+				}}
+				/>
+				<div className="flex flex-col ">
+				<div className="p-5 my-10 flex flex-row justify-between gap-6">
+				<div className="flex-1">
+				<div className="flex flex-col items-start justify-start">
+				<h6 className="text-[15px] font-bold text-gray-800">
+				Reducte Villes
+				</h6>
+				</div>
+				<Cities_table
+				Data={villes}
+				OnEdit={(data) => {
+					handle_city_change(data)
+				}}
+				/>
+				</div>
+				<div className="flex-1">
+				<div className="flex flex-col items-start justify-start">
+				<h6 className="text-[15px] font-bold text-gray-800">
+				Reducte Activities
+				</h6>
+				</div>
+				<Activities_table
+				Data={activities}
+				OnEdit={(item) => {
+					handleOpenEditeActivity(item.id);
+				}}
+				/>
+				</div>
+				</div>
+				<div className="flex-1">
+				<div className="flex flex-col items-start justify-start">
+				<h6 className="text-[15px] font-bold text-gray-800">
+				Reducte Villes
+				</h6>
+				</div>
+				<Profession_table
+				Data={profession}
+				OnEdit={(data) => {
 
-        </div>
-    );
+				}}
+				/>
+				</div>
+				</div>
+
+				<div className="absolute bottom-8 right-8 flex flex-row gap-5 capitalize ">
+				<Button
+				Icon={() => <BiTask />}
+				title={"Ajoutez Une Ville"}
+				OnClick={() => { setnewcity(true); }}
+				style={"!w-[250px] text-[15px] shadow-lg capitalize"}
+				/>
+				<Button
+				Icon={() => <BiTask />}
+				title={"Ajoutez Une Activity"}
+				OnClick={() => setnewactivity(true)}
+				style={"!w-[250px] text-[15px] shadow-lg capitalize"}
+				/>
+				<Button
+				Icon={() => <BiTask />}
+				title={"Ajoutez Une Profession"}
+				OnClick={() => setnewactivity(true)}
+				style={"!w-[250px] text-[15px] shadow-lg capitalize"}
+				/>
+				</div>
+
+				</div>
+			);
 }
 
 export default Settings;
