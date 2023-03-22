@@ -42,9 +42,10 @@ const UpdateClinets = ({ open, OnClick, partner, setRefresh, is_update }) => {
 
   const handle_update_create = async () => {
     setloading(true);
+    setdata({ ...data, admin: true });
     try {
-      const req = await fetch(`${BaseUrl}/${is_update ? 'clients/update' : 'auth/new_client'}`, {
-        method: "POST",
+      const req = await fetch(`${BaseUrl}/${is_update ? 'clients/' : 'auth/new_client'}`, {
+        method: is_update ? 'PUT' : 'POST',
         mode: "cors",
         cache: "no-cache",
         headers: {
@@ -176,7 +177,7 @@ const Fill_Form = ({ data, setdata }) => {
       <div className="flex flex-wrap -mx-3 mb-6">
 
         {Object.keys(data).map((key) => (
-          (key !== "ville" && key !== "profession" && key !== "abonnement" && key !== "statut" && key !== "birth_date" && key != "sexe") && (
+          (key === 'full_name' || key == 'adresse' || key == 'email' || key == 'tel') && (
             <div className="w-full px-3">
               <label
                 className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
@@ -243,29 +244,55 @@ const Fill_Form = ({ data, setdata }) => {
               styles={"!max-w-full"}
             />
           </div>
-          <div className="flex flex-col w-full justify-center items-start ml-3   ">
-            <h3 className="block font-black mb-2 text-sm  text-gray-900 dark:text-gray-400 mt-4">
-              {" "}
-              Selece Date
-            </h3>
-            <LocalizationProvider dateAdapter={AdapterDayjs}>
-              <DatePicker
-                label="Date of visite"
-                value={data.birth_date || ''}
-                onChange={(newValue) => {
-                  try {
-                    setdata({
-                      ...data,
-                      birth_date: newValue.$d
-                        .toISOString()
-                        .slice(0, 19)
-                        .replace("T", " "),
-                    });
-                  } catch (error) { }
-                }}
-                renderInput={(params) => <TextField {...params} />}
-              />
-            </LocalizationProvider>
+          <div className="flex flex-row justify-center items=center" >
+            <div className="flex flex-col w-full justify-center items-start ml-3   ">
+              <h3 className="block font-black mb-2 text-sm  text-gray-900 dark:text-gray-400 mt-4">
+                {" "}
+                Selece Date
+              </h3>
+              <LocalizationProvider dateAdapter={AdapterDayjs}>
+                <DatePicker
+                  label="birth date"
+                  value={data.birth_date || ''}
+                  onChange={(newValue) => {
+                    try {
+                      setdata({
+                        ...data,
+                        birth_date: newValue.$d
+                          .toISOString()
+                          .slice(0, 19)
+                          .replace("T", " "),
+                      });
+                    } catch (error) { }
+                  }}
+                  renderInput={(params) => <TextField {...params} />}
+                />
+              </LocalizationProvider>
+            </div>
+            <div className="flex flex-col w-full justify-center items-start ml-3   ">
+              <h3 className="block font-black mb-2 text-sm  text-gray-900 dark:text-gray-400 mt-4">
+                {" "}
+                Selece Date
+              </h3>
+              <LocalizationProvider dateAdapter={AdapterDayjs}>
+                <DatePicker
+                  label="birth date"
+                  value={data.birth_date || ''}
+                  onChange={(newValue) => {
+                    try {
+                      setdata({
+                        ...data,
+                        birth_date: newValue.$d
+                          .toISOString()
+                          .slice(0, 19)
+                          .replace("T", " "),
+                      });
+                    } catch (error) { }
+                  }}
+                  renderInput={(params) => <TextField {...params} />}
+                />
+              </LocalizationProvider>
+            </div>
           </div>
         </div>
       </div>

@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/alt-text */
 import React, { useState, useEffect } from "react";
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
@@ -68,9 +69,13 @@ const PartnerInfoRender = ({ item }) => {
               Render={() => {
                 return (
                   <img
-                    className="w-[50px] h-[50px] rounded-full"
-                    src={`https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Default_pfp.svg/800px-Default_pfp.svg.png`}
-                    alt="entreprise Logo"
+                    className="w-[50px] h-[50px] rounded-full object-cover bg-gray-400 overflow-hidden"
+                    src={
+                      item.avatar_Url === '' || item.avatar_Url === undefined ?
+                        "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Default_pfp.svg/800px-Default_pfp.svg.png" :
+                        item.avatar_Url
+                    }
+                    onerror="if (this.src != 'error.jpg') this.src = 'https://www.nicepng.com/png/detail/136-1366211_group-of-10-guys-login-user-icon-png.png';"
                     srcSet=""
                   />
                 );
@@ -134,12 +139,10 @@ const PartnerInfoRender = ({ item }) => {
           </tbody>
         </table>
       </div>
-      {/* <ul className="w-full h-full  flex flex-col justify-center items-center mt-1 gap-0 ">
-
-      </ul> */}
     </>
   );
 };
+
 function PartnerInfo({ open, OnClick, data, setRefresh }) {
   const [cookies, setCookie, removeCookie] = useCookies([Coockies_name]);
   const [loading, setloading] = useState(false);

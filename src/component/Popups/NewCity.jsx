@@ -7,12 +7,6 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import { Button as MyButton, Filter_Selector, LoadingIcon } from "../index";
 import { BaseUrl, Coockies_name } from "../../constants";
-import { get_villes } from "../../Utils/villes/get_villes";
-import dayjs, { Dayjs } from "dayjs";
-import TextField from "@mui/material/TextField";
-import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import Cookies from "js-cookie";
 import { useCookies } from "react-cookie";
 
@@ -38,6 +32,42 @@ const Fill_Form = ({ data, setdata }) => {
             placeholder="Jane Doe"
           />
         </div>
+        <div className="w-full px-3">
+          <label
+            className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+            htmlFor="grid-name"
+          >
+            City longitude
+          </label>
+          <input
+            className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+            id="grid-name"
+            type="text"
+            value={data.name}
+            onChange={(e) => {
+              setdata({ ...data, longitude: e.target.value });
+            }}
+            placeholder="0.0000"
+          />
+        </div>
+        <div className="w-full px-3">
+          <label
+            className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+            htmlFor="grid-name"
+          >
+            City latitude
+          </label>
+          <input
+            className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+            id="grid-name"
+            type="text"
+            value={data.name}
+            onChange={(e) => {
+              setdata({ ...data, lat: e.target.value });
+            }}
+            placeholder="0.0000"
+          />
+        </div>
       </div>
     </form>
   );
@@ -46,6 +76,8 @@ const Fill_Form = ({ data, setdata }) => {
 function AddNewCity({ open, OnClick, setRef }) {
   let [data, setdata] = useState({
     name: "",
+    longitude: 0.000,
+    lat: 0.000
   });
   const [cookies, setCookie, removeCookie] = useCookies([Coockies_name]);
   const [loading, setloading] = useState(false);

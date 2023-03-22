@@ -13,7 +13,6 @@ import TextField from "@mui/material/TextField";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
-import Cookies from "js-cookie";
 import { useCookies } from "react-cookie";
 
 const Fill_Form = ({ data, setdata }) => {

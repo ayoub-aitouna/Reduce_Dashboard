@@ -50,72 +50,67 @@ const PartnerInfoRender = ({ item }) => {
             </tr>
           </thead>
           <tbody>
-            <DataRow title={"nom complet"} data={item.email} />
+            <DataRow title={"nom complet"} data={item.full_name} />
             <DataRow
               title={"date naissance"}
-              data={`${new Date(item.created_date).getDate()}/${new Date(
-                item.created_date
+              data={`${new Date(item.created_dat).getDate()}/${new Date(
+                item.birth_date
               ).getMonth()}/${new Date(
-                item.created_date
+                item.birth_date
               ).getFullYear()}  ${String(
-                new Date(item.created_date).getHours()
+                new Date(item.birth_date).getHours()
               ).padStart(2, "0")}:${String(
-                new Date(item.created_date).getMinutes()
+                new Date(item.birth_date).getMinutes()
               ).padStart(2, "0")}`}
             />
 
-            <DataRow title={"sexe"} data={item.numero_telephone} />
+            <DataRow title={"sexe"} data={item.sexe} />
             <DataRow
               title={"ville"}
-              data={item.numero_telephone_fix}
+              data={item.ville_name}
             />
             <DataRow title={"adresse"} data={item.adrress} />
-            <DataRow title={"profession"} data={item.identificateur_entreprise} />
+            <DataRow title={"profession"} data={item.profession} />
             <DataRow
               title={"tel"}
-              data={item.representant_entreprise}
+              data={item.tel}
             />
-            <DataRow title={"Email"} data={item.role_dans_entriprise} />
-            <DataRow title={"Abonnement"} data={item.ville_name} />
-            <DataRow title={"Device ID"} data={item.activity_name} />
+            <DataRow title={"Email"} data={item.email} />
+            <DataRow title={"Abonnement"} data={item.abonnement} />
+            <DataRow title={"Device ID"} data={item.device_id} />
 
             <DataRow title={"Statut"} data={item.offer} />
-            <DataRow title={"Date inscription"} data={item.note} />
+            <DataRow title={"Date inscription"} data= {`${new Date(item.date_inscription).getDate()}/${new Date(
+                item.date_inscription
+              ).getMonth()}/${new Date(
+                item.date_inscription
+              ).getFullYear()}  ${String(
+                new Date(item.date_inscription).getHours()
+              ).padStart(2, "0")}:${String(
+                new Date(item.date_inscription).getMinutes()
+              ).padStart(2, "0")}`}/>
 
-            <DataRow title={"Date debut abonnement"} data={item.activity_name} />
-            <DataRow title={"Date Fin abonnement"} data={item.activity_name} />
+            <DataRow title={"Date debut abonnement"} data=  {`${new Date(item.date_debut_abonnement).getDate()}/${new Date(
+                item.date_debut_abonnement
+              ).getMonth()}/${new Date(
+                item.date_debut_abonnement
+              ).getFullYear()}  ${String(
+                new Date(item.date_debut_abonnement).getHours()
+              ).padStart(2, "0")}:${String(
+                new Date(item.date_debut_abonnement).getMinutes()
+              ).padStart(2, "0")}`}/>
+            <DataRow title={"Date Fin abonnement"} data={`${new Date(item.date_fin_abonnement).getDate()}/${new Date(
+                item.date_fin_abonnement
+              ).getMonth()}/${new Date(
+                item.date_fin_abonnement
+              ).getFullYear()}  ${String(
+                new Date(item.date_fin_abonnement).getHours()
+              ).padStart(2, "0")}:${String(
+                new Date(item.date_fin_abonnement).getMinutes()
+              ).padStart(2, "0")}`}/>
 
-            <DataRow
-              title={"Statut"}
-              Render={() => {
-                return (
-                  <div className="flex flex-row justify-center items-center gap-5 ">
-                    <p>{item._status}</p>
-                    {item._status == "Pending" ? (
-                      <IconHalder
-                        Icon={() => <MdPendingActions />}
-                        style="text-[#353535]"
-                      />
-                    ) : item._status == "Approved" ? (
-                      <div>
-                        <IconHalder
-                          Icon={() => <BsCheckCircleFill />}
-                          style="text-[#0012ff]"
-                        />
-                      </div>
-                    ) : (
-                      <div>
-                        <IconHalder
-                          Icon={() => <IoIosCloseCircle />}
-                          style="text-[#ff0000]"
-                        />
-                      </div>
-                    )}
-                  </div>
-                );
-              }}
-            />
-          </tbody>
+            
+			</tbody>
         </table>
       </div>
     </>

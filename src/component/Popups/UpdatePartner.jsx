@@ -1,9 +1,10 @@
+/* eslint-disable react/style-prop-object */
+/* eslint-disable react/jsx-pascal-case */
 import React, { useState, useEffect } from "react";
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
-import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import { Button as MyButton, Filter_Selector, LoadingIcon } from "../index";
 import { BaseUrl, Coockies_name } from "../../constants";
@@ -15,8 +16,7 @@ import FormData from 'form-data';
 const UpdatePartner = ({ open, OnClick, partner, setRefresh }) => {
   const [cookies, setCookie, removeCookie] = useCookies([Coockies_name]);
   const [data, setdata] = useState({});
-  const [loading, setloading] = useState(false);
-  const hadlerClose = () => {
+  const [loading, setloading] = useState(false); const hadlerClose = () => {
     OnClick();
   };
 
@@ -53,21 +53,25 @@ const UpdatePartner = ({ open, OnClick, partner, setRefresh }) => {
             <Button
               onClick={async (e) => {
                 setloading(true);
+                const formData = new FormData();
+                formData.append("images", data.cover);
+                formData.append("images", data.logo);
+                formData.append("data", JSON.stringify(data));
                 try {
-                  const req = await fetch(`${BaseUrl}/Admin/update_partner`, {
+                  await fetch(`${BaseUrl}/admin/update_partner`, {
                     method: "POST",
                     mode: "cors",
                     cache: "no-cache",
                     headers: {
-                      "Content-Type": "application/json",
                       Authorization: `Bearer ${cookies.accesToken}`,
                     },
                     referrerPolicy: "no-referrer",
-                    body: JSON.stringify(data),
+                    body: formData,
                   });
                   setRefresh((val) => val + 1);
                   setloading(false);
                 } catch (err) {
+                  console.log(err);
                   setloading(false);
                 }
               }}
@@ -89,39 +93,6 @@ const UpdatePartner = ({ open, OnClick, partner, setRefresh }) => {
 const Fill_Form = ({ data, setdata }) => {
   let [villes, setvilles] = useState([]);
   const [Activities, setActivities] = useState([]);
-  const [file, setFile] = useState(null);
-
-  const Upload = (endpoint) => {
-    const formData = new FormData();
-    formData.append('image', file);
-    fetch(`${BaseUrl}/partner/${endpoint}`, {
-      method: 'POST',
-      body: formData
-    })
-      .then(response => {
-        if (!response.ok) {
-          throw new Error('Error uploading image');
-        }
-        return response.json();
-      })
-      .then(data => {
-        console.log('Image uploaded successfully:', data);
-      })
-      .catch(error => {
-        console.error(error);
-      });
-
-  }
-
-  const handleLOGOFileChange = (event) => {
-    setFile(event.target.files[0]);
-    Upload('upload_cover');
-  }
-
-  const handleCOVERFileChange = (event) => {
-    setFile(event.target.files[0]);
-    Upload('upload_logo');
-  }
 
   useEffect(() => {
     get_villes(setvilles);
@@ -133,11 +104,13 @@ const Fill_Form = ({ data, setdata }) => {
       <div className="w-full flex flex-row justify-around p-5">
         <Button variant="contained" component="label">
           Upload LOGO
-          <input hidden accept="image/*" multiple type="file" onChange={handleLOGOFileChange} />
+          <input hidden accept="image/*" multiple type="file" onChange={(event) => setdata({ ...data, logo: event.target.files[0], logo_selected: true })
+          } />
         </Button>
         <Button variant="contained" component="label">
           Upload COVER
-          <input hidden accept="image/*" multiple type="file" onChange={handleCOVERFileChange} />
+          <input hidden accept="image/*" multiple type="file" onChange={(event) => setdata({ ...data, cover: event.target.files[0], cover_selected: true })
+          } />
         </Button>
       </div>
       <div className="flex flex-wrap -mx-3 mb-6">

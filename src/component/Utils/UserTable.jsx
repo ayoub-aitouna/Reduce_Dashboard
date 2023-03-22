@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/alt-text */
 import React from "react";
 import { IoIosCloseCircle } from "react-icons/io";
 import { AiFillEdit } from "react-icons/ai";
@@ -6,7 +7,7 @@ import { MdPendingActions } from "react-icons/md";
 import { BsFillArrowRightSquareFill } from "react-icons/bs";
 import { IconHalder } from "../index";
 
-const DataRow = ({ item, index, onClick = () => { }, OnEdit = () => { }, onRowSelected = () => { } }) => {
+const DataRow = ({ item, index, onClick = () => { }, OnEdit = () => { }, onRowSelected = () => { }, action }) => {
 	return (
 		<tr
 			onClick={() => onRowSelected()}
@@ -20,7 +21,9 @@ const DataRow = ({ item, index, onClick = () => { }, OnEdit = () => { }, onRowSe
 				<img
 					className="w-[50px] h-[50px] rounded-full object-cover bg-gray-400 overflow-hidden"
 					src={
-						"https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Default_pfp.svg/800px-Default_pfp.svg.png"
+						item.avatar_Url === '' || item.avatar_Url === undefined ?
+							"https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Default_pfp.svg/800px-Default_pfp.svg.png" :
+							item.avatar_Url
 					}
 					onerror="if (this.src != 'error.jpg') this.src = 'https://www.nicepng.com/png/detail/136-1366211_group-of-10-guys-login-user-icon-png.png';"
 					srcSet=""
@@ -66,28 +69,31 @@ const DataRow = ({ item, index, onClick = () => { }, OnEdit = () => { }, onRowSe
 					</div>
 				)}
 			</td>
-			<td
-				className="px-6 py-4 whitespace-nowrap text-sm font-medium "
-				onClick={(event) => { event.stopPropagation(); onClick() }}
-			>
-				<IconHalder
-					Icon={() => <BsFillArrowRightSquareFill />}
-					style="text-[20px]"
-				/>
-			</td>
-			<td
-				className="px-6 py-4 whitespace-nowrap text-sm font-medium "
-				onClick={(event) => { event.stopPropagation(); OnEdit() }}
-			>
-				<IconHalder Icon={() => <AiFillEdit />} style="text-[20px]" />
-			</td>
+			{action ? <>
+				<td
+					className="px-6 py-4 whitespace-nowrap text-sm font-medium "
+					onClick={(event) => { event.stopPropagation(); onClick() }}
+				>
+					<IconHalder
+						Icon={() => <BsFillArrowRightSquareFill />}
+						style="text-[20px]"
+					/>
+				</td>
+				<td
+					className="px-6 py-4 whitespace-nowrap text-sm font-medium "
+					onClick={(event) => { event.stopPropagation(); OnEdit() }}
+				>
+					<IconHalder Icon={() => <AiFillEdit />} style="text-[20px]" />
+				</td>
+			</> : <></>}
+
 		</tr>
 	);
 };
 
-function UserTable({ Data, OnSelect, OnEdit, onRowSelected, my = "10" }) {
+function UserTable({ Data, OnSelect, OnEdit, onRowSelected, my = "10", action = true }) {
 	return (
-		<div className={`flex flex-col  border-[1px] my-${my} border-gray-200 rounded-lg `}>
+		<div className={`flex flex-col  border-[1px] my-${my} border-gray-200 rounded-lg w-full`}>
 			<div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
 				<div className="py-2 inline-block min-w-full sm:px-6 lg:px-8">
 					<div className="overflow-hidden">
@@ -148,18 +154,21 @@ function UserTable({ Data, OnSelect, OnEdit, onRowSelected, my = "10" }) {
 									>
 										Statut
 									</th>
-									<th
-										scope="col"
-										className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
-									>
-										Action
-									</th>
-									<th
-										scope="col"
-										className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
-									>
-										Modifier
-									</th>
+									{action ? <>
+										<th
+											scope="col"
+											className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
+										>
+											Action
+										</th>
+										<th
+											scope="col"
+											className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
+										>
+											Modifier
+										</th>
+									</> : <></>}
+
 								</tr>
 							</thead>
 							<tbody>
@@ -167,6 +176,7 @@ function UserTable({ Data, OnSelect, OnEdit, onRowSelected, my = "10" }) {
 									<DataRow
 										key={item.id}
 										item={item}
+										action={action}
 										index={index}
 										onRowSelected={() => onRowSelected(item)}
 										OnEdit={() => OnEdit(item)}

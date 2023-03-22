@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-pascal-case */
 import React, { useState, useEffect } from "react";
 
 import {
@@ -26,7 +27,7 @@ function Partner() {
   const [activity_entrprise, setactivity_entrprise] = useState("");
   const [selectedStatus, setselectedStatus] = useState("");
   const [Search, setSearch] = useState("");
-  const [cookies, setCookie, removeCookie] = useCookies([Coockies_name]);
+  const [cookies] = useCookies([Coockies_name]);
   const [SelectedPartner, setSelectedpartner] = useState({});
   let [Odata, setOdata] = useState([]);
   let [Refresh, setRefresh] = useState(0);
@@ -47,6 +48,7 @@ function Partner() {
     });
     if (req.ok) {
       const data = await req.json();
+      console.log(data);
       setOdata(data);
     }
     setloading(false);
@@ -81,6 +83,15 @@ function Partner() {
         : per
     );
   }, [Search, selectedStatus, City, Odata, activity_entrprise]);
+
+  useEffect(() => {
+    setdata((per) =>
+      activity_entrprise !== 0
+        ? per.filter((item) => item.activity_entrprise === activity_entrprise)
+        : per
+    );
+    setdata(Odata);
+  }, [activity_entrprise]);
 
   return (
     <div className="p-5 my-10">
@@ -148,6 +159,7 @@ function Partner() {
       {
         loading ? <LinearIndeterminate /> : <UserTable
           Data={data}
+          action={true}
           selectedstatu={selectedStatus}
           OnSelect={(data) => {
             setSelectedpartner(data);

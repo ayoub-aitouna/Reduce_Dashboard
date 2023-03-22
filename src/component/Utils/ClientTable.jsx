@@ -3,7 +3,7 @@ import { AiFillEdit } from "react-icons/ai";
 import { BsFillArrowRightSquareFill } from "react-icons/bs";
 import { IconHalder } from "../index";
 
-const DataRow = ({ item, index, onClick = () => { }, OnEdit = () => { } }) => {
+const DataRow = ({ item, index, onClick = () => { }, OnEdit = () => { }, action }) => {
 	return (
 		<tr
 			className={` text-gray-900 hover:text-[#fff] hover:bg-[#2E5CFF] cursor-pointer ${index % 2 == 0 ? "bg-gray-100" : "bg-white"
@@ -40,29 +40,32 @@ const DataRow = ({ item, index, onClick = () => { }, OnEdit = () => { } }) => {
 			<td className="px-6 py-4 whitespace-nowrap text-sm font-medium ">
 				{item.activity_name}
 			</td>
-			<td
-				className="px-6 py-4 whitespace-nowrap text-sm font-medium "
-				onClick={() => onClick()}
-			>
-				<IconHalder
-					Icon={() => <BsFillArrowRightSquareFill />}
-					style="text-[20px]"
-				/>
-			</td>
+			{action ? <>
+				<td
+					className="px-6 py-4 whitespace-nowrap text-sm font-medium "
+					onClick={() => onClick()}
+				>
+					<IconHalder
+						Icon={() => <BsFillArrowRightSquareFill />}
+						style="text-[20px]"
+					/>
+				</td>
 
-			<td
-				className="px-6 py-4 whitespace-nowrap text-sm font-medium "
-				onClick={() => OnEdit()}
-			>
-				<IconHalder Icon={() => <AiFillEdit />} style="text-[20px]" />
-			</td>
+				<td
+					className="px-6 py-4 whitespace-nowrap text-sm font-medium "
+					onClick={() => OnEdit()}
+				>
+					<IconHalder Icon={() => <AiFillEdit />} style="text-[20px]" />
+				</td>
+			</> : <></>}
+
 		</tr>
 	);
 };
 
-function UserTable({ Data, OnSelect, OnEdit }) {
+function ClientTable({ Data, OnSelect, OnEdit, my = 10, action = true }) {
 	return (
-		<div className="flex flex-col  border-[1px] my-10 border-gray-200 rounded-lg ">
+		<div className={`flex flex-col  border-[1px] my-${my} border-gray-200 rounded-lg`}>
 			<div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
 				<div className="py-2 inline-block min-w-full sm:px-6 lg:px-8">
 					<div className="overflow-hidden">
@@ -128,18 +131,21 @@ function UserTable({ Data, OnSelect, OnEdit }) {
 									>
 										Statut
 									</th>
-									<th
-										scope="col"
-										className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
-									>
-										Action
-									</th>
-									<th
-										scope="col"
-										className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
-									>
-										Modifier
-									</th>
+									{action ? <>
+										<th
+											scope="col"
+											className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
+										>
+											Action
+										</th>
+										<th
+											scope="col"
+											className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
+										>
+											Modifier
+										</th>
+									</> : <></>}
+
 								</tr>
 							</thead>
 							<tbody>
@@ -148,6 +154,7 @@ function UserTable({ Data, OnSelect, OnEdit }) {
 										key={item.id}
 										item={item}
 										index={index}
+										action={action}
 										OnEdit={() => OnEdit(item)}
 										onClick={() => OnSelect(item)}
 									/>
@@ -161,4 +168,4 @@ function UserTable({ Data, OnSelect, OnEdit }) {
 	);
 }
 
-export default UserTable;
+export default ClientTable;
