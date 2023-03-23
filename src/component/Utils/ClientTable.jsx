@@ -26,19 +26,19 @@ const DataRow = ({ item, index, onClick = () => { }, OnEdit = () => { }, action 
 				{item.ville_name}
 			</td>
 			<td className="px-6 py-4 whitespace-nowrap text-sm font-medium ">
-				{item.activity_name}
+				{item.profession}
 			</td>
 			<td className="px-6 py-4 whitespace-nowrap text-sm font-medium ">
-				{item.activity_name}
+				{item.tel}
 			</td>
 			<td className="px-6 py-4 whitespace-nowrap text-sm font-medium ">
-				{item.activity_name}
+				{item.email}
 			</td>
 			<td className="px-6 py-4 whitespace-nowrap text-sm font-medium ">
-				{item.activity_name}
+				text
 			</td>
 			<td className="px-6 py-4 whitespace-nowrap text-sm font-medium ">
-				{item.activity_name}
+				{item.status}
 			</td>
 			{action ? <>
 				<td

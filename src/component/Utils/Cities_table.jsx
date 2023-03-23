@@ -25,13 +25,13 @@ const DataRow = ({ item, index, onClick = () => { }, OnEdit = () => { }, onRowSe
 			<td
 				className="px-6 py-4 whitespace-nowrap text-sm font-medium flex-1"
 			>
-				<FormControlLabel control={<Switch  />} checked={checked} onChange={handleChange}  label={checked ? "Active" : "Desabled"} />
+				<FormControlLabel control={<Switch />} checked={checked} onChange={handleChange} label={checked ? "Active" : "Desabled"} />
 			</td>
 		</tr>
 	);
 };
 
-function Cities_table({ Data, OnSelect, OnEdit, onRowSelected, my = "10" }) {
+function Cities_table({ Data, OnSelect = () => { }, OnEdit = () => { }, onRowSelected = () => { }, my = "10" }) {
 	return (
 		<div className={`flex flex-col  border-[1px] my-${my} border-gray-200 rounded-lg `}>
 			<div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
