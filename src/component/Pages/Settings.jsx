@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from "react";
 import {
     Cities_table,
@@ -13,7 +14,7 @@ import { BiTask } from "react-icons/bi";
 import { get_villes } from "../../Utils/villes/get_villes";
 import { get_Activity } from "../../Utils/Activities/Activities";
 import { get_profesion } from "../../Utils/profesion/Profesion";
-
+import { BaseUrl } from "../../constants"
 function Settings() {
     const [villes, setvilles] = useState([]);
     const [profession, setprofession] = useState([]);
@@ -24,7 +25,21 @@ function Settings() {
     const [Activity, setActivity] = useState(0);
     const [activities, setactivities] = useState([]);
 
- 
+    async function handle_city_change(city) {
+        const { status, id } = city;
+        await fetch(`${BaseUrl}/Ville/change_status`, {
+            method: "POST",
+            mode: "cors",
+            cache: "no-cache",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            referrerPolicy: "no-referrer",
+            body: { status: !status, id: id }
+        });
+
+    }
+
     useEffect(() => {
         get_profesion(setprofession);
         get_villes(setvilles);
@@ -35,7 +50,8 @@ function Settings() {
         setActivity(id);
         setediteActivity(true);
     }
-    if((villes  !== undefined  && villes.length === 0) || ( Activity !== undefined && Activity.length == 0))
+
+    if ((villes !== undefined && villes.length === 0) || (Activity !== undefined && Activity.length == 0))
         return <LinearIndeterminate />
     return (
         <div className="p-5 my-10 ">
@@ -72,7 +88,7 @@ function Settings() {
                         <Cities_table
                             Data={villes}
                             OnEdit={(data) => {
-
+                                handle_city_change(data)
                             }}
                         />
                     </div>
@@ -85,7 +101,6 @@ function Settings() {
                         <Activities_table
                             Data={activities}
                             OnEdit={(item) => {
-                                console.log("clicked");
                                 handleOpenEditeActivity(item.id);
                             }}
                         />
