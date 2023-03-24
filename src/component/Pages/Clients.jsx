@@ -11,7 +11,6 @@ import {
 } from "../index";
 import { BiTask } from "react-icons/bi";
 import { BaseUrl, Coockies_name } from "../../constants";
-import { get_Activity } from "../../Utils/Activities/Activities";
 import { useCookies } from "react-cookie";
 import { get_villes } from "../../Utils/villes/get_villes";
 import dayjs, { Dayjs } from "dayjs";
@@ -19,10 +18,10 @@ import dayjs, { Dayjs } from "dayjs";
 function Clients({ selectedStatus }) {
   const [isDialogOpend, setDialogOpend] = useState(true);
   const [City, setCity] = useState("");
-  const [Activities, setActivities] = useState([]);
+  const [subs, setsubs] = useState("");
+  const [status, setstatus] = useState("");
   let [villes, setvilles] = useState([{ value: 0, name: "" }]);
 
-  const [activity_entrprise, setactivity_entrprise] = useState("");
   const [Search, setSearch] = useState("");
   const [cookies, setCookie, removeCookie] = useCookies([Coockies_name]);
   const emty_client = {
@@ -58,23 +57,31 @@ function Clients({ selectedStatus }) {
 
   useEffect(() => {
     handleRequest();
-    get_Activity(setActivities);
     get_villes(setvilles);
   }, [Refresh]);
 
   useEffect(() => {
+    setdata(Odata);
     setdata((per) =>
       Search != ""
         ? per.filter((item) =>
-          item.name.toLowerCase().includes(Search.toLowerCase())
+          item.full_name.toLowerCase().includes(Search.toLowerCase())
         )
         : per
     );
     setdata((per) => {
+      return subs != 0 ? per.filter((item) => item.abonnement == subs) : per;
+    });
+    
+    setdata((per) => {
       return City != 0 ? per.filter((item) => item.ville == City) : per;
     });
-    setdata(Odata);
-  }, [Search, City, Odata]);
+
+    setdata((per) => {
+      return status != 0 ? per.filter((item) => item.status == status) : per;
+    });
+
+  }, [Search, City, Odata, status, subs]);
 
   const handle_popup = (data, type) => {
     setSelectedClient(data);
@@ -99,7 +106,7 @@ function Clients({ selectedStatus }) {
         OnClick={() => {
           setOpenPopUp(false);
         }}
-        partner={SelectedClient}
+        client={SelectedClient}
       />
       <div className="flex flex-col items-start justify-start">
         <h1 className="text-[20px] font-black leading-9 text-gray-800">
@@ -115,9 +122,14 @@ function Clients({ selectedStatus }) {
           <Filter_Selector
             title={"filter abonnement"}
             styles={"h-[95px]"}
-            options={Activities}
-            setFilter={(value) => setactivity_entrprise(value)}
-            Filter={activity_entrprise}
+            options={[{ value: 'Tout', name: '' },
+            { value: 'Abonne', name: 'Abonne' },
+            { value: 'Telecharger', name: 'Telecharger' },
+            { value: 'Gratuit', name: 'Gratuit' },
+            { value: 'Routier', name: 'Routier' },
+            { value: 'investisseur', name: 'investisseur' }]}
+            setFilter={(value) => setsubs(value)}
+            Filter={subs}
           />
           <Filter_Selector
             title={"Ville"}
@@ -129,16 +141,11 @@ function Clients({ selectedStatus }) {
           <Filter_Selector
             title={"filter status"}
             styles={"h-[95px]"}
-            options={Activities}
-            setFilter={(value) => setactivity_entrprise(value)}
-            Filter={activity_entrprise}
-          />
-          <Filter_Selector
-            title={"filter date"}
-            styles={"h-[95px]"}
-            options={Activities}
-            setFilter={(value) => setactivity_entrprise(value)}
-            Filter={activity_entrprise}
+            options={[{ value: 'Tout', name: '' },
+            { value: 'Activé', name: 'Activé' },
+            { value: 'Desactivé', name: 'Desactivé' }]}
+            setFilter={(value) => setstatus(value)}
+            Filter={status}
           />
         </div>
       </div>

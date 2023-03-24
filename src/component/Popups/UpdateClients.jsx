@@ -9,15 +9,13 @@ import TextField from "@mui/material/TextField";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
-
 import { Button as MyButton, Filter_Selector, LoadingIcon } from "../index";
 import { BaseUrl, Coockies_name } from "../../constants";
 import { get_villes } from "../../Utils/villes/get_villes";
 import { useCookies } from "react-cookie";
-import { get_Activity } from "../../Utils/Activities/Activities";
 import { get_profesion } from "../../Utils/profesion/Profesion";
 
-const UpdateClinets = ({ open, OnClick, partner, setRefresh, is_update }) => {
+const UpdateClinets = ({ open, OnClick, client, setRefresh, is_update }) => {
   const [cookies, setCookie, removeCookie] = useCookies([Coockies_name]);
   const [loading, setloading] = useState(false);
 
@@ -36,9 +34,12 @@ const UpdateClinets = ({ open, OnClick, partner, setRefresh, is_update }) => {
   }, [loading]);
 
   useEffect(() => {
-    if (partner != null)
-      setdata(partner);
-  }, [partner]);
+    if (client != null) {
+      setdata(client);
+      console.log(client);
+    }
+
+  }, [client]);
 
   const handle_update_create = async () => {
     setloading(true);
@@ -66,7 +67,7 @@ const UpdateClinets = ({ open, OnClick, partner, setRefresh, is_update }) => {
     setloading(true);
     try {
       const req = await fetch(`${BaseUrl}/clients/change_status`, {
-        method: "POST",
+        method: "PUT",
         mode: "cors",
         cache: "no-cache",
         headers: {
@@ -74,7 +75,7 @@ const UpdateClinets = ({ open, OnClick, partner, setRefresh, is_update }) => {
           Authorization: `Bearer ${cookies.accesToken}`,
         },
         referrerPolicy: "no-referrer",
-        body: { statut: data.status === "Activé" ? "Desactivé" : data.status },
+        body: JSON.stringify({ id: data.id, statut: data.statut === "Activé" ? "Desactivé" : "Activé" }),
       });
       setRefresh((val) => val + 1);
       setloading(false);
@@ -86,7 +87,7 @@ const UpdateClinets = ({ open, OnClick, partner, setRefresh, is_update }) => {
   const reinit_device_id = async () => {
     setloading(true);
     try {
-      const req = await fetch(`${BaseUrl}/clients/setDeviceId?id=${data.id}`, {
+      const req = await fetch(`${BaseUrl}/clients/setDeviceId`, {
         method: "PUT",
         mode: "cors",
         cache: "no-cache",
@@ -95,7 +96,7 @@ const UpdateClinets = ({ open, OnClick, partner, setRefresh, is_update }) => {
           Authorization: `Bearer ${cookies.accesToken}`,
         },
         referrerPolicy: "no-referrer",
-        body: JSON.stringify(data),
+        body: JSON.stringify({ id: data.id }),
       });
       setRefresh((val) => val + 1);
       setloading(false);
@@ -252,13 +253,13 @@ const Fill_Form = ({ data, setdata }) => {
               </h3>
               <LocalizationProvider dateAdapter={AdapterDayjs}>
                 <DatePicker
-                  label="birth date"
-                  value={data.birth_date || ''}
+                  label="date_fin_abonnement"
+                  value={data.date_fin_abonnement}
                   onChange={(newValue) => {
                     try {
                       setdata({
                         ...data,
-                        birth_date: newValue.$d
+                        date_fin_abonnement: newValue.$d
                           .toISOString()
                           .slice(0, 19)
                           .replace("T", " "),
@@ -277,7 +278,7 @@ const Fill_Form = ({ data, setdata }) => {
               <LocalizationProvider dateAdapter={AdapterDayjs}>
                 <DatePicker
                   label="birth date"
-                  value={data.birth_date || ''}
+                  value={data.birth_date}
                   onChange={(newValue) => {
                     try {
                       setdata({

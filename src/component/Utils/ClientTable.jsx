@@ -35,10 +35,10 @@ const DataRow = ({ item, index, onClick = () => { }, OnEdit = () => { }, action 
 				{item.email}
 			</td>
 			<td className="px-6 py-4 whitespace-nowrap text-sm font-medium ">
-				text
+				{item.abonnement}
 			</td>
 			<td className="px-6 py-4 whitespace-nowrap text-sm font-medium ">
-				{item.status}
+				{item.statut}
 			</td>
 			{action ? <>
 				<td
