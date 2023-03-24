@@ -5,6 +5,7 @@ import {
   SearchBar,
   BannerTable,
   LinearIndeterminate,
+  Filter_Selector,
   Banner_Dialog
 } from "../index";
 import { BaseUrl, Coockies_name } from "../../constants";
@@ -14,7 +15,7 @@ import { BiTask } from "react-icons/bi";
 function Banners() {
   const emty_banner = {
     Baniere_ordre: 0, Logo: "",
-    Couverture: "", Offer: 0, Adresse: "", Tel: "", statut: ""
+    Couverture: "", Offer: "", Adresse: "", Tel: "", statut: ""
   };
   const [Search, setSearch] = useState("");
   const [cookies, setCookie, removeCookie] = useCookies([Coockies_name]);
@@ -25,11 +26,13 @@ function Banners() {
   const [OpenPopUp, setOpenPopUp] = useState(false);
   const [PopUpType, setPopUpType] = useState(false);
   let [loading, setloading] = useState(false);
+  let [status, setstatus] = useState(1);
 
   const handleRequest = async () => {
     setloading(true);
     try {
-      const req = await fetch(`${BaseUrl}/banners`, {
+      let type = status != 0 ? `?type=${status}` : '';
+      const req = await fetch(`${BaseUrl}/banners${type}`, {
         method: "GET",
         mode: "cors",
         cache: "no-cache",
@@ -58,7 +61,7 @@ function Banners() {
 
   useEffect(() => {
     handleRequest();
-  }, [Refresh]);
+  }, [Refresh, status]);
 
   useEffect(() => {
     setdata((per) =>
@@ -95,6 +98,18 @@ function Banners() {
       </div>
       <div className="flex ld:flex-row flex-col w-full mt-10 lg:gap-5 gap-0 justify-center items-center">
         <SearchBar styles={"max-h-[15px] !w-full"} setSearch={setSearch} />
+        <div className="flex flex-row w-full mt-10 gap-5 justify-start items-center">
+          <Filter_Selector
+            title={"filter abonnement"}
+            styles={"h-[95px]"}
+            options={[{ value: 0, name: '' },
+              { value: 1, name: 'Activer' },
+              { value: 2, name: 'desctiver' }]}
+            setFilter={(value) => setstatus(value)}
+            Filter={status}
+          />
+
+        </div>
       </div>
       <div className="absolute bottom-8 right-8 flex flex-row gap-5 capitalize ">
         <Button

@@ -69,8 +69,8 @@ function Statics({ selectedStatus }) {
           <>
             <div className="mt-10  w-full h-[90%] justify-center  items-start gap-5 ">
               <div className="w-[100%] rounded-xl flex flex-col items-start h-[40vh] ">
-                <h1 className="text-[15px] font-normal self-start text-gray-800">Recently clinets</h1>
-                <div className="flex-1 w-full">
+                <h1 className="text-[15px] font-bold self-start mb-5 text-gray-800">Recently clinets</h1>
+                <div className="flex-1 w-full overflow-y-scroll overflow-x-hidden">
                   <ClientTable
                     Data={clients_data}
                     action={false}
@@ -79,8 +79,8 @@ function Statics({ selectedStatus }) {
                 </div>
 
               </div>
-              <div className=" rounded-xl flex flex-col items-start  h-[40vh] w-full">
-                <h1 className="text-[15px] font-normal self-start text-gray-800 ">Recently partners</h1>
+              <div className=" rounded-xl flex flex-col items-start  h-[40vh] w-full  overflow-y-scroll overflow-x-hidden">
+                <h1 className="text-[15px] font-bold self-start mt-10 mb-5 text-gray-800 ">Recently partners</h1>
                 <UserTable
                   my="0"
                   action={false}

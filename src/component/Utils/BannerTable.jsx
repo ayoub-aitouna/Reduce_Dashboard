@@ -1,9 +1,5 @@
 import React from "react";
-import { IoIosCloseCircle } from "react-icons/io";
 import { AiFillEdit } from "react-icons/ai";
-import { BsCheckCircleFill } from "react-icons/bs";
-import { MdPendingActions } from "react-icons/md";
-import { BsFillArrowRightSquareFill } from "react-icons/bs";
 import { IconHalder } from "../index";
 
 const DataRow = ({ item, index, OnEdit = () => { } }) => {
@@ -16,10 +12,28 @@ const DataRow = ({ item, index, OnEdit = () => { } }) => {
 				{item.Baniere_ordre}
 			</td>
 			<td className="px-6 py-4 whitespace-nowrap text-sm font-medium ">
-				{item.Logo}
+				<img
+					className="w-[60px] h-[60px] rounded-full object-cover bg-gray-400 overflow-hidden"
+					src={
+						item.Logo === '' || item.Logo === undefined ?
+							"https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Default_pfp.svg/800px-Default_pfp.svg.png" :
+							item.Logo
+					}
+					onerror="if (this.src != 'error.jpg') this.src = 'https://www.nicepng.com/png/detail/136-1366211_group-of-10-guys-login-user-icon-png.png';"
+					srcSet=""
+				/>
 			</td>
-			<td className="px-6 py-4 whitespace-nowrap text-sm font-medium ">
-				{item.Couverture}
+			<td className="px-5 py-0 whitespace-nowrap text-sm font-medium ">
+				<img
+					className="w-[200px] h-[70px] rounded-md object-cover bg-gray-400 overflow-hidden"
+					src={
+						item.Couverture === '' || item.Couverture === undefined ?
+							"https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Default_pfp.svg/800px-Default_pfp.svg.png" :
+							item.Couverture
+					}
+					onerror="if (this.src != 'error.jpg') this.src = 'https://www.nicepng.com/png/detail/136-1366211_group-of-10-guys-login-user-icon-png.png';"
+					srcSet=""
+				/>
 			</td>
 			<td className="px-6 py-4 whitespace-nowrap text-sm font-medium ">
 				{item.Offer}
