@@ -69,7 +69,7 @@ const UpdateClinets = ({ open, OnClick, Client, setRefresh, is_update }) => {
     setloading(true);
     try {
       const req = await fetch(`${BaseUrl}/clients/change_status`, {
-        method: "POST",
+        method: "PUT",
         mode: "cors",
         cache: "no-cache",
         headers: {
@@ -77,7 +77,7 @@ const UpdateClinets = ({ open, OnClick, Client, setRefresh, is_update }) => {
           Authorization: `Bearer ${cookies.accesToken}`,
         },
         referrerPolicy: "no-referrer",
-        body: { statut: data.status === "Activé" ? "Desactivé" : data.status },
+        body: JSON.stringify({ id: data.id, statut: data.statut === "Activé" ? "Desactivé" : "Activé" }),
       });
       setRefresh((val) => val + 1);
       setloading(false);
@@ -89,7 +89,7 @@ const UpdateClinets = ({ open, OnClick, Client, setRefresh, is_update }) => {
   const reinit_device_id = async () => {
     setloading(true);
     try {
-      const req = await fetch(`${BaseUrl}/clients/setDeviceId?id=${data.id}`, {
+      const req = await fetch(`${BaseUrl}/clients/setDeviceId`, {
         method: "PUT",
         mode: "cors",
         cache: "no-cache",
@@ -98,7 +98,7 @@ const UpdateClinets = ({ open, OnClick, Client, setRefresh, is_update }) => {
           Authorization: `Bearer ${cookies.accesToken}`,
         },
         referrerPolicy: "no-referrer",
-        body: JSON.stringify(data),
+        body: JSON.stringify({ id: data.id }),
       });
       setRefresh((val) => val + 1);
       setloading(false);
@@ -271,13 +271,13 @@ const Fill_Form = ({ data, setdata, is_update = true }) => {
 
               <LocalizationProvider dateAdapter={AdapterDayjs}>
                 <DatePicker
-                  label="birth date"
-                  value={data.birth_date || ''}
+                  label="date_fin_abonnement"
+                  value={data.date_fin_abonnement}
                   onChange={(newValue) => {
                     try {
                       setdata({
                         ...data,
-                        birth_date: newValue.$d
+                        date_fin_abonnement: newValue.$d
                           .toISOString()
                           .slice(0, 19)
                           .replace("T", " "),

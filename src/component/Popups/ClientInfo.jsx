@@ -34,7 +34,7 @@ const DataRow = ({ title, data = null, Render = () => <></> }) => {
   );
 };
 
-const PartnerInfoRender = ({ item }) => {
+const ClientInfoRender = ({ item }) => {
   return (
     <>
       <div className="overflow-x-auto relative sm:rounded-lg">
@@ -53,7 +53,7 @@ const PartnerInfoRender = ({ item }) => {
             <DataRow title={"nom complet"} data={item.full_name} />
             <DataRow
               title={"date naissance"}
-              data={`${new Date(item.created_dat).getDate()}/${new Date(
+              data={`${new Date(item.birth_date ).getDate()}/${new Date(
                 item.birth_date
               ).getMonth()}/${new Date(
                 item.birth_date
@@ -69,7 +69,7 @@ const PartnerInfoRender = ({ item }) => {
               title={"ville"}
               data={item.ville_name}
             />
-            <DataRow title={"adresse"} data={item.adrress} />
+            <DataRow title={"adresse"} data={item.adresse} />
             <DataRow title={"profession"} data={item.profession} />
             <DataRow
               title={"tel"}
@@ -79,7 +79,7 @@ const PartnerInfoRender = ({ item }) => {
             <DataRow title={"Abonnement"} data={item.abonnement} />
             <DataRow title={"Device ID"} data={item.device_id} />
 
-            <DataRow title={"Statut"} data={item.offer} />
+            <DataRow title={"Statut"} data={item.statut} />
             <DataRow title={"Date inscription"} data= {`${new Date(item.date_inscription).getDate()}/${new Date(
                 item.date_inscription
               ).getMonth()}/${new Date(
@@ -123,34 +123,7 @@ function PartnerInfo({ open, OnClick, data, setRefresh }) {
   const hadlerClose = () => {
     OnClick();
   };
-  const hadlerResponse = async (id, response) => {
-    setloading(true);
 
-    let blob = await Generate_contract_Pdf(data);
-    const formData = new FormData();
-    const str = JSON.stringify({
-      partner_id: id,
-      response: response,
-    });
-
-    formData.append("file", blob);
-    formData.append("data", str);
-    try {
-      const req = await fetch(`${BaseUrl}/admin/Response_partner_form`, {
-        method: "POST",
-        mode: "cors",
-        headers: {
-          Authorization: `Bearer ${cookies.accesToken}`,
-        },
-        body: formData,
-      });
-      console.log(await req.json());
-    } catch (err) {
-      console.log(err);
-    }
-    setloading(false);
-    setRefresh((i) => i + 1);
-  };
   useEffect(() => {
     if (!loading) hadlerClose();
   }, [loading]);
@@ -169,7 +142,7 @@ function PartnerInfo({ open, OnClick, data, setRefresh }) {
         aria-describedby="alert-dialog-slide-description"
       >
         <DialogContent>
-          <PartnerInfoRender item={data} />
+          <ClientInfoRender item={data} />
         </DialogContent>
       </Dialog>
     </div>
