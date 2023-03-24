@@ -99,7 +99,7 @@ function Clients({ selectedStatus }) {
         OnClick={() => {
           setOpenPopUp(false);
         }}
-        partner={SelectedClient}
+        Client={SelectedClient}
       />
       <div className="flex flex-col items-start justify-start">
         <h1 className="text-[20px] font-black leading-9 text-gray-800">

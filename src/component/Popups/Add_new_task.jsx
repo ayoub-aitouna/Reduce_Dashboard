@@ -133,10 +133,6 @@ const Fill_Form = ({ data, setdata }) => {
                 value={data.visite_date || ''}
                 onChange={(newValue) => {
                   try {
-                    console.log(`${newValue.$d} : formated ${newValue.$d
-                      .toISOString()
-                      .slice(0, 19)
-                      .replace("T", " ")}`);
                     setdata({
                       ...data,
                       visite_date: newValue.$d

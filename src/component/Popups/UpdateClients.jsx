@@ -9,23 +9,24 @@ import TextField from "@mui/material/TextField";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import dayjs, { Dayjs } from "dayjs";
 
 import { Button as MyButton, Filter_Selector, LoadingIcon } from "../index";
 import { BaseUrl, Coockies_name } from "../../constants";
 import { get_villes } from "../../Utils/villes/get_villes";
 import { useCookies } from "react-cookie";
-import { get_Activity } from "../../Utils/Activities/Activities";
 import { get_profesion } from "../../Utils/profesion/Profesion";
 
-const UpdateClinets = ({ open, OnClick, partner, setRefresh, is_update }) => {
+const UpdateClinets = ({ open, OnClick, Client, setRefresh, is_update }) => {
   const [cookies, setCookie, removeCookie] = useCookies([Coockies_name]);
   const [loading, setloading] = useState(false);
-
-  const [data, setdata] = useState({
-    full_name: "", birth_date: "", sexe: "", ville: 0,
-    adresse: "", profession: 0, tel: "", email: "", abonnement: "",
-    statut: "", date_fin_abonnement: ""
-  });
+  const now = dayjs().$d.toISOString().slice(0, 19).replace("T", " ");
+  const empty_client = {
+    full_name: "", email: "", birth_date: now, sexe: "", ville: 0,
+    adresse: "", profession: 0, tel: "", abonnement: "", _password: "",
+    statut: "", date_fin_abonnement: now
+  };
+  const [data, setdata] = useState(empty_client);
 
   const hadlerClose = () => {
     OnClick();
@@ -36,9 +37,11 @@ const UpdateClinets = ({ open, OnClick, partner, setRefresh, is_update }) => {
   }, [loading]);
 
   useEffect(() => {
-    if (partner != null)
-      setdata(partner);
-  }, [partner]);
+    if (Client != null)
+      setdata(Client);
+    if (is_update)
+      setdata(empty_client);
+  }, [Client, is_update]);
 
   const handle_update_create = async () => {
     setloading(true);
@@ -120,7 +123,7 @@ const UpdateClinets = ({ open, OnClick, partner, setRefresh, is_update }) => {
           </DialogContentText>
         </DialogContent>
         <div className="w-full grid place-content-center">
-          <Fill_Form data={data} setdata={setdata} />
+          <Fill_Form data={data} setdata={setdata} is_update={is_update} />
         </div>
         <div className="h-[60px]"></div>
         <DialogActions>
@@ -162,28 +165,29 @@ const UpdateClinets = ({ open, OnClick, partner, setRefresh, is_update }) => {
   );
 };
 
-const Fill_Form = ({ data, setdata }) => {
+const Fill_Form = ({ data, setdata, is_update = true }) => {
   let [villes, setvilles] = useState([]);
   const [Profession, setProfession] = useState([]);
-
+  console.log({ is_update: is_update })
   useEffect(() => {
     get_villes(setvilles);
     get_profesion(setProfession);
   }, []);
-
-
+  const is_pass = (key) => {
+    return (key === '_password' && is_update === false);
+  }
   return (
     <form className="w-full max-w-lg ">
       <div className="flex flex-wrap -mx-3 mb-6">
 
         {Object.keys(data).map((key) => (
-          (key === 'full_name' || key == 'adresse' || key == 'email' || key == 'tel') && (
+          (key === 'full_name' || key === 'adresse' || key === 'email' || key === 'tel') && (
             <div className="w-full px-3">
               <label
                 className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
                 htmlFor="grid-name"
               >
-                {key}
+                {key === '_password' ? 'Password' : key}
               </label>
               <input
                 key={key}
@@ -198,7 +202,26 @@ const Fill_Form = ({ data, setdata }) => {
             </div>
           )
         ))}
-        <div className="flex flex-wrap  flex- -mx-3 mb-2">
+        {!is_update ? <div className="w-full px-3">
+          <label
+            className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+            htmlFor="grid-name"
+          >
+            Password
+          </label>
+          <input
+            key={0}
+            className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+            id={`grid-Password`}
+            value={data._password}
+            onChange={(e) => {
+              setdata({ ...data, _password: e.target.value });
+            }}
+            type="password"
+          />
+        </div> : <></>}
+
+        <div className="flex flex-wrap  flex- mx-3 mb-2">
           <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
             <Filter_Selector
               title={"Ville"}
@@ -223,7 +246,6 @@ const Fill_Form = ({ data, setdata }) => {
               Filter={data.sexe}
               setFilter={(value) => setdata({ ...data, sexe: value })}
               options={[
-                { value: "", name: "NONE" },
                 { value: "M", name: "Male" },
                 { value: "F", name: "Female" },
               ]}
@@ -245,11 +267,8 @@ const Fill_Form = ({ data, setdata }) => {
             />
           </div>
           <div className="flex flex-row justify-center items=center" >
-            <div className="flex flex-col w-full justify-center items-start ml-3   ">
-              <h3 className="block font-black mb-2 text-sm  text-gray-900 dark:text-gray-400 mt-4">
-                {" "}
-                Selece Date
-              </h3>
+            <div className="flex flex-col w-full justify-center  md:w-1/2 items-start ml-3    mt-4">
+
               <LocalizationProvider dateAdapter={AdapterDayjs}>
                 <DatePicker
                   label="birth date"
@@ -269,20 +288,17 @@ const Fill_Form = ({ data, setdata }) => {
                 />
               </LocalizationProvider>
             </div>
-            <div className="flex flex-col w-full justify-center items-start ml-3   ">
-              <h3 className="block font-black mb-2 text-sm  text-gray-900 dark:text-gray-400 mt-4">
-                {" "}
-                Selece Date
-              </h3>
+            <div className="flex flex-col w-full justify-center md:w-1/2 items-start ml-3    mt-4">
+
               <LocalizationProvider dateAdapter={AdapterDayjs}>
                 <DatePicker
-                  label="birth date"
-                  value={data.birth_date || ''}
+                  label="Date fin_abonnement"
+                  value={data.date_fin_abonnement || ''}
                   onChange={(newValue) => {
                     try {
                       setdata({
                         ...data,
-                        birth_date: newValue.$d
+                        date_fin_abonnement: newValue.$d
                           .toISOString()
                           .slice(0, 19)
                           .replace("T", " "),
