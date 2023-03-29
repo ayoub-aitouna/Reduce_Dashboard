@@ -15,9 +15,9 @@ const AuthForm = ({ setEmail }) => {
     val: 0,
     msg: "Email ou mot de passe incorrect.",
   });
- 
+
   const [cookies, setCookie, removeCookie] = useCookies([Coockies_name]);
-  
+
   const [login, setlogin] = useState({
     email: "",
     password: "",
@@ -38,6 +38,7 @@ const AuthForm = ({ setEmail }) => {
   };
 
   const login_submit = async (event) => {
+    // login_call({ _name: "name", accesToken: "dasdasdad adsadsas", role: "ADMIN" });
     if (event != undefined) event.preventDefault();
     setloading(true);
     try {
@@ -55,7 +56,7 @@ const AuthForm = ({ setEmail }) => {
         }),
       });
       if (req.ok) return login_call(await req.json());
-    } catch (error_msg) {}
+    } catch (error_msg) { }
     setlogin({ ...login, password: "" });
     setloading(false);
     seterror((obj) => {
@@ -85,7 +86,7 @@ const AuthForm = ({ setEmail }) => {
       });
       if (req.ok) return navigate("/forgot_pass");
       else return { val: 1, msg: "Email incorrect." };
-    } catch (error_msg) {}
+    } catch (error_msg) { }
     setloading(false);
     seterror((obj) => {
       return { val: 1, msg: "Email incorrect." };
