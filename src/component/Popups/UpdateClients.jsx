@@ -23,7 +23,7 @@ const UpdateClinets = ({ open, OnClick, Client, setRefresh, is_update }) => {
   const now = dayjs().$d.toISOString().slice(0, 19).replace("T", " ");
   const empty_client = {
     full_name: "", email: "", birth_date: now, sexe: "", ville: 0,
-    adresse: "", profession: 0, tel: "", abonnement: "", _password: "",
+    adresse: "", profession_id: 0, tel: "", abonnement: "", _password: "",
     statut: "", date_fin_abonnement: now
   };
   const [data, setdata] = useState(empty_client);
@@ -39,7 +39,7 @@ const UpdateClinets = ({ open, OnClick, Client, setRefresh, is_update }) => {
   useEffect(() => {
     if (Client != null)
       setdata(Client);
-    if (is_update)
+    if (!is_update)
       setdata(empty_client);
   }, [Client, is_update]);
 
@@ -234,8 +234,8 @@ const Fill_Form = ({ data, setdata, is_update = true }) => {
           <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
             <Filter_Selector
               title={"profession"}
-              Filter={data.profession}
-              setFilter={(value) => setdata({ ...data, profession: value })}
+              Filter={data.profession_id}
+              setFilter={(value) => setdata({ ...data, profession_id: value })}
               options={Profession}
               styles={"!max-w-full"}
             />
