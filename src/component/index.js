@@ -31,6 +31,7 @@ import Banner_Dialog from "./Popups/Banner_Dialog";
 import AddNewCity from "./Popups/NewCity";
 import NewActivity from "./Popups/NewActivity";
 import EditeActivity from "./Popups/EditeActivity";
+import AddProffesion from './Popups/NewProfession'
 
 //Utils 
 import UserTable from "./Utils/UserTable";
@@ -98,5 +99,6 @@ export {
   Activities_table,
   Profession_table,
   EditeActivity,
-  LinearIndeterminate
+  LinearIndeterminate,
+  AddProffesion
 };

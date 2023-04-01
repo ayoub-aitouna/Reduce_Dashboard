@@ -40,8 +40,7 @@ const Fill_Form = ({ data, setdata }) => {
 	);
 };
 
-function EditeActivity({ open, OnClick, setRefresh, activity
-}) {
+function EditeActivity({ open, OnClick, setRefresh, activity }) {
 	const [villes, setvilles] = useState([]);
 	const [loading, setloading] = useState(false);
 	let [data, setdata] = useState({
@@ -109,9 +108,8 @@ function EditeActivity({ open, OnClick, setRefresh, activity
 	}
 
 	useEffect(() => {
-		if (open === true)
-			get_Activity_villes();
-	}, [open]);
+		get_Activity_villes();
+	}, [open, activity]);
 
 	return (
 		<div>

@@ -8,6 +8,7 @@ const DataRow = ({ item, index, onClick = () => { }, OnEdit = () => { }, onRowSe
 	const handleChange = (event) => {
 		setChecked(event.target.checked);
 		item.status = event.target.checked;
+		
 		OnEdit(item);
 	};
 	return (

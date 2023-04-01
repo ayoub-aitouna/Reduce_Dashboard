@@ -43,7 +43,7 @@ const Fill_Form = ({ data, setdata }) => {
             className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
             id="grid-name"
             type="text"
-            value={data.name}
+            value={data.longitude}
             onChange={(e) => {
               setdata({ ...data, longitude: e.target.value });
             }}
@@ -61,7 +61,7 @@ const Fill_Form = ({ data, setdata }) => {
             className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
             id="grid-name"
             type="text"
-            value={data.name}
+            value={data.lat}
             onChange={(e) => {
               setdata({ ...data, lat: e.target.value });
             }}
@@ -73,7 +73,7 @@ const Fill_Form = ({ data, setdata }) => {
   );
 };
 
-function AddNewCity({ open, OnClick, setRef }) {
+function AddNewCity({ open, OnClick, setRefresh }) {
   let [data, setdata] = useState({
     name: "",
     longitude: 0.000,
@@ -124,7 +124,7 @@ function AddNewCity({ open, OnClick, setRef }) {
                   referrerPolicy: "no-referrer",
                   body: JSON.stringify(data),
                 });
-                setRef((val) => val + 1);
+                setRefresh((val) => val + 1);
                 setloading(false);
               } catch (err) {
                 setloading(false);

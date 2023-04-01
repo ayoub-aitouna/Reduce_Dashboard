@@ -7,7 +7,7 @@ import {
 	NewActivity,
 	AddNewCity,
 	Profession_table,
-	EditeActivity,
+	EditeActivity, AddProffesion,
 	LinearIndeterminate
 } from "../index";
 import { BiTask } from "react-icons/bi";
@@ -22,12 +22,13 @@ function Settings() {
 	const [newcity, setnewcity] = useState(false);
 	const [Refresh, setRefresh] = useState(0);
 	const [newactivity, setnewactivity] = useState(false);
+	const [newproffesion, setnewproffesion] = useState(false);
 	const [editeActivity, setediteActivity] = useState(false);
 	const [Activity, setActivity] = useState({});
 	const [activities, setactivities] = useState([]);
 
 	async function handle_city_change(city) {
-		const { status, id } = city;
+		const { status, value } = city;
 		await fetch(`${BaseUrl}/Ville/change_status`, {
 			method: "POST",
 			mode: "cors",
@@ -36,7 +37,7 @@ function Settings() {
 				"Content-Type": "application/json",
 			},
 			referrerPolicy: "no-referrer",
-			body: { status: status, id: id }
+			body: JSON.stringify({ status: status, id: value })
 		});
 
 	}
@@ -56,6 +57,13 @@ function Settings() {
 		return <LinearIndeterminate />
 	return (
 		<div className="p-5 my-10 ">
+			<AddProffesion
+				open={newproffesion}
+				setRefresh={setRefresh}
+				OnClick={() => {
+					setnewproffesion(false);
+				}}
+			/>
 			<NewActivity
 				open={newactivity}
 				setRefresh={setRefresh}
@@ -139,7 +147,7 @@ function Settings() {
 				<Button
 					Icon={() => <BiTask />}
 					title={"Ajoutez Une Profession"}
-					OnClick={() => setnewactivity(true)}
+					OnClick={() => setnewproffesion(true)}
 					style={"!w-[250px] text-[15px] shadow-lg capitalize"}
 				/>
 			</div>

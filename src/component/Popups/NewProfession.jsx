@@ -37,7 +37,7 @@ const Fill_Form = ({ data, setdata }) => {
   );
 };
 
-function AddActivity({ open, OnClick, setRef }) {
+function AddProffesion({ open, OnClick, setRefresh }) {
   let [data, setdata] = useState({
     profession: ""
   });
@@ -60,7 +60,7 @@ function AddActivity({ open, OnClick, setRef }) {
         onClose={hadlerClose}
         aria-describedby="alert-dialog-slide-description"
       >
-        <DialogTitle>{"Ajoutez une Tâche"}</DialogTitle>
+        <DialogTitle>{"Ajoutez une Proffesion"}</DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-slide-description">
             <p className="text-gray-600 text-xs ">
@@ -88,7 +88,7 @@ function AddActivity({ open, OnClick, setRef }) {
                   referrerPolicy: "no-referrer",
                   body: JSON.stringify(data),
                 });
-                setRef((val) => val + 1);
+                setRefresh((val) => val + 1);
                 setloading(false);
               } catch (err) {
                 setloading(false);
@@ -107,4 +107,4 @@ function AddActivity({ open, OnClick, setRef }) {
   );
 }
 
-export default AddActivity;
+export default AddProffesion;
