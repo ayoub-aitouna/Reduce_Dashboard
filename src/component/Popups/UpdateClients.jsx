@@ -267,7 +267,7 @@ const Fill_Form = ({ data, setdata, is_update = true }) => {
             />
           </div>
           <div className="flex flex-row justify-center items=center" >
-            <div className="flex flex-col w-full justify-center  md:w-1/2 items-start ml-3    mt-4">
+            <div className="flex flex-col w-full justify-center ml-3  mt-4">
 
               <LocalizationProvider dateAdapter={AdapterDayjs}>
                 <DatePicker
@@ -288,7 +288,7 @@ const Fill_Form = ({ data, setdata, is_update = true }) => {
                 />
               </LocalizationProvider>
             </div>
-            <div className="flex flex-col w-full justify-center md:w-1/2 items-start ml-3    mt-4">
+            {/* <div className="flex flex-col w-full justify-center md:w-1/2 items-start ml-3    mt-4">
 
               <LocalizationProvider dateAdapter={AdapterDayjs}>
                 <DatePicker
@@ -308,7 +308,7 @@ const Fill_Form = ({ data, setdata, is_update = true }) => {
                   renderInput={(params) => <TextField {...params} />}
                 />
               </LocalizationProvider>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

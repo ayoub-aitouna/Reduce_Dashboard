@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { SiMicrosoftexcel } from "react-icons/si";
+import { writeFile, utils } from 'xlsx';
 
 
 import {
@@ -13,6 +14,7 @@ import {
   LinearIndeterminate,
   Button as IconButton
 } from "../index";
+
 import { BaseUrl, Coockies_name } from "../../constants";
 import { useCookies } from "react-cookie";
 
@@ -20,7 +22,7 @@ import { useCookies } from "react-cookie";
 function Statics({ selectedStatus }) {
   let [partner_data, setpartner_data] = useState([]);
   let [clients_data, setclients_data] = useState([]);
-  let [state, setstate] = useState([]);
+  let [state, setstate] = useState({ client: {}, partner: {} });
   const [cookies, setCookie, removeCookie] = useCookies([Coockies_name]);
   let [loading, setloading] = useState(false);
 
@@ -78,14 +80,25 @@ function Statics({ selectedStatus }) {
     handleRequest_state();
   }, []);
 
+  const save_as_xlsx = (data, name) => {
+    const currentDate = new Date();
+    const workbook = utils.book_new();
+    const sheet = utils.json_to_sheet(data);
+    utils.book_append_sheet(workbook, sheet, 'Sheet1');
+    writeFile(workbook, `${name}-data-${currentDate.toDateString()}.xlsx`);
+  }
+
   const Statebanner = ({ title = "", count = 0 }) => {
+    if (count == null || count == undefined)
+      count = 0;
     return (
       <div className="flex flex-row justify-start items-center  gap-2 ">
         <h1 className="text-[22px] font-bold self-center text-gray-800">{title}</h1>
-        <h6 className="text-[18px] font-bold self-center  text-blue-500">{`${count}K`}</h6>
+        <h6 className="text-[18px] font-bold self-center  text-blue-500">{`${count > 1000 ? count / 1000 : count}${count > 1000 ? 'K' : ''}`}</h6>
       </div>
     );
   }
+
   return (
     <div className="p-5 my-10 h-full">
       <div className="flex flex-col items-center justify-start ">
@@ -97,9 +110,9 @@ function Statics({ selectedStatus }) {
             <div className="mt-10  w-full h-[90%] justify-center  items-start gap-5 ">
               <div className="w-[100%] rounded-xl flex flex-col items-start h-[40vh] ">
                 <div className="w-full flex flex-row justify-start items-center  gap-10 mb-5 ">
-                  <Statebanner title={"Recent clinets : "} count={500} />
-                  <Statebanner title={"All clinets : "} count={500} />
-                  <IconButton Icon={() => <SiMicrosoftexcel />} title={"Save As Execl"} style={'ml-auto !w-[250px]'} />
+                  <Statebanner title={"Recent clinets : "} count={state.client.resent_clients} />
+                  <Statebanner title={"All clinets : "} count={state.client.total_clients} />
+                  <IconButton OnClick={() => save_as_xlsx(clients_data, 'clinets')} Icon={() => <SiMicrosoftexcel />} title={"Save As Execl"} style={'ml-auto !w-[250px]'} />
                 </div>
                 <div className="flex-1 w-full overflow-y-scroll overflow-x-hidden">
                   <ClientTable
@@ -112,9 +125,9 @@ function Statics({ selectedStatus }) {
               </div>
               <div className=" rounded-xl flex flex-col items-start  h-[40vh] w-full  overflow-y-scroll overflow-x-hidden">
                 <div className="w-full flex flex-row justify-start items-center  gap-10 mb-5 ">
-                  <Statebanner title={"Recent Partners : "} count={500} />
-                  <Statebanner title={"All Partners : "} count={500} />
-                  <IconButton Icon={() => <SiMicrosoftexcel />} title={"Save As Execl"} style={'ml-auto !w-[250px]'} />
+                  <Statebanner title={"Recent Partners : "} count={state.partner.resent_partners} />
+                  <Statebanner title={"All Partners : "} count={state.partner.total_partners} />
+                  <IconButton OnClick={() => save_as_xlsx(partner_data, 'partners')} Icon={() => <SiMicrosoftexcel />} title={"Save As Execl"} style={'ml-auto !w-[250px]'} />
                 </div>
                 <UserTable
                   my="0"

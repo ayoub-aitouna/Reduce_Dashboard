@@ -24,7 +24,7 @@ function Sidebar() {
 	return (
 		<div className="absolute w-[289.19px] h-[100vh] top-0 left-0 bg-[#fff] pt-[20px] px-10 flex flex-col py-10 shadow-lg">
 			<div className="flex flex-col text-[#2E5CFF] text-4xl font-black gap-2 justify-start items-start pb-9">
-				<img src={Icon} alt="" srcset="" className="w-[150px] object-cover" />
+				<img src={Icon} alt="" srcSet="" className="w-[150px] object-cover" />
 				<h1 className="text-xl ">{cookies.name}</h1>
 			</div>
 			<ul className="flex flex-col gap-8 justify-center items-start w-full">
