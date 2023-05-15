@@ -39,8 +39,8 @@ function App() {
             element={<ForgotPass Email={Email} />}
           />
           <Route path="/home" element={<Home />}>
-            <Route exact path="Statistics" element={<Statics />} />
-            <Route exact path="" element={<Partner />} />
+            <Route exact path="" element={<Statics />} />
+            <Route exact path="Partner" element={<Partner />} />
             <Route
               path="Pending_partners"
               element={<Partner selectedStatus="Pending" />}

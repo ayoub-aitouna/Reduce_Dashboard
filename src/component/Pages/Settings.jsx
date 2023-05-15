@@ -39,12 +39,30 @@ function Settings() {
 			referrerPolicy: "no-referrer",
 			body: JSON.stringify({ status: status, id: value })
 		});
-
 	}
-
+	async function load_all_cities(city) {
+		try {
+			const req = await fetch(`${BaseUrl}/Ville/All_Villes`, {
+				method: "GET",
+				mode: "cors",
+				cache: "no-cache",
+				headers: {
+					"Content-Type": "application/json",
+				},
+				referrerPolicy: "no-referrer",
+			});
+			if (req.ok) {
+				const data = await req.json();
+				data.map((item) => {
+					setvilles((v) => [...v, { value: item.id, name: item.ville_name, status: item.status }]);
+				});
+			} else {
+			}
+		} catch (err) { }
+	}
 	useEffect(() => {
 		get_profesion(setprofession);
-		get_villes(setvilles);
+		load_all_cities();
 		get_Activity(setactivities)
 	}, [Refresh])
 

@@ -9,20 +9,23 @@ import { Icon } from "../../assets";
 
 function Sidebar() {
 	const [cookies, setCookie, removeCookie] = useCookies([Coockies_name]);
+
 	const [links, setLinks] = useState(SideBarLinks);
 	useEffect(() => {
 		setLinks((per) =>
 			per.filter((item) =>
-				cookies.role == "Admin"
-					? item.groupName
-					: item.groupName != "ADMINISTRATEUR"
+				cookies.role === "Investor" ?
+					item.groupName == "Statistiques" :
+					cookies.role === "Admin"
+						? item.groupName
+						: item.groupName !== "ADMINISTRATEUR"
 			)
 		);
 	}, []);
 
 	let navigate = useNavigate();
 	return (
-		<div className="absolute w-[289.19px] h-[100vh] top-0 left-0 bg-[#fff] pt-[20px] px-10 flex flex-col py-10 shadow-lg">
+		<div className="absolute w-[289.19px] overflow-y-scroll h-[100vh] top-0 left-0 bg-[#fff] pt-[20px] px-10 flex flex-col py-10 shadow-lg gap-5">
 			<div className="flex flex-col text-[#2E5CFF] text-4xl font-black gap-2 justify-start items-start pb-9">
 				<img src={Icon} alt="" srcSet="" className="w-[150px] object-cover" />
 				<h1 className="text-xl ">{cookies.name}</h1>
@@ -89,7 +92,7 @@ function Sidebar() {
 					navigate("/");
 					window.location.reload(false);
 				}}
-				style="!h-[30px] p-[28px]  mt-auto"
+				style="!h-[30px] p-[28px] mt-auto min-mt-[20px]"
 			/>
 		</div>
 	);

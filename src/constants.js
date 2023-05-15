@@ -10,14 +10,20 @@ import { AiFillHome } from "react-icons/ai";
 export const SideBarLinks = [
   {
     key: 0,
-    groupName: "GÉNÉRAL",
+    groupName: "Statistiques",
     tabs: [
       {
         key: 0,
         name: "Statistiques",
         Icon: AiFillHome,
-        Url: "Statistics",
-      },
+        Url: "",
+      }
+    ],
+  },
+  {
+    key: 0,
+    groupName: "GÉNÉRAL",
+    tabs: [
       {
         name: "les Abonné",
         Url: "subscribers",
@@ -26,7 +32,7 @@ export const SideBarLinks = [
       },
       {
         name: "les partenaires",
-        Url: "",
+        Url: "Partner",
         Icon: HiUsers,
         key: 1,
       }

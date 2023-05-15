@@ -53,7 +53,6 @@ function EditeActivity({ open, OnClick, setRefresh, activity }) {
 	};
 
 	useEffect(() => {
-		console.log(activity);
 		if (activity != undefined)
 			setdata(activity);
 	}, [activity]);
@@ -108,7 +107,10 @@ function EditeActivity({ open, OnClick, setRefresh, activity }) {
 	}
 
 	useEffect(() => {
-		get_Activity_villes();
+		if (open && activity != undefined)
+			get_Activity_villes();
+		else
+			setvilles([]);
 	}, [open, activity]);
 
 	return (

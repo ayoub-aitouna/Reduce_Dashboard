@@ -1,7 +1,7 @@
 import { BaseUrl } from "../../constants";
 const get_villes = async (setvilles) => {
   try {
-    const req = await fetch(`${BaseUrl}/Ville`, {
+    const req = await fetch(`${BaseUrl}/Ville/All_Villes`, {
       method: "GET",
       mode: "cors",
       cache: "no-cache",

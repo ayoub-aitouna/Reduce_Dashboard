@@ -9,12 +9,14 @@ import { Button as MyButton, Filter_Selector, LoadingIcon } from "../index";
 import { BaseUrl, Coockies_name } from "../../constants";
 import Cookies from "js-cookie";
 import { useCookies } from "react-cookie";
+import { setDate } from "date-fns";
 
 const Fill_Form = ({ data, setdata }) => {
   return (
     <form className="w-full max-w-lg ">
-      <div className="flex flex-wrap -mx-3 mb-6">
+      <div className="flex flex-wrap -mx-3 mb-6 items-center justify-center">
         <div className="w-full px-3">
+
           <label
             className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2 w-full"
             htmlFor="grid-name"
@@ -32,6 +34,11 @@ const Fill_Form = ({ data, setdata }) => {
             placeholder="Jane Doe"
           />
         </div>
+        <Button variant="contained" component="label" className="w-[50%] h-[60px] mt-5">
+          Upload LOGO
+          <input hidden accept="image/*" multiple type="file" onChange={(event) => setdata({ ...data, logo: event.target.files[0] })
+          } />
+        </Button>
       </div>
     </form>
   );
@@ -50,7 +57,7 @@ function AddActivity({ open, OnClick, setRefresh }) {
   useEffect(() => {
     if (!loading) hadlerClose();
   }, [loading]);
-  
+
   return (
     <div>
       <Dialog
@@ -71,20 +78,22 @@ function AddActivity({ open, OnClick, setRefresh }) {
             onClick={async (e) => {
               setloading(true);
               try {
+                const formData = new FormData();
+                formData.append("images", data.logo);
+                formData.append("data", JSON.stringify(data));
                 const req = await fetch(`${BaseUrl}/Activities/Add`, {
                   method: "POST",
                   mode: "cors",
                   cache: "no-cache",
                   headers: {
-                    "Content-Type": "application/json",
                     Authorization: `Bearer ${cookies.accesToken}`,
                   },
                   referrerPolicy: "no-referrer",
-                  body: JSON.stringify(data),
+                  body: formData,
                 });
-                setRefresh((val) => val + 1);
-                setloading(false);
-              } catch (err) {
+               } catch (err) {
+              } finally {
+                setDate([]);
                 setloading(false);
               }
             }}

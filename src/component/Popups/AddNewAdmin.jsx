@@ -95,6 +95,7 @@ const Fill_Form = ({ data, setdata }) => {
               { value: "", name: "Toute" },
               { value: "Admin", name: "Administrateur" },
               { value: "Manager", name: "Responsable" },
+              { value: "Investor", name: "investisseur" },
             ]}
             styles={"!max-w-full"}
           />
