@@ -1,15 +1,12 @@
 import React, { useEffect } from "react";
-import { Sidebar, Partner } from "../index";
+import { Sidebar } from "../index";
 import {
-  BrowserRouter,
-  Routes,
-  Route,
   useNavigate,
   Outlet,
 } from "react-router-dom";
 import { useCookies } from "react-cookie";
-import { BaseUrl, Coockies_name } from "../../constants";
-import { Check_if_user_valide } from "../../Utils/Auth";
+import { Coockies_name } from "../../constants";
+
 function Home() {
   const [cookies, setCookie, removeCookie] = useCookies([Coockies_name]);
 
@@ -22,7 +19,7 @@ function Home() {
     ) {
       navigate(`/`);
     }
-  }, [ cookies.accesToken]);
+  }, [cookies.accesToken]);
 
   return (
     <div className="bg-gray-100 w-full h-full overflow-y-scroll overflow-x-hidden">
