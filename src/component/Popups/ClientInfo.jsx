@@ -128,10 +128,6 @@ function PartnerInfo({ open, OnClick, data, setRefresh }) {
     if (!loading) hadlerClose();
   }, [loading]);
 
-  useEffect(() => {
-    console.log(data);
-  }, [open]);
-
   return (
     <div>
       <Dialog

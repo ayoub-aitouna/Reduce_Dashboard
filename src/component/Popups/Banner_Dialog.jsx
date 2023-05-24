@@ -59,7 +59,6 @@ const Banner_Dialog = ({ open, OnClick, setRefresh, selected, update = false }) 
 			setRefresh((val) => val + 1);
 			setloading(false);
 		} catch (err) {
-			console.log(err);
 			setloading(false);
 		}
 	}

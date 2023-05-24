@@ -71,7 +71,7 @@ const UpdatePartner = ({ open, OnClick, partner, setRefresh }) => {
                   setRefresh((val) => val + 1);
                   setloading(false);
                 } catch (err) {
-                  console.log(err);
+                  console.error(err);
                   setloading(false);
                 }
               }}

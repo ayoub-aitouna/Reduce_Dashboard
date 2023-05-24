@@ -42,7 +42,6 @@ function SetAsDone({ open, OnClick, item, setrefrech }) {
   const [loading, setloading] = useState(false);
   useEffect(() => {
     setdata(item);
-    console.trace(data);
   }, [open]);
 
   const hadlerClose = () => {

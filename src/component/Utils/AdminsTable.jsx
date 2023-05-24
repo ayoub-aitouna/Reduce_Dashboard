@@ -2,7 +2,6 @@ import React from "react";
 import { BsFillArrowRightSquareFill } from "react-icons/bs";
 import { IconHalder } from "../index";
 const DataRow = ({ m_key, item, index, onClick }) => {
-	console.log("received key: ", m_key);
 	return (
 		<tr key={m_key}
 			onClick={() => onClick()}

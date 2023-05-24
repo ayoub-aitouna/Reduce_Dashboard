@@ -38,7 +38,6 @@ const ForgotPass = ({ Email }) => {
       }
     } catch (error_msg) {
       setloading(false);
-      console.log(error_msg);
       alert("error !!");
     }
     setloading(false);

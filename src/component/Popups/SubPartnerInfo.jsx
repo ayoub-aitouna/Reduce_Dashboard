@@ -164,17 +164,12 @@ function SubPartnerInfo({ open, OnClick, id }) {
         },
         referrerPolicy: "no-referrer",
       });
-      if (req.ok) {
-        const json = await req.json();
-        console.log(json);
-        setdata(json);
-      }
+      if (req.ok) setdata(await req.json());
       else
         setdata([{ sub_partner_Name: "No Account is Available Yet!" }]);
 
     } catch (err) {
       setdata([{ sub_partner_Name: "Error !!" }]);
-
     }
   }
 
@@ -191,11 +186,8 @@ function SubPartnerInfo({ open, OnClick, id }) {
         },
         referrerPolicy: "no-referrer",
       });
-      if (req.ok) {
-        const json = await req.json();
-        console.log(json);
-        sethoistory(json);
-      }
+      if (req.ok) 
+        sethoistory(await req.json());
       else
         sethoistory([{ sub_partner_Name: "No Account is Available Yet!" }]);
 

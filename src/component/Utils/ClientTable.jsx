@@ -17,9 +17,6 @@ const DataRow = ({ item, index, onClick = () => { }, OnEdit = () => { }, action 
 				{item.sexe}
 			</td>
 			<td className="px-6 py-4 whitespace-nowrap text-sm font-medium ">
-				{item.tel}
-			</td>
-			<td className="px-6 py-4 whitespace-nowrap text-sm font-medium ">
 				{item.adresse}
 			</td>
 			<td className="px-6 py-4 whitespace-nowrap text-sm font-medium ">
@@ -75,14 +72,9 @@ function ClientTable({ Data, OnSelect, OnEdit, my = 10, action = true }) {
 									<th
 										scope="col"
 										className="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-										full name
+										prénom et nom
 									</th>
-									<th
-										scope="col"
-										className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
-									>
-										date naissance
-									</th>
+
 									<th
 										scope="col"
 										className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
@@ -93,14 +85,15 @@ function ClientTable({ Data, OnSelect, OnEdit, my = 10, action = true }) {
 										scope="col"
 										className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
 									>
-										ville
+										adresse
 									</th>
 									<th
 										scope="col"
 										className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
 									>
-										adresse
+										ville
 									</th>
+
 									<th
 										scope="col"
 										className="text-sm font-medium text-gray-900 px-6 py-4 text-left"

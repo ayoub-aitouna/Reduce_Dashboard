@@ -63,7 +63,6 @@ function EditeActivity({ open, OnClick, setRefresh, activity }) {
 
 	async function toggle_city(id) {
 		const req_body = { cityId: id, activityId: data.value };
-		console.log(req_body);
 		try {
 			const req = await fetch(`${BaseUrl}/Activities/toggle_city`, {
 				method: "POST",
@@ -78,7 +77,7 @@ function EditeActivity({ open, OnClick, setRefresh, activity }) {
 			if (req.ok)
 				setvilles(await req.json());
 		} catch (err) {
-			console.log(err);
+			console.error(err);
 		}
 
 	}
@@ -102,7 +101,7 @@ function EditeActivity({ open, OnClick, setRefresh, activity }) {
 				});
 			}
 		} catch (err) {
-			console.log(err);
+			console.error(err);
 		}
 	}
 

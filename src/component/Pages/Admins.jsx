@@ -46,18 +46,13 @@ function Admins() {
 			if (req.ok) {
 				const data = await req.json();
 				setOdata(data);
-				console.log("recieve responce");
-				console.table(data);
-			} else {
-				console.log(req);	
-			}
+			} 
 		} catch (err) {
 			console.error(err);
 		}
 		setloading(false);
 	};
 	useEffect(() => {
-		console.log("sending request");
 		fetchData();
 		get_villes(setvilles);
 	}, [Ref]);

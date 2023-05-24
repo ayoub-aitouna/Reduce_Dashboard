@@ -171,9 +171,8 @@ function PartnerInfo({ open, OnClick, data, setRefresh }) {
         },
         body: formData,
       });
-      console.log(await req.json());
     } catch (err) {
-      console.log(err);
+      console.error(err);
     }
     setloading(false);
     setRefresh((i) => i + 1);

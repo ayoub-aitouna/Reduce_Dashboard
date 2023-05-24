@@ -12,7 +12,6 @@ const get_profesion = async (setProfesion) => {
     });
     if (req.ok) {
       const data = await req.json();
-      console.log(data);
       setProfesion([{ value: 0, name: "" }]);
       data.map((item) => {
         setProfesion((v) => [

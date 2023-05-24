@@ -49,11 +49,8 @@ function Partner() {
 			},
 			referrerPolicy: "no-referrer",
 		});
-		if (req.ok) {
-			const data = await req.json();
-			console.log(data);
-			setOdata(data);
-		}
+		if (req.ok) 
+			setOdata(await req.json());
 		setloading(false);
 	};
 
@@ -77,7 +74,6 @@ function Partner() {
 				: per
 		);
 		setdata((per) => {
-			console.log(City);
 			return City != 0 ? per.filter((item) => item.ville == City) : per;
 		});
 		setdata((per) =>

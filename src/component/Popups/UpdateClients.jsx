@@ -168,7 +168,6 @@ const UpdateClinets = ({ open, OnClick, Client, setRefresh, is_update }) => {
 const Fill_Form = ({ data, setdata, is_update = true }) => {
   let [villes, setvilles] = useState([]);
   const [Profession, setProfession] = useState([]);
-  console.log({ is_update: is_update })
   useEffect(() => {
     get_villes(setvilles);
     get_profesion(setProfession);

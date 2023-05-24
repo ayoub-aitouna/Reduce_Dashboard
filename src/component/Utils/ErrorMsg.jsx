@@ -3,7 +3,6 @@ import { AiOutlineClose } from "react-icons/ai";
 const ErrorMsg = ({ error }) => {
   const [Show, setShow] = useState(false);
   useEffect(() => {
-    console.log(error.val);
     error.val > 0 ? setShow(true) : setShow(false);
   }, [error]);
   const handleclose = () => {

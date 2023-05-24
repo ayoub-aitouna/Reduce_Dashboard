@@ -128,7 +128,6 @@ function Settings() {
 						<Activities_table
 							Data={activities}
 							OnEdit={(item) => {
-								console.log(item);
 								handleOpenEditeActivity(item);
 							}}
 						/>
