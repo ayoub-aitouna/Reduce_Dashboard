@@ -7,7 +7,7 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import FormData from 'form-data';
-
+import { ImgInput } from "../../Utils/ImgInput";
 import { Button as MyButton, Filter_Selector, LoadingIcon } from "../index";
 import { BaseUrl, Coockies_name } from "../../constants";
 import { useCookies } from "react-cookie";
@@ -105,13 +105,11 @@ const Fill_Form = ({ data, setdata }) => {
 			<div className="w-full flex flex-row justify-around p-5">
 				<Button variant="contained" component="label">
 					Upload LOGO
-					<input hidden accept="image/*" multiple type="file" onChange={(event) => setdata({ ...data, logo: event.target.files[0], logo_selected: true })
-					} />
+					<ImgInput width={500} height={500} call={(file) => { setdata({ ...data, logo: file, logo_selected: true }) }} />
 				</Button>
 				<Button variant="contained" component="label">
 					Upload COVER
-					<input hidden accept="image/*" multiple type="file" onChange={(event) => setdata({ ...data, cover: event.target.files[0], cover_selected: true })
-					} />
+					<ImgInput width={500} height={500} call={(file) => { setdata({ ...data, cover: file, cover_selected: true }) }} />
 				</Button>
 			</div>
 			<div className="flex flex-wrap -mx-3 mb-6">

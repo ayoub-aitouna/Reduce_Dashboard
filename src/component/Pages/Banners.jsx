@@ -26,7 +26,7 @@ function Banners() {
   const [OpenPopUp, setOpenPopUp] = useState(false);
   const [PopUpType, setPopUpType] = useState(false);
   let [loading, setloading] = useState(false);
-  let [status, setstatus] = useState(1);
+  let [status, setstatus] = useState(0);
 
   const handleRequest = async () => {
     setloading(true);
@@ -100,7 +100,7 @@ function Banners() {
         <SearchBar styles={"max-h-[15px] !w-full"} setSearch={setSearch} />
         <div className="flex flex-row w-full mt-10 gap-5 justify-start items-center">
           <Filter_Selector
-            title={"filter abonnement"}
+            title={"Actif/inactif"}
             styles={"h-[95px]"}
             options={[{ value: 0, name: '' },
               { value: 1, name: 'Activer' },

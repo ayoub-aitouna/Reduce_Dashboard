@@ -1,5 +1,3 @@
-/* eslint-disable react/style-prop-object */
-/* eslint-disable react/jsx-pascal-case */
 import React, { useState, useEffect } from "react";
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
@@ -106,11 +104,11 @@ const Fill_Form = ({ data, setdata }) => {
       <div className="w-full flex flex-row justify-around p-5">
         <Button variant="contained" component="label">
           Upload LOGO
-          <ImgInput width={500} height={500} call={(file)=>{setdata({ ...data, logo: file, logo_selected: true })}}/>
+          <ImgInput width={500} height={500} call={(file) => { setdata({ ...data, logo: file, logo_selected: true }) }} />
         </Button>
         <Button variant="contained" component="label">
           Upload COVER
-          <ImgInput width={500} height={500} call={(file)=>{setdata({ ...data, cover: file, cover_selected: true })}}/>
+          <ImgInput width={500} height={500} call={(file) => { setdata({ ...data, cover: file, cover_selected: true }) }} />
         </Button>
       </div>
       <div className="flex flex-wrap -mx-3 mb-6">

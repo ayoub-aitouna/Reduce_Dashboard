@@ -1,4 +1,4 @@
-const ImgInput = ({call = (file)=>{}, width, height}) => {
+const ImgInput = ({ call = () => { }, width, height }) => {
     return <input
         hidden
         accept="image/*"
@@ -8,11 +8,10 @@ const ImgInput = ({call = (file)=>{}, width, height}) => {
             const file = event.target.files[0];
             const image = new Image();
             image.onload = () => {
-                if (image.width === width && image.height === height) {
+                if (image.width === width && image.height === height)
                     call(file);
-                } else {
+                else
                     alert(`Please select an image with dimensions ${width}px by ${height}px.`);
-                }
             };
 
             image.src = URL.createObjectURL(file);
@@ -20,4 +19,4 @@ const ImgInput = ({call = (file)=>{}, width, height}) => {
     />
 }
 
-export {ImgInput};
+export { ImgInput };
