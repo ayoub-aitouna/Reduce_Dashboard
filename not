@@ -8,3 +8,13 @@
     + add vile
     + create client 
     
+
+
+##ADD
+	- Resulation limit on images
+	- in Banner Add : *Name, *Activity, *secnd number
+	- add modif history on modif on clients 
+	- months in dates are all less by one
+	- on fine the abonment date return abonment status to "telecharge"
+	- save as exele show on superadmin only
+
