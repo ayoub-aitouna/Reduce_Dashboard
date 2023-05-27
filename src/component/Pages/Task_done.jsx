@@ -4,6 +4,7 @@ import { IconHalder, Edite_Task } from "../index";
 import { BaseUrl, Coockies_name } from "../../constants";
 import { LinearIndeterminate } from "../index";
 import { useCookies } from "react-cookie";
+import { PrintDate, formatDate } from '../../Utils/Date'
 
 const Task_done = ({ Ref }) => {
 	let [data, setdata] = useState([]);
@@ -163,9 +164,7 @@ const DataRow = ({ item, index, onClick = () => { } }) => {
 				{item.note}
 			</td>
 			<td className="px-6 py-4 whitespace-nowrap text-sm font-medium ">
-				{`${new Date(item.data_of_visite).getDate()}/${new Date(
-					item.data_of_visite
-				).getMonth()}/${new Date(item.data_of_visite).getFullYear()}`}
+				<PrintDate sqlDateTime={item.data_of_visite} />
 			</td>
 			<td className="px-6 py-4 whitespace-nowrap text-sm font-medium ">
 				{item.partner_status == "intrested"

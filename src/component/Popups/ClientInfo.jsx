@@ -1,16 +1,8 @@
 import React, { useState, useEffect } from "react";
-import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
-import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
-import { IoIosCloseCircle } from "react-icons/io";
-import { BsCheckCircleFill } from "react-icons/bs";
-import { MdPendingActions } from "react-icons/md";
-import { IconHalder } from "../index";
-import { Button as MyButton, LoadingIcon } from "../index";
-import { BaseUrl, Coockies_name } from "../../constants";
-import { useCookies } from "react-cookie";
-import { Generate_contract_Pdf } from "../../Utils/Pdfgenerator";
+import { PrintDate, formatDate } from '../../Utils/Date'
+
 const DataRow = ({ title, data = null, Render = () => <></> }) => {
   return (
     <tr>
@@ -53,15 +45,7 @@ const ClientInfoRender = ({ item }) => {
             <DataRow title={"nom complet"} data={item.full_name} />
             <DataRow
               title={"date naissance"}
-              data={`${new Date(item.birth_date ).getDate()}/${new Date(
-                item.birth_date
-              ).getMonth()}/${new Date(
-                item.birth_date
-              ).getFullYear()}  ${String(
-                new Date(item.birth_date).getHours()
-              ).padStart(2, "0")}:${String(
-                new Date(item.birth_date).getMinutes()
-              ).padStart(2, "0")}`}
+              data={formatDate(item.birth_date)}
             />
 
             <DataRow title={"sexe"} data={item.sexe} />
@@ -78,46 +62,21 @@ const ClientInfoRender = ({ item }) => {
             <DataRow title={"Email"} data={item.email} />
             <DataRow title={"Abonnement"} data={item.abonnement} />
             <DataRow title={"Device ID"} data={item.device_id} />
-
             <DataRow title={"Statut"} data={item.statut} />
-            <DataRow title={"Date inscription"} data= {`${new Date(item.date_inscription).getDate()}/${new Date(
-                item.date_inscription
-              ).getMonth()}/${new Date(
-                item.date_inscription
-              ).getFullYear()}  ${String(
-                new Date(item.date_inscription).getHours()
-              ).padStart(2, "0")}:${String(
-                new Date(item.date_inscription).getMinutes()
-              ).padStart(2, "0")}`}/>
-
-            <DataRow title={"Date debut abonnement"} data=  {`${new Date(item.date_debut_abonnement).getDate()}/${new Date(
-                item.date_debut_abonnement
-              ).getMonth()}/${new Date(
-                item.date_debut_abonnement
-              ).getFullYear()}  ${String(
-                new Date(item.date_debut_abonnement).getHours()
-              ).padStart(2, "0")}:${String(
-                new Date(item.date_debut_abonnement).getMinutes()
-              ).padStart(2, "0")}`}/>
-            <DataRow title={"Date Fin abonnement"} data={`${new Date(item.date_fin_abonnement).getDate()}/${new Date(
-                item.date_fin_abonnement
-              ).getMonth()}/${new Date(
-                item.date_fin_abonnement
-              ).getFullYear()}  ${String(
-                new Date(item.date_fin_abonnement).getHours()
-              ).padStart(2, "0")}:${String(
-                new Date(item.date_fin_abonnement).getMinutes()
-              ).padStart(2, "0")}`}/>
-
-            
-			</tbody>
+            <DataRow title={"Date inscription"} data={formatDate(item.date_inscription)}
+            />
+            <DataRow title={"Date debut abonnement"}
+              data={formatDate(item.date_debut_abonnement)} />
+            <DataRow title={"Date Fin abonnement"}
+              data={formatDate(item.date_fin_abonnement)}
+            />
+          </tbody>
         </table>
       </div>
     </>
   );
 };
 function PartnerInfo({ open, OnClick, data, setRefresh }) {
-  const [cookies, setCookie, removeCookie] = useCookies([Coockies_name]);
   const [loading, setloading] = useState(false);
 
   const hadlerClose = () => {

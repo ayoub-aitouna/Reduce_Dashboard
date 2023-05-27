@@ -6,6 +6,7 @@ import { BaseUrl, Coockies_name } from "../../constants";
 import { LinearIndeterminate } from "../index";
 import { useCookies } from "react-cookie";
 
+import { PrintDate } from '../../Utils/Date'
 
 const DataRow = ({ item, index, onClick = () => { } }) => {
 	return (
@@ -29,9 +30,7 @@ const DataRow = ({ item, index, onClick = () => { } }) => {
 				{item.note}
 			</td>
 			<td className="px-6 py-4 whitespace-nowrap text-sm font-medium ">
-				{`${new Date(item.data_of_visite).getDate()}/${new Date(
-					item.data_of_visite
-				).getMonth()}/${new Date(item.data_of_visite).getFullYear()}`}
+				<PrintDate sqlDateTime={item.data_of_visite} />
 			</td>
 			<td className="px-6 py-4 whitespace-nowrap text-sm font-medium ">
 				"En cours"
@@ -73,125 +72,125 @@ const Task_anounsments = () => {
 
 	const handleRequest = async () => {
 		setloading(false);
-			const req = await fetch(`${BaseUrl}/Tasks/announcement`, {
-				method: "GET",
-				mode: "cors",
-				cache: "no-cache",
-				headers: {
-					"Content-Type": "application/json",
-					Authorization: `Bearer ${cookies.accesToken}`,
-				},
-				referrerPolicy: "no-referrer",
-			});
-			if (req.ok)
-				setdata(await req.json());
-			setloading(false);
-		};
+		const req = await fetch(`${BaseUrl}/Tasks/announcement`, {
+			method: "GET",
+			mode: "cors",
+			cache: "no-cache",
+			headers: {
+				"Content-Type": "application/json",
+				Authorization: `Bearer ${cookies.accesToken}`,
+			},
+			referrerPolicy: "no-referrer",
+		});
+		if (req.ok)
+			setdata(await req.json());
+		setloading(false);
+	};
 
-		useEffect(() => {
-			handleRequest();
-		}, [refrech]);
+	useEffect(() => {
+		handleRequest();
+	}, [refrech]);
 
-		data = data.filter((v) => v.task_status == "Pending");
-		if (loading) return <LinearIndeterminate />
-		return (
-			<div className="flex flex-col  border-[1px] my-10 border-gray-200 rounded-lg ">
-				<SetAsDone
-					setrefrech={setrefrech}
-					open={isDialogOpend}
-					OnClick={() => {
-						setDialogOpend(false);
-					}}
-					item={SelectedTask}
-				/>
-				<div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
-					<div className="py-2 inline-block min-w-full sm:px-6 lg:px-8">
-						<div className="overflow-hidden">
-							<table className="min-w-full">
-								<thead className="bg-white border-b">
-									<tr>
-										<th
-											scope="col"
-											className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
-										>
-											#
-										</th>
-										<th
-											scope="col"
-											className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
-										>
-											Partenaire
-										</th>
-										<th
-											scope="col"
-											className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
-										>
-											Nom et Prenom
-										</th>
-										<th
-											scope="col"
-											className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
-										>
-											Tele
-										</th>
-										<th
-											scope="col"
-											className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
-										>
-											Note
-										</th>
+	data = data.filter((v) => v.task_status == "Pending");
+	if (loading) return <LinearIndeterminate />
+	return (
+		<div className="flex flex-col  border-[1px] my-10 border-gray-200 rounded-lg ">
+			<SetAsDone
+				setrefrech={setrefrech}
+				open={isDialogOpend}
+				OnClick={() => {
+					setDialogOpend(false);
+				}}
+				item={SelectedTask}
+			/>
+			<div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
+				<div className="py-2 inline-block min-w-full sm:px-6 lg:px-8">
+					<div className="overflow-hidden">
+						<table className="min-w-full">
+							<thead className="bg-white border-b">
+								<tr>
+									<th
+										scope="col"
+										className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
+									>
+										#
+									</th>
+									<th
+										scope="col"
+										className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
+									>
+										Partenaire
+									</th>
+									<th
+										scope="col"
+										className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
+									>
+										Nom et Prenom
+									</th>
+									<th
+										scope="col"
+										className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
+									>
+										Tele
+									</th>
+									<th
+										scope="col"
+										className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
+									>
+										Note
+									</th>
 
-										<th
-											scope="col"
-											className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
-										>
-											Visite Date
-										</th>
-										<th
-											scope="col"
-											className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
-										>
-											Satut
-										</th>
-										<th
-											scope="col"
-											className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
-										>
-											Ville
-										</th>
-										<th
-											scope="col"
-											className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
-										>
-											Adresse
-										</th>
-										<th
-											scope="col"
-											className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
-										>
-											Résultat
-										</th>
-									</tr>
-								</thead>
-								<tbody>
-									{data.map((item, index) => (
-										<DataRow
-											key={item.id}
-											item={item}
-											index={index}
-											onClick={(selected) => {
-												setDialogOpend(true);
-												setSelectedTask(selected);
-											}}
-										/>
-									))}
-								</tbody>
-							</table>
-						</div>
+									<th
+										scope="col"
+										className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
+									>
+										Visite Date
+									</th>
+									<th
+										scope="col"
+										className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
+									>
+										Satut
+									</th>
+									<th
+										scope="col"
+										className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
+									>
+										Ville
+									</th>
+									<th
+										scope="col"
+										className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
+									>
+										Adresse
+									</th>
+									<th
+										scope="col"
+										className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
+									>
+										Résultat
+									</th>
+								</tr>
+							</thead>
+							<tbody>
+								{data.map((item, index) => (
+									<DataRow
+										key={item.id}
+										item={item}
+										index={index}
+										onClick={(selected) => {
+											setDialogOpend(true);
+											setSelectedTask(selected);
+										}}
+									/>
+								))}
+							</tbody>
+						</table>
 					</div>
 				</div>
 			</div>
-		);
-	};
+		</div>
+	);
+};
 
-	export default Task_anounsments;
+export default Task_anounsments;

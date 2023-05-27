@@ -98,6 +98,12 @@ function Statics({ selectedStatus }) {
       </div>
     );
   }
+  const ExcelBtn = ({ data , name}) => {
+    return cookies.role === "Admin" ?
+      <IconButton OnClick={() => save_as_xlsx(data, name)} Icon={() => <SiMicrosoftexcel />} title={"Save As Execl"} style={'ml-auto !w-[250px]'} />
+      :
+      <></>
+  }
 
   return (
     <div className="p-5 my-10 h-full">
@@ -112,7 +118,7 @@ function Statics({ selectedStatus }) {
                 <div className="w-full flex flex-row justify-start items-center  gap-10 mb-5 ">
                   <Statebanner title={"Recent clinets : "} count={state.client.resent_clients} />
                   <Statebanner title={"All clinets : "} count={state.client.total_clients} />
-                  <IconButton OnClick={() => save_as_xlsx(clients_data, 'clinets')} Icon={() => <SiMicrosoftexcel />} title={"Save As Execl"} style={'ml-auto !w-[250px]'} />
+                  <ExcelBtn data={clients_data} name={'clinets'}/>
                 </div>
                 <div className="flex-1 w-full overflow-y-scroll overflow-x-hidden">
                   <ClientTable
@@ -127,7 +133,7 @@ function Statics({ selectedStatus }) {
                 <div className="w-full flex flex-row justify-start items-center  gap-10 mb-5 ">
                   <Statebanner title={"Recent Partners : "} count={state.partner.resent_partners} />
                   <Statebanner title={"All Partners : "} count={state.partner.total_partners} />
-                  <IconButton OnClick={() => save_as_xlsx(partner_data, 'partners')} Icon={() => <SiMicrosoftexcel />} title={"Save As Execl"} style={'ml-auto !w-[250px]'} />
+                  <ExcelBtn data={clients_data} name={'partners'} />
                 </div>
                 <UserTable
                   my="0"

@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import Dialog from "@mui/material/Dialog";
 import DialogContent from "@mui/material/DialogContent";
-import { get_villes } from "../../Utils/villes/get_villes";
 import { useCookies } from "react-cookie";
 import { BaseUrl, Coockies_name } from "../../constants";
+import { PrintDate } from '../../Utils/Date'
 
 const DataRow = ({ item, index }) => {
   return (
@@ -71,8 +71,6 @@ const SubPartnerInfoRender = ({ Data = [] }) => {
   );
 };
 
-
-
 const HistoryRows = ({ item, index }) => {
   return (
     <tr
@@ -86,13 +84,7 @@ const HistoryRows = ({ item, index }) => {
         {item.product}
       </td>
       <td className="px-6 py-4 whitespace-nowrap text-sm font-medium ">
-        {`${new Date(item.created_date).getDate()}/${new Date(
-          item.created_date
-        ).getMonth()}/${new Date(item.created_date).getFullYear()}  ${new Date(
-          item.created_date
-        ).getHours()}:${String(
-          new Date(item.created_date).getMinutes()
-        ).padStart(2, "0")}`}
+        <PrintDate sqlDateTime={item.created_date} />
       </td>
     </tr>
   );
@@ -186,7 +178,7 @@ function SubPartnerInfo({ open, OnClick, id }) {
         },
         referrerPolicy: "no-referrer",
       });
-      if (req.ok) 
+      if (req.ok)
         sethoistory(await req.json());
       else
         sethoistory([{ sub_partner_Name: "No Account is Available Yet!" }]);

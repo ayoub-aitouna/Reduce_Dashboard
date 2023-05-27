@@ -3,7 +3,7 @@ import { SearchBar } from "../index";
 import { BaseUrl, Coockies_name } from "../../constants";
 import { useCookies } from "react-cookie";
 import { LinearIndeterminate } from "../index";
-
+import { PrintDate } from '../../Utils/Date'
 function Edit_history() {
 	const [Search, setSearch] = useState("");
 	const [cookies, setCookie, removeCookie] = useCookies([Coockies_name]);
@@ -131,13 +131,7 @@ const DataRow = ({ item, index }) => {
 				{item.edited_column}
 			</td>
 			<td className="px-6 py-4 whitespace-nowrap text-sm font-medium ">
-				{`${new Date(item.created_date).getDate()}/${new Date(
-					item.created_date
-				).getMonth()}/${new Date(item.created_date).getFullYear()}  ${new Date(
-					item.created_date
-				).getHours()}:${String(
-					new Date(item.created_date).getMinutes()
-				).padStart(2, "0")}`}
+				<PrintDate sqlDateTime={item.created_date} />
 			</td>
 		</tr>
 	);

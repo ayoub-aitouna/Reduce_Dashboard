@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
-
+import { PrintDate } from '../../Utils/Date'
 import { BaseUrl, Coockies_name } from "../../constants";
 import { useCookies } from "react-cookie";
 // Data Row
+
 const DataRow = ({ item, index, onClick = () => {} }) => {
   return (
     <tr
@@ -25,10 +26,8 @@ const DataRow = ({ item, index, onClick = () => {} }) => {
       <td className="px-6 py-4 whitespace-nowrap text-sm font-medium ">
         {item.note}
       </td>
-      <td className="px-6 py-4 whitespace-nowrap text-sm font-medium ">
-        {`${new Date(item.data_of_visite).getDate()}/${new Date(
-          item.data_of_visite
-        ).getMonth()}/${new Date(item.data_of_visite).getFullYear()}`}
+      <td className="px-6 py-4 whitespace-nowrap text-sm font-medium ">=
+        <PrintDate sqlDateTime={item.data_of_visite} />
       </td>
       <td className="px-6 py-4 whitespace-nowrap text-sm font-medium ">
         {item.partner_status === "intrested"

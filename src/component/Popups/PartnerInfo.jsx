@@ -12,6 +12,9 @@ import { Button as MyButton, LoadingIcon } from "../index";
 import { BaseUrl, Coockies_name } from "../../constants";
 import { useCookies } from "react-cookie";
 import { Generate_contract_Pdf } from "../../Utils/Pdfgenerator";
+import { PrintDate, formatDate } from '../../Utils/Date'
+
+
 const DataRow = ({ title, data = null, Render = () => <></> }) => {
   return (
     <tr>
@@ -54,15 +57,7 @@ const PartnerInfoRender = ({ item }) => {
             <DataRow title={"#"} data={item.id} />
             <DataRow
               title={"Submited At"}
-              data={`${new Date(item.created_date).getDate()}/${new Date(
-                item.created_date
-              ).getMonth()}/${new Date(
-                item.created_date
-              ).getFullYear()}  ${String(
-                new Date(item.created_date).getHours()
-              ).padStart(2, "0")}:${String(
-                new Date(item.created_date).getMinutes()
-              ).padStart(2, "0")}`}
+              data={formatDate(item.created_date)}
             />
             <DataRow
               title={"Logo"}
