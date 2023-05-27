@@ -11,6 +11,8 @@ import { BaseUrl, Coockies_name } from "../../constants";
 import { get_villes } from "../../Utils/villes/get_villes";
 import { useCookies } from "react-cookie";
 import { get_Activity } from "../../Utils/Activities/Activities";
+import { ImgInput } from "../../Utils/ImgInput";
+
 import FormData from 'form-data';
 
 const UpdatePartner = ({ open, OnClick, partner, setRefresh }) => {
@@ -104,13 +106,11 @@ const Fill_Form = ({ data, setdata }) => {
       <div className="w-full flex flex-row justify-around p-5">
         <Button variant="contained" component="label">
           Upload LOGO
-          <input hidden accept="image/*" multiple type="file" onChange={(event) => setdata({ ...data, logo: event.target.files[0], logo_selected: true })
-          } />
+          <ImgInput width={500} height={500} call={(file)=>{setdata({ ...data, logo: file, logo_selected: true })}}/>
         </Button>
         <Button variant="contained" component="label">
           Upload COVER
-          <input hidden accept="image/*" multiple type="file" onChange={(event) => setdata({ ...data, cover: event.target.files[0], cover_selected: true })
-          } />
+          <ImgInput width={500} height={500} call={(file)=>{setdata({ ...data, cover: file, cover_selected: true })}}/>
         </Button>
       </div>
       <div className="flex flex-wrap -mx-3 mb-6">

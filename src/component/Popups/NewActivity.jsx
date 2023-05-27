@@ -3,13 +3,12 @@ import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
-import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
-import { Button as MyButton, Filter_Selector, LoadingIcon } from "../index";
+import { Button as MyButton, LoadingIcon } from "../index";
 import { BaseUrl, Coockies_name } from "../../constants";
-import Cookies from "js-cookie";
 import { useCookies } from "react-cookie";
 import { setDate } from "date-fns";
+import { ImgInput } from "../../Utils/ImgInput";
 
 const Fill_Form = ({ data, setdata }) => {
   return (
@@ -36,8 +35,7 @@ const Fill_Form = ({ data, setdata }) => {
         </div>
         <Button variant="contained" component="label" className="w-[50%] h-[60px] mt-5">
           Upload LOGO
-          <input hidden accept="image/*" multiple type="file" onChange={(event) => setdata({ ...data, logo: event.target.files[0] })
-          } />
+          <ImgInput width={500} height={500} call={(file)=>{setdata({ ...data, logo: file })}}/>
         </Button>
       </div>
     </form>
