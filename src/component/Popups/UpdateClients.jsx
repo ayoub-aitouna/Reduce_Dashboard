@@ -287,27 +287,6 @@ const Fill_Form = ({ data, setdata, is_update = true }) => {
                 />
               </LocalizationProvider>
             </div>
-            {/* <div className="flex flex-col w-full justify-center md:w-1/2 items-start ml-3    mt-4">
-
-              <LocalizationProvider dateAdapter={AdapterDayjs}>
-                <DatePicker
-                  label="Date fin_abonnement"
-                  value={data.date_fin_abonnement || ''}
-                  onChange={(newValue) => {
-                    try {
-                      setdata({
-                        ...data,
-                        date_fin_abonnement: newValue.$d
-                          .toISOString()
-                          .slice(0, 19)
-                          .replace("T", " "),
-                      });
-                    } catch (error) { }
-                  }}
-                  renderInput={(params) => <TextField {...params} />}
-                />
-              </LocalizationProvider>
-            </div> */}
           </div>
         </div>
       </div>

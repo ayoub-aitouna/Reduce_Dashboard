@@ -9,6 +9,7 @@ import {
 	PartnerInfo,
 	SubPartnerInfo,
 	UserTable,
+	NewPartner,
 	LinearIndeterminate
 } from "../index";
 
@@ -21,6 +22,7 @@ function Partner() {
 	const [isDialogOpend, setDialogOpend] = useState(false);
 	const [issubDialogOpend, setsubDialogOpend] = useState(false);
 	const [isUpdateDialogOpend, setUpdateDialogOpend] = useState(false);
+	const [isNewDialogOpend, setNewDialogOpend] = useState(false);
 
 	let [loading, setloading] = useState(false);
 	let [Odata, setOdata] = useState([]);
@@ -49,7 +51,7 @@ function Partner() {
 			},
 			referrerPolicy: "no-referrer",
 		});
-		if (req.ok) 
+		if (req.ok)
 			setOdata(await req.json());
 		setloading(false);
 	};
@@ -110,6 +112,13 @@ function Partner() {
 				}}
 				partner={SelectedPartner}
 			/>
+			<NewPartner
+				open={isNewDialogOpend}
+				setRefresh={setRefresh}
+				OnClick={() => {
+					setUpdateDialogOpend(false);
+				}}
+			/>
 
 			<div className="flex flex-col items-start justify-start">
 				<h1 className="text-[20px] font-black leading-9 text-gray-800">
@@ -145,6 +154,14 @@ function Partner() {
 						Filter={selectedStatus}
 					/>
 				</div>
+			</div>
+			<div className="absolute bottom-8 right-8 flex flex-row gap-5 capitalize ">
+				<Button
+					Icon={() => <BiTask />}
+					title={"Ajoutez Une Partner"}
+					OnClick={() => setNewDialogOpend(true)}
+					style={"!w-[250px] text-[15px] shadow-lg capitalize"}
+				/>
 			</div>
 			{
 				loading ? <LinearIndeterminate /> : <UserTable

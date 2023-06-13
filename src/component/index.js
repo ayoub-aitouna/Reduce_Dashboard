@@ -32,6 +32,7 @@ import AddNewCity from "./Popups/NewCity";
 import NewActivity from "./Popups/NewActivity";
 import EditeActivity from "./Popups/EditeActivity";
 import AddProffesion from './Popups/NewProfession'
+import NewPartner from './Popups/NewPartner'
 
 //Utils 
 import UserTable from "./Utils/UserTable";
@@ -100,5 +101,6 @@ export {
   Profession_table,
   EditeActivity,
   LinearIndeterminate,
-  AddProffesion
+  AddProffesion,
+  NewPartner
 };
