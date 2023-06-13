@@ -25,6 +25,9 @@ const NewPartner = ({ open, OnClick, setRefresh }) => {
     if (!loading) hadlerClose();
   }, [loading]);
 
+  useEffect(() => {
+    setdata({});
+  }, [open]);
 
   return (
     <div>
@@ -67,10 +70,11 @@ const NewPartner = ({ open, OnClick, setRefresh }) => {
                     body: formData,
                   });
                   setRefresh((val) => val + 1);
-                  setloading(false);
                 } catch (err) {
                   console.error(err);
+                } finally {
                   setloading(false);
+                  setdata({});
                 }
               }}
             >

@@ -10,8 +10,10 @@ import {
 	SubPartnerInfo,
 	UserTable,
 	NewPartner,
+	Button,
 	LinearIndeterminate
 } from "../index";
+import { BiTask } from "react-icons/bi";
 
 import { BaseUrl, Coockies_name } from "../../constants";
 import { get_Activity } from "../../Utils/Activities/Activities";
@@ -116,7 +118,7 @@ function Partner() {
 				open={isNewDialogOpend}
 				setRefresh={setRefresh}
 				OnClick={() => {
-					setUpdateDialogOpend(false);
+					setNewDialogOpend(false);
 				}}
 			/>
 
