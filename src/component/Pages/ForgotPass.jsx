@@ -2,11 +2,11 @@ import React, { useState, useEffect } from "react";
 import { BaseUrl, Coockies_name } from "../../constants";
 import { useNavigate, NavLink } from "react-router-dom";
 import { Dark_loading_icon } from "../index";
-const ForgotPass = ({ Email }) => {
+const ForgotPass = ({ FgtData }) => {
   let navigate = useNavigate();
   const [loading, setloading] = useState(false);
   const [credintials, setcredintials] = useState({
-    email: Email,
+    email: FgtData.Email,
     key: "",
     _password: "",
     re_password: "",
@@ -14,23 +14,24 @@ const ForgotPass = ({ Email }) => {
   useEffect(() => {
     setcredintials({
       ...credintials,
-      email: Email,
+      email: FgtData.Email,
     });
-  }, [Email]);
+  }, [FgtData]);
   const handlesubmit = async (e) => {
     e.preventDefault();
     if (credintials.re_password != credintials._password)
       alert("le mot de passe ne correspond pas");
     setloading(true);
     try {
+      const headers = new Headers();
+      console.log(FgtData.sessoion);
+      headers.set('Content-Type', `application/json`);
+      headers.set('Cookie', FgtData.sessoion);
+
       const req = await fetch(`${BaseUrl}/auth/reset_pass`, {
         method: "POST",
         mode: "cors",
-        cache: "no-cache",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        referrerPolicy: "no-referrer",
+        headers: headers,
         body: JSON.stringify(credintials),
       });
       if (req.ok) {
@@ -70,7 +71,7 @@ const ForgotPass = ({ Email }) => {
                 </label>
                 <input
                   type="text"
-                  onkeypress={(event) => {}}
+                  onkeypress={(event) => { }}
                   name="key"
                   value={credintials.key}
                   onChange={(e) =>
@@ -79,7 +80,7 @@ const ForgotPass = ({ Email }) => {
                       key:
                         e.target.value.charCodeAt(e.target.value.length - 1) >=
                           48 &&
-                        e.target.value.charCodeAt(e.target.value.length - 1) <=
+                          e.target.value.charCodeAt(e.target.value.length - 1) <=
                           57
                           ? e.target.value
                           : "",

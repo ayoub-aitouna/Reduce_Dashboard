@@ -25,18 +25,18 @@ import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";
 
 function App() {
   const [Search, setSearch] = useState("");
-  const [Email, setEmail] = useState("");
+  const [FgtData, setFgtData] = useState({ Eamil: "", sessoion: "" });
   let [Ref, setRef] = useState(0);
 
   return (
     <div className="w-full h-[100vh] !pb-[50px]">
       <BrowserRouter>
         <Routes>
-          <Route exact path="/" element={<Auth setEmail={setEmail} />} />
+          <Route exact path="/" element={<Auth setFgtData={setFgtData} />} />
           <Route
             exact
             path="/forgot_pass"
-            element={<ForgotPass Email={Email} />}
+            element={<ForgotPass FgtData={FgtData} />}
           />
           <Route path="/home" element={<Home />}>
             <Route exact path="" element={<Statics />} />

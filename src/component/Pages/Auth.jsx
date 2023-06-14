@@ -6,7 +6,7 @@ import Cookies from "js-cookie";
 import { Icon_Auth } from "../../assets";
 import { useNavigate, NavLink } from "react-router-dom";
 
-const AuthForm = ({ setEmail }) => {
+const AuthForm = ({ setFgtData }) => {
   let navigate = useNavigate();
 
   const [loading, setloading] = useState(false);
@@ -16,7 +16,7 @@ const AuthForm = ({ setEmail }) => {
     msg: "Email ou mot de passe incorrect.",
   });
 
-  const [cookies, setCookie, removeCookie] = useCookies([Coockies_name]);
+  const [cookies, setCookie] = useCookies([Coockies_name]);
 
   const [login, setlogin] = useState({
     email: "",
@@ -38,7 +38,6 @@ const AuthForm = ({ setEmail }) => {
   };
 
   const login_submit = async (event) => {
-    // login_call({ _name: "name", accesToken: "dasdasdad adsadsas", role: "ADMIN" });
     if (event != undefined) event.preventDefault();
     setloading(true);
     try {
@@ -64,18 +63,19 @@ const AuthForm = ({ setEmail }) => {
     });
   };
 
+ 
   const request_key = async () => {
     if (login.email === "" || login.email == undefined || login.email === null)
       return seterror((obj) => {
         return { val: 1, msg: "Veuillez saisir votre e-mail" };
       });
     setloading(true);
-    setEmail(login.email);
     try {
-      const req = await fetch(`${BaseUrl}/auth/sendVeriifyOtp`, {
+      const response = await fetch(`${BaseUrl}/auth/sendVeriifyOtp`, {
         method: "POST",
         mode: "cors",
         cache: "no-cache",
+        credentials: "include", // Include credentials (cookies) in the request
         headers: {
           "Content-Type": "application/json",
         },
@@ -84,10 +84,22 @@ const AuthForm = ({ setEmail }) => {
           email: login.email,
         }),
       });
-      if (req.ok) return navigate("/forgot_pass");
+      if (response.ok) {
+        // Access specific header values
+        const headers = response.headers;
+        const Set_Cookie = headers.get('Set-Cookie');
+        const contentLength = headers.get('Content-Length');
+        console.log(Set_Cookie);
+        console.log(contentLength);
+   
+        setFgtData({ Eamil: login.email, sessoion: Set_Cookie });
+        return navigate("/forgot_pass");
+      }
       else return { val: 1, msg: "Email incorrect." };
     } catch (error_msg) { }
-    setloading(false);
+    finally {
+      setloading(false);
+    }
     seterror((obj) => {
       return { val: 1, msg: "Email incorrect." };
     });
@@ -153,10 +165,10 @@ const AuthForm = ({ setEmail }) => {
   );
 };
 
-function Auth({ setEmail }) {
+function Auth({ setFgtData }) {
   return (
     <div className="w-full h-[100vh] grid place-content-center bg-gray-50 ">
-      <AuthForm setEmail={setEmail} />
+      <AuthForm setFgtData={setFgtData} />
     </div>
   );
 }
