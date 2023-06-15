@@ -2,9 +2,9 @@ import React, { useState, useEffect } from "react";
 import { Button, Input, LoadingIcon, ErrorMsg } from "../index";
 import { useCookies } from "react-cookie";
 import { BaseUrl, Coockies_name } from "../../constants";
-import Cookies from "js-cookie";
 import { Icon_Auth } from "../../assets";
 import { useNavigate, NavLink } from "react-router-dom";
+import axios from 'axios';
 
 const AuthForm = ({ setFgtData }) => {
   let navigate = useNavigate();
@@ -63,36 +63,24 @@ const AuthForm = ({ setFgtData }) => {
     });
   };
 
- 
+
   const request_key = async () => {
-    if (login.email === "" || login.email == undefined || login.email === null)
-      return seterror((obj) => {
-        return { val: 1, msg: "Veuillez saisir votre e-mail" };
-      });
-    setloading(true);
     try {
-      const response = await fetch(`${BaseUrl}/auth/sendVeriifyOtp`, {
-        method: "POST",
-        mode: "cors",
-        cache: "no-cache",
-        credentials: "include", // Include credentials (cookies) in the request
-        headers: {
-          "Content-Type": "application/json",
-        },
-        referrerPolicy: "no-referrer",
-        body: JSON.stringify({
-          email: login.email,
-        }),
+      if (login.email === "" || login.email == undefined || login.email === null)
+        return seterror((obj) => {
+          return { val: 1, msg: "Veuillez saisir votre e-mail" };
+        });
+      setloading(true);
+      const response = await axios.post(`${BaseUrl}/auth/sendVeriifyOtp`, {
+        email: login.email,
+      }, {
+        withCredentials: true // Include cookies in the request
       });
-      if (response.ok) {
-        // Access specific header values
-        const headers = response.headers;
-        const Set_Cookie = headers.get('Set-Cookie');
-        const contentLength = headers.get('Content-Length');
-        console.log(Set_Cookie);
-        console.log(contentLength);
-   
-        setFgtData({ Eamil: login.email, sessoion: Set_Cookie });
+
+      const value = response.data.yourCookieName; // Replace with the actual cookie name
+      console.log(value);
+      if (response.status === 200) {
+        setFgtData({ Eamil: login.email, sessoion: '' });
         return navigate("/forgot_pass");
       }
       else return { val: 1, msg: "Email incorrect." };
