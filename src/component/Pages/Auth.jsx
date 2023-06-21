@@ -73,14 +73,11 @@ const AuthForm = ({ setFgtData }) => {
       setloading(true);
       const response = await axios.post(`${BaseUrl}/auth/sendVeriifyOtp`, {
         email: login.email,
-      }, {
-        withCredentials: true // Include cookies in the request
       });
 
-      const value = response.data.yourCookieName; // Replace with the actual cookie name
-      console.log(value);
       if (response.status === 200) {
-        setFgtData({ Eamil: login.email, sessoion: '' });
+        console.log(response.data.otp);
+        setFgtData({ Eamil: login.email, sessoion: response.data.otp });
         return navigate("/forgot_pass");
       }
       else return { val: 1, msg: "Email incorrect." };

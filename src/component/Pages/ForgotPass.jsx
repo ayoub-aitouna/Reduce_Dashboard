@@ -10,11 +10,13 @@ const ForgotPass = ({ FgtData }) => {
     key: "",
     _password: "",
     re_password: "",
+    value:""
   });
   useEffect(() => {
     setcredintials({
       ...credintials,
       email: FgtData.Email,
+      value: FgtData.sessoion
     });
   }, [FgtData]);
   const handlesubmit = async (e) => {
@@ -26,8 +28,6 @@ const ForgotPass = ({ FgtData }) => {
       const headers = new Headers();
       console.log(FgtData.sessoion);
       headers.set('Content-Type', `application/json`);
-      headers.set('Cookie', FgtData.sessoion);
-
       const req = await fetch(`${BaseUrl}/auth/reset_pass`, {
         method: "POST",
         mode: "cors",
