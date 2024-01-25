@@ -11,7 +11,7 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import dayjs, { Dayjs } from "dayjs";
 
-import { Button as MyButton, Filter_Selector, LoadingIcon } from "../index";
+import { Button as MyButton, FilterSelector, LoadingIcon } from "../index";
 import { BaseUrl, Coockies_name } from "../../constants";
 import { get_villes } from "../../Utils/villes/get_villes";
 import { useCookies } from "react-cookie";
@@ -23,7 +23,7 @@ const UpdateClinets = ({ open, OnClick, Client, setRefresh, is_update }) => {
   const now = dayjs().$d.toISOString().slice(0, 19).replace("T", " ");
   const empty_client = {
     full_name: "", email: "", birth_date: now, sexe: "", ville: 0,
-    adresse: "", profession_id: 0, tel: "", abonnement: "", _password: "",
+    adresse: "", profession: 0, tel: "", abonnement: "", _password: "",
     statut: "", date_fin_abonnement: now
   };
   const [data, setdata] = useState(empty_client);
@@ -46,6 +46,15 @@ const UpdateClinets = ({ open, OnClick, Client, setRefresh, is_update }) => {
   const handle_update_create = async () => {
     setloading(true);
     setdata({ ...data, admin: true });
+    data.statut = (data.statut === "") ? "Activé" : data.statut;
+    const emptyFields = Object.values(data)
+      .filter((value) => !value);
+
+    if (emptyFields.length > 0) {
+      setloading(false);
+      alert("Please fill all required fields. ");
+      return;
+    }
     try {
       const req = await fetch(`${BaseUrl}/${is_update ? 'clients/' : 'auth/new_client'}`, {
         method: is_update ? 'PUT' : 'POST',
@@ -107,6 +116,7 @@ const UpdateClinets = ({ open, OnClick, Client, setRefresh, is_update }) => {
     }
   }
 
+
   return (
     <div>
       <Dialog
@@ -167,20 +177,29 @@ const UpdateClinets = ({ open, OnClick, Client, setRefresh, is_update }) => {
 
 const Fill_Form = ({ data, setdata, is_update = true }) => {
   let [villes, setvilles] = useState([]);
-  const [Profession, setProfession] = useState([]);
-  useEffect(() => {
-    get_villes(setvilles);
-    get_profesion(setProfession);
-  }, []);
-  const is_pass = (key) => {
-    return (key === '_password' && is_update === false);
+  let [Professions, setProfessions] = useState([]);
+  const GetValues = async () => {
+    await get_villes(setvilles);
+    await get_profesion(setProfessions);
+    setvilles((prev) => {
+      return (prev.filter((value) => value.name));
+    });
+    setProfessions((prev) => {
+      return (prev.filter((value) => value.name));
+    })
   }
+
+  useEffect(() => {
+    GetValues();
+  }, []);
+
   return (
-    <form className="w-full max-w-lg ">
+    <form className="w-full max-w-lg " >
       <div className="flex flex-wrap -mx-3 mb-6">
 
         {Object.keys(data).map((key) => (
-          (key === 'full_name' || key === 'adresse' || key === 'email' || key === 'tel') && (
+          (key === 'full_name' || key === 'adresse' || key === 'email' || key === 'tel') &&
+          (
             <div className="w-full px-3">
               <label
                 className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
@@ -212,9 +231,13 @@ const Fill_Form = ({ data, setdata, is_update = true }) => {
             key={0}
             className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
             id={`grid-Password`}
+            autoComplete="new-password"
             value={data._password}
             onChange={(e) => {
-              setdata({ ...data, _password: e.target.value });
+              setdata((prevData) => {
+                const newData = { ...prevData, _password: e.target.value };
+                return newData;
+              });
             }}
             type="password"
           />
@@ -222,7 +245,7 @@ const Fill_Form = ({ data, setdata, is_update = true }) => {
 
         <div className="flex flex-wrap  flex- mx-3 mb-2">
           <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-            <Filter_Selector
+            <FilterSelector
               title={"Ville"}
               Filter={data.ville}
               setFilter={(value) => setdata({ ...data, ville: value })}
@@ -231,16 +254,16 @@ const Fill_Form = ({ data, setdata, is_update = true }) => {
             />
           </div>
           <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-            <Filter_Selector
+            <FilterSelector
               title={"profession"}
-              Filter={data.profession_id}
-              setFilter={(value) => setdata({ ...data, profession_id: value })}
-              options={Profession}
+              Filter={data.profession}
+              setFilter={(value) => setdata({ ...data, profession: value })}
+              options={Professions}
               styles={"!max-w-full"}
             />
           </div>
           <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0 mt-4">
-            <Filter_Selector
+            <FilterSelector
               title={"sexe"}
               Filter={data.sexe}
               setFilter={(value) => setdata({ ...data, sexe: value })}
@@ -252,7 +275,7 @@ const Fill_Form = ({ data, setdata, is_update = true }) => {
             />
           </div>
           <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0 mt-4">
-            <Filter_Selector
+            <FilterSelector
               title={"abonnement"}
               Filter={data.abonnement}
               setFilter={(value) => setdata({ ...data, abonnement: value })}
@@ -267,7 +290,6 @@ const Fill_Form = ({ data, setdata, is_update = true }) => {
           </div>
           <div className="flex flex-row justify-center items=center" >
             <div className="flex flex-col w-full justify-center ml-3  mt-4">
-
               <LocalizationProvider dateAdapter={AdapterDayjs}>
                 <DatePicker
                   label="date_fin_abonnement"

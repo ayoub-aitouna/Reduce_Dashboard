@@ -7,7 +7,6 @@ import DialogTitle from "@mui/material/DialogTitle";
 import { Button as MyButton, LoadingIcon } from "../index";
 import { BaseUrl, Coockies_name } from "../../constants";
 import { useCookies } from "react-cookie";
-import { setDate } from "date-fns";
 import { ImgInput } from "../../Utils/ImgInput";
 
 const Fill_Form = ({ data, setdata }) => {
@@ -35,7 +34,7 @@ const Fill_Form = ({ data, setdata }) => {
         </div>
         <Button variant="contained" component="label" className="w-[50%] h-[60px] mt-5">
           Upload LOGO
-          <ImgInput width={500} height={500} call={(file)=>{setdata({ ...data, logo: file })}}/>
+          <ImgInput width={500} height={500} call={(file) => { setdata({ ...data, logo: file }) }} />
         </Button>
       </div>
     </form>
@@ -49,13 +48,41 @@ function AddActivity({ open, OnClick, setRefresh }) {
   const [cookies, setCookie, removeCookie] = useCookies([Coockies_name]);
 
   const [loading, setloading] = useState(false);
+
   const hadlerClose = () => {
     OnClick();
   };
+
   useEffect(() => {
     if (!loading) hadlerClose();
   }, [loading]);
+  const handle_request = async () => {
+    try {
+      setloading(true);
 
+      const formData = new FormData();
+      formData.append("images", data.logo);
+      formData.append("data", JSON.stringify(data));
+      const req = await fetch(`${BaseUrl}/Activities/Add`, {
+        method: "POST",
+        mode: "cors",
+        cache: "no-cache",
+        headers: {
+          Authorization: `Bearer ${cookies.accesToken}`,
+        },
+        referrerPolicy: "no-referrer",
+        body: formData,
+      });
+      console.log("OK DONE");
+    } catch (err) {
+      console.log("Error " + err);
+    } finally {
+      console.log("Finally");
+      setdata([]);
+      setloading(false);
+      setRefresh((val) => val + 1);
+    }
+  }
   return (
     <div>
       <Dialog
@@ -74,26 +101,7 @@ function AddActivity({ open, OnClick, setRefresh }) {
         <DialogActions>
           <Button
             onClick={async (e) => {
-              setloading(true);
-              try {
-                const formData = new FormData();
-                formData.append("images", data.logo);
-                formData.append("data", JSON.stringify(data));
-                const req = await fetch(`${BaseUrl}/Activities/Add`, {
-                  method: "POST",
-                  mode: "cors",
-                  cache: "no-cache",
-                  headers: {
-                    Authorization: `Bearer ${cookies.accesToken}`,
-                  },
-                  referrerPolicy: "no-referrer",
-                  body: formData,
-                });
-               } catch (err) {
-              } finally {
-                setDate([]);
-                setloading(false);
-              }
+              handle_request();
             }}
           >
             <MyButton

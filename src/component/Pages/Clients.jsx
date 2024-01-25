@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 
 import {
-	Filter_Selector,
+	FilterSelector,
 	SearchBar,
 	UpdateClients,
 	ClientInfo,
@@ -94,7 +94,7 @@ function Clients({ selectedStatus }) {
 	}
 
 	return (
-		<div className="p-5 my-10 ">
+		<div className="p-5">
 			<ClientInfo
 				open={isDialogOpend}
 				setRefresh={setRefresh}
@@ -123,7 +123,7 @@ function Clients({ selectedStatus }) {
 			<div className="flex ld:flex-row flex-col w-full mt-10 lg:gap-5 gap-0 justify-center items-center">
 				<SearchBar styles={"max-h-[15px] !w-full"} setSearch={setSearch} />
 				<div className="flex flex-row w-full mt-10 gap-5 justify-start items-center">
-					<Filter_Selector
+					<FilterSelector
 						title={"sélectionner un abonnement"}
 						styles={"h-[95px]"}
 						options={[{ value: 'Tout', name: '' },
@@ -135,14 +135,14 @@ function Clients({ selectedStatus }) {
 						setFilter={(value) => setsubs(value)}
 						Filter={subs}
 					/>
-					<Filter_Selector
+					<FilterSelector
 						title={"Sélectionnez une ville"}
 						styles={"h-[95px]"}
 						options={villes}
 						setFilter={(value) => setCity(value)}
 						Filter={City}
 					/>
-					<Filter_Selector
+					<FilterSelector
 						title={"sélectionner le statut"}
 						styles={"h-[95px]"}
 						options={[{ value: 'Tout', name: '' },
@@ -161,17 +161,21 @@ function Clients({ selectedStatus }) {
 					style={"!w-[250px] text-[15px] shadow-lg capitalize"}
 				/>
 			</div>
-			{loading ? <LinearIndeterminate /> : <ClientTable
-				Data={data}
-				selectedstatu={selectedStatus}
-				OnSelect={(data) => {
-					setSelectedClient(data);
-					setDialogOpend(true);
-				}}
-				OnEdit={(data) => {
-					handle_popup(data, true);
-				}}
-			/>}
+			{loading ? <LinearIndeterminate /> :
+				<div className="overflow-scroll max-h-[50vh]">
+					<ClientTable
+						Data={data}
+						selectedstatu={selectedStatus}
+						OnSelect={(data) => {
+							setSelectedClient(data);
+							setDialogOpend(true);
+						}}
+						OnEdit={(data) => {
+							handle_popup(data, true);
+						}}
+					/>
+				</div>
+			}
 		</div>
 	);
 }

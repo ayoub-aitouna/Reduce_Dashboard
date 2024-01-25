@@ -1,14 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { SiMicrosoftexcel } from "react-icons/si";
+import { FaCaretDown, FaCaretUp } from "react-icons/fa";
+
 import { writeFile, utils } from 'xlsx';
 
 
 import {
-  Filter_Selector,
-  SearchBar,
-  UpdatePartner,
-  PartnerInfo,
-  SubPartnerInfo,
   UserTable,
   ClientTable,
   LinearIndeterminate,
@@ -22,12 +19,13 @@ import { useCookies } from "react-cookie";
 function Statics({ selectedStatus }) {
   let [partner_data, setpartner_data] = useState([]);
   let [clients_data, setclients_data] = useState([]);
+  let [Show, setShow] = useState({ clients: true, Partners: true });
   let [state, setstate] = useState({ client: {}, partner: {} });
   const [cookies, setCookie, removeCookie] = useCookies([Coockies_name]);
   let [loading, setloading] = useState(false);
 
   const handleRequest = async () => {
-    setloading(false);
+    setloading(true);
     try {
       const req = await fetch(`${BaseUrl}/clients/all`, {
         method: "GET",
@@ -55,9 +53,9 @@ function Statics({ selectedStatus }) {
         const data = await partner_req.json();
         setpartner_data(data);
       }
-    } catch (err) { }
-
-    setloading(false);
+    } catch (err) {
+      alert("error loading Users Data");
+    }
   };
 
   const handleRequest_state = async () => {
@@ -72,12 +70,18 @@ function Statics({ selectedStatus }) {
         referrerPolicy: "no-referrer",
       });
       if (req.ok) setstate(await req.json());
-    } catch (err) { }
+    } catch (err) {
+      alert("error loading State Data");
+    }
   };
+  const GetData = async () => {
 
+    await handleRequest();
+    await handleRequest_state();
+    setloading(false);
+  }
   useEffect(() => {
-    handleRequest();
-    handleRequest_state();
+    GetData();
   }, []);
 
   const save_as_xlsx = (data, name) => {
@@ -92,54 +96,87 @@ function Statics({ selectedStatus }) {
     if (count == null || count == undefined)
       count = 0;
     return (
-      <div className="flex flex-row justify-start items-center  gap-2 ">
-        <h1 className="text-[22px] font-bold self-center text-gray-800">{title}</h1>
+      <div className="flex-1 flex flex-row justify-center items-center  gap-6 ">
+        <h1 className="text-[18px] font-bold self-center text-gray-500">{title}</h1>
         <h6 className="text-[18px] font-bold self-center  text-blue-500">{`${count > 1000 ? count / 1000 : count}${count > 1000 ? 'K' : ''}`}</h6>
       </div>
     );
   }
-  const ExcelBtn = ({ data , name}) => {
+
+
+  const ExcelBtn = ({ data, name, style }) => {
     return cookies.role === "Admin" ?
-      <IconButton OnClick={() => save_as_xlsx(data, name)} Icon={() => <SiMicrosoftexcel />} title={"Save As Execl"} style={'ml-auto !w-[250px]'} />
+      <IconButton orientation={0} OnClick={() => save_as_xlsx(data, name)} Icon={() => <SiMicrosoftexcel />} title={"télécharger des données"} style={`${style}`} />
       :
       <></>
   }
 
-  return (
-    <div className="p-5 my-10 h-full">
-      <div className="flex flex-col items-center justify-start ">
-        <h1 className="text-[20px] font-black leading-9 text-gray-800">Reducte Statiscs</h1>
+  const Badge = ({ title, latest, total, data }) => {
+    return (<>
+      <div className="min-w-[350px] max-w-[50%] max-h-[160px] bg-gray-50 shadow md:shadow-lg flex flex-col justify-center items-center gap-3 p-[20px] rounded-lg">
+        <h1 className="text-[25px] font-bold text-gray-800 capitalize">{title}</h1>
+        <div className="bg-black w-full h-[1px] opacity-[10%]"></div>
+        <div className="flex flex-row w-full">
+          <Statebanner title="Derniers: " count={latest} />
+          <Statebanner title="Totaux: " count={total} />
+        </div>
+        <ExcelBtn data={data} name={title} style={'!h-[50px] !text-bold'} />
       </div>
+    </>);
+  }
+
+  const Expand = ({ title, state, Onclick }) => {
+    return (
+      <>
+        <div className="w-full flex flex-row justify-start items-center  gap-4 mb-5 ">
+          <h3 className="text-[22px] font-bold text-gray-800 capitalize">{title}</h3>
+          <div className="cursor-pointer" onClick={Onclick}>
+            {state ? <FaCaretDown /> : <FaCaretUp />}
+          </div>
+        </div>
+      </>);
+  };
+
+  return (
+    <div className="px-5 my-0 h-full overflow-hidden">
       {
         loading ? <LinearIndeterminate /> :
           <>
-            <div className="mt-10  w-full h-[90%] justify-center  items-start gap-5 ">
-              <div className="w-[100%] rounded-xl flex flex-col items-start h-[40vh] ">
-                <div className="w-full flex flex-row justify-start items-center  gap-10 mb-5 ">
-                  <Statebanner title={"Recent clinets : "} count={state.client.resent_clients} />
-                  <Statebanner title={"All clinets : "} count={state.client.total_clients} />
-                  <ExcelBtn data={clients_data} name={'clinets'}/>
-                </div>
-                <div className="flex-1 w-full overflow-y-scroll overflow-x-hidden">
+            <div className="mt-5  w-full h-[100%] flex flex-col justify-start  items-start gap-5 ">
+
+              {/* Badges */}
+              <div className="w-full flex flex-row justify-around items-center">
+                <Badge title={"les Abonné"} latest={state.client.resent_clients} total={state.client.total_clients} data={clients_data} />
+
+                <div className="w-[2px] h-[100px] bg-black opacity-[30%]"></div>
+
+                <Badge title={"les partenaires"} latest={state.client.resent_clients} total={state.partner.total_partners} data={partner_data} />
+              </div>
+
+              {/* Clients */}
+              <div className="w-[100%] rounded-xl flex flex-col items-start  max-h-[50%]">
+                <Expand title={"les Abonné"} state={Show.clients} Onclick={() => { setShow({ ...Show, clients: !Show.clients }) }} />
+                <div className={`${Show.clients ? ' overflow-y-scroll' : 'h-[0px] overflow-hidden'}  w-full `}>
                   <ClientTable
                     Data={clients_data}
                     action={false}
                     my={0}
                   />
                 </div>
-
               </div>
-              <div className=" rounded-xl flex flex-col items-start  h-[40vh] w-full  overflow-y-scroll overflow-x-hidden">
-                <div className="w-full flex flex-row justify-start items-center  gap-10 mb-5 ">
-                  <Statebanner title={"Recent Partners : "} count={state.partner.resent_partners} />
-                  <Statebanner title={"All Partners : "} count={state.partner.total_partners} />
-                  <ExcelBtn data={clients_data} name={'partners'} />
+
+              <div className="w-full h-[2px] bg-black opacity-[10%]"></div>
+              {/* Partner */}
+              <div className="rounded-xl flex flex-col items-start max-h-[60vh] w-full">
+                <Expand title={"les partenaires"} state={Show.Partners} Onclick={() => { setShow({ ...Show, Partners: !Show.Partners }) }} />
+                <div className={`${Show.Partners ? 'overflow-scroll' : 'h-[0px] overflow-hidden'}  w-full `}>
+                  <UserTable
+                    my="0"
+                    action={false}
+                    Data={partner_data}
+                  />
                 </div>
-                <UserTable
-                  my="0"
-                  action={false}
-                  Data={partner_data}
-                />
+
               </div>
             </div>
           </>

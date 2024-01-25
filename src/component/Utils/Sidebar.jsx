@@ -25,12 +25,12 @@ function Sidebar() {
 
 	let navigate = useNavigate();
 	return (
-		<div className="absolute w-[289.19px] overflow-y-scroll h-[100vh] top-0 left-0 bg-[#fff] pt-[20px] px-10 flex flex-col py-10 shadow-lg gap-5">
-			<div className="flex flex-col text-[#2E5CFF] text-4xl font-black gap-2 justify-start items-start pb-9">
+		<div className="absolute w-[289.19px] overflow-y-scroll h-[100vh] top-0 left-0 bg-[#fff] pt-[20px] flex flex-col shadow-lg gap-5">
+			<div className=" px-10  flex flex-col text-[#2E5CFF] text-4xl font-black gap-2 justify-start items-start pb-9">
 				<img src={Icon} alt="" srcSet="" className="w-[150px] object-cover" />
 				<h1 className="text-xl ">{cookies.name}</h1>
 			</div>
-			<ul className="flex flex-col gap-8 justify-center items-start w-full">
+			<ul className="flex px-10  pb-10  flex-col gap-8 justify-center items-start w-full">
 				{links.map((item) => (
 					<>
 						<li
@@ -82,18 +82,21 @@ function Sidebar() {
 					</>
 				))}
 			</ul>
-			<Button
-				title={"Se déconnecter"}
-				Icon={() => <BiExit />}
-				OnClick={() => {
-					removeCookie("role");
-					removeCookie("accesToken");
-					removeCookie("name");
-					navigate("/");
-					window.location.reload(false);
-				}}
-				style="!h-[30px] p-[28px] mt-auto min-mt-[20px]"
-			/>
+			<div className="w-full sticky left-0 right-0 bottom-0 p-5 bg-gray-200 rounded-lg">
+				<Button
+					title={"Se déconnecter"}
+					Icon={() => <BiExit />}
+					OnClick={() => {
+						removeCookie("role");
+						removeCookie("accesToken");
+						removeCookie("name");
+						navigate("/");
+						window.location.reload(false);
+					}}
+					style="!h-[30px] p-[28px] mt-auto min-mt-[20px]"
+				/>
+			</div>
+
 		</div>
 	);
 }

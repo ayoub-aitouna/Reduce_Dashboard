@@ -63,9 +63,9 @@ const DataRow = ({ item, index, onClick = () => { }, OnEdit = () => { }, action 
 function ClientTable({ Data, OnSelect, OnEdit, my = 10, action = true }) {
 	return (
 		<div className={`flex flex-col  border-[1px] my-${my} border-gray-200 rounded-lg`}>
-			<div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
+			<div className="min-w-full sm:-mx-6 lg:-mx-8">
 				<div className="py-2 inline-block min-w-full sm:px-6 lg:px-8">
-					<div className="overflow-hidden">
+					<div className="">
 						<table className="min-w-full">
 							<thead className="bg-white border-b">
 								<tr>

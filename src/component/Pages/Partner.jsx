@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from "react";
 
 import {
-	Filter_Selector,
+	FilterSelector,
 	SearchBar,
 	UpdatePartner,
 	PartnerInfo,
@@ -88,7 +88,7 @@ function Partner() {
 	}, [Search, selectedStatus, City, Odata, activity_entrprise]);
 
 	return (
-		<div className="p-5 my-10">
+		<div className="px-5">
 			<SubPartnerInfo
 				open={issubDialogOpend}
 				setRefresh={setRefresh}
@@ -114,6 +114,7 @@ function Partner() {
 				}}
 				partner={SelectedPartner}
 			/>
+
 			<NewPartner
 				open={isNewDialogOpend}
 				setRefresh={setRefresh}
@@ -122,7 +123,7 @@ function Partner() {
 				}}
 			/>
 
-			<div className="flex flex-col items-start justify-start">
+			<div className="flex flex-col items-start justify-start ">
 				<h1 className="text-[20px] font-black leading-9 text-gray-800">
 					Reducte Partenaires
 				</h1>
@@ -133,14 +134,14 @@ function Partner() {
 			<div className="flex ld:flex-row flex-col w-full mt-10 lg:gap-5 gap-0 justify-center items-center">
 				<SearchBar styles={"max-h-[15px] !w-full"} setSearch={setSearch} />
 				<div className="flex flex-row w-full mt-10 gap-5 justify-start items-center">
-					<Filter_Selector
+					<FilterSelector
 						title={"Secteur d'activité"}
 						styles={"h-[95px]"}
 						options={Activities}
 						setFilter={(value) => setactivity_entrprise(value)}
 						Filter={activity_entrprise}
 					/>
-					<Filter_Selector
+					<FilterSelector
 						title={"Ville"}
 						styles={"h-[95px]"}
 						options={villes}
@@ -148,7 +149,7 @@ function Partner() {
 						Filter={City}
 					/>
 
-					<Filter_Selector
+					<FilterSelector
 						title={"status"}
 						styles={"h-[95px]"}
 						options={[{ value: "", name: "Tout" }, { value: "Approved", name: "Accepted" }, { value: "Pending", name: "Pending" }, { value: "Rejected", name: "Rejected" }]}
@@ -156,6 +157,34 @@ function Partner() {
 						Filter={selectedStatus}
 					/>
 				</div>
+			</div>
+
+			<div className="">
+				{
+					loading ? <LinearIndeterminate /> :
+						<div className="overflow-scroll max-h-[57vh]">
+							<UserTable
+								Data={data}
+								action={true}
+								my="0"
+								selectedstatu={selectedStatus}
+								OnSelect={(data) => {
+									setSelectedpartner(data);
+									setDialogOpend(true);
+								}}
+								onRowSelected={(data) => {
+									setSelectedpartner(data);
+									setsubDialogOpend(true);
+								}}
+								OnEdit={(data) => {
+									setSelectedpartner(data);
+									setUpdateDialogOpend(true);
+								}}
+							/>
+						</div>
+
+
+				}
 			</div>
 			<div className="absolute bottom-8 right-8 flex flex-row gap-5 capitalize ">
 				<Button
@@ -165,26 +194,6 @@ function Partner() {
 					style={"!w-[250px] text-[15px] shadow-lg capitalize"}
 				/>
 			</div>
-			{
-				loading ? <LinearIndeterminate /> : <UserTable
-					Data={data}
-					action={true}
-					selectedstatu={selectedStatus}
-					OnSelect={(data) => {
-						setSelectedpartner(data);
-						setDialogOpend(true);
-					}}
-					onRowSelected={(data) => {
-						setSelectedpartner(data);
-						setsubDialogOpend(true);
-					}}
-					OnEdit={(data) => {
-						setSelectedpartner(data);
-						setUpdateDialogOpend(true);
-					}}
-				/>
-
-			}
 
 		</div>
 	);

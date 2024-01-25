@@ -1,12 +1,9 @@
 import React from "react";
-import { IoIosCloseCircle } from "react-icons/io";
 import { AiFillEdit } from "react-icons/ai";
-import { BsCheckCircleFill } from "react-icons/bs";
-import { MdPendingActions } from "react-icons/md";
-import { BsFillArrowRightSquareFill } from "react-icons/bs";
+import { MdDeleteForever } from "react-icons/md";
 import { IconHalder } from "../index";
 
-const DataRow = ({ item, index, OnEdit = () => { }, onRowSelected = () => { } }) => {
+const DataRow = ({ item, index, OnEdit = () => { }, OnDelete = () => { } }) => {
 	return (
 		<tr
 			className={` text-gray-900 hover:text-[#fff] hover:bg-[#2E5CFF] cursor-pointer ${index % 2 == 0 ? "bg-gray-100" : "bg-white"
@@ -19,23 +16,29 @@ const DataRow = ({ item, index, OnEdit = () => { }, onRowSelected = () => { } })
 				{item.name}
 			</td>
 			<td
-				className="px-6 py-4 whitespace-nowrap text-sm font-medium "
+				className="px-10 py-4 whitespace-nowrap text-sm font-medium "
 				onClick={() => OnEdit()}
 			>
-				<IconHalder Icon={() => <AiFillEdit />} style="text-[20px]" />
+				<IconHalder Icon={() => <AiFillEdit />} style="text-[20px] text-Cyan-500" />
+			</td>
+			<td
+				className="px-10 py-4 whitespace-nowrap text-sm font-medium "
+				onClick={() => OnDelete()}
+			>
+				<IconHalder Icon={() => <MdDeleteForever />} style="text-[20px] text-red-600" />
 			</td>
 		</tr>
 	);
 };
 
-function Activities_table({ Data, OnSelect, OnEdit, onRowSelected, my = "10" }) {
+function Activities_table({ Data, OnSelect, OnEdit, OnDelete, my = "10" }) {
 	return (
 		<div className={`flex flex-col  border-[1px] my-${my} border-gray-200 rounded-lg `}>
 			<div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
 				<div className="py-2 inline-block min-w-full sm:px-6 lg:px-8">
 					<div className="overflow-hidden">
 						<table className="min-w-full">
-							<thead className="bg-white border-b">
+							<thead className="bg-gray-200 border-b ">
 								<tr>
 									<th
 										scope="col"
@@ -48,13 +51,19 @@ function Activities_table({ Data, OnSelect, OnEdit, onRowSelected, my = "10" }) 
 										scope="col"
 										className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
 									>
-										Name
+										nom
 									</th>
 									<th
 										scope="col"
 										className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
 									>
 										Modifier
+									</th>
+									<th
+										scope="col"
+										className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
+									>
+										Supprimer
 									</th>
 								</tr>
 							</thead>
@@ -65,7 +74,7 @@ function Activities_table({ Data, OnSelect, OnEdit, onRowSelected, my = "10" }) 
 										key={item.id}
 										item={item}
 										index={index}
-										onRowSelected={() => onRowSelected(item)}
+										OnDelete={() => OnDelete(item)}
 										OnEdit={() => OnEdit(item)}
 										onClick={() => OnSelect(item)}
 									/>

@@ -8,7 +8,7 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import FormData from 'form-data';
 import { ImgInput } from "../../Utils/ImgInput";
-import { Button as MyButton, Filter_Selector, LoadingIcon } from "../index";
+import { Button as MyButton, FilterSelector, LoadingIcon } from "../index";
 import { BaseUrl, Coockies_name } from "../../constants";
 import { useCookies } from "react-cookie";
 
@@ -138,7 +138,7 @@ const Fill_Form = ({ data, setdata }) => {
 				))}
 				<div className="flex flex-wrap  flex- -mx-3 mb-2">
 					<div className="w-full px-3 mb-6 md:mb-0">
-						<Filter_Selector
+						<FilterSelector
 							title={"statut"}
 							Filter={data.statut}
 							setFilter={(value) => setdata({ ...data, statut: value === '' || value === undefined ? 'activer' : value })}

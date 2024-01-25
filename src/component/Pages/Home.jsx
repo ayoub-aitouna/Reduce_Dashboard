@@ -22,7 +22,7 @@ function Home() {
   }, [cookies.accesToken]);
 
   return (
-    <div className="bg-gray-100 w-full h-full overflow-y-scroll overflow-x-hidden">
+    <div className="bg-gray-100 w-full h-full  overflow-auto overflow-x-hidden">
       <Sidebar />
       <div className="ml-[289.19px] h-full">
         <Outlet />

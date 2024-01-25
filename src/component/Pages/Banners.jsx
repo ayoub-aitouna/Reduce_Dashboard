@@ -5,7 +5,7 @@ import {
   SearchBar,
   BannerTable,
   LinearIndeterminate,
-  Filter_Selector,
+  FilterSelector,
   Banner_Dialog
 } from "../index";
 import { BaseUrl, Coockies_name } from "../../constants";
@@ -99,7 +99,7 @@ function Banners() {
       <div className="flex ld:flex-row flex-col w-full mt-10 lg:gap-5 gap-0 justify-center items-center">
         <SearchBar styles={"max-h-[15px] !w-full"} setSearch={setSearch} />
         <div className="flex flex-row w-full mt-10 gap-5 justify-start items-center">
-          <Filter_Selector
+          <FilterSelector
             title={"Actif/inactif"}
             styles={"h-[95px]"}
             options={[{ value: 0, name: '' },

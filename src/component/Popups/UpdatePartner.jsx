@@ -4,18 +4,18 @@ import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
-import { Button as MyButton, Filter_Selector, LoadingIcon } from "../index";
+import { Button as MyButton, FilterSelector, LoadingIcon } from "../index";
 import { BaseUrl, Coockies_name } from "../../constants";
 import { get_villes } from "../../Utils/villes/get_villes";
 import { useCookies } from "react-cookie";
 import { get_Activity } from "../../Utils/Activities/Activities";
 import { ImgInput } from "../../Utils/ImgInput";
-
+import { DefaultPartner } from "../../constants";
 import FormData from 'form-data';
 
 const UpdatePartner = ({ open, OnClick, partner, setRefresh }) => {
   const [cookies, setCookie, removeCookie] = useCookies([Coockies_name]);
-  const [data, setdata] = useState({});
+  const [data, setdata] = useState(DefaultPartner);
   const [loading, setloading] = useState(false); const hadlerClose = () => {
     OnClick();
   };
@@ -26,8 +26,32 @@ const UpdatePartner = ({ open, OnClick, partner, setRefresh }) => {
 
   useEffect(() => {
     setdata(partner);
-  }, [partner]);
+  }, [partner]);;
 
+  const handle_submit = async () => {
+    setloading(true);
+    const formData = new FormData();
+    formData.append("images", data.cover);
+    formData.append("images", data.logo);
+    formData.append("data", JSON.stringify(data));
+    try {
+      await fetch(`${BaseUrl}/admin/update_partner`, {
+        method: "POST",
+        mode: "cors",
+        cache: "no-cache",
+        headers: {
+          Authorization: `Bearer ${cookies.accesToken}`,
+        },
+        referrerPolicy: "no-referrer",
+        body: formData,
+      });
+      setRefresh((val) => val + 1);
+      setloading(false);
+    } catch (err) {
+      console.error(err);
+      setloading(false);
+    }
+  }
   return (
     <div>
       <Dialog
@@ -51,30 +75,7 @@ const UpdatePartner = ({ open, OnClick, partner, setRefresh }) => {
               </div>
             </div>
             <Button
-              onClick={async (e) => {
-                setloading(true);
-                const formData = new FormData();
-                formData.append("images", data.cover);
-                formData.append("images", data.logo);
-                formData.append("data", JSON.stringify(data));
-                try {
-                  await fetch(`${BaseUrl}/admin/update_partner`, {
-                    method: "POST",
-                    mode: "cors",
-                    cache: "no-cache",
-                    headers: {
-                      Authorization: `Bearer ${cookies.accesToken}`,
-                    },
-                    referrerPolicy: "no-referrer",
-                    body: formData,
-                  });
-                  setRefresh((val) => val + 1);
-                  setloading(false);
-                } catch (err) {
-                  console.error(err);
-                  setloading(false);
-                }
-              }}
+              onClick={async (e) => { await handle_submit() }}
             >
               <MyButton
                 title="Confirmez"
@@ -86,7 +87,7 @@ const UpdatePartner = ({ open, OnClick, partner, setRefresh }) => {
         </DialogContent>
 
       </Dialog>
-    </div>
+    </div >
   );
 };
 
@@ -94,9 +95,12 @@ const Fill_Form = ({ data, setdata }) => {
   let [villes, setvilles] = useState([]);
   const [Activities, setActivities] = useState([]);
 
+  const GetValues = async () => {
+    await get_villes(setvilles);
+    await get_Activity(setActivities);
+  }
   useEffect(() => {
-    get_villes(setvilles);
-    get_Activity(setActivities);
+    GetValues();
   }, []);
 
   return (
@@ -202,13 +206,13 @@ const Fill_Form = ({ data, setdata }) => {
             type="text"
           />
         </div>
-
+  
         <div className="w-full px-3">
           <label
             className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
             htmlFor="grid-name"
           >
-            Offer
+            Offre
           </label>
           <input
             className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
@@ -240,7 +244,7 @@ const Fill_Form = ({ data, setdata }) => {
 
         <div className="flex flex-wrap -mx-3 mb-2">
           <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-            <Filter_Selector
+            <FilterSelector
               title={"Ville"}
               Filter={data.ville}
               setFilter={(value) => {
@@ -252,7 +256,7 @@ const Fill_Form = ({ data, setdata }) => {
           </div>
 
           <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-            <Filter_Selector
+            <FilterSelector
               title={"d'activité"}
               Filter={data.activity_entrprise}
               setFilter={(value) => {
@@ -264,14 +268,13 @@ const Fill_Form = ({ data, setdata }) => {
           </div>
 
           <div className="w-full px-3 mb-6 md:mb-0">
-            <Filter_Selector
+            <FilterSelector
               title={"Partenaire Statut"}
               Filter={data._status}
               setFilter={(value) => {
                 setdata({ ...data, _status: value });
               }}
               options={[
-                { value: "", name: "" },
                 { value: "Approved", name: "Approved" },
                 { value: "Rejected", name: "Rejected" },
                 { value: "Pending", name: "Pending" },

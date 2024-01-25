@@ -6,7 +6,7 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 
-import { Button as MyButton, Filter_Selector, LoadingIcon } from "../index";
+import { Button as MyButton, FilterSelector, LoadingIcon } from "../index";
 import { BaseUrl, Coockies_name } from "../../constants";
 import { useCookies } from "react-cookie";
 import { get_villes } from "../../Utils/villes/get_villes";
@@ -15,7 +15,7 @@ const Fill_Form = ({ data, setdata }) => {
   let [villes, setvilles] = useState([{ value: 0, name: "" }]);
   useEffect(() => {
     setvilles([]);
-    get_villes(setvilles);
+    get_villes(setvilles, false);
   }, []);
   return (
     <form className="w-full max-w-lg ">
@@ -77,7 +77,7 @@ const Fill_Form = ({ data, setdata }) => {
 
       <div className="flex flex-wrap -mx-3 mb-2">
         <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-          <Filter_Selector
+          <FilterSelector
             title={"Ville"}
             Filter={data.ville}
             setFilter={(value) => setdata({ ...data, ville: value })}
@@ -87,7 +87,7 @@ const Fill_Form = ({ data, setdata }) => {
         </div>
 
         <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-          <Filter_Selector
+          <FilterSelector
             title={"Fonction"}
             Filter={data._role}
             setFilter={(value) => setdata({ ...data, _role: value })}

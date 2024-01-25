@@ -5,7 +5,7 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
-import { Button as MyButton, Filter_Selector, LoadingIcon } from "../index";
+import { Button as MyButton, FilterSelector, LoadingIcon } from "../index";
 import { BaseUrl, Coockies_name } from "../../constants";
 import Cookies from "js-cookie";
 import { useCookies } from "react-cookie";

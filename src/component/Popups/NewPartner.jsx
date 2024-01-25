@@ -4,18 +4,18 @@ import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
-import { Button as MyButton, Filter_Selector, LoadingIcon } from "../index";
+import { Button as MyButton, FilterSelector, LoadingIcon } from "../index";
 import { BaseUrl, Coockies_name } from "../../constants";
 import { get_villes } from "../../Utils/villes/get_villes";
 import { useCookies } from "react-cookie";
 import { get_Activity } from "../../Utils/Activities/Activities";
 import { ImgInput } from "../../Utils/ImgInput";
-
+import { DefaultPartner } from "../../constants";
 import FormData from 'form-data';
 
 const NewPartner = ({ open, OnClick, setRefresh }) => {
   const [cookies, setCookie, removeCookie] = useCookies([Coockies_name]);
-  const [data, setdata] = useState({});
+  const [data, setdata] = useState(DefaultPartner);
   const [loading, setloading] = useState(false);
   const hadlerClose = () => {
     OnClick();
@@ -26,8 +26,43 @@ const NewPartner = ({ open, OnClick, setRefresh }) => {
   }, [loading]);
 
   useEffect(() => {
-    setdata({});
+    setdata(DefaultPartner);
   }, [open]);
+
+  const handle_submit = async () => {
+    console.table(data);
+    const emptyFields = Object.values(data)
+      .filter((value) => !value);
+
+    if (emptyFields.length > 0) {
+      setloading(false);
+      alert("Please fill all required fields. ");
+      return;
+    }
+    setloading(true);
+    const formData = new FormData();
+    formData.append("images", data.logo);
+    formData.append("images", data.cover);
+    formData.append("data", JSON.stringify(data));
+    try {
+      await fetch(`${BaseUrl}/admin/new_partner`, {
+        method: "POST",
+        mode: "cors",
+        cache: "no-cache",
+        headers: {
+          Authorization: `Bearer ${cookies.accesToken}`,
+        },
+        referrerPolicy: "no-referrer",
+        body: formData,
+      });
+      setRefresh((val) => val + 1);
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setloading(false);
+      setdata({});
+    }
+  }
 
   return (
     <div>
@@ -52,31 +87,7 @@ const NewPartner = ({ open, OnClick, setRefresh }) => {
               </div>
             </div>
             <Button
-              onClick={async (e) => {
-                setloading(true);
-                const formData = new FormData();
-                formData.append("images", data.cover);
-                formData.append("images", data.logo);
-                formData.append("data", JSON.stringify(data));
-                try {
-                  await fetch(`${BaseUrl}/admin/new_partner`, {
-                    method: "POST",
-                    mode: "cors",
-                    cache: "no-cache",
-                    headers: {
-                      Authorization: `Bearer ${cookies.accesToken}`,
-                    },
-                    referrerPolicy: "no-referrer",
-                    body: formData,
-                  });
-                  setRefresh((val) => val + 1);
-                } catch (err) {
-                  console.error(err);
-                } finally {
-                  setloading(false);
-                  setdata({});
-                }
-              }}
+              onClick={async (e) => { handle_submit() }}
             >
               <MyButton
                 title="Confirmez"
@@ -95,10 +106,13 @@ const NewPartner = ({ open, OnClick, setRefresh }) => {
 const Fill_Form = ({ data, setdata }) => {
   let [villes, setvilles] = useState([]);
   const [Activities, setActivities] = useState([]);
+  const GetValues = async () => {
+    await get_villes(setvilles);
+    await get_Activity(setActivities);
 
+  }
   useEffect(() => {
-    get_villes(setvilles);
-    get_Activity(setActivities);
+    GetValues();
   }, []);
 
   return (
@@ -242,7 +256,7 @@ const Fill_Form = ({ data, setdata }) => {
 
         <div className="flex flex-wrap -mx-3 mb-2">
           <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-            <Filter_Selector
+            <FilterSelector
               title={"Ville"}
               Filter={data.ville}
               setFilter={(value) => {
@@ -254,7 +268,7 @@ const Fill_Form = ({ data, setdata }) => {
           </div>
 
           <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-            <Filter_Selector
+            <FilterSelector
               title={"d'activité"}
               Filter={data.activity_entrprise}
               setFilter={(value) => {
@@ -266,14 +280,13 @@ const Fill_Form = ({ data, setdata }) => {
           </div>
 
           <div className="w-full px-3 mb-6 md:mb-0">
-            <Filter_Selector
+            <FilterSelector
               title={"Partenaire Statut"}
               Filter={data._status}
               setFilter={(value) => {
                 setdata({ ...data, _status: value });
               }}
               options={[
-                { value: "", name: "" },
                 { value: "Approved", name: "Approved" },
                 { value: "Rejected", name: "Rejected" },
                 { value: "Pending", name: "Pending" },

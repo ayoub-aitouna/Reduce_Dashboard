@@ -6,7 +6,10 @@ import { BsCheckCircleFill } from "react-icons/bs";
 import { MdPendingActions } from "react-icons/md";
 import { BsFillArrowRightSquareFill } from "react-icons/bs";
 import { IconHalder } from "../index";
-
+const filter = (value) => {
+	if (value == "undefined") return ("informations non disponibles");
+	return value;
+}
 const DataRow = ({ item, index, onClick = () => { }, OnEdit = () => { }, onRowSelected = () => { }, action }) => {
 	return (
 		<tr
@@ -19,33 +22,32 @@ const DataRow = ({ item, index, onClick = () => { }, OnEdit = () => { }, onRowSe
 			</td>
 			<td className="px-4 py-4 whitespace-nowrap text-sm font-medium ">
 				<img
-					className="w-[50px] h-[50px] rounded-full object-cover bg-gray-400 overflow-hidden"
+					className="w-[50px] h-[50px] border-[2px] border-gray-500 object-fit bg-gray-400 overflow-hidden"
 					src={
 						item.avatar_Url === '' || item.avatar_Url === undefined ?
 							"https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Default_pfp.svg/800px-Default_pfp.svg.png" :
 							item.avatar_Url
 					}
-					onerror="if (this.src != 'error.jpg') this.src = 'https://www.nicepng.com/png/detail/136-1366211_group-of-10-guys-login-user-icon-png.png';"
 					srcSet=""
 				/>
 			</td>
 			<td className="px-6 py-4 whitespace-nowrap text-sm font-medium ">
-				{item.nome_entreprise}
+				{filter(item.nome_entreprise)}
 			</td>
 			<td className="px-6 py-4 whitespace-nowrap text-sm font-medium ">
-				{item.identificateur_entreprise}
+				{filter(item.identificateur_entreprise)}
 			</td>
 			<td className="px-6 py-4 whitespace-nowrap text-sm font-medium ">
-				{item.representant_entreprise}
+				{filter(item.representant_entreprise)}
 			</td>
 			<td className="px-6 py-4 whitespace-nowrap text-sm font-medium ">
-				{item.role_dans_entriprise}
+				{filter(item.role_dans_entriprise)}
 			</td>
 			<td className="px-6 py-4 whitespace-nowrap text-sm font-medium ">
-				{item.ville_name}
+				{filter(item.ville_name)}
 			</td>
 			<td className="px-6 py-4 whitespace-nowrap text-sm font-medium ">
-				{item.activity_name}
+				{filter(item.activity_name)}
 			</td>
 			<td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-[30px] ">
 				{item._status == "Pending" ? (
@@ -94,9 +96,9 @@ const DataRow = ({ item, index, onClick = () => { }, OnEdit = () => { }, onRowSe
 function UserTable({ Data, OnSelect, OnEdit, onRowSelected, my = "10", action = true }) {
 	return (
 		<div className={`flex flex-col  border-[1px] my-${my} border-gray-200 rounded-lg w-full`}>
-			<div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
+			<div className="min-w-full sm:-mx-6 lg:-mx-8">
 				<div className="py-2 inline-block min-w-full sm:px-6 lg:px-8">
-					<div className="overflow-hidden">
+					<div className="">
 						<table className="min-w-full">
 							<thead className="bg-white border-b">
 								<tr>

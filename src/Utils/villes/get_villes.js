@@ -1,5 +1,5 @@
 import { BaseUrl } from "../../constants";
-const get_villes = async (setvilles) => {
+const get_villes = async (setvilles, add_empty = true) => {
   try {
     const req = await fetch(`${BaseUrl}/Ville/All_Villes`, {
       method: "GET",
@@ -12,7 +12,8 @@ const get_villes = async (setvilles) => {
     });
     if (req.ok) {
       const data = await req.json();
-      setvilles([{ id: 0, name: "" }]);
+      if (add_empty)
+        setvilles([{ id: 0, name: "" }]);
       data.map((item) => {
         setvilles((v) => [...v, { value: item.id, name: item.ville_name, status: item.status }]);
       });

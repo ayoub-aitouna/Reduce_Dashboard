@@ -1,5 +1,5 @@
 import { BaseUrl } from "../../constants";
-const get_Activity = async (setActivity) => {
+const get_Activity = async (setActivity, add_empty = true) => {
   try {
     const req = await fetch(`${BaseUrl}/Activities`, {
       method: "GET",
@@ -12,7 +12,8 @@ const get_Activity = async (setActivity) => {
     });
     if (req.ok) {
       const data = await req.json();
-      setActivity([{ id: 0, name: "" }]);
+      if (add_empty)
+        setActivity([{ id: 0, name: "" }]);
       data.map((item) => {
         setActivity((v) => [
           ...v,
@@ -21,6 +22,6 @@ const get_Activity = async (setActivity) => {
       });
     } else {
     }
-  } catch (err) {}
+  } catch (err) { }
 };
 export { get_Activity };

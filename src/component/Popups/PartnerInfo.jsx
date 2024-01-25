@@ -70,7 +70,6 @@ const PartnerInfoRender = ({ item }) => {
                         "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Default_pfp.svg/800px-Default_pfp.svg.png" :
                         item.avatar_Url
                     }
-                    onerror="if (this.src != 'error.jpg') this.src = 'https://www.nicepng.com/png/detail/136-1366211_group-of-10-guys-login-user-icon-png.png';"
                     srcSet=""
                   />
                 );

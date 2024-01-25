@@ -42,7 +42,7 @@ import Input from "./Utils/Input";
 import IconHalder from "./Utils/IconHolder";
 import AdminsTable from "./Utils/AdminsTable";
 import ClientTable from "./Utils/ClientTable";
-import Filter_Selector from "./Utils/Filter_Selector";
+import FilterSelector from "./Utils/FilterSelector";
 import SearchBar from "./Utils/SearchBar";
 import ErrorMsg from "./Utils/ErrorMsg";
 import LoadingIcon from "./Utils/LoadingIcon";
@@ -70,7 +70,7 @@ export {
   Admins,
   AddNewAdmin,
   Add_new_task,
-  Filter_Selector,
+  FilterSelector,
   SearchBar,
   Task_done,
   Tasks,

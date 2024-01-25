@@ -5,7 +5,7 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
-import { Button as MyButton, Filter_Selector, LoadingIcon } from "../index";
+import { Button as MyButton, FilterSelector, LoadingIcon } from "../index";
 import { BaseUrl, Coockies_name } from "../../constants";
 import { get_villes } from "../../Utils/villes/get_villes";
 import dayjs, { Dayjs } from "dayjs";
@@ -112,7 +112,7 @@ const Fill_Form = ({ data, setdata }) => {
           />
         </div>
         <div className="w-full  px-3 mb-6 md:mb-0 flex flex-row justify-between items-center w-full">
-          <Filter_Selector
+          <FilterSelector
             title={"Ville"}
             Filter={data.ville}
             setFilter={(value) => {
@@ -147,7 +147,7 @@ const Fill_Form = ({ data, setdata }) => {
           </div>
         </div>
         <div className="w-full px-3 mb-6 md:mb-0">
-          <Filter_Selector
+          <FilterSelector
             title={"Partenaire Statut"}
             Filter={data.partner_status}
             setFilter={(value) => {

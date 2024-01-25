@@ -1,6 +1,6 @@
 import React from "react";
 
-const Filter_Selector = ({
+const FilterSelector = ({
   title = "",
   options = [],
   styles,
@@ -18,7 +18,7 @@ const Filter_Selector = ({
       <select
         value={Filter}
         onChange={(e) =>
-          setFilter(e.target.value == "Tout" ? "" : e.target.value)
+          setFilter(e.target.value === "Tout" ? "" : e.target.value)
         }
         id={title}
         className="h-[40px] bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500
@@ -26,7 +26,7 @@ const Filter_Selector = ({
       >
         {options.map((item, index) => (
           <option key={index} value={item.value}>
-            {item.name == "" ? "Tout" : item.name}
+            {item.name === "" ? "Tout" : item.name}
           </option>
         ))}
       </select>
@@ -34,4 +34,4 @@ const Filter_Selector = ({
   );
 };
 
-export default Filter_Selector;
+export default FilterSelector;

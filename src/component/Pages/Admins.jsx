@@ -6,7 +6,7 @@ import { BaseUrl, Coockies_name } from "../../constants";
 import { useCookies } from "react-cookie";
 import { get_villes } from "../../Utils/villes/get_villes";
 import {
-	Filter_Selector,
+	FilterSelector,
 	SearchBar,
 	Button,
 	AddNewAdmin,
@@ -52,6 +52,7 @@ function Admins() {
 		}
 		setloading(false);
 	};
+	
 	useEffect(() => {
 		fetchData();
 		get_villes(setvilles);
@@ -113,7 +114,7 @@ function Admins() {
 			<div className="flex ld:flex-row flex-col w-full mt-10 lg:gap-5 gap-0 justify-center items-center">
 				<SearchBar styles={"max-h-[15px] !w-full"} setSearch={setSearch} />
 				<div className="flex flex-row w-full mt-10 gap-5 justify-start items-center">
-					<Filter_Selector
+					<FilterSelector
 						title={"Fonction"}
 						styles={"h-[95px]"}
 						options={[
@@ -124,7 +125,7 @@ function Admins() {
 						setFilter={(value) => setRole(value)}
 						Filter={Role}
 					/>
-					<Filter_Selector
+					<FilterSelector
 						title={"Statut Du Compte"}
 						styles={"h-[95px]"}
 						options={[
@@ -136,7 +137,7 @@ function Admins() {
 						setFilter={(value) => setAccountState(value)}
 						Filter={AccountState}
 					/>
-					<Filter_Selector
+					<FilterSelector
 						title={"Ville"}
 						styles={"h-[95px]"}
 						options={villes}

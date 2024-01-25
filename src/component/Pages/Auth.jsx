@@ -63,7 +63,6 @@ const AuthForm = ({ setFgtData }) => {
     });
   };
 
-
   const request_key = async () => {
     try {
       if (login.email === "" || login.email == undefined || login.email === null)
