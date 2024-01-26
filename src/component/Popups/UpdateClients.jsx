@@ -19,6 +19,8 @@ import { get_profesion } from "../../Utils/profesion/Profesion";
 
 const UpdateClinets = ({ open, OnClick, Client, setRefresh, is_update }) => {
   const [cookies, setCookie, removeCookie] = useCookies([Coockies_name]);
+  let [cities, setvilles] = useState([]);
+  let [Professions, setProfessions] = useState([]);
   const [loading, setloading] = useState(false);
   const now = dayjs().$d.toISOString().slice(0, 19).replace("T", " ");
   const empty_client = {
@@ -27,6 +29,18 @@ const UpdateClinets = ({ open, OnClick, Client, setRefresh, is_update }) => {
     statut: "", date_fin_abonnement: now
   };
   const [data, setdata] = useState(empty_client);
+
+  const GetValues = async () => {
+    await get_villes(setvilles);
+    await get_profesion(setProfessions);
+    setvilles((prev) => {
+      return (prev.filter((value) => value.name));
+    });
+    setProfessions((prev) => {
+      return (prev.filter((value) => value.name));
+    })
+
+  }
 
   const hadlerClose = () => {
     OnClick();
@@ -37,6 +51,7 @@ const UpdateClinets = ({ open, OnClick, Client, setRefresh, is_update }) => {
   }, [loading]);
 
   useEffect(() => {
+    GetValues();
     if (Client != null)
       setdata(Client);
     if (!is_update)
@@ -47,6 +62,11 @@ const UpdateClinets = ({ open, OnClick, Client, setRefresh, is_update }) => {
     setloading(true);
     setdata({ ...data, admin: true });
     data.statut = (data.statut === "") ? "Activé" : data.statut;
+    data.abonnement = (data.abonnement === "") ? "Gratuit" : data.abonnement;
+    data.sexe = (data.sexe === "") ? "M" : data.sexe;
+    data.profession = (data.profession === 0) ? Professions[0]?.value : data.profession;
+    data.ville = (data.ville === 0) ? cities[0]?.value : data.ville;
+
     const emptyFields = Object.values(data)
       .filter((value) => !value);
 
@@ -55,6 +75,7 @@ const UpdateClinets = ({ open, OnClick, Client, setRefresh, is_update }) => {
       alert("Please fill all required fields. ");
       return;
     }
+
     try {
       const req = await fetch(`${BaseUrl}/${is_update ? 'clients/' : 'auth/new_client'}`, {
         method: is_update ? 'PUT' : 'POST',
@@ -67,8 +88,14 @@ const UpdateClinets = ({ open, OnClick, Client, setRefresh, is_update }) => {
         referrerPolicy: "no-referrer",
         body: JSON.stringify(data),
       });
-      setRefresh((val) => val + 1);
+      const res = await req.json();
       setloading(false);
+      console.log(res);
+      if (res.statut !== 200) {
+        alert(res.msg);
+        return;
+      }
+      setRefresh((val) => val + 1);
     } catch (err) {
       setloading(false);
     }
@@ -77,7 +104,7 @@ const UpdateClinets = ({ open, OnClick, Client, setRefresh, is_update }) => {
   const toggle_status = async () => {
     setloading(true);
     try {
-      const req = await fetch(`${BaseUrl}/clients/change_status`, {
+      await fetch(`${BaseUrl}/clients/change_status`, {
         method: "PUT",
         mode: "cors",
         cache: "no-cache",
@@ -98,7 +125,7 @@ const UpdateClinets = ({ open, OnClick, Client, setRefresh, is_update }) => {
   const reinit_device_id = async () => {
     setloading(true);
     try {
-      const req = await fetch(`${BaseUrl}/clients/setDeviceId`, {
+      await fetch(`${BaseUrl}/clients/setDeviceId`, {
         method: "PUT",
         mode: "cors",
         cache: "no-cache",
@@ -133,7 +160,11 @@ const UpdateClinets = ({ open, OnClick, Client, setRefresh, is_update }) => {
           </DialogContentText>
         </DialogContent>
         <div className="w-full grid place-content-center">
-          <Fill_Form data={data} setdata={setdata} is_update={is_update} />
+          <Form data={data}
+            setdata={setdata}
+            is_update={is_update}
+            cities={cities}
+            professions={Professions} />
         </div>
         <div className="h-[60px]"></div>
         <DialogActions>
@@ -175,23 +206,7 @@ const UpdateClinets = ({ open, OnClick, Client, setRefresh, is_update }) => {
   );
 };
 
-const Fill_Form = ({ data, setdata, is_update = true }) => {
-  let [villes, setvilles] = useState([]);
-  let [Professions, setProfessions] = useState([]);
-  const GetValues = async () => {
-    await get_villes(setvilles);
-    await get_profesion(setProfessions);
-    setvilles((prev) => {
-      return (prev.filter((value) => value.name));
-    });
-    setProfessions((prev) => {
-      return (prev.filter((value) => value.name));
-    })
-  }
-
-  useEffect(() => {
-    GetValues();
-  }, []);
+const Form = ({ data, setdata, is_update = true, cities, professions }) => {
 
   return (
     <form className="w-full max-w-lg " >
@@ -249,7 +264,7 @@ const Fill_Form = ({ data, setdata, is_update = true }) => {
               title={"Ville"}
               Filter={data.ville}
               setFilter={(value) => setdata({ ...data, ville: value })}
-              options={villes}
+              options={cities}
               styles={"!max-w-full"}
             />
           </div>
@@ -258,7 +273,7 @@ const Fill_Form = ({ data, setdata, is_update = true }) => {
               title={"profession"}
               Filter={data.profession}
               setFilter={(value) => setdata({ ...data, profession: value })}
-              options={Professions}
+              options={professions}
               styles={"!max-w-full"}
             />
           </div>

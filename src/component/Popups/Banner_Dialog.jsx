@@ -109,7 +109,7 @@ const Fill_Form = ({ data, setdata }) => {
 				</Button>
 				<Button variant="contained" component="label">
 					Upload COVER
-					<ImgInput width={500} height={500} call={(file) => { setdata({ ...data, cover: file, cover_selected: true }) }} />
+					<ImgInput width={889} height={500} call={(file) => { setdata({ ...data, cover: file, cover_selected: true }) }} />
 				</Button>
 			</div>
 			<div className="flex flex-wrap -mx-3 mb-6">

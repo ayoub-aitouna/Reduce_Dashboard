@@ -86,8 +86,18 @@ export const BaseUrl = "https://api.reducte.tech/api/v1";
 
 export const Coockies_name = "auth_name";
 export const DefaultPartner = {
-  _status: "Approved", activity_entrprise: "", ville: "",
-  note: "", offer: "", adrress: "", role_dans_entriprise: "",
-  representant_entreprise: "", nome_entreprise: "",
-  identificateur_entreprise: "", logo: "", cover: ""
+  _status: "Approved",
+  activity_entrprise: "",
+  ville: "",
+  note: "",
+  offer: "",
+  adrress: "",
+  numero_telephone: "",
+  numero_telephone_fix: "",
+  role_dans_entriprise: "",
+  representant_entreprise: "",
+  nome_entreprise: "",
+  identificateur_entreprise: "",
+  logo: "",
+  cover: ""
 }

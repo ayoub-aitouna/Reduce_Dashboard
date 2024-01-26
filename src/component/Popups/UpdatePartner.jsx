@@ -112,7 +112,7 @@ const Fill_Form = ({ data, setdata }) => {
         </Button>
         <Button variant="contained" component="label">
           Upload COVER
-          <ImgInput width={500} height={500} call={(file) => { setdata({ ...data, cover: file, cover_selected: true }) }} />
+          <ImgInput width={889} height={500} call={(file) => { setdata({ ...data, cover: file, cover_selected: true }) }} />
         </Button>
       </div>
       <div className="flex flex-wrap -mx-3 mb-6">
@@ -206,7 +206,45 @@ const Fill_Form = ({ data, setdata }) => {
             type="text"
           />
         </div>
-  
+
+
+        {/* new iputes  */}
+        <div className="w-full px-3">
+          <label
+            className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+            htmlFor="grid-name"
+          >
+            Numero Telephone
+          </label>
+          <input
+            className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+            id="grid-name"
+            value={data.numero_telephone}
+            onChange={(e) => {
+              setdata({ ...data, numero_telephone: e.target.value });
+            }}
+            type="text"
+          />
+        </div>
+
+        <div className="w-full px-3">
+          <label
+            className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+            htmlFor="grid-name"
+          >
+            Numero Telephone Fix
+          </label>
+          <input
+            className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+            id="grid-name"
+            value={data.numero_telephone_fix}
+            onChange={(e) => {
+              setdata({ ...data, numero_telephone_fix: e.target.value });
+            }}
+            type="text"
+          />
+        </div>
+        {/* --------- */}
         <div className="w-full px-3">
           <label
             className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"

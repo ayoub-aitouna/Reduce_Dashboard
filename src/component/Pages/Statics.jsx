@@ -146,11 +146,11 @@ function Statics({ selectedStatus }) {
 
               {/* Badges */}
               <div className="w-full flex flex-row justify-around items-center">
-                <Badge title={"les Abonné"} latest={state.client.resent_clients} total={state.client.total_clients} data={clients_data} />
+                <Badge title={"les Abonné"} latest={state.client.recent_clients} total={state.client.total_clients} data={clients_data} />
 
                 <div className="w-[2px] h-[100px] bg-black opacity-[30%]"></div>
 
-                <Badge title={"les partenaires"} latest={state.client.resent_clients} total={state.partner.total_partners} data={partner_data} />
+                <Badge title={"les partenaires"} latest={state.partner.resent_partners} total={state.partner.total_partners} data={partner_data} />
               </div>
 
               {/* Clients */}
