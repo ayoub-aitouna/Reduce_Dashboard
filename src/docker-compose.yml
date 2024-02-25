@@ -1,0 +1,24 @@
+version: "3"
+services:
+  dashboard:
+    container_name: dashboard
+    build:
+      context: ./dashboard/.
+    networks:
+      - mynetwork
+    ports:
+      - "3000:3000"
+    volumes:
+      - dashboard_volume:/usr/src/app
+
+volumes:
+  dashboard_volume:
+    driver: local
+    driver_opts:
+      type: "none"
+      o: 'bind'
+      device: './dashboard/'
+
+networks:
+  mynetwork:
+    driver: bridge
