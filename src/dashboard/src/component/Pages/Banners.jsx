@@ -49,6 +49,25 @@ function Banners() {
     setloading(false);
   };
 
+  const handle_delete = async (data) => {
+    setloading(true);
+    try {
+      const req = await fetch(``, {
+        method: "DELETE",
+        mode: "cors",
+        cache: "no-cache",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${cookies.accesToken}`,
+        },
+        referrerPolicy: "no-referrer",
+      });
+      if (req.ok)
+        setOdata(await req.json());
+    } catch (err) { }
+    setloading(false);
+  }
+
   const handle_popup = (data, type) => {
     setSlectedBanner(data);
     setPopUpType(type);
@@ -103,8 +122,8 @@ function Banners() {
             title={"Actif/inactif"}
             styles={"h-[95px]"}
             options={[{ value: 0, name: '' },
-              { value: 1, name: 'Activer' },
-              { value: 2, name: 'desctiver' }]}
+            { value: 1, name: 'Activer' },
+            { value: 2, name: 'desctiver' }]}
             setFilter={(value) => setstatus(value)}
             Filter={status}
           />
@@ -128,6 +147,10 @@ function Banners() {
           OnEdit={(data) => {
             handle_popup(data, data);
           }}
+          OnDelete={(data) => {
+            handle_delete(data, true);
+          }
+          }
         />}
     </div>
   );

@@ -305,10 +305,10 @@ const Form = ({ data, setdata, is_update = true, cities, professions }) => {
                       setdata({
                         ...data,
                         date_fin_abonnement: newValue.$d
-                          .toISOString()
-                          .slice(0, 19)
-                          .replace("T", " "),
+                        .toLocaleDateString('en-US'),
                       });
+                      console.log( newValue.$d
+                        .toLocaleDateString('en-US'));
                     } catch (error) { }
                   }}
                   renderInput={(params) => <TextField {...params} />}
