@@ -54,7 +54,7 @@ function Edit_history() {
 					Historique des modifications
 				</h1>
 				<p className="text-[16px] font-normal  leading-9 text-gray-500">
-					Modifications sur les partenaires
+					Modifications sur nos partenaires
 				</p>
 			</div>
 			<div className="flex ld:flex-row flex-col w-full mt-10 lg:gap-5 gap-0 justify-center items-center">

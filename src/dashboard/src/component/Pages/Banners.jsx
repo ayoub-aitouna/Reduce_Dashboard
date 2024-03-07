@@ -50,9 +50,10 @@ function Banners() {
   };
 
   const handle_delete = async (data) => {
-    setloading(true);
+    if (!window.confirm(`Êtes-Vous Sûr De Vouloir Supprimer Cette Banier`))
+      return;
     try {
-      const req = await fetch(``, {
+      const req = await fetch(`${BaseUrl}/banners/${data.id}`, {
         method: "DELETE",
         mode: "cors",
         cache: "no-cache",
@@ -62,10 +63,10 @@ function Banners() {
         },
         referrerPolicy: "no-referrer",
       });
-      if (req.ok)
-        setOdata(await req.json());
-    } catch (err) { }
-    setloading(false);
+    } catch (err) {
+
+    }
+    handleRequest();
   }
 
   const handle_popup = (data, type) => {
@@ -112,7 +113,7 @@ function Banners() {
           Reducte Banners
         </h1>
         <p className="text-[16px] font-normal  leading-9 text-gray-500">
-          Partenaires ayant soumis le formulaire à la plateforme Reducte
+          nos partenaires ayant soumis le formulaire à la plateforme Reducte
         </p>
       </div>
       <div className="flex ld:flex-row flex-col w-full mt-10 lg:gap-5 gap-0 justify-center items-center">

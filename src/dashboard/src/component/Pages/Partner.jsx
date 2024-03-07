@@ -125,10 +125,10 @@ function Partner() {
 
 			<div className="flex flex-col items-start justify-start ">
 				<h1 className="text-[20px] font-black leading-9 text-gray-800">
-					Reducte Partenaires
+					Reducte nos partenaires
 				</h1>
 				<p className="text-[16px] font-normal  leading-9 text-gray-500">
-					Partenaires ayant soumis le formulaire à la plateforme Reducte
+					nos partenaires ayant soumis le formulaire à la plateforme Reducte
 				</p>
 			</div>
 			<div className="flex ld:flex-row flex-col w-full mt-10 lg:gap-5 gap-0 justify-center items-center">
@@ -189,7 +189,7 @@ function Partner() {
 			<div className="absolute bottom-8 right-8 flex flex-row gap-5 capitalize ">
 				<Button
 					Icon={() => <BiTask />}
-					title={"Ajoutez Une Partner"}
+					title={"Ajouter Un Partenaire"}
 					OnClick={() => setNewDialogOpend(true)}
 					style={"!w-[250px] text-[15px] shadow-lg capitalize"}
 				/>

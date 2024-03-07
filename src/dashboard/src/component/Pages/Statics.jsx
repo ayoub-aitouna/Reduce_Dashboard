@@ -146,11 +146,11 @@ function Statics({ selectedStatus }) {
 
               {/* Badges */}
               <div className="w-full flex flex-row justify-around items-center">
-                <Badge title={"les Abonné"} latest={state.client.recent_clients} total={state.client.total_clients} data={clients_data} />
+                <Badge title={"nos abonné"} latest={state.client.recent_clients} total={state.client.total_clients} data={clients_data} />
 
                 <div className="w-[2px] h-[100px] bg-black opacity-[30%]"></div>
 
-                <Badge title={"les partenaires"} latest={state.partner.resent_partners} total={state.partner.total_partners} data={partner_data} />
+                <Badge title={"nos partenaires"} latest={state.partner.resent_partners} total={state.partner.total_partners} data={partner_data} />
               </div>
 
               {/* Clients */}
@@ -168,7 +168,7 @@ function Statics({ selectedStatus }) {
               <div className="w-full h-[2px] bg-black opacity-[10%]"></div>
               {/* Partner */}
               <div className="rounded-xl flex flex-col items-start max-h-[60vh] w-full">
-                <Expand title={"les partenaires"} state={Show.Partners} Onclick={() => { setShow({ ...Show, Partners: !Show.Partners }) }} />
+                <Expand title={"nos partenaires"} state={Show.Partners} Onclick={() => { setShow({ ...Show, Partners: !Show.Partners }) }} />
                 <div className={`${Show.Partners ? 'overflow-scroll' : 'h-[0px] overflow-hidden'}  w-full `}>
                   <UserTable
                     my="0"

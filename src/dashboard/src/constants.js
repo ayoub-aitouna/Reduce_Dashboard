@@ -25,13 +25,13 @@ export const SideBarLinks = [
     groupName: "GÉNÉRAL",
     tabs: [
       {
-        name: "les Abonné",
+        name: "nos abonné",
         Url: "subscribers",
         Icon: MdGroups,
         key: 0,
       },
       {
-        name: "les partenaires",
+        name: "nos partenaires",
         Url: "Partner",
         Icon: HiUsers,
         key: 1,

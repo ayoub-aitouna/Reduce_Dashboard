@@ -116,6 +116,8 @@ const Fill_Form = ({ data, setdata }) => {
         </Button>
       </div>
       <div className="flex flex-wrap -mx-3 mb-6">
+
+
         <div className="w-full px-3">
           <label
             className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
@@ -244,6 +246,26 @@ const Fill_Form = ({ data, setdata }) => {
             type="text"
           />
         </div>
+
+        <div className="w-full px-3">
+          <label
+            className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+            htmlFor="grid-name"
+          >
+            Email
+          </label>
+          <input
+            className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+            id="grid-name"
+            type="text"
+            value={data.email}
+            onChange={(e) => {
+              setdata({ ...data, email: e.target.value });
+            }}
+            placeholder="Jane@Gmail.com"
+          />
+        </div>
+
         {/* --------- */}
         <div className="w-full px-3">
           <label

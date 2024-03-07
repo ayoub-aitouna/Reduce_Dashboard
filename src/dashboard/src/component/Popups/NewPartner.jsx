@@ -255,6 +255,48 @@ const Fill_Form = ({ data, setdata }) => {
             type="text"
           />
         </div>
+
+
+        <div className="w-full px-3">
+          <label
+            className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+            htmlFor="grid-name"
+          >
+            Email
+          </label>
+          <input
+            className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+            id="grid-name"
+            type="email"
+            value={data.email}
+            onChange={(e) => {
+              setdata({ ...data, email: e.target.value });
+            }}
+            placeholder="Jane@Gmail.com"
+          />
+        </div>
+
+
+        <div className="w-full px-3">
+          <label
+            className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+            htmlFor="grid-name"
+          >
+            Mot De Passe
+          </label>
+          <input
+            className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+            id="grid-password"
+            type="password"
+            value={data.password}
+            onChange={(e) => {
+              setdata({ ...data, password: e.target.value });
+            }}
+            placeholder="********"
+          />
+        </div>
+
+
         {/* --------- */}
 
         <div className="w-full px-3">
@@ -264,7 +306,7 @@ const Fill_Form = ({ data, setdata }) => {
           >
             Offer
           </label>
-          <input
+          <textarea
             className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
             id="grid-name"
             value={data.offer}
@@ -281,7 +323,7 @@ const Fill_Form = ({ data, setdata }) => {
           >
             Note
           </label>
-          <input
+          <textarea
             className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
             id="grid-name"
             value={data.note}

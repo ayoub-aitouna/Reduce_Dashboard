@@ -117,7 +117,7 @@ function Clients({ selectedStatus }) {
 					Reducte Abonné
 				</h1>
 				<p className="text-[16px] font-normal  leading-9 text-gray-500">
-					Partenaires ayant soumis le formulaire à la plateforme Reducte
+					nos abonné ayant soumis le formulaire à la plateforme Reducte
 				</p>
 			</div>
 			<div className="flex ld:flex-row flex-col w-full mt-10 lg:gap-5 gap-0 justify-center items-center">
@@ -156,7 +156,7 @@ function Clients({ selectedStatus }) {
 			<div className="absolute bottom-8 right-8 flex flex-row gap-5 capitalize ">
 				<Button
 					Icon={() => <BiTask />}
-					title={"Ajoutez Une Client"}
+					title={"Ajouter Un Client"}
 					OnClick={() => handle_popup(emty_client, false)}
 					style={"!w-[250px] text-[15px] shadow-lg capitalize"}
 				/>

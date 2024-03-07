@@ -41,8 +41,8 @@ const Banner_Dialog = ({ open, OnClick, setRefresh, selected, update = false }) 
 	const handle_request = async () => {
 		setloading(true);
 		const formData = new FormData();
-		formData.append("images", data.cover);
 		formData.append("images", data.logo);
+		formData.append("images", data.cover);
 		formData.append("data", JSON.stringify(data));
 
 		try {

@@ -1,8 +1,6 @@
 FROM debian:bullseye
 
-RUN apt-get update
-
-RUN apt-get install -y zsh curl gnupg git
+RUN apt-get update && apt-get install -y zsh curl gnupg git
 
 RUN sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 

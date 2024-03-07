@@ -221,13 +221,13 @@ function Settings() {
 				/>
 				<Button
 					Icon={() => <BiTask />}
-					title={"Ajoutez Une Activity"}
+					title={"Ajouter Une Activité"}
 					OnClick={() => setnewactivity(true)}
 					style={"!w-[250px] text-[15px] shadow-lg capitalize"}
 				/>
 				<Button
 					Icon={() => <BiTask />}
-					title={"Ajoutez Une Profession"}
+					title={"Ajouter Une Profession"}
 					OnClick={() => setnewproffesion(true)}
 					style={"!w-[250px] text-[15px] shadow-lg capitalize"}
 				/>
